@@ -1,0 +1,52 @@
+.DS_Store
+**/.DS_Store
+
+**/node_modules/
+**/dist/
+**/.vite/
+**/.cache/
+
+app/src-tauri/target/
+app/src-tauri/gen/
+
+*.log
+*.tmp
+
+.env
+.env.*
+!.env.example
+
+assets/private/
+media/private/
+
+# Cache npm local del proyecto
+.npm-cache/
+
+# ============================================================
+# Datos locales / privados: nunca publicar
+user-data/
+workspace-private/
+projects-private/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+# Credenciales / firma
+*.p12
+*.pfx
+*.mobileprovision
+*.pem
+*.key
+# Derivados locales
+coverage/
+.playwright/
+
+# ============================================================
+# Workspace real de clientes — SIEMPRE LOCAL / PRIVADO
+# ============================================================
+CLIENTES_PRIVADOS_LOCAL/*
+!CLIENTES_PRIVADOS_LOCAL/README.md
+
+# Backups locales de patches
+archive/patches/

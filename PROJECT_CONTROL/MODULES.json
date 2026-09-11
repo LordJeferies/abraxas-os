@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "abraxas.modules.v1",
+  "modules": [
+    {
+      "id": "foundation",
+      "name": "Foundation",
+      "status": "completed",
+      "path": "PROJECT_CONTROL"
+    },
+    {
+      "id": "domain",
+      "name": "Core Domain / Production Graph",
+      "status": "started",
+      "path": "contracts"
+    },
+    {
+      "id": "media-lab",
+      "name": "Media Compatibility Lab",
+      "status": "pending",
+      "path": "app/src/modules/media-lab"
+    },
+    {
+      "id": "editor-shell",
+      "name": "Editor Shell",
+      "status": "pending",
+      "path": "app/src/modules/editor-shell"
+    },
+    {
+      "id": "timeline",
+      "name": "Production Timeline",
+      "status": "pending",
+      "path": "app/src/modules/timeline"
+    },
+    {
+      "id": "inspector",
+      "name": "Inspector",
+      "status": "pending",
+      "path": "app/src/modules/inspector"
+    },
+    {
+      "id": "xr-studio",
+      "name": "XR Studio",
+      "status": "pending",
+      "path": "app/src/modules/xr-studio"
+    },
+    {
+      "id": "assets",
+      "name": "Asset Workflow",
+      "status": "pending",
+      "path": "app/src/modules/assets"
+    },
+    {
+      "id": "captions",
+      "name": "Captions Studio",
+      "status": "pending",
+      "path": "app/src/modules/captions"
+    },
+    {
+      "id": "visual-studio",
+      "name": "Visual / Carousel Studio",
+      "status": "pending",
+      "path": "app/src/modules/visual-studio"
+    },
+    {
+      "id": "apple-media",
+      "name": "Apple Media Engine",
+      "status": "pending",
+      "path": "native/apple"
+    },
+    {
+      "id": "architect",
+      "name": "Arquitecto",
+      "status": "pending",
+      "path": "app/src/modules/architect"
+    },
+    {
+      "id": "review",
+      "name": "Omega / Review",
+      "status": "pending",
+      "path": "app/src/modules/review"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "status": "pending",
+      "path": "app/src/modules/calendar"
+    },
+    {
+      "id": "publisher",
+      "name": "Publisher",
+      "status": "pending",
+      "path": "app/src/modules/publisher"
+    },
+    {
+      "id": "public-site",
+      "name": "Status / Product Website",
+      "status": "started",
+      "path": "site"
+    }
+  ]
+}

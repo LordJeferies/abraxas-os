@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/production-graph.v1.schema.json",
+  "title": "Abraxas OS Production Graph v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "projectId",
+    "pieceId",
+    "duration",
+    "events"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.production-graph.v1"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pieceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 0
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    }
+  },
+  "$defs": {
+    "status": {
+      "enum": [
+        "ghost",
+        "creating",
+        "linked",
+        "ready",
+        "review",
+        "approved"
+      ]
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "type",
+        "status",
+        "start",
+        "end"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "a_roll",
+            "b_roll",
+            "xr",
+            "sfx",
+            "motion",
+            "image",
+            "vo",
+            "music",
+            "caption",
+            "transition",
+            "note"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "minimum": 0
+        },
+        "segmentId": {
+          "type": ["string", "null"]
+        },
+        "parentEventId": {
+          "type": ["string", "null"]
+        },
+        "targetEventId": {
+          "type": ["string", "null"]
+        },
+        "anchorText": {
+          "type": ["string", "null"]
+        },
+        "purpose": {
+          "type": ["string", "null"]
+        },
+        "assetRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instruction": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "short": {
+              "type": "string"
+            },
+            "technical": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "searchQuery": {
+              "type": "string"
+            }
+          }
+        },
+        "xrStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              },
+              "description": {
+                "type": "string"
+              },
+              "assetRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

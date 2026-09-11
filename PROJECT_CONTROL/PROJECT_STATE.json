@@ -1,0 +1,22 @@
+{
+  "project": "Abraxas OS",
+  "schemaVersion": "abraxas.project-state.v1",
+  "currentPhase": "F1",
+  "phaseName": "Media Compatibility Lab",
+  "status": "pending",
+  "lastCompletedStep": "F0 Foundation completada y validada: frontend build, Cargo/Tauri check y public-repo guard pasan.",
+  "blockedReason": null,
+  "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
+  "updatedAt": "2026-09-11T14:36:04-04:00",
+  "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
+  "progress": {
+    "foundation": 100,
+    "mediaCompatibility": 0,
+    "editorShell": 0,
+    "productionTimeline": 0
+  },
+  "lastCheck": {
+    "status": "passed",
+    "updatedAt": "2026-09-11T14:36:04-04:00"
+  }
+}

@@ -1,0 +1,77 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+CONT="$ROOT/continuacion en chat"
+CMD="${1:-help}"
+shift || true
+
+# Cada comando lanzado desde la CLI abre la carpeta de continuidad al terminar.
+# Para comandos de larga duración (web/desktop/site), se abrirá cuando el
+# proceso se cierre con Ctrl+C o termine.
+trap 'open "$CONT" >/dev/null 2>&1 || true' EXIT
+
+case "$CMD" in
+  status)
+    python3 "$ROOT/scripts/update_continuation.py" >/dev/null
+    cat "$CONT/ABRAXAS_OS_CONTINUACION_CHAT.md"
+    open "$CONT" >/dev/null 2>&1 || true
+    ;;
+  check)
+    "$ROOT/scripts/check_project.sh"
+    ;;
+  continuation)
+    "$ROOT/scripts/finalize_update.sh" "✅ Continuación actualizada."
+    ;;
+  checkpoint)
+    "$ROOT/scripts/checkpoint.sh" "$@"
+    ;;
+  web)
+    "$ROOT/scripts/run-web.sh"
+    ;;
+  desktop)
+    "$ROOT/scripts/run-desktop.sh"
+    ;;
+  site)
+    echo "Abriendo http://127.0.0.1:8088"
+    open "http://127.0.0.1:8088" >/dev/null 2>&1 || true
+    cd "$ROOT"
+    python3 -m http.server 8088 --directory site
+    ;;
+  github-check)
+    echo "Cuenta:"
+    gh auth status || true
+    echo
+    echo "Remote:"
+    git -C "$ROOT" remote -v || true
+    echo
+    echo "Objetivo:"
+    echo "https://github.com/LordJeferies/abraxas-os"
+    open "$CONT" >/dev/null 2>&1 || true
+    ;;
+  github-public)
+    "$ROOT/scripts/github_public.sh"
+    ;;
+  private)
+    open "$ROOT/CLIENTES_PRIVADOS_LOCAL"
+    ;;
+  help|*)
+    cat <<'TXT'
+ABRAXAS OS CLI
+
+  ./scripts/abraxas status
+  ./scripts/abraxas check
+  ./scripts/abraxas continuation
+  ./scripts/abraxas checkpoint "qué se hizo"
+  ./scripts/abraxas web
+  ./scripts/abraxas desktop
+  ./scripts/abraxas site
+  ./scripts/abraxas github-check
+  ./scripts/abraxas github-public
+  ./scripts/abraxas private
+
+Al terminar checks/checkpoints/publicación se abre automáticamente:
+continuacion en chat/
+TXT
+    ;;
+esac

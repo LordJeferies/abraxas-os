@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "abraxas.production-graph.v1",
+  "projectId": "demo-joc55",
+  "pieceId": "vertical-demo-001",
+  "duration": 30,
+  "events": [
+    {
+      "id": "aroll-001",
+      "type": "a_roll",
+      "status": "linked",
+      "start": 0,
+      "end": 30,
+      "assetRefs": ["master-demo"],
+      "purpose": "Fuente principal"
+    },
+    {
+      "id": "motion-aroll-001",
+      "type": "motion",
+      "status": "ghost",
+      "start": 0,
+      "end": 5,
+      "targetEventId": "aroll-001",
+      "purpose": "Aumentar tensión visual sin cortar el A-roll",
+      "instruction": {
+        "short": "Push-in suave 100% → 108%",
+        "technical": "Interpolar escala durante cinco segundos, manteniendo encuadre del rostro."
+      }
+    },
+    {
+      "id": "broll-001",
+      "type": "b_roll",
+      "status": "ghost",
+      "start": 6,
+      "end": 11,
+      "anchorText": "empecé a organizar todo",
+      "purpose": "Visualizar el paso de información dispersa a organización",
+      "instruction": {
+        "short": "Close-up de manos organizando una lista.",
+        "prompt": "Cinematic close-up of hands organizing a handwritten action plan...",
+        "searchQuery": "hands organizing handwritten action plan close up"
+      }
+    },
+    {
+      "id": "motion-broll-001",
+      "type": "motion",
+      "status": "ghost",
+      "start": 6,
+      "end": 11,
+      "targetEventId": "broll-001",
+      "instruction": {
+        "short": "Push 100% → 115% con deriva ligera hacia arriba."
+      }
+    },
+    {
+      "id": "xr-001",
+      "type": "xr",
+      "status": "ghost",
+      "start": 12,
+      "end": 21,
+      "anchorText": "paso a paso",
+      "purpose": "Convertir una explicación abstracta en una progresión visual",
+      "instruction": {
+        "short": "XR acumulativo de tres estados."
+      },
+      "xrStates": [
+        {
+          "id": "S01",
+          "start": 12,
+          "end": 15,
+          "description": "Información dispersa"
+        },
+        {
+          "id": "S02",
+          "start": 15,
+          "end": 18,
+          "description": "Aparece una estructura"
+        },
+        {
+          "id": "S03",
+          "start": 18,
+          "end": 21,
+          "description": "Sistema organizado"
+        }
+      ]
+    },
+    {
+      "id": "sfx-001",
+      "type": "sfx",
+      "status": "ghost",
+      "start": 15,
+      "end": 15.2,
+      "parentEventId": "xr-001",
+      "purpose": "Marcar la entrada del segundo estado solamente si mejora el ritmo",
+      "instruction": {
+        "short": "Click mecánico suave",
+        "searchQuery": "soft mechanical ui click short"
+      }
+    },
+    {
+      "id": "caption-001",
+      "type": "caption",
+      "status": "ready",
+      "start": 0,
+      "end": 30,
+      "purpose": "Caption track de demostración"
+    }
+  ]
+}

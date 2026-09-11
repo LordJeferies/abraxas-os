@@ -1,0 +1,35 @@
+name: Abraxas OS CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install frontend
+        working-directory: app
+        run: npm ci
+
+      - name: Frontend build
+        working-directory: app
+        run: npm run build
+
+      - name: Rust check
+        working-directory: app/src-tauri
+        run: cargo check

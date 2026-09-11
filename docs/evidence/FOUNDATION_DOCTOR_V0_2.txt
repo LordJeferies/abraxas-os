@@ -1,0 +1,51 @@
+ABRAXAS OS DOCTOR
+=================
+Date: 2026-09-11 14:04:22 -0400
+
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A5425a
+
+arm64
+
+v24.18.0
+11.16.0
+rustc 1.98.0 (88d9e12ae 2026-08-18)
+cargo 1.98.0 (797e8a9bc 2026-08-05)
+swift-driver version: 1.168.6 Apple Swift version 6.4 (swiftlang-6.4.0.33.1 clang-2100.3.33.1)
+Target: arm64-apple-macosx27.0.0
+Xcode 27.0
+Build version 27A5252f
+
+
+[✔] Environment
+    - OS: Mac OS 27.0.0 arm64 (X64)
+    ✔ Xcode Command Line Tools: installed
+    ✔ Xcode: 27.0
+    ✔ rustc: 1.98.0 (88d9e12ae 2026-08-18)
+    ✔ cargo: 1.98.0 (797e8a9bc 2026-08-05)
+    ✔ rustup: 1.29.0 (28d1352db 2026-03-05)
+    ✔ Rust toolchain: stable-aarch64-apple-darwin (default)
+    - node: 24.18.0
+    - pnpm: 11.24.0
+    - npm: 11.16.0
+
+[-] Packages
+    - tauri 🦀: 2.11.3, (outdated, latest: 2.11.5)
+    - tauri-build 🦀: No version detected
+    - wry 🦀: No version detected
+    - tao 🦀: No version detected
+    - @tauri-apps/api  ⱼₛ: 2.11.1
+    - @tauri-apps/cli  ⱼₛ: 2.11.4
+
+[-] Plugins
+    - tauri-plugin-log 🦀: 2
+    - @tauri-apps/plugin-log  ⱼₛ: not installed!
+
+[-] App
+    - build-type: bundle
+    - CSP: unset
+    - frontendDist: ../dist
+    - devUrl: http://localhost:1420/
+    - framework: React
+    - bundler: Vite

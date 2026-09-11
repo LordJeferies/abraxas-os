@@ -1,0 +1,5 @@
+
+> abraxas-os@0.0.0 build
+> tsc -b && vite build
+
+src/App.tsx(7,7): error TS2741: Property 'backgroundColor' is missing in type '{ name: string; width: number; height: number; fps: number; duration: number; layers: never[]; }' but required in type 'VideoJSON'.
