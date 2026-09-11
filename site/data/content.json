@@ -1,60 +1,239 @@
 {
-  "product": "Abraxas OS",
-  "edition": "Content Renaissance",
-  "hero": {
-    "eyebrow": "ABRAXAS OS · BUILDING IN PUBLIC",
-    "title": "The Content Renaissance",
-    "lead": "Producción masiva sin sacrificar criterio.",
-    "body": "Un sistema operativo editorial que transforma material bruto, estrategia y estructuras de producción en contenidos trazables, ejecutables y cada vez más automatizados."
+  "meta": {
+    "edition": "The Content Renaissance",
+    "eyebrow": "ABRAXAS OS · CONTENT OPERATING SYSTEM",
+    "title": "Producción masiva. Criterio profesional.",
+    "lead": "De una grabación a un sistema completo de contenidos, producción, revisión y publicación.",
+    "promise": "Abraxas OS organiza el criterio para que el volumen no destruya la calidad."
   },
-  "chapters": [
+  "outcomes": [
     {
-      "roman": "I",
-      "id": "source",
-      "kicker": "SOURCE",
-      "title": "Una grabación deja de ser un archivo.",
-      "statement": "Se convierte en materia prima estructurada.",
-      "body": "Video, audio, transcripción y contexto viven como fuentes trazables. Nada se corta, reescribe o mezcla sin saber de dónde vino."
+      "title": "Publicación constante",
+      "text": "Diseñado para volver operativo un flujo de contenido continuo sin depender de improvisar cada pieza desde cero."
     },
     {
-      "roman": "II",
-      "id": "intelligence",
-      "kicker": "INTELLIGENCE",
-      "title": "Criterio de marca + criterio de producción.",
-      "statement": "Sol Blanco y Sol Negro crean potencial.",
-      "body": "La información de marca se cruza con estructuras editoriales, storytelling, XR, motion, captions y reglas de calidad para decidir qué vale crear y cómo hacerlo."
+      "title": "Más piezas por fuente",
+      "text": "Un podcast, entrevista, webinar o llamada puede convertirse en múltiples formatos conectados al mismo origen."
     },
     {
-      "roman": "III",
-      "id": "timeline",
-      "kicker": "PRODUCTION TIMELINE",
-      "title": "La edición aparece antes de existir.",
-      "statement": "Ghost objects muestran qué debe estar en cada segundo.",
-      "body": "B-roll, XR, Motion, SFX, VO, captions, música y notas aparecen en la timeline como instrucciones ejecutables. Cuando existe el asset real, el ghost se convierte en producción."
+      "title": "Entrega más rápida",
+      "text": "Automatiza decisiones repetibles, conserva assets y deja la revisión humana en los puntos donde realmente aporta valor."
     },
     {
-      "roman": "IV",
-      "id": "scale",
-      "kicker": "SCALE",
-      "title": "Publicar todos los días deja de depender del caos.",
-      "statement": "Velocidad para volumen. Criterio para calidad.",
-      "body": "Abraxas OS está diseñado para convertir una misma fuente en múltiples piezas de alto valor, acelerar ciclos mensuales y hacer viable un servicio de contenido masivo con estándar premium."
-    },
-    {
-      "roman": "V",
-      "id": "review",
-      "kicker": "OMEGA / REVIEW",
-      "title": "Nada sale porque sí.",
-      "statement": "Producción, revisión y aprobación viven en el mismo sistema.",
-      "body": "Cada pieza puede conservar su origen, versión, assets, copy, correcciones, aprobación y fecha tentativa antes de convertirse en contenido publicado."
-    },
-    {
-      "roman": "VI",
-      "id": "build",
-      "kicker": "BUILD STATUS",
-      "title": "La app también se construye con trazabilidad.",
-      "statement": "Cada fase deja evidencia y un siguiente paso.",
-      "body": "El status público se alimenta del estado real del repositorio. Lo que no ha pasado su gate no se declara terminado."
+      "title": "Calidad trazable",
+      "text": "Cada corte, recurso, prompt, versión y aprobación puede mantener relación con la fuente que lo originó."
     }
-  ]
+  ],
+  "categories": [
+    {
+      "id": "source",
+      "index": "01",
+      "label": "Source & SHIM",
+      "headline": "Primero entiende el material.",
+      "summary": "Antes de producir, Abraxas OS necesita saber qué existe, quién habla, qué se dijo y de dónde salió cada fragmento.",
+      "features": [
+        {
+          "title": "Project Intake",
+          "status": "planned",
+          "summary": "Importar masters horizontales/verticales, audio, transcripción y documentos.",
+          "detail": "Un wizard reúne las fuentes del proyecto y preserva los originales. Las versiones de trabajo no reemplazan silenciosamente al material fuente."
+        },
+        {
+          "title": "Source Truth",
+          "status": "designed",
+          "summary": "Separar sourceRange y editorialRange.",
+          "detail": "Los segmentos discontinuos permanecen discontinuos. Cada pieza sabe exactamente qué partes del master utiliza y qué decisiones editoriales fueron aplicadas."
+        },
+        {
+          "title": "Transcripción + análisis",
+          "status": "planned",
+          "summary": "Speech, escenas, personas, temas y momentos.",
+          "detail": "El sistema podrá transcribir cuando sea necesario y enriquecer la fuente con señales útiles para descubrir contenido sin inventar timecodes."
+        }
+      ]
+    },
+    {
+      "id": "intelligence",
+      "index": "02",
+      "label": "Editorial Intelligence",
+      "headline": "Decidir qué vale crear.",
+      "summary": "Estrategia de marca, estructuras editoriales y análisis de fuente se combinan antes de entrar a producción.",
+      "features": [
+        {
+          "title": "Sol Blanco",
+          "status": "designed",
+          "summary": "Marca, audiencia, voz, productos, campañas y objetivos.",
+          "detail": "Es la base estratégica del cliente. Permite que el contenido conserve identidad y no sea una colección de plantillas genéricas."
+        },
+        {
+          "title": "Sol Negro",
+          "status": "designed",
+          "summary": "Storytelling, hooks, XR, Motion, SFX, captions y estructuras.",
+          "detail": "Es la biblioteca de criterio de producción. Reúne formas probadas de construir piezas y reglas de calidad reutilizables."
+        },
+        {
+          "title": "Beta",
+          "status": "designed",
+          "summary": "Qué contenidos tienen potencial.",
+          "detail": "Beta descubre candidatos y conserva su identidad, objetivo, fuente y razones. No es todavía el plan técnico de edición."
+        },
+        {
+          "title": "Alfa",
+          "status": "designed",
+          "summary": "Cómo producir cada contenido seleccionado.",
+          "detail": "Alfa expande Beta con cortes, partes, beats, XR, B-roll, Motion, SFX, captions, VO, assets y guía de producción."
+        },
+        {
+          "title": "Continuidad semántica",
+          "status": "planned",
+          "summary": "Cortar por significado, no por duración.",
+          "detail": "Pronombres, antecedentes, pregunta/respuesta, hooks y desarrollo deben permanecer coherentes al reconstruir una historia con fragmentos reales."
+        }
+      ]
+    },
+    {
+      "id": "timeline",
+      "index": "03",
+      "label": "Production Timeline",
+      "headline": "Ver lo que falta antes de crearlo.",
+      "summary": "La timeline no sólo muestra clips: muestra la intención de producción situada exactamente donde debe ocurrir.",
+      "features": [
+        {
+          "title": "Ghost Objects",
+          "status": "designed",
+          "summary": "Un ghost es un estado, no un tipo de recurso.",
+          "detail": "XR, B-roll, SFX, Motion, imagen, música, VO o caption pueden existir como instrucciones fantasma hasta que el asset real sea creado o enlazado."
+        },
+        {
+          "title": "XR",
+          "status": "designed",
+          "summary": "B-roll estructurado generado/diseñado con IA.",
+          "detail": "Un XR puede contener varios estados o imágenes internas. Su ficha explica función, assets, prompts, continuidad, movimiento y criterio de revisión."
+        },
+        {
+          "title": "B-roll",
+          "status": "designed",
+          "summary": "Referencia visual real, stock, grabada o generada.",
+          "detail": "Puede sustituir un XR cuando ocupa el mismo slot semántico. Tiene descripción, búsqueda, duración y Motion cuando corresponde."
+        },
+        {
+          "title": "Motion",
+          "status": "designed",
+          "summary": "Movimiento aplicado a A-roll, B-roll, XR, texto o imagen.",
+          "detail": "Motion es una operación sobre un objetivo: zoom, push, pan, crop, reframe, opacity, blur, keyframes y transiciones."
+        },
+        {
+          "title": "SFX",
+          "status": "designed",
+          "summary": "Sonido sólo cuando el contexto lo justifica.",
+          "detail": "No existe una cuota de SFX. El sistema analiza lo que se dice y lo que aparece en pantalla para decidir si un sonido aporta o sobra."
+        },
+        {
+          "title": "Inspector contextual",
+          "status": "planned",
+          "summary": "Click en un objeto → cómo producirlo.",
+          "detail": "El inspector muestra por qué está ahí, qué crear, prompt, búsqueda, Motion, SFX asociado, assets y guía de ejecución sin obligar a leer una ficha gigante."
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "index": "04",
+      "label": "Editor & Media",
+      "headline": "Del plan a media reproducible y exportable.",
+      "summary": "VideoFlow da una base de composición y preview; Tauri y los motores Apple permiten convertir el sistema en una app macOS real.",
+      "features": [
+        {
+          "title": "F1 Media Compatibility Lab",
+          "status": "building",
+          "summary": "Certificar video real antes de construir la timeline final.",
+          "detail": "Se están validando browser y Tauri con video horizontal/vertical, play, pause, seek, scrub, frame step, audio y VideoFlow DOM Renderer."
+        },
+        {
+          "title": "VideoFlow Adapter",
+          "status": "building",
+          "summary": "Abraxas Production Graph → VideoFlow.",
+          "detail": "VideoFlow no es la fuente de verdad. Un adapter traduce assets, grupos XR, audio, captions y Motion al modelo de composición."
+        },
+        {
+          "title": "Apple Native Engine",
+          "status": "planned",
+          "summary": "AVFoundation + CoreMedia + VideoToolbox.",
+          "detail": "El objetivo del render principal en Mac es aprovechar APIs nativas y hardware Apple para cortes, composición y export de alta calidad."
+        },
+        {
+          "title": "Batch Cut / Export",
+          "status": "planned",
+          "summary": "Cortar lotes sin perder trazabilidad.",
+          "detail": "Una selección Alfa puede convertirse en jobs deterministas con cache, resume, manifiestos y QA."
+        }
+      ]
+    },
+    {
+      "id": "visual",
+      "index": "05",
+      "label": "Visual Studio",
+      "headline": "Los formatos estáticos también tienen producción.",
+      "summary": "Carruseles, quotes, PDFs y piezas de diseño necesitan una UI propia, no una timeline falsa.",
+      "features": [
+        {
+          "title": "Carousel Studio",
+          "status": "planned",
+          "summary": "Slides, texto editable, imágenes y layouts.",
+          "detail": "Cada slide conserva texto visible, fuente, composición, prompt sin texto y continuidad. Los assets pueden cargarse y ajustarse por capas."
+        },
+        {
+          "title": "Quote Plates",
+          "status": "planned",
+          "summary": "Diseño tipográfico conectado a la fuente.",
+          "detail": "Frases exactas, división, atribución, fondo y branding permanecen editables y trazables."
+        },
+        {
+          "title": "PDF / Thread / LinkedIn",
+          "status": "planned",
+          "summary": "Cada formato tiene su propio storyboard.",
+          "detail": "El sistema evita forzar formatos no temporales dentro de una timeline audiovisual."
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "index": "06",
+      "label": "Review & Operations",
+      "headline": "Producir no termina en exportar.",
+      "summary": "El contenido necesita revisión, aprobación, calendario y publicación antes de convertirse en operación recurrente.",
+      "features": [
+        {
+          "title": "Omega / Review",
+          "status": "planned",
+          "summary": "Contenido producido listo para revisión.",
+          "detail": "Comentarios por timestamp, versiones y correcciones vuelven al objeto de producción exacto que originó el cambio."
+        },
+        {
+          "title": "Calendar",
+          "status": "planned",
+          "summary": "Lotes, canales, copy, fechas y estados.",
+          "detail": "La producción aprobada puede pasar a un calendario editorial drag & drop sin duplicar manualmente su información."
+        },
+        {
+          "title": "Publisher",
+          "status": "planned",
+          "summary": "Preparar/publicar donde la integración lo permita.",
+          "detail": "La primera Luna útil es operativa: review y publicación. Métricas profundas y finanzas quedan para fases posteriores."
+        },
+        {
+          "title": "Mobile Companion",
+          "status": "planned",
+          "summary": "Revisar y aprobar desde el teléfono.",
+          "detail": "Desktop y móvil comparten dominio y estado, pero usan layouts adaptados en vez de encoger la UI de escritorio."
+        }
+      ]
+    }
+  ],
+  "statusLabels": {
+    "complete": "COMPLETE",
+    "building": "BUILDING",
+    "designed": "DESIGNED",
+    "planned": "PLANNED"
+  }
 }

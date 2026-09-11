@@ -1,47 +1,35 @@
 # Próximo paso
 
-## Ejecutar F1
+## F1 — certificación real
 
 ### Browser
 
-Desde el repo:
-
 `./scripts/abraxas web`
 
-Probar:
+Hacer un run horizontal y uno vertical.
 
-1. video horizontal real;
-2. video vertical real.
+Para la primera línea base usar un video H.264/AAC conocido.
 
-En cada uno:
-
-- seleccionar video;
-- play;
-- pause;
-- mover scrubber;
-- frame step;
-- Load VideoFlow;
-- Play Flow;
-- Seek Flow;
-- confirmar Audio audible;
-- confirmar Reopen sólo después de haber cerrado/reabierto y repetido carga;
-- guardar run.
+Descargar ambos reportes JSON.
 
 ### Tauri
 
 `./scripts/abraxas desktop`
 
-Repetir:
+Hacer un run horizontal y uno vertical.
 
-1. horizontal;
-2. vertical.
+Descargar ambos reportes JSON.
 
-### Gate
+### Consolidar
 
-Cuando las cuatro celdas acumuladas estén verdes, descargar/copiar reporte.
+Con los cuatro JSON en Downloads:
 
-Sólo después se evaluará marcar F1 como COMPLETED.
+`./scripts/abraxas f1-validate`
 
-## En paralelo
+Sólo cuatro reportes v2 con `currentRunPassed=true` completan F1.
 
-La web pública puede revisarse en GitHub Pages después del push.
+## Después
+
+F2 Editor Shell.
+
+El sitio público queda congelado hasta F1/F2 salvo fallo crítico.

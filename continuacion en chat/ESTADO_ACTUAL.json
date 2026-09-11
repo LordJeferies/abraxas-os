@@ -1,31 +1,33 @@
 {
-  "generatedAt": "2026-09-11T15:30:46-04:00",
+  "generatedAt": "2026-09-11T16:05:29-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1",
     "phaseName": "Media Compatibility Lab",
     "status": "in_progress",
-    "lastCompletedStep": "v0.5.x publicado en GitHub: Content Renaissance + F1 Media Lab. Build frontend/Tauri pasan. Falta certificar cuatro runs de media real.",
+    "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
     "blockedReason": null,
-    "nextStep": "Ejecutar F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
-    "updatedAt": "2026-09-11T15:30:46-04:00",
+    "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
+    "updatedAt": "2026-09-11T16:05:29-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
-      "mediaCompatibility": 30,
+      "mediaCompatibility": 35,
       "editorShell": 0,
       "productionTimeline": 0
     },
     "lastCheck": {
-      "status": "passed",
-      "updatedAt": "2026-09-11T15:30:24-04:00"
+      "status": "failed",
+      "exitCode": 2,
+      "updatedAt": "2026-09-11T15:55:18-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
       "url": "https://lordjeferies.github.io/abraxas-os/",
       "checkedAt": "2026-09-11T15:30:45-04:00"
-    }
+    },
+    "publicSiteIsReleaseGate": false
   },
   "modules": [
     {
@@ -149,9 +151,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M PROJECT_CONTROL/PROJECT_STATE.json\n M site/data/status.json",
+    "status": "## main...origin/main\n M .gitignore\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/FROM_TO.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/modules/media-lab/MediaCompatibilityLab.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/abraxas\n M scripts/normalize_generated_text.py\n M site/assets/site.js\n M site/assets/style.css\n M site/data/content.json\n M site/data/status.json\n M site/index.html\n?? PROJECT_CONTROL/APP_PROGRESS.md\n?? PROJECT_CONTROL/PUBLIC_SITE_FREEZE.md\n?? docs/evidence/CHECK_20260911_155515.txt\n?? scripts/build_public_site.py\n?? scripts/check_site_budget.py\n?? scripts/validate_f1_reports.py\n?? site/assets/creation-hands-1800.jpg\n?? site/assets/creation-hands-960.jpg",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "7a47bff feat: publish F1 media lab and content renaissance site\n12942a2 docs: record successful GitHub publication\n03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
+    "lastCommits": "d4387d8 docs: record F1 publication state\n7a47bff feat: publish F1 media lab and content renaissance site\n12942a2 docs: record successful GitHub publication\n03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_153021.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_155515.txt"
 }

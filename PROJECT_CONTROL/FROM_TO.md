@@ -2,67 +2,32 @@
 
 ## De dónde venimos
 
-ABRXOS R9.x demostró y exploró:
+ABRXOS R9.x dejó aprendizaje útil sobre Beta/Alfa, Story Editors, cortes,
+paquetes IA y arquitectura Tauri/Rust/Swift.
 
-- contratos Beta/Alfa;
-- importación y normalización;
-- Story Editors HTML;
-- cortes y automatizaciones;
-- arquitectura Tauri/Rust/Swift;
-- conceptos de SHIM y producción editorial.
+Abraxas OS reutiliza ese aprendizaje con una arquitectura modular nueva.
 
-La nueva rama Abraxas OS NO elimina ese aprendizaje, pero comienza con una
-arquitectura más limpia y modular.
+## Dónde estamos ahora
 
-El primer bootstrap de Abraxas OS creó Foundation parcialmente.
-El segundo bootstrap instaló VideoFlow y Tauri, pero el primer build detectó
-que `VideoJSON` de VideoFlow exige `backgroundColor`.
+F0 Foundation está completada.
 
-Ese error se corrige de forma localizada en v0.3.
+Estamos en F1 Media Compatibility Lab.
 
-## Dónde estamos
+El código de F1 compila en frontend y Tauri, pero todavía falta la prueba que
+realmente importa: reproducir videos reales.
 
-Estamos cerrando F0 — Foundation.
+## Hacia dónde vamos inmediatamente
 
-Todavía NO hemos demostrado reproducción real de un MP4 dentro de Tauri.
+Certificar cuatro casos:
 
-## A dónde vamos inmediatamente
+1. Browser horizontal.
+2. Browser vertical.
+3. Tauri horizontal.
+4. Tauri vertical.
 
-F1 — Media Compatibility Lab.
+Después comienza F2 Editor Shell y F3 Production Timeline.
 
-Debe demostrar con archivos reales:
+## Regla
 
-- load;
-- play;
-- pause;
-- seek;
-- scrub;
-- audio;
-- frame step;
-- horizontal;
-- vertical;
-- reopen.
-
-## Dirección de producto
-
-Después de F1:
-
-- Editor Shell;
-- Production Timeline;
-- objetos fantasma;
-- inspector;
-- Alfa Adapter;
-- XR Studio;
-- Asset Workflow;
-- Apple Native Cut/Render;
-- SHIM;
-- Sol Blanco / Sol Negro;
-- Beta / Alfa;
-- captions;
-- Visual Studio;
-- Arquitecto;
-- Omega / Review;
-- Calendar;
-- Publisher.
-
-Luna 2 y Luna 3 quedan para etapas posteriores.
+El sitio público puede evolucionar en paralelo, pero no vuelve a bloquear el
+roadmap de la aplicación.

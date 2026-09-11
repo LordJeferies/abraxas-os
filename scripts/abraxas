@@ -49,6 +49,10 @@ case "$CMD" in
     echo "https://github.com/LordJeferies/abraxas-os"
     open "$CONT" >/dev/null 2>&1 || true
     ;;
+  f1-validate)
+    python3 "$ROOT/scripts/validate_f1_reports.py" "$@"
+    "$ROOT/scripts/finalize_update.sh" "F1 validation ejecutada."
+    ;;
   github-public)
     "$ROOT/scripts/github_public.sh"
     ;;
@@ -67,6 +71,7 @@ ABRAXAS OS CLI
   ./scripts/abraxas desktop
   ./scripts/abraxas site
   ./scripts/abraxas github-check
+  ./scripts/abraxas f1-validate
   ./scripts/abraxas github-public
   ./scripts/abraxas private
 

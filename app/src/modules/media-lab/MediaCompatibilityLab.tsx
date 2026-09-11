@@ -152,7 +152,13 @@ export default function MediaCompatibilityLab() {
     nextName: string,
     kind: 'blob' | 'asset'
   ) => {
+    // Limpiar la fuente ANTERIOR antes de registrar la nueva.
     clearSource()
+
+    if (kind === 'blob') {
+      objectUrlRef.current = nextSource
+    }
+
     setSource(nextSource)
     setFileName(nextName)
     setSourceKind(kind)
@@ -164,9 +170,14 @@ export default function MediaCompatibilityLab() {
 
   const onBrowserFile = (file?: File) => {
     if (!file) return
+
     const url = URL.createObjectURL(file)
-    objectUrlRef.current = url
     acceptSource(url, file.name, 'blob')
+
+    log(
+      `Browser file · ${file.type || 'unknown MIME'} · ` +
+      `${(file.size / 1024 / 1024).toFixed(1)} MB`
+    )
   }
 
   const chooseVideo = async () => {
@@ -343,15 +354,17 @@ export default function MediaCompatibilityLab() {
     }
   }, [savedRuns])
 
-  const gateReady =
-    coverage.browserHorizontal &&
-    coverage.browserVertical &&
-    coverage.tauriHorizontal &&
-    coverage.tauriVertical
+  // Browser y Tauri NO comparten localStorage.
+  // Cada runtime certifica sus dos orientaciones y un validador externo
+  // consolida los cuatro reportes.
+  const runtimeReady =
+    runtime === 'browser'
+      ? coverage.browserHorizontal && coverage.browserVertical
+      : coverage.tauriHorizontal && coverage.tauriVertical
 
   const report = useMemo(
     () => ({
-      schemaVersion: 'abraxas.media-compatibility-report.v1',
+      schemaVersion: 'abraxas.media-compatibility-report.v2',
       generatedAt: new Date().toISOString(),
       runtime,
       sourceKind,
@@ -366,7 +379,8 @@ export default function MediaCompatibilityLab() {
       checks,
       currentRunPassed: runPassed,
       accumulatedCoverage: coverage,
-      f1GateCandidate: gateReady,
+      runtimeCoverageReady: runtimeReady,
+      requiresExternalConsolidation: true,
       note: 'No contiene ruta completa del archivo ni media del cliente.',
     }),
     [
@@ -381,7 +395,7 @@ export default function MediaCompatibilityLab() {
       checks,
       runPassed,
       coverage,
-      gateReady,
+      runtimeReady,
     ]
   )
 
@@ -491,9 +505,14 @@ export default function MediaCompatibilityLab() {
                 onTimeUpdate={(event) => {
                   setCurrentTime(event.currentTarget.currentTime)
                 }}
-                onError={() => {
-                  setCheck('canplay', 'fail', 'HTMLVideoElement error')
-                  log('ERROR video element')
+                onError={(event) => {
+                  const error = event.currentTarget.error
+                  const detail = error
+                    ? `code ${error.code} · ${error.message || 'sin mensaje'}`
+                    : 'HTMLVideoElement error sin MediaError'
+
+                  setCheck('canplay', 'fail', detail)
+                  log(`ERROR video element · ${detail}`)
                 }}
               />
             ) : (
@@ -609,20 +628,33 @@ export default function MediaCompatibilityLab() {
           <div className="panel-head">
             <div>
               <small>04 · ACCUMULATED COVERAGE</small>
-              <strong>{gateReady ? 'F1 CANDIDATE READY' : 'Faltan ejecuciones reales'}</strong>
+              <strong>{runtimeReady ? 'CURRENT RUNTIME READY' : 'Faltan ejecuciones reales'}</strong>
             </div>
           </div>
 
           <div className="coverage-grid">
-            <Coverage label="Browser · horizontal" pass={coverage.browserHorizontal} />
-            <Coverage label="Browser · vertical" pass={coverage.browserVertical} />
-            <Coverage label="Tauri · horizontal" pass={coverage.tauriHorizontal} />
-            <Coverage label="Tauri · vertical" pass={coverage.tauriVertical} />
+            <Coverage
+              label={`${runtime} · horizontal`}
+              pass={
+                runtime === 'browser'
+                  ? coverage.browserHorizontal
+                  : coverage.tauriHorizontal
+              }
+            />
+            <Coverage
+              label={`${runtime} · vertical`}
+              pass={
+                runtime === 'browser'
+                  ? coverage.browserVertical
+                  : coverage.tauriVertical
+              }
+            />
           </div>
 
           <p className="coverage-note">
-            Cada casilla sólo queda verde después de guardar un run completo
-            con un archivo de esa orientación y runtime.
+            Browser y Tauri guardan estado por separado. Completa horizontal y
+            vertical en este runtime, descarga ambos reportes y luego consolida
+            los cuatro con <code>./scripts/abraxas f1-validate</code>.
           </p>
 
           <div className="report-actions">

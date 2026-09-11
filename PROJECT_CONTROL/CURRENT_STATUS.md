@@ -1,54 +1,24 @@
 # Estado actual
 
-## F0 — Foundation
-COMPLETED
+## Aplicación
 
-Foundation continúa protegida por gates.
+F0 Foundation: COMPLETED.
 
-## F1 — Media Compatibility Lab
-IN PROGRESS
+F1 Media Compatibility Lab: IN PROGRESS.
 
-El módulo ya existe en código.
+Frontend y Tauri compilan. Falta certificar reproducción real con cuatro runs:
 
-Incluye dos caminos reales de preview:
-
-1. HTMLVideoElement;
-2. VideoFlow DOM Renderer.
-
-También incluye:
-
-- selección local browser;
-- selector nativo macOS/Tauri;
-- asset protocol;
-- metadata;
-- play/pause;
-- scrub/seek;
-- frame step;
-- requestVideoFrameCallback;
-- VideoFlow load/play/seek;
-- confirmación manual de audio;
-- confirmación manual de reopen;
-- acumulación de runs horizontal/vertical;
-- acumulación browser/Tauri;
-- reporte JSON sin ruta privada del cliente.
-
-## Release gate
-
-F1 TODAVÍA NO está completada.
-
-Debe ejecutarse realmente con:
-
-- browser horizontal;
-- browser vertical;
+- Browser horizontal;
+- Browser vertical;
 - Tauri horizontal;
 - Tauri vertical.
 
-Los cuatro runs deben quedar PASS.
-
 ## Sitio público
 
-El sitio de status/producto fue rediseñado como una experiencia original de
-scrollytelling "Content Renaissance", inspirada en la estructura narrativa de
-sitios editoriales inmersivos, usando arte público de Michelangelo como hero.
+Se está estabilizando una versión rápida y data-driven.
 
-No contiene assets propietarios de Shopify.
+El sitio es una capa de comunicación del proyecto y NO un release gate de la
+aplicación.
+
+Si su diseño vuelve a requerir iteraciones importantes, se aparca y se retoma
+después de F1/F2.

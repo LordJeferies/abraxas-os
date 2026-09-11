@@ -50,3 +50,7 @@ CLIENTES_PRIVADOS_LOCAL/*
 
 # Backups locales de patches
 archive/patches/
+
+# Python caches
+__pycache__/
+*.py[cod]

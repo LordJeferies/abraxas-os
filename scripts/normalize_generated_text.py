@@ -15,6 +15,7 @@ TARGET_DIRS = [
 
 TARGET_FILES = [
     ROOT / "site" / "data" / "status.json",
+    ROOT / "site" / "index.html",
 ]
 
 TEXT_SUFFIXES = {

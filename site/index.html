@@ -4,311 +4,647 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0a0908">
-  <meta name="description" content="Abraxas OS — Content Operating System para producción masiva con criterio premium.">
-  <title>Abraxas OS · Content Renaissance</title>
+  <meta name="description" content="Abraxas OS — Content Operating System para producción masiva de contenido con criterio profesional.">
 
-  <link rel="preload" href="assets/creation-hands.jpg" as="image">
+  <title>Abraxas OS · The Content Renaissance</title>
+
+  <link
+    rel="preload"
+    href="assets/creation-hands-1800.jpg"
+    as="image"
+    media="(min-width: 721px)"
+    fetchpriority="high"
+  >
   <link rel="stylesheet" href="assets/style.css">
-
-  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script defer src="assets/site.js"></script>
 </head>
-<body>
-  <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader-word">ABRAXAS</div>
-    <div class="preloader-count" id="preloader-count">00</div>
-  </div>
 
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="#top"><span>A</span>Abraxas OS</a>
 
-  <header class="topbar">
-    <a href="#hero" class="brand">
-      <span class="brand-glyph">A</span>
-      <span>Abraxas OS</span>
-    </a>
-
-    <div class="top-meta">
-      <span>Content Renaissance</span>
+    <nav>
+      <a href="#edition-nav">Sistema</a>
+      <a href="#outcomes">Impacto</a>
+      <a href="#build">Estado</a>
       <a href="https://github.com/LordJeferies/abraxas-os" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
+    </nav>
   </header>
 
-  <aside class="chapter-rail" aria-label="Secciones">
-    <a href="#source"><span>I</span><b>Source</b></a>
-    <a href="#intelligence"><span>II</span><b>Intelligence</b></a>
-    <a href="#timeline"><span>III</span><b>Timeline</b></a>
-    <a href="#scale"><span>IV</span><b>Scale</b></a>
-    <a href="#review"><span>V</span><b>Review</b></a>
-    <a href="#build"><span>VI</span><b>Build</b></a>
-  </aside>
-
   <main>
-    <section class="hero" id="hero">
-      <div class="hero-art" aria-label="Detalle de La creación de Adán">
-        <div class="hand-half hand-left">
-          <img
-            src="assets/creation-hands.jpg"
-            alt=""
-            onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/1e/Michelangelo_-_Creation_of_Adam_%28hand_crop%29.jpg'"
-          >
-        </div>
-        <div class="hand-half hand-right">
-          <img
-            src="assets/creation-hands.jpg"
-            alt=""
-            onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/1e/Michelangelo_-_Creation_of_Adam_%28hand_crop%29.jpg'"
-          >
-        </div>
-        <div class="touch-point" aria-hidden="true"></div>
-      </div>
+    <section class="hero">
+      <picture class="hero-picture">
+        <source media="(max-width:720px)" srcset="assets/creation-hands-960.jpg">
+        <img
+          src="assets/creation-hands-1800.jpg"
+          width="1800"
+          height="900"
+          alt="Detalle de las manos de La creación de Adán de Miguel Ángel"
+          decoding="async"
+          fetchpriority="high"
+        >
+      </picture>
+
+      <div class="hands left-hand" aria-hidden="true"></div>
+      <div class="hands right-hand" aria-hidden="true"></div>
+
+      <div class="hero-shade"></div>
 
       <div class="hero-copy">
-        <p class="eyebrow" id="hero-eyebrow">ABRAXAS OS · BUILDING IN PUBLIC</p>
-        <h1>
-          <span>The Content</span>
-          <em>Renaissance</em>
-        </h1>
-        <p class="hero-lead">Producción masiva sin sacrificar criterio.</p>
+        <span>ABRAXAS OS · CONTENT OPERATING SYSTEM</span>
+        <p class="edition-name">The Content Renaissance</p>
+        <h1>Producción masiva. Criterio profesional.</h1>
+        <p>De una grabación a un sistema completo de contenidos, producción, revisión y publicación.</p>
+
+        <div class="hero-actions">
+          <a href="#edition-nav">Explorar el sistema ↓</a>
+          <a class="subtle" href="#build">Ver avance</a>
+        </div>
       </div>
 
-      <div class="hero-bottom">
-        <p>
-          Del material bruto a un sistema de producción editorial trazable.
-        </p>
-        <a href="#source">Entrar al sistema ↓</a>
-      </div>
+      <div class="hero-promise">Abraxas OS organiza el criterio para que el volumen no destruya la calidad.</div>
     </section>
 
-    <section class="manifesto">
-      <p class="manifesto-small">THE OPERATING IDEA</p>
-      <p class="manifesto-big">
-        La automatización no reemplaza el criterio.
-        <em>Lo multiplica.</em>
-      </p>
-    </section>
-
-    <section class="chapter chapter-source" id="source" data-chapter="source">
-      <div class="chapter-stage">
-        <span class="chapter-number">I</span>
-        <h2>Source</h2>
-        <p class="chapter-script">Una grabación deja de ser un archivo.</p>
-
-        <div class="source-orbit">
-          <div class="orbit-center">SOURCE</div>
-          <span class="orbit-chip c1">VIDEO</span>
-          <span class="orbit-chip c2">AUDIO</span>
-          <span class="orbit-chip c3">TRANSCRIPT</span>
-          <span class="orbit-chip c4">BRAND</span>
-        </div>
-      </div>
-
-      <div class="chapter-copy">
-        <p class="chapter-kicker">MATTER → STRUCTURE</p>
-        <h3>Se convierte en materia prima estructurada.</h3>
+    <section class="orientation" id="edition-nav">
+      <div class="orientation-copy">
+        <span>EL MAPA</span>
+        <h2>Entender Abraxas OS en seis partes.</h2>
         <p>
-          Video, audio, transcripción y contexto viven como fuentes trazables.
-          Nada se corta, reescribe o mezcla sin saber de dónde vino.
-        </p>
-      </div>
-    </section>
-
-    <section class="chapter chapter-intelligence" id="intelligence" data-chapter="intelligence">
-      <div class="chapter-stage split-stage">
-        <div class="sun sun-white">
-          <span>SOL BLANCO</span>
-          <small>Marca · voz · campaña · objetivo</small>
-        </div>
-        <div class="eclipse-core">ECLIPSE</div>
-        <div class="sun sun-black">
-          <span>SOL NEGRO</span>
-          <small>Estructuras · XR · motion · captions</small>
-        </div>
-      </div>
-
-      <div class="chapter-copy">
-        <span class="chapter-number mobile-number">II</span>
-        <p class="chapter-kicker">INTELLIGENCE</p>
-        <h2 class="copy-title">Criterio de marca + criterio de producción.</h2>
-        <h3>Sol Blanco y Sol Negro crean potencial.</h3>
-        <p>
-          El sistema cruza estrategia con estructuras editoriales para decidir
-          qué vale crear y cómo ejecutarlo.
-        </p>
-      </div>
-    </section>
-
-    <section class="chapter chapter-timeline" id="timeline" data-chapter="timeline">
-      <div class="timeline-scene">
-        <div class="timeline-top">
-          <span>ABRAXAS PRODUCTION TIMELINE</span>
-          <span>00:18:24</span>
-        </div>
-
-        <div class="timeline-preview">
-          <div class="preview-frame">
-            <span>PREVIEW</span>
-            <strong>“Aquí empieza a cambiar la idea.”</strong>
-          </div>
-          <div class="preview-note">
-            <b>XR07 · GHOST</b>
-            <span>Mostrar transformación visual en tres estados.</span>
-          </div>
-        </div>
-
-        <div class="timeline-ruler">
-          <span>00</span><span>05</span><span>10</span><span>15</span><span>20</span><span>25</span>
-        </div>
-
-        <div class="track">
-          <b>A-ROLL</b>
-          <div class="clip solid" style="--x:2%;--w:94%">SOURCE VIDEO</div>
-        </div>
-        <div class="track">
-          <b>VISUAL</b>
-          <div class="clip ghost purple" style="--x:18%;--w:18%">B-ROLL · GHOST</div>
-          <div class="clip ghost iris" style="--x:51%;--w:27%">XR07 · 3 STATES</div>
-        </div>
-        <div class="track">
-          <b>MOTION</b>
-          <div class="clip ghost gold" style="--x:4%;--w:16%">PUSH 100→108</div>
-          <div class="clip ghost gold" style="--x:51%;--w:27%">XR MOTION</div>
-        </div>
-        <div class="track">
-          <b>SFX</b>
-          <div class="cue" style="--x:65%">◆</div>
-        </div>
-      </div>
-
-      <div class="chapter-copy timeline-copy">
-        <span class="chapter-number mobile-number">III</span>
-        <p class="chapter-kicker">PRODUCTION TIMELINE</p>
-        <h2 class="copy-title">La edición aparece antes de existir.</h2>
-        <h3>Ghost objects convierten intención en un mapa de producción.</h3>
-        <p>
-          B-roll, XR, Motion, SFX, VO, captions y música ocupan su posición real.
-          Un clic explica qué crear, por qué, cómo y con qué movimiento.
-        </p>
-      </div>
-    </section>
-
-    <section class="chapter chapter-scale" id="scale" data-chapter="scale">
-      <div class="scale-word" aria-hidden="true">SCALE</div>
-
-      <div class="chapter-copy floating-copy">
-        <span class="chapter-number mobile-number">IV</span>
-        <p class="chapter-kicker">MASSIVE CONTENT · PREMIUM CRITERION</p>
-        <h2 class="copy-title">Publicar todos los días deja de depender del caos.</h2>
-        <h3>Velocidad para volumen. Criterio para calidad.</h3>
-        <p>
-          Abraxas OS está diseñado para reducir trabajo repetitivo y volver
-          operacionalmente realista una producción mensual de alto volumen,
-          manteniendo revisión humana donde aporta valor.
+          Cada categoría explica una función del sistema. Abre una tarjeta sólo
+          cuando quieras profundizar; la información esencial se entiende sin
+          hacer clic.
         </p>
       </div>
 
-      <div class="scale-marquee">
+      <nav class="category-nav">
+        <a href="#source"><span>01</span><b>Source &amp; SHIM</b></a><a href="#intelligence"><span>02</span><b>Editorial Intelligence</b></a><a href="#timeline"><span>03</span><b>Production Timeline</b></a><a href="#media"><span>04</span><b>Editor &amp; Media</b></a><a href="#visual"><span>05</span><b>Visual Studio</b></a><a href="#operations"><span>06</span><b>Review &amp; Operations</b></a>
+      </nav>
+    </section>
+
+    <section class="outcomes" id="outcomes">
+      <header>
+        <span>POR QUÉ EXISTE</span>
+        <h2>El volumen sirve sólo si mantiene criterio.</h2>
+      </header>
+
+      <div class="outcome-grid">
+
+    <article>
+      <h3>Publicación constante</h3>
+      <p>Diseñado para volver operativo un flujo de contenido continuo sin depender de improvisar cada pieza desde cero.</p>
+    </article>
+
+    <article>
+      <h3>Más piezas por fuente</h3>
+      <p>Un podcast, entrevista, webinar o llamada puede convertirse en múltiples formatos conectados al mismo origen.</p>
+    </article>
+
+    <article>
+      <h3>Entrega más rápida</h3>
+      <p>Automatiza decisiones repetibles, conserva assets y deja la revisión humana en los puntos donde realmente aporta valor.</p>
+    </article>
+
+    <article>
+      <h3>Calidad trazable</h3>
+      <p>Cada corte, recurso, prompt, versión y aprobación puede mantener relación con la fuente que lo originó.</p>
+    </article>
+
+      </div>
+    </section>
+
+
+    <section class="edition-section" id="source">
+      <header class="section-intro">
+        <div class="section-index">01</div>
         <div>
-          BETA · ALFA · PRODUCTION · OMEGA · REVIEW · CALENDAR · PUBLISH ·
-          BETA · ALFA · PRODUCTION · OMEGA · REVIEW · CALENDAR · PUBLISH ·
+          <span class="section-label">Source &amp; SHIM</span>
+          <h2>Primero entiende el material.</h2>
+          <p>Antes de producir, Abraxas OS necesita saber qué existe, quién habla, qué se dijo y de dónde salió cada fragmento.</p>
         </div>
+      </header>
+
+      <div class="feature-grid">
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Project Intake</h3>
+            <p>Importar masters horizontales/verticales, audio, transcripción y documentos.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Un wizard reúne las fuentes del proyecto y preserva los originales. Las versiones de trabajo no reemplazan silenciosamente al material fuente.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Source Truth</h3>
+            <p>Separar sourceRange y editorialRange.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Los segmentos discontinuos permanecen discontinuos. Cada pieza sabe exactamente qué partes del master utiliza y qué decisiones editoriales fueron aplicadas.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Transcripción + análisis</h3>
+            <p>Speech, escenas, personas, temas y momentos.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>El sistema podrá transcribir cuando sea necesario y enriquecer la fuente con señales útiles para descubrir contenido sin inventar timecodes.</p>
+          </div>
+        </details>
+
       </div>
+
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
     </section>
 
-    <section class="chapter chapter-review" id="review" data-chapter="review">
-      <div class="review-board">
-        <div class="review-head">
-          <span>OMEGA REVIEW</span>
-          <span class="status-dot"></span>
+    <section class="edition-section" id="intelligence">
+      <header class="section-intro">
+        <div class="section-index">02</div>
+        <div>
+          <span class="section-label">Editorial Intelligence</span>
+          <h2>Decidir qué vale crear.</h2>
+          <p>Estrategia de marca, estructuras editoriales y análisis de fuente se combinan antes de entrar a producción.</p>
         </div>
+      </header>
 
-        <div class="review-card">
-          <div class="review-thumb">01</div>
-          <div>
-            <b>Reel · La decisión incómoda</b>
-            <span>Origen → Alfa → Omega</span>
-          </div>
-          <mark>READY FOR REVIEW</mark>
-        </div>
+      <div class="feature-grid">
 
-        <div class="review-card">
-          <div class="review-thumb">02</div>
-          <div>
-            <b>Carrusel · El costo de esperar</b>
-            <span>6 slides · Copy · Assets</span>
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Sol Blanco</h3>
+            <p>Marca, audiencia, voz, productos, campañas y objetivos.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Es la base estratégica del cliente. Permite que el contenido conserve identidad y no sea una colección de plantillas genéricas.</p>
           </div>
-          <mark>APPROVED</mark>
-        </div>
+        </details>
 
-        <div class="review-card">
-          <div class="review-thumb">03</div>
-          <div>
-            <b>Clip vertical · Cambio de perspectiva</b>
-            <span>Timeline · Captions · XR</span>
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Sol Negro</h3>
+            <p>Storytelling, hooks, XR, Motion, SFX, captions y estructuras.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Es la biblioteca de criterio de producción. Reúne formas probadas de construir piezas y reglas de calidad reutilizables.</p>
           </div>
-          <mark>PRODUCTION</mark>
-        </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Beta</h3>
+            <p>Qué contenidos tienen potencial.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Beta descubre candidatos y conserva su identidad, objetivo, fuente y razones. No es todavía el plan técnico de edición.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Alfa</h3>
+            <p>Cómo producir cada contenido seleccionado.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Alfa expande Beta con cortes, partes, beats, XR, B-roll, Motion, SFX, captions, VO, assets y guía de producción.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Continuidad semántica</h3>
+            <p>Cortar por significado, no por duración.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Pronombres, antecedentes, pregunta/respuesta, hooks y desarrollo deben permanecer coherentes al reconstruir una historia con fragmentos reales.</p>
+          </div>
+        </details>
+
       </div>
 
-      <div class="chapter-copy">
-        <span class="chapter-number mobile-number">V</span>
-        <p class="chapter-kicker">OMEGA / REVIEW</p>
-        <h2 class="copy-title">Nada sale porque sí.</h2>
-        <h3>Origen, producción y aprobación permanecen conectados.</h3>
-        <p>
-          La revisión final no es un Drive perdido ni un mensaje aislado:
-          cada corrección puede volver al objeto exacto que la originó.
-        </p>
-      </div>
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
     </section>
 
-    <section class="chapter chapter-build" id="build" data-chapter="build">
-      <div class="build-visual">
-        <p>BUILDING IN PUBLIC</p>
-        <div class="build-orb">
-          <span id="build-percent">0%</span>
-          <small>Foundation</small>
+    <section class="edition-section" id="timeline">
+      <header class="section-intro">
+        <div class="section-index">03</div>
+        <div>
+          <span class="section-label">Production Timeline</span>
+          <h2>Ver lo que falta antes de crearlo.</h2>
+          <p>La timeline no sólo muestra clips: muestra la intención de producción situada exactamente donde debe ocurrir.</p>
         </div>
+      </header>
 
-        <div class="build-lines">
-          <div><span>F0</span><b>Foundation</b><em class="done">Completed</em></div>
-          <div><span>F1</span><b>Media Compatibility</b><em id="f1-state">Next</em></div>
-          <div><span>F2</span><b>Editor Shell</b><em>Pending</em></div>
-          <div><span>F3</span><b>Production Timeline</b><em>Pending</em></div>
-        </div>
+      <div class="feature-grid">
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Ghost Objects</h3>
+            <p>Un ghost es un estado, no un tipo de recurso.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>XR, B-roll, SFX, Motion, imagen, música, VO o caption pueden existir como instrucciones fantasma hasta que el asset real sea creado o enlazado.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>XR</h3>
+            <p>B-roll estructurado generado/diseñado con IA.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Un XR puede contener varios estados o imágenes internas. Su ficha explica función, assets, prompts, continuidad, movimiento y criterio de revisión.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>B-roll</h3>
+            <p>Referencia visual real, stock, grabada o generada.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Puede sustituir un XR cuando ocupa el mismo slot semántico. Tiene descripción, búsqueda, duración y Motion cuando corresponde.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>Motion</h3>
+            <p>Movimiento aplicado a A-roll, B-roll, XR, texto o imagen.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Motion es una operación sobre un objetivo: zoom, push, pan, crop, reframe, opacity, blur, keyframes y transiciones.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="designed">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot designed"></span>
+              <small>DESIGNED</small>
+            </div>
+            <h3>SFX</h3>
+            <p>Sonido sólo cuando el contexto lo justifica.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>No existe una cuota de SFX. El sistema analiza lo que se dice y lo que aparece en pantalla para decidir si un sonido aporta o sobra.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Inspector contextual</h3>
+            <p>Click en un objeto → cómo producirlo.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>El inspector muestra por qué está ahí, qué crear, prompt, búsqueda, Motion, SFX asociado, assets y guía de ejecución sin obligar a leer una ficha gigante.</p>
+          </div>
+        </details>
+
       </div>
 
-      <div class="chapter-copy">
-        <span class="chapter-number mobile-number">VI</span>
-        <p class="chapter-kicker">REAL STATUS</p>
-        <h2 class="copy-title">Cada fase deja evidencia.</h2>
-        <h3 id="status-title">Leyendo estado real…</h3>
-        <p id="status-next">Cargando siguiente paso.</p>
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
+    </section>
 
-        <div class="build-links">
-          <a href="https://github.com/LordJeferies/abraxas-os" target="_blank" rel="noopener">
-            Ver código ↗
-          </a>
-          <span>El progreso mostrado proviene del repositorio.</span>
+    <section class="edition-section" id="media">
+      <header class="section-intro">
+        <div class="section-index">04</div>
+        <div>
+          <span class="section-label">Editor &amp; Media</span>
+          <h2>Del plan a media reproducible y exportable.</h2>
+          <p>VideoFlow da una base de composición y preview; Tauri y los motores Apple permiten convertir el sistema en una app macOS real.</p>
         </div>
+      </header>
+
+      <div class="feature-grid">
+
+        <details class="feature-card" data-status="building">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot building"></span>
+              <small>BUILDING</small>
+            </div>
+            <h3>F1 Media Compatibility Lab</h3>
+            <p>Certificar video real antes de construir la timeline final.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Se están validando browser y Tauri con video horizontal/vertical, play, pause, seek, scrub, frame step, audio y VideoFlow DOM Renderer.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="building">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot building"></span>
+              <small>BUILDING</small>
+            </div>
+            <h3>VideoFlow Adapter</h3>
+            <p>Abraxas Production Graph → VideoFlow.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>VideoFlow no es la fuente de verdad. Un adapter traduce assets, grupos XR, audio, captions y Motion al modelo de composición.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Apple Native Engine</h3>
+            <p>AVFoundation + CoreMedia + VideoToolbox.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>El objetivo del render principal en Mac es aprovechar APIs nativas y hardware Apple para cortes, composición y export de alta calidad.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Batch Cut / Export</h3>
+            <p>Cortar lotes sin perder trazabilidad.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Una selección Alfa puede convertirse en jobs deterministas con cache, resume, manifiestos y QA.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
+    </section>
+
+    <section class="edition-section" id="visual">
+      <header class="section-intro">
+        <div class="section-index">05</div>
+        <div>
+          <span class="section-label">Visual Studio</span>
+          <h2>Los formatos estáticos también tienen producción.</h2>
+          <p>Carruseles, quotes, PDFs y piezas de diseño necesitan una UI propia, no una timeline falsa.</p>
+        </div>
+      </header>
+
+      <div class="feature-grid">
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Carousel Studio</h3>
+            <p>Slides, texto editable, imágenes y layouts.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Cada slide conserva texto visible, fuente, composición, prompt sin texto y continuidad. Los assets pueden cargarse y ajustarse por capas.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Quote Plates</h3>
+            <p>Diseño tipográfico conectado a la fuente.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Frases exactas, división, atribución, fondo y branding permanecen editables y trazables.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>PDF / Thread / LinkedIn</h3>
+            <p>Cada formato tiene su propio storyboard.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>El sistema evita forzar formatos no temporales dentro de una timeline audiovisual.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
+    </section>
+
+    <section class="edition-section" id="operations">
+      <header class="section-intro">
+        <div class="section-index">06</div>
+        <div>
+          <span class="section-label">Review &amp; Operations</span>
+          <h2>Producir no termina en exportar.</h2>
+          <p>El contenido necesita revisión, aprobación, calendario y publicación antes de convertirse en operación recurrente.</p>
+        </div>
+      </header>
+
+      <div class="feature-grid">
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Omega / Review</h3>
+            <p>Contenido producido listo para revisión.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Comentarios por timestamp, versiones y correcciones vuelven al objeto de producción exacto que originó el cambio.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Calendar</h3>
+            <p>Lotes, canales, copy, fechas y estados.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>La producción aprobada puede pasar a un calendario editorial drag &amp; drop sin duplicar manualmente su información.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Publisher</h3>
+            <p>Preparar/publicar donde la integración lo permita.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>La primera Luna útil es operativa: review y publicación. Métricas profundas y finanzas quedan para fases posteriores.</p>
+          </div>
+        </details>
+
+        <details class="feature-card" data-status="planned">
+          <summary>
+            <div class="feature-topline">
+              <span class="status-dot planned"></span>
+              <small>PLANNED</small>
+            </div>
+            <h3>Mobile Companion</h3>
+            <p>Revisar y aprobar desde el teléfono.</p>
+            <span class="open-hint">Ver cómo funciona <i>+</i></span>
+          </summary>
+          <div class="feature-detail">
+            <p>Desktop y móvil comparten dominio y estado, pero usan layouts adaptados en vez de encoger la UI de escritorio.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <a class="back-link" href="#edition-nav">Volver a categorías ↑</a>
+    </section>
+
+
+    <section class="build-section" id="build">
+      <header>
+        <span>BUILDING IN PUBLIC</span>
+        <h2>Lo que funciona se marca. Lo que falta también.</h2>
+        <p>Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.</p>
+      </header>
+
+      <div class="build-grid">
+        <article>
+          <div><span>F0</span><b>100%</b></div>
+          <h3>Foundation</h3>
+          <progress max="100" value="100">100%</progress>
+          <p>Arquitectura, contratos, Tauri, VideoFlow, gates y repositorio.</p>
+        </article>
+
+        <article class="active">
+          <div><span>F1</span><b>35%</b></div>
+          <h3>Media Compatibility</h3>
+          <progress max="100" value="35">35%</progress>
+          <p>Certificar playback real horizontal/vertical en browser y Tauri.</p>
+        </article>
+
+        <article>
+          <div><span>F2</span><b>0%</b></div>
+          <h3>Editor Shell</h3>
+          <progress max="100" value="0">0%</progress>
+          <p>Workspace premium de Preview, Timeline e Inspector.</p>
+        </article>
+
+        <article>
+          <div><span>F3</span><b>0%</b></div>
+          <h3>Production Timeline</h3>
+          <progress max="100" value="0">0%</progress>
+          <p>Ghost objects, assets, XR, B-roll, Motion, SFX y captions.</p>
+        </article>
+      </div>
+
+      <div class="status-footer">
+        <span>Estado real del repositorio</span>
+        <b>F1 · Media Compatibility Lab</b>
+        <a href="https://github.com/LordJeferies/abraxas-os" target="_blank" rel="noopener">Ver código ↗</a>
       </div>
     </section>
 
     <section class="finale">
-      <p>ONE SOURCE.</p>
-      <p>ONE SYSTEM.</p>
-      <h2>More content.<br><em>More criterion.</em></h2>
-      <a href="https://github.com/LordJeferies/abraxas-os" target="_blank" rel="noopener">
-        Follow the build ↗
-      </a>
+      <span>ABRAXAS OS</span>
+      <h2>Una fuente.<br>Muchas piezas.<br><em>Un solo criterio.</em></h2>
+      <a href="#top">Volver al inicio ↑</a>
     </section>
   </main>
 
   <footer>
     <span>Abraxas OS · Content Operating System</span>
-    <span>Hero artwork: Michelangelo, The Creation of Adam · Public Domain.</span>
+    <span>Hero: Michelangelo · The Creation of Adam · Public Domain</span>
   </footer>
 </body>
 </html>

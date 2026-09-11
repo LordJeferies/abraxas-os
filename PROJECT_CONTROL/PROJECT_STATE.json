@@ -4,24 +4,26 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "v0.5.x publicado en GitHub: Content Renaissance + F1 Media Lab. Build frontend/Tauri pasan. Falta certificar cuatro runs de media real.",
+  "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
   "blockedReason": null,
-  "nextStep": "Ejecutar F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
-  "updatedAt": "2026-09-11T15:30:46-04:00",
+  "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
+  "updatedAt": "2026-09-11T16:05:29-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 30,
+    "mediaCompatibility": 35,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
-    "status": "passed",
-    "updatedAt": "2026-09-11T15:30:24-04:00"
+    "status": "failed",
+    "exitCode": 2,
+    "updatedAt": "2026-09-11T15:55:18-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
     "url": "https://lordjeferies.github.io/abraxas-os/",
     "checkedAt": "2026-09-11T15:30:45-04:00"
-  }
+  },
+  "publicSiteIsReleaseGate": false
 }

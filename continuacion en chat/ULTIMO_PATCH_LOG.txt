@@ -1,56 +1,51 @@
 
 ============================================================
-0/9 · PREFLIGHT
+0/11 · PREFLIGHT
 ============================================================
-Local HEAD:  12942a2
-Origin:      https://github.com/LordJeferies/abraxas-os.git
-Cambios:     43 archivos/entradas
+OK repo
+OK F1 Media Lab presente
 
 ============================================================
-1/9 · NORMALIZADOR ROBUSTO DE ARCHIVOS GENERADOS
+1/11 · BACKUP LOCALIZADO
 ============================================================
-NORMALIZED:
- - continuacion en chat/ULTIMO_PATCH_LOG.txt
- - docs/evidence/CHECK_20260911_151858.txt
- - docs/evidence/ABRAXAS_OS_V0_5_2_20260911_151857.log
- - docs/evidence/CHECK_20260911_143556.txt
- - docs/evidence/CHECK_20260911_151031.txt
- - docs/evidence/ABRAXAS_OS_V0_5_20260911_151021.log
- - docs/evidence/GITHUB_FIX_20260911_144217.log
- - docs/evidence/ABRAXAS_OS_V0_4_20260911_143554.log
- - docs/evidence/CHECK_20260911_151356.txt
- - docs/evidence/CHECK_20260911_144956.txt
- - docs/evidence/CHECK_20260911_142937.txt
- - docs/evidence/ABRAXAS_OS_PATCH_V0_3_20260911_142935.log
- - docs/evidence/CHECK_20260911_143602.txt
- - docs/evidence/ABRAXAS_OS_V0_5_1_20260911_151346.log
+Backup: ~/Desktop/Abrxs os/archive/patches/ABRAXAS_OS_V0_7_0_20260911_160525
 
 ============================================================
-2/9 · ULTIMO_PATCH_LOG AUTOMÁTICO PARA FUTURAS CONVERSACIONES
+2/11 · CORREGIR CICLO DE VIDA DEL BLOB URL
 ============================================================
-✅ finalize_update ahora sincroniza ULTIMO_PATCH_LOG.
+OK blob URL lifecycle corregido
 
 ============================================================
-3/9 · RE-STAGE LIMPIO + VALIDAR WHITESPACE
+3/11 · DIAGNÓSTICO DE ERROR DE VIDEO
+============================================================
+OK error diagnostics
+
+============================================================
+4/11 · GATE ENTRE BROWSER Y TAURI
+============================================================
+OK runtime-separated F1 coverage
+
+============================================================
+5/11 · CONSOLIDADOR DE 4 REPORTES F1
+============================================================
+OK CLI f1-validate agregado
+
+============================================================
+6/11 · SITE BUILDER HIGIÉNICO + FREEZE
+============================================================
+OK builder genera HTML limpio
+OK site/index agregado al normalizador
+
+============================================================
+7/11 · ESTADO F1 CORRECTO
+============================================================
+
+============================================================
+8/11 · SYNTAX + BUILD
 ============================================================
 ✅ Generated/evidence text already normalized.
-Comprobando staged whitespace...
-✅ Staged diff limpio.
-
-============================================================
-4/9 · PIPELINE COMPLETO
-============================================================
-ABRAXAS OS PROJECT CHECK
-========================
-Date: 2026-09-11 15:30:21 -0400
-
-[0/8] Predictive preflight
-ABRAXAS · PREDICTIVE PREFLIGHT
-==============================
-
-✅ Preflight predictivo aprobado.
-
-[1/8] Syntax + generated-text hygiene
+Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+Built: ~/Desktop/Abrxs os/site/index.html
 ✅ Generated/evidence text already normalized.
 ABRAXAS · SYNTAX CHECK
 ======================
@@ -67,6 +62,8 @@ OK scripts/checkpoint.sh
 OK scripts/check_project.sh
 
 [python]
+OK scripts/build_public_site.py
+OK scripts/check_site_budget.py
 OK scripts/check_tauri_coherence.py
 OK scripts/normalize_generated_text.py
 OK scripts/preflight_predictive.py
@@ -74,6 +71,7 @@ OK scripts/prepush_guard.py
 OK scripts/sync_latest_patch_log.py
 OK scripts/sync_status.py
 OK scripts/update_continuation.py
+OK scripts/validate_f1_reports.py
 
 [site javascript]
 OK site/assets/site.js
@@ -91,14 +89,10 @@ OK site/data/content.json
 OK site/data/status.json
 
 ✅ Syntax gate aprobado.
-
-[2/8] Tauri config coherence
 ABRAXAS · TAURI COHERENCE CHECK
 ================================
 
 ✅ Configuración Tauri/Cargo/plugins coherente.
-
-[3/8] TypeScript + Vite
 
 > abraxas-os@0.0.0 build
 > tsc -b && vite build
@@ -112,97 +106,30 @@ dist/index.html                                     0.45 kB │ gzip:   0.29 kB
 dist/assets/index-Bf5GYW6i.css                      2.18 kB │ gzip:   0.98 kB
 dist/assets/MediaCompatibilityLab-BJdpb-Oa.css      5.40 kB │ gzip:   1.71 kB
 dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
-dist/assets/MediaCompatibilityLab-BDgEXvvc.js      12.90 kB │ gzip:   4.45 kB
-dist/assets/index-DAYfg3X0.js                     223.71 kB │ gzip:  70.29 kB
-dist/assets/EditorSpike-CumHErcO.js               329.10 kB │ gzip:  62.36 kB
-dist/assets/dist-C70y3Iyj.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/MediaCompatibilityLab-BqjDy9Dn.js      13.19 kB │ gzip:   4.60 kB
+dist/assets/index-Ct1Cq7zR.js                     223.71 kB │ gzip:  70.29 kB
+dist/assets/EditorSpike-Bv-PYVy6.js               329.10 kB │ gzip:  62.36 kB
+dist/assets/dist-BZx4ZWgg.js                    1,704.83 kB │ gzip: 358.93 kB
 
+✓ built in 261ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 206ms
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s
 
-[4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s
-
-[5/8] Public repo guard
+============================================================
+9/11 · REPO GATES
+============================================================
 ABRAXAS PUBLIC REPO GUARD
 =========================
 
 ✅ No se detectaron bloqueos para un repo público.
-
-[6/8] Sync generated state
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
 NORMALIZED:
- - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
- - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_153021.txt
- - docs/evidence/ABRAXAS_OS_V0_5_3_20260911_153021.log
-
-[7/8] Git whitespace FINAL
-
-[8/8] Record successful check
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
-✅ Generated/evidence text already normalized.
-
-✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_153021.txt
-✅ Generated/evidence text already normalized.
-✅ Gates completos y evidencia limpia.
+ - docs/evidence/ABRAXAS_OS_V0_7_0_20260911_160525.log
 
 ============================================================
-5/9 · LIMPIAR ERROR ANTERIOR Y CHECKPOINT
-============================================================
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
-✅ Generated/evidence text already normalized.
-✅ Generated/evidence text already normalized.
-
-============================================================
-6/9 · COMMIT + PUSH
-============================================================
-[main 7a47bff] feat: publish F1 media lab and content renaissance site
- 48 files changed, 3442 insertions(+), 488 deletions(-)
- create mode 100644 PROJECT_CONTROL/ERROR_PREVENTION_POLICY.md
- create mode 100644 PROJECT_CONTROL/F1_MEDIA_COMPATIBILITY_PLAN.md
- create mode 100644 PROJECT_CONTROL/KNOWN_WARNINGS.md
- create mode 100644 app/src/core/state/useAppStore.ts
- create mode 100644 app/src/modules/editor-shell/EditorSpike.tsx
- create mode 100644 app/src/modules/media-lab/MediaCompatibilityLab.tsx
- create mode 100644 app/src/modules/media-lab/media-lab.css
- create mode 100644 continuacion en chat/ULTIMO_PATCH_LOG.txt
- create mode 100644 docs/evidence/CHECK_20260911_151031.txt
- create mode 100644 docs/evidence/CHECK_20260911_151356.txt
- create mode 100644 docs/evidence/CHECK_20260911_151858.txt
- create mode 100644 docs/evidence/CHECK_20260911_153021.txt
- create mode 100755 scripts/check_syntax.sh
- create mode 100755 scripts/check_tauri_coherence.py
- create mode 100755 scripts/normalize_generated_text.py
- create mode 100755 scripts/preflight_predictive.py
- create mode 100755 scripts/sync_latest_patch_log.py
- create mode 100644 site/assets/creation-hands.jpg
- create mode 100644 site/data/content.json
-To https://github.com/LordJeferies/abraxas-os.git
-   12942a2..7a47bff  main -> main
-Local SHA:  7a47bffd5c2e7931d8aff6980394d323856c9c59
-Remote SHA: 7a47bffd5c2e7931d8aff6980394d323856c9c59
-✅ GitHub contiene el commit actual.
-
-============================================================
-7/9 · ESPERAR GITHUB PAGES
-============================================================
-Esperando que GitHub Actions publique la nueva página...
-Buscamos el texto: Content Renaissance
-  intento 1/24 · todavía sirve la versión anterior
-  intento 2/24 · todavía sirve la versión anterior
-  intento 3/24 · todavía sirve la versión anterior
-✅ GitHub Pages actualizado (intento 4).
-
-============================================================
-8/9 · REGISTRAR PUBLICACIÓN
+10/11 · CHECKPOINT + COMMIT + PUSH
 ============================================================
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md

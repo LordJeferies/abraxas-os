@@ -14,3 +14,6 @@ GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Me
 
 ## 2026-09-11 15:19:02 -0400
 v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.
+
+## 2026-09-11 16:05:29 -0400
+v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri agregados. Sitio congelado hasta F1/F2.

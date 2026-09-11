@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T15:30:46-04:00
+- Generado: 2026-09-11T16:05:29-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -47,109 +47,67 @@ XR es una secuencia visual compuesta que puede contener varios estados/assets.
 
 # Estado actual
 
-## F0 — Foundation
-COMPLETED
+## Aplicación
 
-Foundation continúa protegida por gates.
+F0 Foundation: COMPLETED.
 
-## F1 — Media Compatibility Lab
-IN PROGRESS
+F1 Media Compatibility Lab: IN PROGRESS.
 
-El módulo ya existe en código.
+Frontend y Tauri compilan. Falta certificar reproducción real con cuatro runs:
 
-Incluye dos caminos reales de preview:
-
-1. HTMLVideoElement;
-2. VideoFlow DOM Renderer.
-
-También incluye:
-
-- selección local browser;
-- selector nativo macOS/Tauri;
-- asset protocol;
-- metadata;
-- play/pause;
-- scrub/seek;
-- frame step;
-- requestVideoFrameCallback;
-- VideoFlow load/play/seek;
-- confirmación manual de audio;
-- confirmación manual de reopen;
-- acumulación de runs horizontal/vertical;
-- acumulación browser/Tauri;
-- reporte JSON sin ruta privada del cliente.
-
-## Release gate
-
-F1 TODAVÍA NO está completada.
-
-Debe ejecutarse realmente con:
-
-- browser horizontal;
-- browser vertical;
+- Browser horizontal;
+- Browser vertical;
 - Tauri horizontal;
 - Tauri vertical.
 
-Los cuatro runs deben quedar PASS.
-
 ## Sitio público
 
-El sitio de status/producto fue rediseñado como una experiencia original de
-scrollytelling "Content Renaissance", inspirada en la estructura narrativa de
-sitios editoriales inmersivos, usando arte público de Michelangelo como hero.
+Se está estabilizando una versión rápida y data-driven.
 
-No contiene assets propietarios de Shopify.
+El sitio es una capa de comunicación del proyecto y NO un release gate de la
+aplicación.
+
+Si su diseño vuelve a requerir iteraciones importantes, se aparca y se retoma
+después de F1/F2.
 
 
 ## Próximo paso
 
 # Próximo paso
 
-## Ejecutar F1
+## F1 — certificación real
 
 ### Browser
 
-Desde el repo:
-
 `./scripts/abraxas web`
 
-Probar:
+Hacer un run horizontal y uno vertical.
 
-1. video horizontal real;
-2. video vertical real.
+Para la primera línea base usar un video H.264/AAC conocido.
 
-En cada uno:
-
-- seleccionar video;
-- play;
-- pause;
-- mover scrubber;
-- frame step;
-- Load VideoFlow;
-- Play Flow;
-- Seek Flow;
-- confirmar Audio audible;
-- confirmar Reopen sólo después de haber cerrado/reabierto y repetido carga;
-- guardar run.
+Descargar ambos reportes JSON.
 
 ### Tauri
 
 `./scripts/abraxas desktop`
 
-Repetir:
+Hacer un run horizontal y uno vertical.
 
-1. horizontal;
-2. vertical.
+Descargar ambos reportes JSON.
 
-### Gate
+### Consolidar
 
-Cuando las cuatro celdas acumuladas estén verdes, descargar/copiar reporte.
+Con los cuatro JSON en Downloads:
 
-Sólo después se evaluará marcar F1 como COMPLETED.
+`./scripts/abraxas f1-validate`
 
-## En paralelo
+Sólo cuatro reportes v2 con `currentRunPassed=true` completan F1.
 
-La web pública puede revisarse en GitHub Pages después del push.
+## Después
+
+F2 Editor Shell.
+
+El sitio público queda congelado hasta F1/F2 salvo fallo crítico.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -158,70 +116,35 @@ La web pública puede revisarse en GitHub Pages después del push.
 
 ## De dónde venimos
 
-ABRXOS R9.x demostró y exploró:
+ABRXOS R9.x dejó aprendizaje útil sobre Beta/Alfa, Story Editors, cortes,
+paquetes IA y arquitectura Tauri/Rust/Swift.
 
-- contratos Beta/Alfa;
-- importación y normalización;
-- Story Editors HTML;
-- cortes y automatizaciones;
-- arquitectura Tauri/Rust/Swift;
-- conceptos de SHIM y producción editorial.
+Abraxas OS reutiliza ese aprendizaje con una arquitectura modular nueva.
 
-La nueva rama Abraxas OS NO elimina ese aprendizaje, pero comienza con una
-arquitectura más limpia y modular.
+## Dónde estamos ahora
 
-El primer bootstrap de Abraxas OS creó Foundation parcialmente.
-El segundo bootstrap instaló VideoFlow y Tauri, pero el primer build detectó
-que `VideoJSON` de VideoFlow exige `backgroundColor`.
+F0 Foundation está completada.
 
-Ese error se corrige de forma localizada en v0.3.
+Estamos en F1 Media Compatibility Lab.
 
-## Dónde estamos
+El código de F1 compila en frontend y Tauri, pero todavía falta la prueba que
+realmente importa: reproducir videos reales.
 
-Estamos cerrando F0 — Foundation.
+## Hacia dónde vamos inmediatamente
 
-Todavía NO hemos demostrado reproducción real de un MP4 dentro de Tauri.
+Certificar cuatro casos:
 
-## A dónde vamos inmediatamente
+1. Browser horizontal.
+2. Browser vertical.
+3. Tauri horizontal.
+4. Tauri vertical.
 
-F1 — Media Compatibility Lab.
+Después comienza F2 Editor Shell y F3 Production Timeline.
 
-Debe demostrar con archivos reales:
+## Regla
 
-- load;
-- play;
-- pause;
-- seek;
-- scrub;
-- audio;
-- frame step;
-- horizontal;
-- vertical;
-- reopen.
-
-## Dirección de producto
-
-Después de F1:
-
-- Editor Shell;
-- Production Timeline;
-- objetos fantasma;
-- inspector;
-- Alfa Adapter;
-- XR Studio;
-- Asset Workflow;
-- Apple Native Cut/Render;
-- SHIM;
-- Sol Blanco / Sol Negro;
-- Beta / Alfa;
-- captions;
-- Visual Studio;
-- Arquitecto;
-- Omega / Review;
-- Calendar;
-- Publisher.
-
-Luna 2 y Luna 3 quedan para etapas posteriores.
+El sitio público puede evolucionar en paralelo, pero no vuelve a bloquear el
+roadmap de la aplicación.
 
 
 ## Estado estructurado
@@ -233,26 +156,28 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "v0.5.x publicado en GitHub: Content Renaissance + F1 Media Lab. Build frontend/Tauri pasan. Falta certificar cuatro runs de media real.",
+  "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
   "blockedReason": null,
-  "nextStep": "Ejecutar F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
-  "updatedAt": "2026-09-11T15:30:46-04:00",
+  "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
+  "updatedAt": "2026-09-11T16:05:29-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 30,
+    "mediaCompatibility": 35,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
-    "status": "passed",
-    "updatedAt": "2026-09-11T15:30:24-04:00"
+    "status": "failed",
+    "exitCode": 2,
+    "updatedAt": "2026-09-11T15:55:18-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
     "url": "https://lordjeferies.github.io/abraxas-os/",
     "checkedAt": "2026-09-11T15:30:45-04:00"
-  }
+  },
+  "publicSiteIsReleaseGate": false
 }
 ```
 
@@ -299,8 +224,32 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 
 ```text
 ## main...origin/main
+ M .gitignore
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/FROM_TO.md
+ M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src/modules/media-lab/MediaCompatibilityLab.tsx
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/abraxas
+ M scripts/normalize_generated_text.py
+ M site/assets/site.js
+ M site/assets/style.css
+ M site/data/content.json
  M site/data/status.json
+ M site/index.html
+?? PROJECT_CONTROL/APP_PROGRESS.md
+?? PROJECT_CONTROL/PUBLIC_SITE_FREEZE.md
+?? docs/evidence/CHECK_20260911_155515.txt
+?? scripts/build_public_site.py
+?? scripts/check_site_budget.py
+?? scripts/validate_f1_reports.py
+?? site/assets/creation-hands-1800.jpg
+?? site/assets/creation-hands-960.jpg
 ```
 
 ### Remote
@@ -313,6 +262,7 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+d4387d8 docs: record F1 publication state
 7a47bff feat: publish F1 media lab and content renaissance site
 12942a2 docs: record successful GitHub publication
 03d0e78 chore: finalize GitHub public setup
@@ -322,69 +272,69 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_153021.txt`
+`docs/evidence/CHECK_20260911_155515.txt`
 
 ```text
-
-[2/8] Tauri config coherence
-ABRAXAS · TAURI COHERENCE CHECK
-================================
-
-✅ Configuración Tauri/Cargo/plugins coherente.
-
-[3/8] TypeScript + Vite
-
-> abraxas-os@0.0.0 build
-> tsc -b && vite build
-
-vite v8.3.0 building client environment for production...
-transforming...
-✓ 204 modules transformed.
-rendering chunks...
-computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.29 kB
-dist/assets/index-Bf5GYW6i.css                      2.18 kB │ gzip:   0.98 kB
-dist/assets/MediaCompatibilityLab-BJdpb-Oa.css      5.40 kB │ gzip:   1.71 kB
-dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
-dist/assets/MediaCompatibilityLab-BDgEXvvc.js      12.90 kB │ gzip:   4.45 kB
-dist/assets/index-DAYfg3X0.js                     223.71 kB │ gzip:  70.29 kB
-dist/assets/EditorSpike-CumHErcO.js               329.10 kB │ gzip:  62.36 kB
-dist/assets/dist-C70y3Iyj.js                    1,704.83 kB │ gzip: 358.93 kB
-
-[plugin builtin:vite-reporter]
-(!) Some chunks are larger than 500 kB after minification. Consider:
-- Using dynamic import() to code-split the application
-- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
-- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 206ms
-
-[4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s
-
-[5/8] Public repo guard
-ABRAXAS PUBLIC REPO GUARD
-=========================
-
-✅ No se detectaron bloqueos para un repo público.
-
-[6/8] Sync generated state
++
+site/index.html:341: trailing whitespace.
++
+site/index.html:356: trailing whitespace.
++
+site/index.html:371: trailing whitespace.
++
+site/index.html:376: trailing whitespace.
++
+site/index.html:388: trailing whitespace.
++
+site/index.html:403: trailing whitespace.
++
+site/index.html:418: trailing whitespace.
++
+site/index.html:433: trailing whitespace.
++
+site/index.html:448: trailing whitespace.
++
+site/index.html:453: trailing whitespace.
++
+site/index.html:465: trailing whitespace.
++
+site/index.html:480: trailing whitespace.
++
+site/index.html:495: trailing whitespace.
++
+site/index.html:510: trailing whitespace.
++
+site/index.html:515: trailing whitespace.
++
+site/index.html:527: trailing whitespace.
++
+site/index.html:542: trailing whitespace.
++
+site/index.html:557: trailing whitespace.
++
+site/index.html:572: trailing whitespace.
++
+site/index.html:587: trailing whitespace.
++
+site/index.html:592: trailing whitespace.
++
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+Patch log sincronizado: ABRAXAS_OS_V0_6_1_20260911_155514.log
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
- NORMALIZED:
+                                                                                                                                                                                                                                                                                                            NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+ - continuacion en chat/ULTIMO_PATCH_LOG.txt
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_153021.txt
- - docs/evidence/ABRAXAS_OS_V0_5_3_20260911_153021.log
+ - docs/evidence/CHECK_20260911_155515.txt
+ - docs/evidence/ABRAXAS_OS_V0_6_1_20260911_155514.log
 
-[7/8] Git whitespace FINAL
+❌ Project check falló. Revisar ULTIMO_CHECK / evidencia.
 
-[8/8] Record successful check
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+📁 Archivos para continuar en ChatGPT:
+~/Desktop/Abrxs os/continuacion en chat
+
+Normalmente sube:
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
-✅ Generated/evidence text already normalized.
-
-✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_153021.txt
 ```
 
 ## Última actividad
@@ -406,6 +356,9 @@ GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Me
 
 ## 2026-09-11 15:19:02 -0400
 v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.
+
+## 2026-09-11 16:05:29 -0400
+v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri agregados. Sitio congelado hasta F1/F2.
 ```
 
 ## Archivos clave
