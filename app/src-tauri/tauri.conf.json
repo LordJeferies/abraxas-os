@@ -22,7 +22,16 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$DOWNLOAD/**/*",
+          "$VIDEO/**/*",
+          "$DOCUMENT/**/*",
+          "$DESKTOP/Abrxs os/CLIENTES_PRIVADOS_LOCAL/**/*"
+        ]
+      }
     }
   },
   "bundle": {

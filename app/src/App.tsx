@@ -1,21 +1,27 @@
-import { useState } from 'react'
-import type { VideoJSON } from '@videoflow/core'
-import { VideoEditor } from '@videoflow/react-video-editor'
-import '@videoflow/react-video-editor/style.css'
+import { lazy, Suspense } from 'react'
+import { useAppStore } from './core/state/useAppStore'
 import './App.css'
 
-const initialVideo: VideoJSON = {
-  name: 'Abraxas OS · Foundation',
-  width: 1920,
-  height: 1080,
-  fps: 30,
-  duration: 12,
-  backgroundColor: '#000000',
-  layers: [],
+const MediaCompatibilityLab = lazy(
+  () => import('./modules/media-lab/MediaCompatibilityLab')
+)
+
+const EditorSpike = lazy(
+  () => import('./modules/editor-shell/EditorSpike')
+)
+
+function LoadingModule() {
+  return (
+    <div className="module-loading">
+      <span>ABRAXAS OS</span>
+      <strong>Cargando módulo…</strong>
+    </div>
+  )
 }
 
 export default function App() {
-  const [video, setVideo] = useState<VideoJSON>(initialVideo)
+  const view = useAppStore((state) => state.view)
+  const setView = useAppStore((state) => state.setView)
 
   return (
     <main className="app-shell">
@@ -28,18 +34,31 @@ export default function App() {
           </div>
         </div>
 
+        <nav className="app-nav">
+          <button
+            className={view === 'media-lab' ? 'active' : ''}
+            onClick={() => setView('media-lab')}
+          >
+            F1 · Media Lab
+          </button>
+          <button
+            className={view === 'editor-spike' ? 'active' : ''}
+            onClick={() => setView('editor-spike')}
+          >
+            Editor Base
+          </button>
+        </nav>
+
         <div className="phase">
-          F0 · Foundation
-          <b>Media gate pendiente</b>
+          F1
+          <b>REAL MEDIA GATE</b>
         </div>
       </header>
 
-      <section className="editor">
-        <VideoEditor
-          video={video}
-          onChange={setVideo}
-          theme="night"
-        />
+      <section className="workspace">
+        <Suspense fallback={<LoadingModule />}>
+          {view === 'media-lab' ? <MediaCompatibilityLab /> : <EditorSpike />}
+        </Suspense>
       </section>
     </main>
   )

@@ -11,3 +11,6 @@ v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y
 
 ## 2026-09-11 14:50:04 -0400
 GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.
+
+## 2026-09-11 15:19:02 -0400
+v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.

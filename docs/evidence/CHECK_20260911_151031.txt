@@ -1,0 +1,78 @@
+ABRAXAS OS PROJECT CHECK
+========================
+Date: 2026-09-11 15:10:31 -0400
+
+[1/6] JSON canonical files
+OK PROJECT_CONTROL/PROJECT_STATE.json
+OK PROJECT_CONTROL/MODULES.json
+OK PROJECT_CONTROL/GITHUB.json
+OK contracts/production-graph.v1.schema.json
+OK examples/production-graph.demo.json
+OK app/package.json
+OK app/src-tauri/tauri.conf.json
+
+[2/6] TypeScript + Vite
+
+> abraxas-os@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 204 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/assets/index-Bf5GYW6i.css                      2.18 kB │ gzip:   0.98 kB
+dist/assets/MediaCompatibilityLab-BJdpb-Oa.css      5.40 kB │ gzip:   1.71 kB
+dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
+dist/assets/MediaCompatibilityLab-BDgEXvvc.js      12.90 kB │ gzip:   4.45 kB
+dist/assets/index-DAYfg3X0.js                     223.71 kB │ gzip:  70.29 kB
+dist/assets/EditorSpike-CumHErcO.js               329.10 kB │ gzip:  62.36 kB
+dist/assets/dist-C70y3Iyj.js                    1,704.83 kB │ gzip: 358.93 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 217ms
+
+[3/6] Rust / Tauri
+ Downloading crates ...
+  Downloaded tauri-plugin-fs v2.5.2
+  Downloaded tauri-plugin-dialog v2.7.3
+    Checking objc2-core-foundation v0.3.2
+   Compiling tauri-plugin-fs v2.5.2
+   Compiling tauri-plugin-dialog v2.7.3
+   Compiling rfd v0.16.0
+    Checking objc2-foundation v0.3.2
+   Compiling app v0.1.0 (/Users/lordjef/Desktop/Abrxs os/app/src-tauri)
+error: failed to run custom build command for `app v0.1.0 (/Users/lordjef/Desktop/Abrxs os/app/src-tauri)`
+
+Caused by:
+  process didn't exit successfully: `/Users/lordjef/Desktop/Abrxs os/app/src-tauri/target/debug/build/app-aae68c7f685cc9f7/build-script-build` (exit status: 1)
+  --- stdout
+  cargo:rerun-if-env-changed=TAURI_CONFIG
+  cargo:rustc-check-cfg=cfg(desktop)
+  cargo:rustc-cfg=desktop
+  cargo:rustc-check-cfg=cfg(mobile)
+  cargo:rerun-if-changed=/Users/lordjef/Desktop/Abrxs os/app/src-tauri/tauri.conf.json
+  cargo:rustc-env=TAURI_ANDROID_PACKAGE_NAME_APP_NAME=desktop
+  cargo:rustc-env=TAURI_ANDROID_PACKAGE_NAME_PREFIX=com_abraxasos
+  cargo:rustc-check-cfg=cfg(dev)
+  cargo:rustc-cfg=dev
+
+        The `tauri` dependency features on the `Cargo.toml` file does not match the allowlist defined under `tauri.conf.json`.
+        Please run `tauri dev` or `tauri build` or add the `protocol-asset` feature.
+
+warning: build failed, waiting for other jobs to finish...
+Status sincronizado: /Users/lordjef/Desktop/Abrxs os/site/data/status.json
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+
+❌ Project check falló. Revisar ULTIMO_CHECK / evidencia.
+
+📁 Archivos para continuar en ChatGPT:
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat
+
+Normalmente sube:
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md

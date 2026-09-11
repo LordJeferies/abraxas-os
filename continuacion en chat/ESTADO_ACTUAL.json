@@ -1,25 +1,25 @@
 {
-  "generatedAt": "2026-09-11T14:50:04-04:00",
+  "generatedAt": "2026-09-11T15:30:25-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1",
     "phaseName": "Media Compatibility Lab",
-    "status": "pending",
-    "lastCompletedStep": "F0 Foundation validada y repositorio público GitHub publicado. Siguiente: F1 Media Compatibility Lab.",
+    "status": "in_progress",
+    "lastCompletedStep": "v0.5.2: build frontend y Tauri pasan; se añadieron gates predictivos, coherencia Tauri y normalización automática. Falta certificar media real.",
     "blockedReason": null,
-    "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-    "updatedAt": "2026-09-11T14:50:04-04:00",
+    "nextStep": "Ejecutar cuatro runs reales F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
+    "updatedAt": "2026-09-11T15:30:24-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
-      "mediaCompatibility": 0,
+      "mediaCompatibility": 30,
       "editorShell": 0,
       "productionTimeline": 0
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T14:49:58-04:00"
+      "updatedAt": "2026-09-11T15:30:24-04:00"
     }
   },
   "modules": [
@@ -38,7 +38,7 @@
     {
       "id": "media-lab",
       "name": "Media Compatibility Lab",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/media-lab"
     },
     {
@@ -116,7 +116,7 @@
     {
       "id": "public-site",
       "name": "Status / Product Website",
-      "status": "started",
+      "status": "in_progress",
       "path": "site"
     }
   ],
@@ -144,9 +144,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M PROJECT_CONTROL/GITHUB.json\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M site/data/status.json",
+    "status": "## main...origin/main\nM  PROJECT_CONTROL/CURRENT_STATUS.md\nA  PROJECT_CONTROL/ERROR_PREVENTION_POLICY.md\nA  PROJECT_CONTROL/F1_MEDIA_COMPATIBILITY_PLAN.md\nA  PROJECT_CONTROL/KNOWN_WARNINGS.md\nM  PROJECT_CONTROL/MODULES.json\nM  PROJECT_CONTROL/NEXT_STEP.md\nM  PROJECT_CONTROL/PROJECT_STATE.json\nM  PROJECT_CONTROL/SESSION_LOG.md\nM  app/package-lock.json\nM  app/package.json\nM  app/src-tauri/Cargo.lock\nM  app/src-tauri/Cargo.toml\nM  app/src-tauri/capabilities/default.json\nM  app/src-tauri/src/lib.rs\nM  app/src-tauri/tauri.conf.json\nM  app/src/App.css\nM  app/src/App.tsx\nA  app/src/core/state/useAppStore.ts\nM  app/src/index.css\nA  app/src/modules/editor-shell/EditorSpike.tsx\nA  app/src/modules/media-lab/MediaCompatibilityLab.tsx\nM  app/src/modules/media-lab/README.md\nA  app/src/modules/media-lab/media-lab.css\nM  \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\nM  \"continuacion en chat/ESTADO_ACTUAL.json\"\nM  \"continuacion en chat/ULTIMO_CHECK.txt\"\nAD \"continuacion en chat/ULTIMO_ERROR.md\"\nA  \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\nM  docs/evidence/CHECK_20260911_142937.txt\nM  docs/evidence/CHECK_20260911_143556.txt\nM  docs/evidence/CHECK_20260911_143602.txt\nM  docs/evidence/CHECK_20260911_144956.txt\nA  docs/evidence/CHECK_20260911_151031.txt\nA  docs/evidence/CHECK_20260911_151356.txt\nA  docs/evidence/CHECK_20260911_151858.txt\nA  docs/evidence/CHECK_20260911_153021.txt\nM  scripts/check_project.sh\nA  scripts/check_syntax.sh\nA  scripts/check_tauri_coherence.py\nM  scripts/finalize_update.sh\nA  scripts/normalize_generated_text.py\nA  scripts/preflight_predictive.py\nA  scripts/sync_latest_patch_log.py\nA  site/assets/creation-hands.jpg\nM  site/assets/site.js\nM  site/assets/style.css\nA  site/data/content.json\nM  site/data/status.json\nM  site/index.html",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
+    "lastCommits": "12942a2 docs: record successful GitHub publication\n03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_144956.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_153021.txt"
 }

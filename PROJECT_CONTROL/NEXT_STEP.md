@@ -1,35 +1,47 @@
 # Próximo paso
 
-## F1 — Media Compatibility Lab
+## Ejecutar F1
 
-La siguiente actualización de código debe concentrarse en:
+### Browser
 
-`app/src/modules/media-lab`
+Desde el repo:
 
-y únicamente en adapters/core necesarios para reproducir medios.
+`./scripts/abraxas web`
 
-## Prueba obligatoria
+Probar:
 
-Seleccionar un MP4 REAL y validar:
+1. video horizontal real;
+2. video vertical real.
 
-1. metadata;
-2. load;
-3. play;
-4. pause;
-5. seek;
-6. scrub;
-7. audio;
-8. frame step;
-9. vertical;
-10. horizontal;
-11. reopen;
-12. ejecución en navegador;
-13. ejecución dentro de Tauri.
+En cada uno:
 
-## Regla
+- seleccionar video;
+- play;
+- pause;
+- mover scrubber;
+- frame step;
+- Load VideoFlow;
+- Play Flow;
+- Seek Flow;
+- confirmar Audio audible;
+- confirmar Reopen sólo después de haber cerrado/reabierto y repetido carga;
+- guardar run.
 
-No comenzar Production Timeline sobre un reproductor no validado.
+### Tauri
 
-No reconstruir Foundation.
+`./scripts/abraxas desktop`
 
-No tocar módulos ajenos salvo que exista una dependencia técnica demostrable.
+Repetir:
+
+1. horizontal;
+2. vertical.
+
+### Gate
+
+Cuando las cuatro celdas acumuladas estén verdes, descargar/copiar reporte.
+
+Sólo después se evaluará marcar F1 como COMPLETED.
+
+## En paralelo
+
+La web pública puede revisarse en GitHub Pages después del push.

@@ -3,51 +3,52 @@
 ## F0 — Foundation
 COMPLETED
 
-Validado automáticamente:
-
-- contratos JSON;
-- React + TypeScript + Vite;
-- VideoFlow instalado;
-- Tauri 2 creado;
-- build frontend;
-- Cargo/Tauri check;
-- Git whitespace;
-- guard para repositorio público.
+Foundation continúa protegida por gates.
 
 ## F1 — Media Compatibility Lab
-PENDING / NEXT
+IN PROGRESS
 
-Todavía NO se afirma que el reproductor funcione con material real.
+El módulo ya existe en código.
 
-La siguiente prueba debe usar archivos MP4 reales y comprobar:
+Incluye dos caminos reales de preview:
 
-- load;
-- play;
-- pause;
-- seek;
-- scrub;
-- audio;
+1. HTMLVideoElement;
+2. VideoFlow DOM Renderer.
+
+También incluye:
+
+- selección local browser;
+- selector nativo macOS/Tauri;
+- asset protocol;
+- metadata;
+- play/pause;
+- scrub/seek;
 - frame step;
-- master horizontal;
-- master vertical;
-- reopen;
-- browser;
-- Tauri / WKWebView.
+- requestVideoFrameCallback;
+- VideoFlow load/play/seek;
+- confirmación manual de audio;
+- confirmación manual de reopen;
+- acumulación de runs horizontal/vertical;
+- acumulación browser/Tauri;
+- reporte JSON sin ruta privada del cliente.
 
-## GitHub
+## Release gate
 
-El repositorio objetivo es público:
+F1 TODAVÍA NO está completada.
 
-https://github.com/LordJeferies/abraxas-os
+Debe ejecutarse realmente con:
 
-GitHub Pages:
+- browser horizontal;
+- browser vertical;
+- Tauri horizontal;
+- Tauri vertical.
 
-https://lordjeferies.github.io/abraxas-os/
+Los cuatro runs deben quedar PASS.
 
-## Datos reales de clientes
+## Sitio público
 
-Todo material privado debe almacenarse en:
+El sitio de status/producto fue rediseñado como una experiencia original de
+scrollytelling "Content Renaissance", inspirada en la estructura narrativa de
+sitios editoriales inmersivos, usando arte público de Michelangelo como hero.
 
-`CLIENTES_PRIVADOS_LOCAL/`
-
-El contenido de esa carpeta NO se publica en GitHub.
+No contiene assets propietarios de Shopify.

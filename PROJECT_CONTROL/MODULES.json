@@ -16,7 +16,7 @@
     {
       "id": "media-lab",
       "name": "Media Compatibility Lab",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/media-lab"
     },
     {
@@ -94,7 +94,7 @@
     {
       "id": "public-site",
       "name": "Status / Product Website",
-      "status": "started",
+      "status": "in_progress",
       "path": "site"
     }
   ]

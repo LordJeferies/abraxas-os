@@ -1,0 +1,60 @@
+{
+  "product": "Abraxas OS",
+  "edition": "Content Renaissance",
+  "hero": {
+    "eyebrow": "ABRAXAS OS · BUILDING IN PUBLIC",
+    "title": "The Content Renaissance",
+    "lead": "Producción masiva sin sacrificar criterio.",
+    "body": "Un sistema operativo editorial que transforma material bruto, estrategia y estructuras de producción en contenidos trazables, ejecutables y cada vez más automatizados."
+  },
+  "chapters": [
+    {
+      "roman": "I",
+      "id": "source",
+      "kicker": "SOURCE",
+      "title": "Una grabación deja de ser un archivo.",
+      "statement": "Se convierte en materia prima estructurada.",
+      "body": "Video, audio, transcripción y contexto viven como fuentes trazables. Nada se corta, reescribe o mezcla sin saber de dónde vino."
+    },
+    {
+      "roman": "II",
+      "id": "intelligence",
+      "kicker": "INTELLIGENCE",
+      "title": "Criterio de marca + criterio de producción.",
+      "statement": "Sol Blanco y Sol Negro crean potencial.",
+      "body": "La información de marca se cruza con estructuras editoriales, storytelling, XR, motion, captions y reglas de calidad para decidir qué vale crear y cómo hacerlo."
+    },
+    {
+      "roman": "III",
+      "id": "timeline",
+      "kicker": "PRODUCTION TIMELINE",
+      "title": "La edición aparece antes de existir.",
+      "statement": "Ghost objects muestran qué debe estar en cada segundo.",
+      "body": "B-roll, XR, Motion, SFX, VO, captions, música y notas aparecen en la timeline como instrucciones ejecutables. Cuando existe el asset real, el ghost se convierte en producción."
+    },
+    {
+      "roman": "IV",
+      "id": "scale",
+      "kicker": "SCALE",
+      "title": "Publicar todos los días deja de depender del caos.",
+      "statement": "Velocidad para volumen. Criterio para calidad.",
+      "body": "Abraxas OS está diseñado para convertir una misma fuente en múltiples piezas de alto valor, acelerar ciclos mensuales y hacer viable un servicio de contenido masivo con estándar premium."
+    },
+    {
+      "roman": "V",
+      "id": "review",
+      "kicker": "OMEGA / REVIEW",
+      "title": "Nada sale porque sí.",
+      "statement": "Producción, revisión y aprobación viven en el mismo sistema.",
+      "body": "Cada pieza puede conservar su origen, versión, assets, copy, correcciones, aprobación y fecha tentativa antes de convertirse en contenido publicado."
+    },
+    {
+      "roman": "VI",
+      "id": "build",
+      "kicker": "BUILD STATUS",
+      "title": "La app también se construye con trazabilidad.",
+      "statement": "Cada fase deja evidencia y un siguiente paso.",
+      "body": "El status público se alimenta del estado real del repositorio. Lo que no ha pasado su gate no se declara terminado."
+    }
+  ]
+}

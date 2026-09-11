@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T14:50:04-04:00
+- Generado: 2026-09-11T15:30:25-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -50,93 +50,106 @@ XR es una secuencia visual compuesta que puede contener varios estados/assets.
 ## F0 — Foundation
 COMPLETED
 
-Validado automáticamente:
-
-- contratos JSON;
-- React + TypeScript + Vite;
-- VideoFlow instalado;
-- Tauri 2 creado;
-- build frontend;
-- Cargo/Tauri check;
-- Git whitespace;
-- guard para repositorio público.
+Foundation continúa protegida por gates.
 
 ## F1 — Media Compatibility Lab
-PENDING / NEXT
+IN PROGRESS
 
-Todavía NO se afirma que el reproductor funcione con material real.
+El módulo ya existe en código.
 
-La siguiente prueba debe usar archivos MP4 reales y comprobar:
+Incluye dos caminos reales de preview:
 
-- load;
-- play;
-- pause;
-- seek;
-- scrub;
-- audio;
+1. HTMLVideoElement;
+2. VideoFlow DOM Renderer.
+
+También incluye:
+
+- selección local browser;
+- selector nativo macOS/Tauri;
+- asset protocol;
+- metadata;
+- play/pause;
+- scrub/seek;
 - frame step;
-- master horizontal;
-- master vertical;
-- reopen;
-- browser;
-- Tauri / WKWebView.
+- requestVideoFrameCallback;
+- VideoFlow load/play/seek;
+- confirmación manual de audio;
+- confirmación manual de reopen;
+- acumulación de runs horizontal/vertical;
+- acumulación browser/Tauri;
+- reporte JSON sin ruta privada del cliente.
 
-## GitHub
+## Release gate
 
-El repositorio objetivo es público:
+F1 TODAVÍA NO está completada.
 
-https://github.com/LordJeferies/abraxas-os
+Debe ejecutarse realmente con:
 
-GitHub Pages:
+- browser horizontal;
+- browser vertical;
+- Tauri horizontal;
+- Tauri vertical.
 
-https://lordjeferies.github.io/abraxas-os/
+Los cuatro runs deben quedar PASS.
 
-## Datos reales de clientes
+## Sitio público
 
-Todo material privado debe almacenarse en:
+El sitio de status/producto fue rediseñado como una experiencia original de
+scrollytelling "Content Renaissance", inspirada en la estructura narrativa de
+sitios editoriales inmersivos, usando arte público de Michelangelo como hero.
 
-`CLIENTES_PRIVADOS_LOCAL/`
-
-El contenido de esa carpeta NO se publica en GitHub.
+No contiene assets propietarios de Shopify.
 
 
 ## Próximo paso
 
 # Próximo paso
 
-## F1 — Media Compatibility Lab
+## Ejecutar F1
 
-La siguiente actualización de código debe concentrarse en:
+### Browser
 
-`app/src/modules/media-lab`
+Desde el repo:
 
-y únicamente en adapters/core necesarios para reproducir medios.
+`./scripts/abraxas web`
 
-## Prueba obligatoria
+Probar:
 
-Seleccionar un MP4 REAL y validar:
+1. video horizontal real;
+2. video vertical real.
 
-1. metadata;
-2. load;
-3. play;
-4. pause;
-5. seek;
-6. scrub;
-7. audio;
-8. frame step;
-9. vertical;
-10. horizontal;
-11. reopen;
-12. ejecución en navegador;
-13. ejecución dentro de Tauri.
+En cada uno:
 
-## Regla
+- seleccionar video;
+- play;
+- pause;
+- mover scrubber;
+- frame step;
+- Load VideoFlow;
+- Play Flow;
+- Seek Flow;
+- confirmar Audio audible;
+- confirmar Reopen sólo después de haber cerrado/reabierto y repetido carga;
+- guardar run.
 
-No comenzar Production Timeline sobre un reproductor no validado.
+### Tauri
 
-No reconstruir Foundation.
+`./scripts/abraxas desktop`
 
-No tocar módulos ajenos salvo que exista una dependencia técnica demostrable.
+Repetir:
+
+1. horizontal;
+2. vertical.
+
+### Gate
+
+Cuando las cuatro celdas acumuladas estén verdes, descargar/copiar reporte.
+
+Sólo después se evaluará marcar F1 como COMPLETED.
+
+## En paralelo
+
+La web pública puede revisarse en GitHub Pages después del push.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -219,21 +232,21 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
   "schemaVersion": "abraxas.project-state.v1",
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
-  "status": "pending",
-  "lastCompletedStep": "F0 Foundation validada y repositorio público GitHub publicado. Siguiente: F1 Media Compatibility Lab.",
+  "status": "in_progress",
+  "lastCompletedStep": "v0.5.2: build frontend y Tauri pasan; se añadieron gates predictivos, coherencia Tauri y normalización automática. Falta certificar media real.",
   "blockedReason": null,
-  "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-  "updatedAt": "2026-09-11T14:50:04-04:00",
+  "nextStep": "Ejecutar cuatro runs reales F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
+  "updatedAt": "2026-09-11T15:30:24-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 0,
+    "mediaCompatibility": 30,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T14:49:58-04:00"
+    "updatedAt": "2026-09-11T15:30:24-04:00"
   }
 }
 ```
@@ -244,7 +257,7 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 |---|---|---|---|
 | foundation | Foundation | completed | PROJECT_CONTROL |
 | domain | Core Domain / Production Graph | started | contracts |
-| media-lab | Media Compatibility Lab | pending | app/src/modules/media-lab |
+| media-lab | Media Compatibility Lab | in_progress | app/src/modules/media-lab |
 | editor-shell | Editor Shell | pending | app/src/modules/editor-shell |
 | timeline | Production Timeline | pending | app/src/modules/timeline |
 | inspector | Inspector | pending | app/src/modules/inspector |
@@ -257,7 +270,7 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 | review | Omega / Review | pending | app/src/modules/review |
 | calendar | Calendar | pending | app/src/modules/calendar |
 | publisher | Publisher | pending | app/src/modules/publisher |
-| public-site | Status / Product Website | started | site |
+| public-site | Status / Product Website | in_progress | site |
 
 ## Versiones clave
 
@@ -281,10 +294,55 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/GITHUB.json
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
- M site/data/status.json
+M  PROJECT_CONTROL/CURRENT_STATUS.md
+A  PROJECT_CONTROL/ERROR_PREVENTION_POLICY.md
+A  PROJECT_CONTROL/F1_MEDIA_COMPATIBILITY_PLAN.md
+A  PROJECT_CONTROL/KNOWN_WARNINGS.md
+M  PROJECT_CONTROL/MODULES.json
+M  PROJECT_CONTROL/NEXT_STEP.md
+M  PROJECT_CONTROL/PROJECT_STATE.json
+M  PROJECT_CONTROL/SESSION_LOG.md
+M  app/package-lock.json
+M  app/package.json
+M  app/src-tauri/Cargo.lock
+M  app/src-tauri/Cargo.toml
+M  app/src-tauri/capabilities/default.json
+M  app/src-tauri/src/lib.rs
+M  app/src-tauri/tauri.conf.json
+M  app/src/App.css
+M  app/src/App.tsx
+A  app/src/core/state/useAppStore.ts
+M  app/src/index.css
+A  app/src/modules/editor-shell/EditorSpike.tsx
+A  app/src/modules/media-lab/MediaCompatibilityLab.tsx
+M  app/src/modules/media-lab/README.md
+A  app/src/modules/media-lab/media-lab.css
+M  "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+M  "continuacion en chat/ESTADO_ACTUAL.json"
+M  "continuacion en chat/ULTIMO_CHECK.txt"
+AD "continuacion en chat/ULTIMO_ERROR.md"
+A  "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+M  docs/evidence/CHECK_20260911_142937.txt
+M  docs/evidence/CHECK_20260911_143556.txt
+M  docs/evidence/CHECK_20260911_143602.txt
+M  docs/evidence/CHECK_20260911_144956.txt
+A  docs/evidence/CHECK_20260911_151031.txt
+A  docs/evidence/CHECK_20260911_151356.txt
+A  docs/evidence/CHECK_20260911_151858.txt
+A  docs/evidence/CHECK_20260911_153021.txt
+M  scripts/check_project.sh
+A  scripts/check_syntax.sh
+A  scripts/check_tauri_coherence.py
+M  scripts/finalize_update.sh
+A  scripts/normalize_generated_text.py
+A  scripts/preflight_predictive.py
+A  scripts/sync_latest_patch_log.py
+A  site/assets/creation-hands.jpg
+M  site/assets/site.js
+M  site/assets/style.css
+A  site/data/content.json
+M  site/data/status.json
+M  site/index.html
 ```
 
 ### Remote
@@ -297,6 +355,7 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+12942a2 docs: record successful GitHub publication
 03d0e78 chore: finalize GitHub public setup
 3946491 chore: publish Abraxas OS foundation
 ```
@@ -304,67 +363,69 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_144956.txt`
+`docs/evidence/CHECK_20260911_153021.txt`
 
 ```text
-ABRAXAS OS PROJECT CHECK
-========================
-Date: 2026-09-11 14:49:56 -0400
 
-[1/6] JSON canonical files
-OK PROJECT_CONTROL/PROJECT_STATE.json
-OK PROJECT_CONTROL/MODULES.json
-OK PROJECT_CONTROL/GITHUB.json
-OK contracts/production-graph.v1.schema.json
-OK examples/production-graph.demo.json
-OK app/package.json
-OK app/src-tauri/tauri.conf.json
+[2/8] Tauri config coherence
+ABRAXAS · TAURI COHERENCE CHECK
+================================
 
-[2/6] TypeScript + Vite
+✅ Configuración Tauri/Cargo/plugins coherente.
+
+[3/8] TypeScript + Vite
 
 > abraxas-os@0.0.0 build
 > tsc -b && vite build
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 197 modules transformed.
+✓ 204 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                     0.45 kB │ gzip:   0.29 kB
-dist/assets/index-BiAW1H3s.css     50.06 kB │ gzip:   7.16 kB
-dist/assets/index-DGQjAUnD.js   2,242.36 kB │ gzip: 486.37 kB
+dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/assets/index-Bf5GYW6i.css                      2.18 kB │ gzip:   0.98 kB
+dist/assets/MediaCompatibilityLab-BJdpb-Oa.css      5.40 kB │ gzip:   1.71 kB
+dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
+dist/assets/MediaCompatibilityLab-BDgEXvvc.js      12.90 kB │ gzip:   4.45 kB
+dist/assets/index-DAYfg3X0.js                     223.71 kB │ gzip:  70.29 kB
+dist/assets/EditorSpike-CumHErcO.js               329.10 kB │ gzip:  62.36 kB
+dist/assets/dist-C70y3Iyj.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 227ms
-[plugin builtin:vite-reporter] 
+[plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 206ms
 
-[3/6] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.50s
+[4/8] Rust / Tauri
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s
 
-[4/6] Git whitespace
-
-[5/6] Public repo guard
+[5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
 =========================
 
 ✅ No se detectaron bloqueos para un repo público.
 
-[6/6] Registrar check SIN cambiar la fase
+[6/8] Sync generated state
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+ NORMALIZED:
+ - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+ - continuacion en chat/ULTIMO_CHECK.txt
+ - docs/evidence/CHECK_20260911_153021.txt
+ - docs/evidence/ABRAXAS_OS_V0_5_3_20260911_153021.log
+
+[7/8] Git whitespace FINAL
+
+[8/8] Record successful check
+Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-
-📁 Archivos para continuar en ChatGPT:
-~/Desktop/Abrxs os/continuacion en chat
-
-Normalmente sube:
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
-
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_144956.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_153021.txt
 ```
 
 ## Última actividad
@@ -383,6 +444,9 @@ v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y
 
 ## 2026-09-11 14:50:04 -0400
 GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.
+
+## 2026-09-11 15:19:02 -0400
+v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.
 ```
 
 ## Archivos clave
