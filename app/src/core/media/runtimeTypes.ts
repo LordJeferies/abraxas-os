@@ -49,6 +49,7 @@ export type BackgroundJobStatus =
   | 'running'
   | 'completed'
   | 'failed'
+  | 'blocked'
   | 'cancelled'
 
 export interface BackgroundJob {

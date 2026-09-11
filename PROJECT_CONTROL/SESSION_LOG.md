@@ -35,3 +35,6 @@ v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFound
 
 ## 2026-09-11 18:33:21 -0400
 v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con registry/jobs/probe/cut worker.
+
+## 2026-09-11 18:48:42 -0400
+v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis adapters.

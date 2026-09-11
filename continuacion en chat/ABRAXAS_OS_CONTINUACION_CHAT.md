@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T18:46:19-04:00
+- Generado: 2026-09-11T18:48:43-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -92,45 +92,36 @@ Esto se vuelve a probar antes de construir F2.
 # Próximo paso
 
 ## F1
+COMPLETED.
 
-CERRADO.
+## F1.5 implementado
 
-La evidencia formal es:
+- Source Registry.
+- Proven Cut Engine.
+- Background Job Queue con claim atómico.
+- Thumbnail worker.
+- Waveform coarse worker.
+- Asset Library base.
+- Sources / Jobs / Assets UI dentro de Tauri.
+- Adapter de transcripción con autodetección de backend.
+- Adapter de análisis semántico por configuración.
 
-- `F1_MANUAL_ATTESTATION.json`;
-- `F1_GATE_SUMMARY.json`.
+## Probar
 
-No repetir Browser/Tauri F1 salvo regresión futura.
+`./scripts/abraxas desktop`
 
-## F1.5 actual
+Abrir `F1.5 · Sources & Jobs`.
 
-Implementado:
+Registrar un master y pulsar `Prepare timeline`.
+Agregar una carpeta de fotos/video/audio con `+ Carpeta de assets`.
 
-- Proven Cut Engine;
-- Source Registry persistente privado;
-- fingerprint rápido;
-- ffprobe metadata;
-- Background Job Queue;
-- probe worker;
-- cut worker;
-- self-test end-to-end.
+## Siguiente
 
-Persistencia local:
+Activar un backend real de transcripción y un proveedor de análisis semántico.
+No se instala un modelo pesado a ciegas: el runtime detecta backends disponibles
+y deja esos jobs en `blocked` mientras no haya uno configurado.
 
-`CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME/`
-
-## Siguiente bloque
-
-1. adapter Tauri para Source Registry;
-2. panel Sources/Jobs;
-3. thumbnail worker;
-4. waveform coarse worker;
-5. transcript worker adapter;
-6. analysis worker adapter;
-7. Asset Library base.
-
-Después:
-F2 Editor Shell.
+Después comienza F2 Editor Shell.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -179,20 +170,21 @@ roadmap de la aplicación.
   "currentPhase": "F1.5",
   "phaseName": "Fast Source Runtime & Proven Cut Engine",
   "status": "in_progress",
-  "lastCompletedStep": "F1 cerrado por atestación manual auditable. Fast Source Runtime implementado con Source Registry privado, Background Job Queue, probe worker y CUT_ONLY worker.",
+  "lastCompletedStep": "Sources/Jobs/Assets integrado en Tauri UI; atomic jobs, thumbnail/waveform workers y Asset Library base pasan self-test.",
   "blockedReason": null,
-  "nextStep": "Integrar Source Registry/Jobs en Tauri UI y añadir workers incrementales para thumbnail/waveform/transcript/analysis.",
-  "updatedAt": "2026-09-11T18:33:21-04:00",
+  "nextStep": "Activar backend real de transcripción y proveedor de análisis semántico; después comenzar F2 Editor Shell.",
+  "updatedAt": "2026-09-11T18:48:42-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
     "editorShell": 0,
-    "productionTimeline": 0
+    "productionTimeline": 0,
+    "fastSourceRuntime": 80
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T18:33:21-04:00"
+    "updatedAt": "2026-09-11T18:48:42-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -231,7 +223,14 @@ roadmap de la aplicación.
     "fastSourceRuntimeSelfTestPass": true,
     "sourceRegistryImplemented": true,
     "backgroundJobQueueImplemented": true,
-    "cutWorkerImplemented": true
+    "cutWorkerImplemented": true,
+    "runtimeUiIntegrated": true,
+    "atomicJobClaimImplemented": true,
+    "thumbnailWorkerSelfTestPass": true,
+    "waveformWorkerSelfTestPass": true,
+    "assetLibraryBaseImplemented": true,
+    "transcriptionAdapterImplemented": true,
+    "analysisAdapterImplemented": true
   }
 }
 ```
@@ -281,10 +280,26 @@ roadmap de la aplicación.
 ### Status
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src-tauri/src/lib.rs
+ M app/src/App.tsx
+ M app/src/core/media/runtimeTypes.ts
+ M app/src/core/state/useAppStore.ts
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
-?? "continuacion en chat/ULTIMO_ERROR.md"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/abraxas
+ M scripts/abraxas_source_runtime.py
+ M scripts/check_project.sh
+ M site/data/status.json
+?? app/src-tauri/src/source_runtime.rs
+?? app/src/modules/runtime/
+?? docs/evidence/CHECK_20260911_184838.txt
+?? scripts/check_runtime_ui.py
 ```
 
 ### Remote
@@ -297,25 +312,23 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+7810f59 chore: sync generated project state
 d66dd7a feat(runtime): close F1 and add fast source job runtime
 d265495 feat(media): add Apple preview proxies for Tauri VideoFlow
 34a6721 fix(f1): use loopback HTTP range bridge for Tauri media
 24c8314 fix(f1): separate media compatibility from session persistence
-95a0c50 fix(f1): bound VideoFlow preview to safe media sample
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_183317.txt`
+`docs/evidence/CHECK_20260911_184838.txt`
 
 ```text
-{
-  "status": "pass",
-  "runtimeRoot": "~/Desktop/Abrxs os/CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME",
-  "ffprobe": "/opt/homebrew/bin/ffprobe",
-  "mediaEngine": "~/Desktop/Abrxs os/scripts/abraxas_media_engine.py"
-}
+OK   Runtime source registration
+OK   Runtime asset indexing
+
+OK F1.5 bundle wiring.
 
 [3/8] TypeScript + Vite
 
@@ -324,19 +337,22 @@ Archivo:
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 205 modules transformed.
+✓ 207 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/index.html                                     0.45 kB │ gzip:   0.28 kB
 dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
+dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
 dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
-dist/assets/MediaCompatibilityLab-Bj9znR8d.js      14.73 kB │ gzip:   5.31 kB
-dist/assets/index-C7vNs2Z7.js                     223.93 kB │ gzip:  70.35 kB
-dist/assets/EditorSpike-Bq0ZLSCq.js               329.07 kB │ gzip:  62.35 kB
-dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/dist-js-D0VCXaEV.js                     0.26 kB │ gzip:   0.21 kB
+dist/assets/RuntimePanel-BsCmfKhC.js                7.83 kB │ gzip:   2.53 kB
+dist/assets/MediaCompatibilityLab-Dz18yXrt.js      14.55 kB │ gzip:   5.22 kB
+dist/assets/index-f03Z41by.js                     224.34 kB │ gzip:  70.46 kB
+dist/assets/EditorSpike-CVWr7rbV.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-dsg4UZeG.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 197ms
+✓ built in 185ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -344,7 +360,7 @@ dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -358,8 +374,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_183317.txt
- - docs/evidence/ABRAXAS_OS_V0_12_0_20260911_183312.log
+ - docs/evidence/CHECK_20260911_184838.txt
 
 [7/8] Git whitespace FINAL
 
@@ -369,15 +384,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_183317.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_184838.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 14:36:00 -0400
-v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y finalizador automático añadidos.
 
 ## 2026-09-11 14:50:04 -0400
 GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.
@@ -405,6 +417,9 @@ v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFound
 
 ## 2026-09-11 18:33:21 -0400
 v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con registry/jobs/probe/cut worker.
+
+## 2026-09-11 18:48:42 -0400
+v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis adapters.
 ```
 
 ## Archivos clave

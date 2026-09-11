@@ -76,6 +76,9 @@ echo
 echo "[2e/8] Fast Source Runtime"
 python3 "$ROOT/scripts/abraxas_source_runtime.py" preflight
 echo
+echo "[2f/8] F1.5 bundle wiring"
+python3 "$ROOT/scripts/check_runtime_ui.py"
+echo
 echo "[3/8] TypeScript + Vite"
 cd "$APP"
 npm run build

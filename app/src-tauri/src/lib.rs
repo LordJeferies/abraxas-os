@@ -1,4 +1,5 @@
 mod media_http;
+mod source_runtime;
 mod media_proxy;
 
 use media_http::MediaHttpServer;
@@ -15,6 +16,16 @@ pub fn run() {
             media_http::register_media_source_http,
             media_http::media_server_health,
             media_proxy::create_videoflow_proxy,
+            source_runtime::source_runtime_status,
+            source_runtime::source_runtime_sources,
+            source_runtime::source_runtime_jobs,
+            source_runtime::source_runtime_assets,
+            source_runtime::source_runtime_register,
+            source_runtime::source_runtime_index_assets,
+            source_runtime::source_runtime_enqueue_thumbnail,
+            source_runtime::source_runtime_enqueue_waveform,
+            source_runtime::source_runtime_worker_once,
+            source_runtime::source_runtime_drain,
         ])
         .setup(|app| {
             if cfg!(debug_assertions) {

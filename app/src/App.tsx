@@ -6,6 +6,10 @@ const MediaCompatibilityLab = lazy(
   () => import('./modules/media-lab/MediaCompatibilityLab')
 )
 
+const RuntimePanel = lazy(
+  () => import('./modules/runtime/RuntimePanel')
+)
+
 const EditorSpike = lazy(
   () => import('./modules/editor-shell/EditorSpike')
 )
@@ -36,6 +40,12 @@ export default function App() {
 
         <nav className="app-nav">
           <button
+            className={view === 'runtime' ? 'active' : ''}
+            onClick={() => setView('runtime')}
+          >
+            F1.5 · Sources & Jobs
+          </button>
+          <button
             className={view === 'media-lab' ? 'active' : ''}
             onClick={() => setView('media-lab')}
           >
@@ -50,8 +60,8 @@ export default function App() {
         </nav>
 
         <div className="phase">
-          F1
-          <b>REAL MEDIA GATE</b>
+          F1.5
+          <b>FAST SOURCE RUNTIME</b>
         </div>
       </header>
 
@@ -65,6 +75,12 @@ export default function App() {
           >
             <MediaCompatibilityLab active={view === 'media-lab'} />
           </div>
+
+          {view === 'runtime' && (
+            <div className="workspace-pane is-active">
+              <RuntimePanel />
+            </div>
+          )}
 
           {view === 'editor-spike' && (
             <div className="workspace-pane is-active">

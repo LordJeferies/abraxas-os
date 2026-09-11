@@ -6,16 +6,12 @@ CONT="$ROOT/continuacion en chat"
 CMD="${1:-help}"
 shift || true
 
-# Cada comando lanzado desde la CLI abre la carpeta de continuidad al terminar.
-# Para comandos de larga duración (web/desktop/site), se abrirá cuando el
-# proceso se cierre con Ctrl+C o termine.
 trap 'open "$CONT" >/dev/null 2>&1 || true' EXIT
 
 case "$CMD" in
   status)
     python3 "$ROOT/scripts/update_continuation.py" >/dev/null
     cat "$CONT/ABRAXAS_OS_CONTINUACION_CHAT.md"
-    open "$CONT" >/dev/null 2>&1 || true
     ;;
   check)
     "$ROOT/scripts/check_project.sh"
@@ -35,19 +31,11 @@ case "$CMD" in
   site)
     echo "Abriendo http://127.0.0.1:8088"
     open "http://127.0.0.1:8088" >/dev/null 2>&1 || true
-    cd "$ROOT"
-    python3 -m http.server 8088 --directory site
+    python3 -m http.server 8088 --directory "$ROOT/site"
     ;;
   github-check)
-    echo "Cuenta:"
     gh auth status || true
-    echo
-    echo "Remote:"
     git -C "$ROOT" remote -v || true
-    echo
-    echo "Objetivo:"
-    echo "https://github.com/LordJeferies/abraxas-os"
-    open "$CONT" >/dev/null 2>&1 || true
     ;;
   f1-validate)
     python3 "$ROOT/scripts/validate_f1_reports.py" "$@"
@@ -60,22 +48,19 @@ case "$CMD" in
     python3 "$ROOT/scripts/abraxas_media_engine.py" self-test
     ;;
   cut)
-    if [ "$#" -lt 4 ]; then
-      echo 'Uso: ./scripts/abraxas cut SOURCE START END OUTPUT [exact_vt|fast_copy]'
+    [ "$#" -ge 4 ] || {
+      echo "Uso: ./scripts/abraxas cut SOURCE START END OUTPUT [exact_vt|fast_copy]"
       exit 2
-    fi
-    SOURCE="$1"
-    START="$2"
-    END="$3"
-    OUTPUT="$4"
-    MODE="${5:-exact_vt}"
-    python3 "$ROOT/scripts/abraxas_media_engine.py" cut       --source "$SOURCE"       --start "$START"       --end "$END"       --out "$OUTPUT"       --mode "$MODE"
+    }
+    python3 "$ROOT/scripts/abraxas_media_engine.py" cut \
+      --source "$1" --start "$2" --end "$3" --out "$4" \
+      --mode "${5:-exact_vt}"
     ;;
   multicut)
-    if [ "$#" -lt 1 ]; then
-      echo 'Uso: ./scripts/abraxas multicut JOB_JSON'
+    [ "$#" -ge 1 ] || {
+      echo "Uso: ./scripts/abraxas multicut JOB_JSON"
       exit 2
-    fi
+    }
     python3 "$ROOT/scripts/abraxas_media_engine.py" multicut --job "$1"
     ;;
   runtime-preflight)
@@ -84,12 +69,20 @@ case "$CMD" in
   runtime-self-test)
     python3 "$ROOT/scripts/abraxas_source_runtime.py" self-test
     ;;
+  runtime-status)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" status
+    ;;
   source-register)
-    shift || true
     python3 "$ROOT/scripts/abraxas_source_runtime.py" register "$@"
     ;;
   source-list)
     python3 "$ROOT/scripts/abraxas_source_runtime.py" sources
+    ;;
+  asset-index)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" index-assets "$@"
+    ;;
+  asset-list)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" assets
     ;;
   job-list)
     python3 "$ROOT/scripts/abraxas_source_runtime.py" jobs
@@ -106,31 +99,32 @@ case "$CMD" in
   help|*)
     cat <<'TXT'
 ABRAXAS OS CLI
-
   ./scripts/abraxas status
   ./scripts/abraxas check
   ./scripts/abraxas continuation
   ./scripts/abraxas checkpoint "qué se hizo"
   ./scripts/abraxas web
   ./scripts/abraxas desktop
-  ./scripts/abraxas site
-  ./scripts/abraxas github-check
-  ./scripts/abraxas f1-validate
+
   ./scripts/abraxas media-preflight
   ./scripts/abraxas media-self-test
-  ./scripts/abraxas runtime-preflight
-  ./scripts/abraxas runtime-self-test
-  ./scripts/abraxas source-register --source PATH --role horizontal_master
-  ./scripts/abraxas source-list
-  ./scripts/abraxas job-list
-  ./scripts/abraxas worker-once
   ./scripts/abraxas cut SOURCE START END OUTPUT [exact_vt|fast_copy]
   ./scripts/abraxas multicut JOB_JSON
+
+  ./scripts/abraxas runtime-preflight
+  ./scripts/abraxas runtime-self-test
+  ./scripts/abraxas runtime-status
+  ./scripts/abraxas source-register --source PATH --role horizontal_master
+  ./scripts/abraxas source-list
+  ./scripts/abraxas asset-index --folder PATH
+  ./scripts/abraxas asset-list
+  ./scripts/abraxas job-list
+  ./scripts/abraxas worker-once
+
+  ./scripts/abraxas f1-validate
+  ./scripts/abraxas github-check
   ./scripts/abraxas github-public
   ./scripts/abraxas private
-
-Al terminar checks/checkpoints/publicación se abre automáticamente:
-continuacion en chat/
 TXT
     ;;
 esac

@@ -1,42 +1,33 @@
 # Próximo paso
 
 ## F1
+COMPLETED.
 
-CERRADO.
+## F1.5 implementado
 
-La evidencia formal es:
+- Source Registry.
+- Proven Cut Engine.
+- Background Job Queue con claim atómico.
+- Thumbnail worker.
+- Waveform coarse worker.
+- Asset Library base.
+- Sources / Jobs / Assets UI dentro de Tauri.
+- Adapter de transcripción con autodetección de backend.
+- Adapter de análisis semántico por configuración.
 
-- `F1_MANUAL_ATTESTATION.json`;
-- `F1_GATE_SUMMARY.json`.
+## Probar
 
-No repetir Browser/Tauri F1 salvo regresión futura.
+`./scripts/abraxas desktop`
 
-## F1.5 actual
+Abrir `F1.5 · Sources & Jobs`.
 
-Implementado:
+Registrar un master y pulsar `Prepare timeline`.
+Agregar una carpeta de fotos/video/audio con `+ Carpeta de assets`.
 
-- Proven Cut Engine;
-- Source Registry persistente privado;
-- fingerprint rápido;
-- ffprobe metadata;
-- Background Job Queue;
-- probe worker;
-- cut worker;
-- self-test end-to-end.
+## Siguiente
 
-Persistencia local:
+Activar un backend real de transcripción y un proveedor de análisis semántico.
+No se instala un modelo pesado a ciegas: el runtime detecta backends disponibles
+y deja esos jobs en `blocked` mientras no haya uno configurado.
 
-`CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME/`
-
-## Siguiente bloque
-
-1. adapter Tauri para Source Registry;
-2. panel Sources/Jobs;
-3. thumbnail worker;
-4. waveform coarse worker;
-5. transcript worker adapter;
-6. analysis worker adapter;
-7. Asset Library base.
-
-Después:
-F2 Editor Shell.
+Después comienza F2 Editor Shell.

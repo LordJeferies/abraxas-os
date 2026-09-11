@@ -1,25 +1,26 @@
 {
-  "generatedAt": "2026-09-11T18:46:19-04:00",
+  "generatedAt": "2026-09-11T18:48:43-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.5",
     "phaseName": "Fast Source Runtime & Proven Cut Engine",
     "status": "in_progress",
-    "lastCompletedStep": "F1 cerrado por atestación manual auditable. Fast Source Runtime implementado con Source Registry privado, Background Job Queue, probe worker y CUT_ONLY worker.",
+    "lastCompletedStep": "Sources/Jobs/Assets integrado en Tauri UI; atomic jobs, thumbnail/waveform workers y Asset Library base pasan self-test.",
     "blockedReason": null,
-    "nextStep": "Integrar Source Registry/Jobs en Tauri UI y añadir workers incrementales para thumbnail/waveform/transcript/analysis.",
-    "updatedAt": "2026-09-11T18:33:21-04:00",
+    "nextStep": "Activar backend real de transcripción y proveedor de análisis semántico; después comenzar F2 Editor Shell.",
+    "updatedAt": "2026-09-11T18:48:42-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
       "editorShell": 0,
-      "productionTimeline": 0
+      "productionTimeline": 0,
+      "fastSourceRuntime": 80
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T18:33:21-04:00"
+      "updatedAt": "2026-09-11T18:48:42-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -58,7 +59,14 @@
       "fastSourceRuntimeSelfTestPass": true,
       "sourceRegistryImplemented": true,
       "backgroundJobQueueImplemented": true,
-      "cutWorkerImplemented": true
+      "cutWorkerImplemented": true,
+      "runtimeUiIntegrated": true,
+      "atomicJobClaimImplemented": true,
+      "thumbnailWorkerSelfTestPass": true,
+      "waveformWorkerSelfTestPass": true,
+      "assetLibraryBaseImplemented": true,
+      "transcriptionAdapterImplemented": true,
+      "analysisAdapterImplemented": true
     }
   },
   "modules": [
@@ -201,9 +209,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n?? \"continuacion en chat/ULTIMO_ERROR.md\"",
+    "status": "## main...origin/main [ahead 1]\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src-tauri/src/lib.rs\n M app/src/App.tsx\n M app/src/core/media/runtimeTypes.ts\n M app/src/core/state/useAppStore.ts\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/abraxas\n M scripts/abraxas_source_runtime.py\n M scripts/check_project.sh\n M site/data/status.json\n?? app/src-tauri/src/source_runtime.rs\n?? app/src/modules/runtime/\n?? docs/evidence/CHECK_20260911_184838.txt\n?? scripts/check_runtime_ui.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "d66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media\n24c8314 fix(f1): separate media compatibility from session persistence\n95a0c50 fix(f1): bound VideoFlow preview to safe media sample"
+    "lastCommits": "7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media\n24c8314 fix(f1): separate media compatibility from session persistence"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_183317.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_184838.txt"
 }
