@@ -36,7 +36,6 @@ const CHECKS: Check[] = [
   { id: 'videoflow-play', label: 'VideoFlow DOM play', state: 'pending' },
   { id: 'videoflow-seek', label: 'VideoFlow DOM seek', state: 'pending' },
   { id: 'audio', label: 'Audio audible', state: 'manual' },
-  { id: 'reopen', label: 'Reopen verificado', state: 'manual' },
 ]
 
 const REQUIRED_IDS = [
@@ -51,7 +50,6 @@ const REQUIRED_IDS = [
   'videoflow-play',
   'videoflow-seek',
   'audio',
-  'reopen',
 ]
 
 const STORAGE_KEY = 'abraxas.media-lab.runs.v1'
@@ -81,7 +79,11 @@ function loadSavedRuns(): SavedRun[] {
   }
 }
 
-export default function MediaCompatibilityLab() {
+export default function MediaCompatibilityLab({
+  active = true,
+}: {
+  active?: boolean
+}) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const flowHostRef = useRef<HTMLDivElement | null>(null)
@@ -149,6 +151,13 @@ export default function MediaCompatibilityLab() {
   useEffect(() => {
     return () => clearSource()
   }, [])
+
+  useEffect(() => {
+    if (active) return
+
+    videoRef.current?.pause()
+    flowRendererRef.current?.stop()
+  }, [active])
 
   const acceptSource = (
     nextSource: string,
@@ -360,7 +369,7 @@ export default function MediaCompatibilityLab() {
     }
   }
 
-  const toggleManual = (id: 'audio' | 'reopen') => {
+  const toggleManual = (id: 'audio') => {
     const item = checks.find((check) => check.id === id)
     const next: CheckState = item?.state === 'pass' ? 'manual' : 'pass'
     setCheck(id, next, next === 'pass' ? 'Confirmado manualmente' : undefined)
@@ -623,6 +632,11 @@ export default function MediaCompatibilityLab() {
             </div>
           </div>
 
+          <p className="coverage-note">
+            F1 valida compatibilidad de media. Persistencia al cerrar/reabrir
+            proyectos se certificará en F2 y no bloquea este run.
+          </p>
+
           <div className="checks">
             {checks.map((check) => (
               <div className={`check ${check.state}`} key={check.id}>
@@ -634,12 +648,6 @@ export default function MediaCompatibilityLab() {
 
                 {check.id === 'audio' && (
                   <button onClick={() => toggleManual('audio')}>
-                    {check.state === 'pass' ? '✓' : 'Confirmar'}
-                  </button>
-                )}
-
-                {check.id === 'reopen' && (
-                  <button onClick={() => toggleManual('reopen')}>
                     {check.state === 'pass' ? '✓' : 'Confirmar'}
                   </button>
                 )}

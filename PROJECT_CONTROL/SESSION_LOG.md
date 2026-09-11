@@ -23,3 +23,6 @@ v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en
 
 ## 2026-09-11 16:55:36 -0400
 v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.
+
+## 2026-09-11 17:02:58 -0400
+v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator recalcula PASS por checks relevantes.

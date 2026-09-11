@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T16:55:36-04:00
+- Generado: 2026-09-11T17:02:59-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -91,47 +91,41 @@ Esto se vuelve a probar antes de construir F2.
 
 # Próximo paso
 
-## Repetir Browser vertical
+Browser vertical ya tiene todos los checks F1 relevantes en PASS.
 
-`./scripts/abraxas web`
+No hace falta repetirlo si conservas el reporte JSON v2 que ya generaste.
 
-Usar el mismo video vertical.
+## Faltan tres slots
 
-El Source Player debe seguir trabajando con el master completo.
+1. Browser horizontal.
+2. Tauri vertical.
+3. Tauri horizontal.
 
-En la sección VideoFlow usar:
+En cada uno:
 
-`Load VideoFlow sample (8s)`
-
-Esa prueba ya NO intentará cargar los ~90 minutos dentro del DomRenderer.
-
-Debe probar:
-
+- selected;
+- metadata;
+- canplay;
+- play;
+- pause;
+- seek;
+- frame;
 - VideoFlow sample load;
-- Play Flow;
-- Seek Flow.
+- VideoFlow sample play;
+- VideoFlow sample seek;
+- audio audible.
 
-El audio audible se certifica en el Source Player, no en el sample muteado.
+`Reopen` ya no forma parte de F1.
 
-## Si Browser vertical pasa
+## Consolidar
 
-Completar:
-
-- Browser horizontal;
-- Tauri vertical;
-- Tauri horizontal.
-
-Luego:
+Cuando estén los cuatro JSON:
 
 `./scripts/abraxas f1-validate`
 
-## Si incluso el sample de 8 s provoca crash
-
-No insistir con el master bruto.
-
-Se registra DomRenderer + blob 4K como no seguro para este source y el siguiente
-paso será generar/use proxy para VideoFlow mientras el master permanece en el
-Source/Native Player.
+El validador acepta tu reporte Browser vertical anterior aunque
+`currentRunPassed=false`, porque ahora recalcula el PASS usando los checks
+relevantes de F1.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -180,14 +174,14 @@ roadmap de la aplicación.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Master vertical completo reproduce correctamente en Browser Source Player. VideoFlow full-master provocó crash del renderer; F1 ahora valida VideoFlow con una muestra acotada segura de 8 s.",
+  "lastCompletedStep": "Browser vertical tiene todos los checks F1 relevantes en PASS. Reopen salió del gate y Media Lab conserva sesión al cambiar de módulo.",
   "blockedReason": null,
-  "nextStep": "Repetir run Browser vertical usando Load VideoFlow sample (8s). Si pasa, completar Browser horizontal y los dos runs Tauri.",
-  "updatedAt": "2026-09-11T16:55:36-04:00",
+  "nextStep": "Completar Browser horizontal, Tauri vertical y Tauri horizontal. Después ejecutar ./scripts/abraxas f1-validate.",
+  "updatedAt": "2026-09-11T17:02:58-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 40,
+    "mediaCompatibility": 50,
     "editorShell": 0,
     "productionTimeline": 0
   },
@@ -208,7 +202,10 @@ roadmap de la aplicación.
     "mediaLabScrollFixApplied": true,
     "editorSpikeFeedbackLoopFixApplied": true,
     "videoFlowFullMasterCrashObserved": true,
-    "videoFlowSafeSampleModeApplied": true
+    "videoFlowSafeSampleModeApplied": true,
+    "browserVerticalChecksPass": true,
+    "reopenMovedToF2": true,
+    "mediaLabKeepAliveAcrossViews": true
   }
 }
 ```
@@ -259,13 +256,15 @@ roadmap de la aplicación.
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src-tauri/Cargo.toml
+ M app/src/App.css
+ M app/src/App.tsx
  M app/src/modules/media-lab/MediaCompatibilityLab.tsx
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/validate_f1_reports.py
  M site/data/status.json
-?? PROJECT_CONTROL/F1_VIDEOFLOW_LOAD_CRASH_FINDING.md
+?? PROJECT_CONTROL/F2_SESSION_PERSISTENCE.md
 ```
 
 ### Remote
@@ -278,11 +277,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+95a0c50 fix(f1): bound VideoFlow preview to safe media sample
 a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
 695fc3e fix(f1): preserve browser media blob and add report consolidation
 d4387d8 docs: record F1 publication state
 7a47bff feat: publish F1 media lab and content renaissance site
-12942a2 docs: record successful GitHub publication
 ```
 
 ## Último check autoritativo
@@ -381,6 +380,9 @@ v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en
 
 ## 2026-09-11 16:55:36 -0400
 v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.
+
+## 2026-09-11 17:02:58 -0400
+v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator recalcula PASS por checks relevantes.
 ```
 
 ## Archivos clave

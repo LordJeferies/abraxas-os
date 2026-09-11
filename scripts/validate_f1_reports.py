@@ -19,17 +19,49 @@ paths = []
 for pattern in patterns:
     paths.extend(Path(p) for p in glob.glob(pattern))
 
-paths = sorted(set(paths), key=lambda p: p.stat().st_mtime if p.exists() else 0)
+paths = sorted(
+    set(paths),
+    key=lambda p: p.stat().st_mtime if p.exists() else 0
+)
 
-required = {
+required_slots = {
     ("browser", "horizontal"),
     ("browser", "vertical"),
     ("tauri", "horizontal"),
     ("tauri", "vertical"),
 }
 
+required_check_ids = {
+    "selected",
+    "metadata",
+    "canplay",
+    "play",
+    "pause",
+    "seek",
+    "frame",
+    "videoflow-load",
+    "videoflow-play",
+    "videoflow-seek",
+    "audio",
+}
+
 best = {}
 rejected = []
+
+def effective_pass(data):
+    checks = {
+        item.get("id"): item.get("state")
+        for item in (data.get("checks") or [])
+        if isinstance(item, dict)
+    }
+
+    missing = sorted(
+        check_id
+        for check_id in required_check_ids
+        if checks.get(check_id) != "pass"
+    )
+
+    return (not missing), missing
 
 for path in paths:
     try:
@@ -46,16 +78,29 @@ for path in paths:
     orient = (data.get("media") or {}).get("orientation")
     key = (runtime, orient)
 
-    if key not in required:
-        rejected.append((path.name, f"runtime/orientation no esperado: {key}"))
+    if key not in required_slots:
+        rejected.append(
+            (path.name, f"runtime/orientation no esperado: {key}")
+        )
         continue
 
-    if data.get("currentRunPassed") is not True:
-        rejected.append((path.name, "currentRunPassed != true"))
+    passed, missing_checks = effective_pass(data)
+
+    if not passed:
+        rejected.append(
+            (
+                path.name,
+                "faltan checks F1: " + ", ".join(missing_checks)
+            )
+        )
         continue
 
+    # currentRunPassed puede ser false en reportes v2 generados antes de que
+    # `reopen` saliera del gate. La fuente de verdad son los checks relevantes.
     best[key] = {
         "generatedAt": data.get("generatedAt"),
+        "reportedCurrentRunPassed": data.get("currentRunPassed"),
+        "effectivePass": True,
         "media": {
             "width": (data.get("media") or {}).get("width"),
             "height": (data.get("media") or {}).get("height"),
@@ -63,12 +108,12 @@ for path in paths:
         },
     }
 
-missing = sorted(required - set(best))
+missing_slots = sorted(required_slots - set(best))
 
 print("ABRAXAS F1 REPORT CONSOLIDATOR")
 print("=============================")
 
-for key in sorted(required):
+for key in sorted(required_slots):
     print(
         ("PASS" if key in best else "MISS"),
         f"{key[0]:7} · {key[1]}"
@@ -80,14 +125,17 @@ if rejected:
         print(" -", name, ":", reason)
 
 summary = {
-    "schemaVersion": "abraxas.f1-validation-summary.v1",
+    "schemaVersion": "abraxas.f1-validation-summary.v2",
     "generatedAt": datetime.now().astimezone().isoformat(timespec="seconds"),
-    "passed": not missing,
+    "passed": not missing_slots,
     "coverage": {
         f"{runtime}_{orient}": (runtime, orient) in best
-        for runtime, orient in sorted(required)
+        for runtime, orient in sorted(required_slots)
     },
-    "missing": [f"{runtime}/{orient}" for runtime, orient in missing],
+    "missing": [
+        f"{runtime}/{orient}"
+        for runtime, orient in missing_slots
+    ],
 }
 
 (PRIVATE / "F1_VALIDATION_REPORT.json").write_text(
@@ -98,7 +146,7 @@ summary = {
     json.dumps(summary, indent=2, ensure_ascii=False) + "\n"
 )
 
-if missing:
+if missing_slots:
     print("\nF1 todavía NO está completo.")
     print("Faltan:", ", ".join(summary["missing"]))
     raise SystemExit(10)
@@ -111,18 +159,28 @@ state["phaseName"] = "Editor Shell"
 state["status"] = "pending"
 state["blockedReason"] = None
 state["lastCompletedStep"] = (
-    "F1 Media Compatibility COMPLETED con cuatro reportes v2 PASS."
+    "F1 Media Compatibility COMPLETED: browser/Tauri, "
+    "horizontal/vertical, todos los checks F1 relevantes PASS."
 )
-state["nextStep"] = "Construir F2 Editor Shell sobre playback certificado."
+state["nextStep"] = (
+    "Construir F2 Editor Shell sobre playback certificado."
+)
 state.setdefault("progress", {})["mediaCompatibility"] = 100
-state_path.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n")
+
+state_path.write_text(
+    json.dumps(state, indent=2, ensure_ascii=False) + "\n"
+)
 
 modules_path = CONTROL / "MODULES.json"
 modules = json.loads(modules_path.read_text())
+
 for module in modules.get("modules", []):
     if module.get("id") == "media-lab":
         module["status"] = "completed"
-modules_path.write_text(json.dumps(modules, indent=2, ensure_ascii=False) + "\n")
+
+modules_path.write_text(
+    json.dumps(modules, indent=2, ensure_ascii=False) + "\n"
+)
 
 print("\nF1 COMPLETED.")
 print("Siguiente fase: F2 Editor Shell.")

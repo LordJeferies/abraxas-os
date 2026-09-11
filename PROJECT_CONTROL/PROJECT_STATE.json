@@ -4,14 +4,14 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Master vertical completo reproduce correctamente en Browser Source Player. VideoFlow full-master provocó crash del renderer; F1 ahora valida VideoFlow con una muestra acotada segura de 8 s.",
+  "lastCompletedStep": "Browser vertical tiene todos los checks F1 relevantes en PASS. Reopen salió del gate y Media Lab conserva sesión al cambiar de módulo.",
   "blockedReason": null,
-  "nextStep": "Repetir run Browser vertical usando Load VideoFlow sample (8s). Si pasa, completar Browser horizontal y los dos runs Tauri.",
-  "updatedAt": "2026-09-11T16:55:36-04:00",
+  "nextStep": "Completar Browser horizontal, Tauri vertical y Tauri horizontal. Después ejecutar ./scripts/abraxas f1-validate.",
+  "updatedAt": "2026-09-11T17:02:58-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 40,
+    "mediaCompatibility": 50,
     "editorShell": 0,
     "productionTimeline": 0
   },
@@ -32,6 +32,9 @@
     "mediaLabScrollFixApplied": true,
     "editorSpikeFeedbackLoopFixApplied": true,
     "videoFlowFullMasterCrashObserved": true,
-    "videoFlowSafeSampleModeApplied": true
+    "videoFlowSafeSampleModeApplied": true,
+    "browserVerticalChecksPass": true,
+    "reopenMovedToF2": true,
+    "mediaLabKeepAliveAcrossViews": true
   }
 }

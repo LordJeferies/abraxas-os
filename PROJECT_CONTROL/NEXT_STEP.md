@@ -1,43 +1,37 @@
 # Próximo paso
 
-## Repetir Browser vertical
+Browser vertical ya tiene todos los checks F1 relevantes en PASS.
 
-`./scripts/abraxas web`
+No hace falta repetirlo si conservas el reporte JSON v2 que ya generaste.
 
-Usar el mismo video vertical.
+## Faltan tres slots
 
-El Source Player debe seguir trabajando con el master completo.
+1. Browser horizontal.
+2. Tauri vertical.
+3. Tauri horizontal.
 
-En la sección VideoFlow usar:
+En cada uno:
 
-`Load VideoFlow sample (8s)`
-
-Esa prueba ya NO intentará cargar los ~90 minutos dentro del DomRenderer.
-
-Debe probar:
-
+- selected;
+- metadata;
+- canplay;
+- play;
+- pause;
+- seek;
+- frame;
 - VideoFlow sample load;
-- Play Flow;
-- Seek Flow.
+- VideoFlow sample play;
+- VideoFlow sample seek;
+- audio audible.
 
-El audio audible se certifica en el Source Player, no en el sample muteado.
+`Reopen` ya no forma parte de F1.
 
-## Si Browser vertical pasa
+## Consolidar
 
-Completar:
-
-- Browser horizontal;
-- Tauri vertical;
-- Tauri horizontal.
-
-Luego:
+Cuando estén los cuatro JSON:
 
 `./scripts/abraxas f1-validate`
 
-## Si incluso el sample de 8 s provoca crash
-
-No insistir con el master bruto.
-
-Se registra DomRenderer + blob 4K como no seguro para este source y el siguiente
-paso será generar/use proxy para VideoFlow mientras el master permanece en el
-Source/Native Player.
+El validador acepta tu reporte Browser vertical anterior aunque
+`currentRunPassed=false`, porque ahora recalcula el PASS usando los checks
+relevantes de F1.

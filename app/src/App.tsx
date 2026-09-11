@@ -57,7 +57,20 @@ export default function App() {
 
       <section className="workspace">
         <Suspense fallback={<LoadingModule />}>
-          {view === 'media-lab' ? <MediaCompatibilityLab /> : <EditorSpike />}
+          <div
+            className={`workspace-pane ${
+              view === 'media-lab' ? 'is-active' : 'is-hidden'
+            }`}
+            aria-hidden={view !== 'media-lab'}
+          >
+            <MediaCompatibilityLab active={view === 'media-lab'} />
+          </div>
+
+          {view === 'editor-spike' && (
+            <div className="workspace-pane is-active">
+              <EditorSpike />
+            </div>
+          )}
         </Suspense>
       </section>
     </main>
