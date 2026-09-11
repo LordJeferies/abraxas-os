@@ -4,21 +4,20 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Browser vertical tiene todos los checks F1 relevantes en PASS. Reopen salió del gate y Media Lab conserva sesión al cambiar de módulo.",
+  "lastCompletedStep": "Browser horizontal/vertical PASS. Tauri media transport migrado a localhost HTTP Range bridge con adapter reutilizable para F2/F3.",
   "blockedReason": null,
-  "nextStep": "Completar Browser horizontal, Tauri vertical y Tauri horizontal. Después ejecutar ./scripts/abraxas f1-validate.",
-  "updatedAt": "2026-09-11T17:02:58-04:00",
+  "nextStep": "Probar sólo Tauri vertical y horizontal con sourceKind=http. Si falla incluso HTTP Range, escalar Source Viewer a AVPlayer nativo.",
+  "updatedAt": "2026-09-11T17:28:42-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 50,
+    "mediaCompatibility": 70,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
-    "status": "failed",
-    "exitCode": 2,
-    "updatedAt": "2026-09-11T15:55:18-04:00"
+    "status": "passed",
+    "updatedAt": "2026-09-11T17:28:41-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -35,6 +34,12 @@
     "videoFlowSafeSampleModeApplied": true,
     "browserVerticalChecksPass": true,
     "reopenMovedToF2": true,
-    "mediaLabKeepAliveAcrossViews": true
+    "mediaLabKeepAliveAcrossViews": true,
+    "browserVerticalPass": true,
+    "browserHorizontalPass": true,
+    "tauriAssetProtocolCode4Observed": true,
+    "tauriRangeStreamApplied": true,
+    "tauriHttpRangeBridgeApplied": true,
+    "nativeAVPlayerIsNextEscalation": true
   }
 }

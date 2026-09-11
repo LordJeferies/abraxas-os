@@ -1,26 +1,25 @@
 {
-  "generatedAt": "2026-09-11T17:02:59-04:00",
+  "generatedAt": "2026-09-11T17:28:42-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1",
     "phaseName": "Media Compatibility Lab",
     "status": "in_progress",
-    "lastCompletedStep": "Browser vertical tiene todos los checks F1 relevantes en PASS. Reopen salió del gate y Media Lab conserva sesión al cambiar de módulo.",
+    "lastCompletedStep": "Browser horizontal/vertical PASS. Tauri media transport migrado a localhost HTTP Range bridge con adapter reutilizable para F2/F3.",
     "blockedReason": null,
-    "nextStep": "Completar Browser horizontal, Tauri vertical y Tauri horizontal. Después ejecutar ./scripts/abraxas f1-validate.",
-    "updatedAt": "2026-09-11T17:02:58-04:00",
+    "nextStep": "Probar sólo Tauri vertical y horizontal con sourceKind=http. Si falla incluso HTTP Range, escalar Source Viewer a AVPlayer nativo.",
+    "updatedAt": "2026-09-11T17:28:42-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
-      "mediaCompatibility": 50,
+      "mediaCompatibility": 70,
       "editorShell": 0,
       "productionTimeline": 0
     },
     "lastCheck": {
-      "status": "failed",
-      "exitCode": 2,
-      "updatedAt": "2026-09-11T15:55:18-04:00"
+      "status": "passed",
+      "updatedAt": "2026-09-11T17:28:41-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -37,7 +36,13 @@
       "videoFlowSafeSampleModeApplied": true,
       "browserVerticalChecksPass": true,
       "reopenMovedToF2": true,
-      "mediaLabKeepAliveAcrossViews": true
+      "mediaLabKeepAliveAcrossViews": true,
+      "browserVerticalPass": true,
+      "browserHorizontalPass": true,
+      "tauriAssetProtocolCode4Observed": true,
+      "tauriRangeStreamApplied": true,
+      "tauriHttpRangeBridgeApplied": true,
+      "nativeAVPlayerIsNextEscalation": true
     }
   },
   "modules": [
@@ -162,9 +167,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/App.css\n M app/src/App.tsx\n M app/src/modules/media-lab/MediaCompatibilityLab.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/validate_f1_reports.py\n M site/data/status.json\n?? PROJECT_CONTROL/F2_SESSION_PERSISTENCE.md",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src-tauri/Cargo.lock\n M app/src-tauri/Cargo.toml\n M app/src-tauri/src/lib.rs\n M app/src/modules/media-lab/MediaCompatibilityLab.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_tauri_coherence.py\n M site/data/status.json\n?? PROJECT_CONTROL/F1_TAURI_ASSET_PROTOCOL_FINDING.md\n?? PROJECT_CONTROL/MEDIA_TRANSPORT_ARCHITECTURE.md\n?? app/src-tauri/src/media_http.rs\n?? app/src/core/media/\n?? docs/evidence/CHECK_20260911_172838.txt\n?? scripts/check_tauri_stream.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "95a0c50 fix(f1): bound VideoFlow preview to safe media sample\na75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike\n695fc3e fix(f1): preserve browser media blob and add report consolidation\nd4387d8 docs: record F1 publication state\n7a47bff feat: publish F1 media lab and content renaissance site"
+    "lastCommits": "24c8314 fix(f1): separate media compatibility from session persistence\n95a0c50 fix(f1): bound VideoFlow preview to safe media sample\na75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike\n695fc3e fix(f1): preserve browser media blob and add report consolidation\nd4387d8 docs: record F1 publication state"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_155515.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_172838.txt"
 }

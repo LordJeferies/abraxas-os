@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import VideoFlow from '@videoflow/core'
 import DomRenderer from '@videoflow/renderer-dom'
-import { convertFileSrc, isTauri } from '@tauri-apps/api/core'
+import { isTauri } from '@tauri-apps/api/core'
 import { open } from '@tauri-apps/plugin-dialog'
+import { registerDesktopMediaPath } from '../../core/media/MediaTransport'
 import './media-lab.css'
 
 type CheckState = 'pending' | 'pass' | 'fail' | 'manual'
@@ -93,7 +94,7 @@ export default function MediaCompatibilityLab({
   const [checks, setChecks] = useState<Check[]>(CHECKS)
   const [source, setSource] = useState('')
   const [fileName, setFileName] = useState('Sin archivo')
-  const [sourceKind, setSourceKind] = useState<'blob' | 'asset' | 'none'>('none')
+  const [sourceKind, setSourceKind] = useState<'blob' | 'http' | 'none'>('none')
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [videoWidth, setVideoWidth] = useState(0)
@@ -162,7 +163,7 @@ export default function MediaCompatibilityLab({
   const acceptSource = (
     nextSource: string,
     nextName: string,
-    kind: 'blob' | 'asset'
+    kind: 'blob' | 'http'
   ) => {
     // Limpiar la fuente ANTERIOR antes de registrar la nueva.
     clearSource()
@@ -212,9 +213,18 @@ export default function MediaCompatibilityLab({
       })
 
       if (typeof selected !== 'string') return
+      const registered = await registerDesktopMediaPath(selected)
 
-      const assetUrl = convertFileSrc(selected)
-      acceptSource(assetUrl, basename(selected), 'asset')
+      acceptSource(
+        registered.url,
+        basename(selected),
+        'http'
+      )
+
+      log(
+        `Tauri media bridge · ${registered.transport} · ` +
+        `${registered.url}`
+      )
     } catch (error) {
       log(`ERROR picker Tauri: ${String(error)}`)
     }
@@ -441,7 +451,7 @@ export default function MediaCompatibilityLab({
       videoFlowTestMode: 'bounded-sample',
       videoFlowSampleSeconds: VIDEOFLOW_SAMPLE_SECONDS,
       videoFlowPreviewMaxEdge: VIDEOFLOW_PREVIEW_MAX_EDGE,
-      note: 'Master completo validado por HTMLVideoElement; VideoFlow DOM usa muestra acotada. No contiene ruta privada.',
+      note: 'Master completo validado por HTMLVideoElement; VideoFlow DOM usa muestra acotada. No contiene ruta privada; Tauri usa localhost HTTP range bridge.',
     }),
     [
       runtime,

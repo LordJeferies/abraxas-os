@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T17:02:59-04:00
+- Generado: 2026-09-11T17:28:42-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -91,41 +91,38 @@ Esto se vuelve a probar antes de construir F2.
 
 # Próximo paso
 
-Browser vertical ya tiene todos los checks F1 relevantes en PASS.
+Browser ya está certificado en horizontal y vertical.
 
-No hace falta repetirlo si conservas el reporte JSON v2 que ya generaste.
+## Probar únicamente Tauri
 
-## Faltan tres slots
+`./scripts/abraxas desktop`
 
-1. Browser horizontal.
-2. Tauri vertical.
-3. Tauri horizontal.
+### Señales esperadas
 
-En cada uno:
+Al seleccionar video:
 
-- selected;
-- metadata;
-- canplay;
-- play;
-- pause;
-- seek;
-- frame;
-- VideoFlow sample load;
-- VideoFlow sample play;
-- VideoFlow sample seek;
-- audio audible.
+- Source = `http`;
+- metadata debe cargar;
+- size y orientation dejan de ser unknown;
+- Terminal debe mostrar:
+  `[abraxas-media-http] ... bytes ...`
 
-`Reopen` ya no forma parte de F1.
+Completar vertical y horizontal.
 
-## Consolidar
+## Si funciona
 
-Cuando estén los cuatro JSON:
+Descargar ambos reportes y ejecutar:
 
 `./scripts/abraxas f1-validate`
 
-El validador acepta tu reporte Browser vertical anterior aunque
-`currentRunPassed=false`, porque ahora recalcula el PASS usando los checks
-relevantes de F1.
+Entonces empieza F2 Editor Shell.
+
+## Si NO funciona
+
+No crear otro transporte WebView.
+
+El siguiente paso será Source Viewer nativo con AVPlayer/AVFoundation,
+manteniendo VideoFlow para composición y Production Timeline.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -174,21 +171,20 @@ roadmap de la aplicación.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Browser vertical tiene todos los checks F1 relevantes en PASS. Reopen salió del gate y Media Lab conserva sesión al cambiar de módulo.",
+  "lastCompletedStep": "Browser horizontal/vertical PASS. Tauri media transport migrado a localhost HTTP Range bridge con adapter reutilizable para F2/F3.",
   "blockedReason": null,
-  "nextStep": "Completar Browser horizontal, Tauri vertical y Tauri horizontal. Después ejecutar ./scripts/abraxas f1-validate.",
-  "updatedAt": "2026-09-11T17:02:58-04:00",
+  "nextStep": "Probar sólo Tauri vertical y horizontal con sourceKind=http. Si falla incluso HTTP Range, escalar Source Viewer a AVPlayer nativo.",
+  "updatedAt": "2026-09-11T17:28:42-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 50,
+    "mediaCompatibility": 70,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
-    "status": "failed",
-    "exitCode": 2,
-    "updatedAt": "2026-09-11T15:55:18-04:00"
+    "status": "passed",
+    "updatedAt": "2026-09-11T17:28:41-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -205,7 +201,13 @@ roadmap de la aplicación.
     "videoFlowSafeSampleModeApplied": true,
     "browserVerticalChecksPass": true,
     "reopenMovedToF2": true,
-    "mediaLabKeepAliveAcrossViews": true
+    "mediaLabKeepAliveAcrossViews": true,
+    "browserVerticalPass": true,
+    "browserHorizontalPass": true,
+    "tauriAssetProtocolCode4Observed": true,
+    "tauriRangeStreamApplied": true,
+    "tauriHttpRangeBridgeApplied": true,
+    "nativeAVPlayerIsNextEscalation": true
   }
 }
 ```
@@ -256,15 +258,22 @@ roadmap de la aplicación.
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/App.css
- M app/src/App.tsx
+ M app/src-tauri/Cargo.lock
+ M app/src-tauri/Cargo.toml
+ M app/src-tauri/src/lib.rs
  M app/src/modules/media-lab/MediaCompatibilityLab.tsx
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/validate_f1_reports.py
+ M scripts/check_tauri_coherence.py
  M site/data/status.json
-?? PROJECT_CONTROL/F2_SESSION_PERSISTENCE.md
+?? PROJECT_CONTROL/F1_TAURI_ASSET_PROTOCOL_FINDING.md
+?? PROJECT_CONTROL/MEDIA_TRANSPORT_ARCHITECTURE.md
+?? app/src-tauri/src/media_http.rs
+?? app/src/core/media/
+?? docs/evidence/CHECK_20260911_172838.txt
+?? scripts/check_tauri_stream.py
 ```
 
 ### Remote
@@ -277,85 +286,84 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+24c8314 fix(f1): separate media compatibility from session persistence
 95a0c50 fix(f1): bound VideoFlow preview to safe media sample
 a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
 695fc3e fix(f1): preserve browser media blob and add report consolidation
 d4387d8 docs: record F1 publication state
-7a47bff feat: publish F1 media lab and content renaissance site
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_155515.txt`
+`docs/evidence/CHECK_20260911_172838.txt`
 
 ```text
-+
-site/index.html:341: trailing whitespace.
-+
-site/index.html:356: trailing whitespace.
-+
-site/index.html:371: trailing whitespace.
-+
-site/index.html:376: trailing whitespace.
-+
-site/index.html:388: trailing whitespace.
-+
-site/index.html:403: trailing whitespace.
-+
-site/index.html:418: trailing whitespace.
-+
-site/index.html:433: trailing whitespace.
-+
-site/index.html:448: trailing whitespace.
-+
-site/index.html:453: trailing whitespace.
-+
-site/index.html:465: trailing whitespace.
-+
-site/index.html:480: trailing whitespace.
-+
-site/index.html:495: trailing whitespace.
-+
-site/index.html:510: trailing whitespace.
-+
-site/index.html:515: trailing whitespace.
-+
-site/index.html:527: trailing whitespace.
-+
-site/index.html:542: trailing whitespace.
-+
-site/index.html:557: trailing whitespace.
-+
-site/index.html:572: trailing whitespace.
-+
-site/index.html:587: trailing whitespace.
-+
-site/index.html:592: trailing whitespace.
-+
+
+[2b/8] VideoFlow integration coherence
+ABRAXAS · VIDEOFLOW INTEGRATION CHECK
+====================================
+
+OK integración spike coherente.
+
+[3/8] TypeScript + Vite
+
+> abraxas-os@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 205 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     0.45 kB │ gzip:   0.28 kB
+dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
+dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
+dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
+dist/assets/MediaCompatibilityLab-wopouFBJ.js      14.06 kB │ gzip:   5.04 kB
+dist/assets/index-B8QRWqs1.js                     223.93 kB │ gzip:  70.34 kB
+dist/assets/EditorSpike-uew8axsh.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-9i_Yu7VT.js                    1,704.83 kB │ gzip: 358.93 kB
+
+✓ built in 224ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+[4/8] Rust / Tauri
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
+
+[5/8] Public repo guard
+ABRAXAS PUBLIC REPO GUARD
+=========================
+
+✅ No se detectaron bloqueos para un repo público.
+
+[6/8] Sync generated state
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
-Patch log sincronizado: ABRAXAS_OS_V0_6_1_20260911_155514.log
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
-                                                                                                                                                                                                                                                                                                            NORMALIZED:
+ NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
- - continuacion en chat/ULTIMO_PATCH_LOG.txt
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_155515.txt
- - docs/evidence/ABRAXAS_OS_V0_6_1_20260911_155514.log
+ - docs/evidence/ABRAXAS_OS_V0_8_0_20260911_172827.log
+ - docs/evidence/CHECK_20260911_172838.txt
 
-❌ Project check falló. Revisar ULTIMO_CHECK / evidencia.
+[7/8] Git whitespace FINAL
 
-📁 Archivos para continuar en ChatGPT:
-~/Desktop/Abrxs os/continuacion en chat
-
-Normalmente sube:
+[8/8] Record successful check
+Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+✅ Generated/evidence text already normalized.
+
+✅ PROJECT CHECK PASSED
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_172838.txt
 ```
 
 ## Última actividad
 
 ```text
-# Session Log
 
 ## 2026-09-11 14:03:22 -0400
 Inicio de recuperación no destructiva del bootstrap Foundation.
@@ -383,6 +391,9 @@ v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Pl
 
 ## 2026-09-11 17:02:58 -0400
 v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator recalcula PASS por checks relevantes.
+
+## 2026-09-11 17:28:42 -0400
+v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport adapter reutilizable. Browser PASS; faltan dos Tauri.
 ```
 
 ## Archivos clave

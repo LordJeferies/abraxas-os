@@ -26,3 +26,6 @@ v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Pl
 
 ## 2026-09-11 17:02:58 -0400
 v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator recalcula PASS por checks relevantes.
+
+## 2026-09-11 17:28:42 -0400
+v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport adapter reutilizable. Browser PASS; faltan dos Tauri.

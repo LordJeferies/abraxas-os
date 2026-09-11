@@ -1,45 +1,81 @@
 
 ============================================================
-0/10 · PREFLIGHT
+0/12 · PREFLIGHT
 ============================================================
 OK repo
 OK archivos objetivo
 
-============================================================
-1/10 · BACKUP
-============================================================
-Backup: ~/Desktop/Abrxs os/archive/patches/ABRAXAS_OS_V0_7_3_20260911_170255
+Estado local previo:
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M app/src-tauri/Cargo.lock
+ M app/src-tauri/Cargo.toml
+ M app/src-tauri/src/lib.rs
+ M app/src/modules/media-lab/MediaCompatibilityLab.tsx
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/check_tauri_coherence.py
+?? PROJECT_CONTROL/F1_TAURI_ASSET_PROTOCOL_FINDING.md
+?? app/src-tauri/src/media_stream.rs
+?? "continuacion en chat/ULTIMO_ERROR.md"
+?? scripts/check_tauri_stream.py
 
 ============================================================
-2/10 · REOPEN SALE DEL GATE F1
+1/12 · BACKUP LOCALIZADO
 ============================================================
-OK reopen removido del release gate F1
+Backup: ~/Desktop/Abrxs os/archive/patches/ABRAXAS_OS_V0_8_0_20260911_172827
 
 ============================================================
-3/10 · MEDIA LAB KEEP-ALIVE AL CAMBIAR DE MÓDULO
+2/12 · DEPENDENCIAS DEL BRIDGE HTTP
 ============================================================
-OK Media Lab permanece montado al cambiar a Editor Base
-OK workspace pane CSS agregado
+    Updating crates.io index
+      Adding tiny_http v0.12 to dependencies
+             Features as of v0.12.0:
+             - openssl
+             - rustls
+             - rustls-pemfile
+             - ssl
+             - ssl-openssl
+             - ssl-rustls
+             - zeroize
+    Updating crates.io index
+     Locking 4 packages to latest compatible versions
+      Adding ascii v1.1.0
+      Adding chunked_transfer v1.5.0
+      Adding httpdate v1.0.3
+      Adding tiny_http v0.12.0
+http-range ya está presente
 
 ============================================================
-4/10 · PAUSAR MEDIA LAB AL OCULTAR SIN DESTRUIRLO
+3/12 · SERVIDOR HTTP RANGE EN 127.0.0.1
 ============================================================
-OK Media Lab pausa al ocultarse y conserva fuente/checks
+OK media_http.rs
 
 ============================================================
-5/10 · VALIDADOR F1 ACEPTA REPORTES V2 PRE-REOPEN-FIX
+4/12 · TAURI BUILDER USA LOCALHOST BRIDGE
 ============================================================
+OK lib.rs usa localhost bridge
 
 ============================================================
-6/10 · DOCUMENTAR REOPEN Y SESSION PERSISTENCE
-============================================================
-
-============================================================
-7/10 · ESTADO
+5/12 · MEDIA TRANSPORT ADAPTER REUTILIZABLE
 ============================================================
 
 ============================================================
-8/10 · CHECKS
+6/12 · MEDIA LAB USA EL ADAPTER HTTP
+============================================================
+OK Media Lab usa MediaTransport adapter
+
+============================================================
+7/12 · CHECKER ESTÁTICO CORRECTO
+============================================================
+
+============================================================
+8/12 · DOCUMENTAR DECISIÓN Y ESCALAMIENTO
+============================================================
+
+============================================================
+9/12 · CARGO + FRONTEND CHECKS
 ============================================================
 ✅ Generated/evidence text already normalized.
 ABRAXAS · SYNTAX CHECK
@@ -60,6 +96,7 @@ OK scripts/check_project.sh
 OK scripts/build_public_site.py
 OK scripts/check_site_budget.py
 OK scripts/check_tauri_coherence.py
+OK scripts/check_tauri_stream.py
 OK scripts/check_videoflow_integration.py
 OK scripts/normalize_generated_text.py
 OK scripts/preflight_predictive.py
@@ -85,47 +122,191 @@ OK site/data/content.json
 OK site/data/status.json
 
 ✅ Syntax gate aprobado.
-ABRAXAS · VIDEOFLOW INTEGRATION CHECK
+ABRAXAS · TAURI LOCALHOST MEDIA CHECK
 ====================================
+OK   loopback bind
+OK   random assigned port
+OK   opaque token registry
+OK   range parser
+OK   206 partial content
+OK   bounded range chunks
+OK   full GET streams File
+OK   CORS
+OK   health endpoint
+OK   tiny_http dependency
+OK   http-range dependency
+OK   server managed by Tauri
+OK   register command
+OK   transport adapter
+OK   runtime health fetch
+OK   Media Lab uses adapter
+OK   source kind http
 
-OK integración spike coherente.
-ABRAXAS · TAURI COHERENCE CHECK
-================================
-
-✅ Configuración Tauri/Cargo/plugins coherente.
+OK localhost media bridge wiring.
+ Downloading crates ...
+  Downloaded httpdate v1.0.3
+  Downloaded ascii v1.1.0
+  Downloaded chunked_transfer v1.5.0
+  Downloaded tiny_http v0.12.0
+    Checking chunked_transfer v1.5.0
+    Checking ascii v1.1.0
+    Checking httpdate v1.0.3
+    Checking tiny_http v0.12.0
+    Checking app v0.1.0 (~/Desktop/Abrxs os/app/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.81s
 
 > abraxas-os@0.0.0 build
 > tsc -b && vite build
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 204 modules transformed.
+✓ 205 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                                     0.45 kB │ gzip:   0.28 kB
 dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
 dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
-dist/assets/MediaCompatibilityLab-B15u2ZqL.js      13.77 kB │ gzip:   4.89 kB
-dist/assets/index-Bil9ka0F.js                     223.93 kB │ gzip:  70.35 kB
-dist/assets/EditorSpike-CHphj2tn.js               329.07 kB │ gzip:  62.35 kB
-dist/assets/dist-B0eqDEX2.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/MediaCompatibilityLab-wopouFBJ.js      14.06 kB │ gzip:   5.04 kB
+dist/assets/index-B8QRWqs1.js                     223.93 kB │ gzip:  70.34 kB
+dist/assets/EditorSpike-uew8axsh.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-9i_Yu7VT.js                    1,704.83 kB │ gzip: 358.93 kB
 
+✓ built in 240ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 232ms
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
 
 ============================================================
-9/10 · REPO + COMMIT
+10/12 · PROJECT CHECK COMPLETO
 ============================================================
+ABRAXAS OS PROJECT CHECK
+========================
+Date: 2026-09-11 17:28:38 -0400
+
+[0/8] Predictive preflight
+ABRAXAS · PREDICTIVE PREFLIGHT
+==============================
+
+✅ Preflight predictivo aprobado.
+
+[1/8] Syntax + generated-text hygiene
+NORMALIZED:
+ - docs/evidence/ABRAXAS_OS_V0_8_0_20260911_172827.log
+ABRAXAS · SYNTAX CHECK
+======================
+
+[bash]
+OK scripts/github_public.sh
+OK scripts/abraxas
+OK scripts/check_syntax.sh
+OK scripts/run-desktop.sh
+OK scripts/doctor.sh
+OK scripts/finalize_update.sh
+OK scripts/run-web.sh
+OK scripts/checkpoint.sh
+OK scripts/check_project.sh
+
+[python]
+OK scripts/build_public_site.py
+OK scripts/check_site_budget.py
+OK scripts/check_tauri_coherence.py
+OK scripts/check_tauri_stream.py
+OK scripts/check_videoflow_integration.py
+OK scripts/normalize_generated_text.py
+OK scripts/preflight_predictive.py
+OK scripts/prepush_guard.py
+OK scripts/sync_latest_patch_log.py
+OK scripts/sync_status.py
+OK scripts/update_continuation.py
+OK scripts/validate_f1_reports.py
+
+[site javascript]
+OK site/assets/site.js
+
+[json]
+OK PROJECT_CONTROL/PROJECT_STATE.json
+OK PROJECT_CONTROL/MODULES.json
+OK PROJECT_CONTROL/GITHUB.json
+OK contracts/production-graph.v1.schema.json
+OK examples/production-graph.demo.json
+OK app/package.json
+OK app/src-tauri/tauri.conf.json
+OK app/src-tauri/capabilities/default.json
+OK site/data/content.json
+OK site/data/status.json
+
+✅ Syntax gate aprobado.
+
+[2/8] Tauri config coherence
+ABRAXAS · TAURI COHERENCE CHECK
+================================
+
+✅ Configuración Tauri/Cargo/plugins coherente.
+
+[2b/8] VideoFlow integration coherence
+ABRAXAS · VIDEOFLOW INTEGRATION CHECK
+====================================
+
+OK integración spike coherente.
+
+[3/8] TypeScript + Vite
+
+> abraxas-os@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 205 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     0.45 kB │ gzip:   0.28 kB
+dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
+dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
+dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
+dist/assets/MediaCompatibilityLab-wopouFBJ.js      14.06 kB │ gzip:   5.04 kB
+dist/assets/index-B8QRWqs1.js                     223.93 kB │ gzip:  70.34 kB
+dist/assets/EditorSpike-uew8axsh.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-9i_Yu7VT.js                    1,704.83 kB │ gzip: 358.93 kB
+
+✓ built in 224ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+[4/8] Rust / Tauri
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
+
+[5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
 =========================
 
 ✅ No se detectaron bloqueos para un repo público.
+
+[6/8] Sync generated state
+Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
 NORMALIZED:
- - docs/evidence/ABRAXAS_OS_V0_7_3_20260911_170255.log
+ - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+ - continuacion en chat/ULTIMO_CHECK.txt
+ - docs/evidence/ABRAXAS_OS_V0_8_0_20260911_172827.log
+ - docs/evidence/CHECK_20260911_172838.txt
+
+[7/8] Git whitespace FINAL
+
+[8/8] Record successful check
+Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+✅ Generated/evidence text already normalized.
+
+✅ PROJECT CHECK PASSED
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_172838.txt
+
+============================================================
+11/12 · CHECKPOINT + COMMIT
+============================================================
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json

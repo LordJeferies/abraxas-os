@@ -103,3 +103,34 @@ if errors:
     sys.exit(2)
 
 print("\n✅ Configuración Tauri/Cargo/plugins coherente.")
+
+# ABRAXAS custom media streaming
+media_stream_rs = TAURI / "src" / "media_stream.rs"
+
+if media_stream_rs.exists():
+    media_stream_text = media_stream_rs.read_text(errors="replace")
+
+    if "HttpRange::parse" not in media_stream_text:
+        errors.append(
+            "media_stream.rs existe pero no parsea Range requests."
+        )
+
+    if "PARTIAL_CONTENT" not in media_stream_text:
+        errors.append(
+            "media_stream.rs no emite 206 Partial Content."
+        )
+
+    if "MAX_RANGE_CHUNK" not in media_stream_text:
+        errors.append(
+            "media_stream.rs no limita tamaño de cada respuesta."
+        )
+
+    if 'register_asynchronous_uri_scheme_protocol(' not in lib:
+        errors.append(
+            "media_stream.rs existe pero lib.rs no registra custom protocol."
+        )
+
+    if "register_media_source" not in lib:
+        errors.append(
+            "lib.rs no registra el comando register_media_source."
+        )

@@ -1,37 +1,34 @@
 # Próximo paso
 
-Browser vertical ya tiene todos los checks F1 relevantes en PASS.
+Browser ya está certificado en horizontal y vertical.
 
-No hace falta repetirlo si conservas el reporte JSON v2 que ya generaste.
+## Probar únicamente Tauri
 
-## Faltan tres slots
+`./scripts/abraxas desktop`
 
-1. Browser horizontal.
-2. Tauri vertical.
-3. Tauri horizontal.
+### Señales esperadas
 
-En cada uno:
+Al seleccionar video:
 
-- selected;
-- metadata;
-- canplay;
-- play;
-- pause;
-- seek;
-- frame;
-- VideoFlow sample load;
-- VideoFlow sample play;
-- VideoFlow sample seek;
-- audio audible.
+- Source = `http`;
+- metadata debe cargar;
+- size y orientation dejan de ser unknown;
+- Terminal debe mostrar:
+  `[abraxas-media-http] ... bytes ...`
 
-`Reopen` ya no forma parte de F1.
+Completar vertical y horizontal.
 
-## Consolidar
+## Si funciona
 
-Cuando estén los cuatro JSON:
+Descargar ambos reportes y ejecutar:
 
 `./scripts/abraxas f1-validate`
 
-El validador acepta tu reporte Browser vertical anterior aunque
-`currentRunPassed=false`, porque ahora recalcula el PASS usando los checks
-relevantes de F1.
+Entonces empieza F2 Editor Shell.
+
+## Si NO funciona
+
+No crear otro transporte WebView.
+
+El siguiente paso será Source Viewer nativo con AVPlayer/AVFoundation,
+manteniendo VideoFlow para composición y Production Timeline.
