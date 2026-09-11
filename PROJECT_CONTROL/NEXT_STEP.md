@@ -1,34 +1,38 @@
 # Próximo paso
 
-Browser ya está certificado en horizontal y vertical.
+La reproducción de SOURCE en Tauri ya funciona en vertical y horizontal.
 
-## Probar únicamente Tauri
+No repetir esa investigación.
+
+## Reprobar sólo VideoFlow en Tauri
 
 `./scripts/abraxas desktop`
 
-### Señales esperadas
+Seleccionar vertical.
 
-Al seleccionar video:
+Completar los checks Source normales y después pulsar:
 
-- Source = `http`;
-- metadata debe cargar;
-- size y orientation dejan de ser unknown;
-- Terminal debe mostrar:
-  `[abraxas-media-http] ... bytes ...`
+`Prepare proxy + Load VideoFlow (8s)`
 
-Completar vertical y horizontal.
+Esperado:
 
-## Si funciona
+1. UI sigue respondiendo.
+2. Event Log muestra "Preparando Apple preview proxy".
+3. Luego "Apple proxy listo".
+4. VideoFlow DOM load pasa.
+5. Play Flow pasa.
+6. Seek Flow pasa.
 
-Descargar ambos reportes y ejecutar:
+Descargar JSON.
 
+Repetir horizontal.
+
+## Decisión
+
+Si ambos proxies pasan:
 `./scripts/abraxas f1-validate`
+→ F2.
 
-Entonces empieza F2 Editor Shell.
-
-## Si NO funciona
-
-No crear otro transporte WebView.
-
-El siguiente paso será Source Viewer nativo con AVPlayer/AVFoundation,
-manteniendo VideoFlow para composición y Production Timeline.
+Si incluso el proxy 960x540 de 8 s congela WKWebView:
+no crear más transportes.
+F2 Preview backend pasa a AVPlayer/AVFoundation nativo.

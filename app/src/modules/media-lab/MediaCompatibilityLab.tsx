@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import VideoFlow from '@videoflow/core'
 import DomRenderer from '@videoflow/renderer-dom'
-import { isTauri } from '@tauri-apps/api/core'
+import { invoke, isTauri } from '@tauri-apps/api/core'
 import { open } from '@tauri-apps/plugin-dialog'
 import { registerDesktopMediaPath } from '../../core/media/MediaTransport'
 import './media-lab.css'
@@ -90,6 +90,7 @@ export default function MediaCompatibilityLab({
   const flowHostRef = useRef<HTMLDivElement | null>(null)
   const flowRendererRef = useRef<DomRenderer | null>(null)
   const objectUrlRef = useRef<string | null>(null)
+  const desktopSourcePathRef = useRef<string | null>(null)
 
   const [checks, setChecks] = useState<Check[]>(CHECKS)
   const [source, setSource] = useState('')
@@ -104,6 +105,7 @@ export default function MediaCompatibilityLab({
   const [flowFrame, setFlowFrame] = useState(0)
   const [flowFps, setFlowFps] = useState(0)
   const [flowReady, setFlowReady] = useState(false)
+  const [flowLoading, setFlowLoading] = useState(false)
   const [savedRuns, setSavedRuns] = useState<SavedRun[]>(loadSavedRuns)
 
   const runtime = runtimeName()
@@ -221,6 +223,8 @@ export default function MediaCompatibilityLab({
         'http'
       )
 
+      desktopSourcePathRef.current = selected
+
       log(
         `Tauri media bridge · ${registered.transport} · ` +
         `${registered.url}`
@@ -252,6 +256,8 @@ export default function MediaCompatibilityLab({
 
   const loadVideoFlow = async () => {
     if (!source || !flowHostRef.current || !duration) return
+
+    setFlowLoading(true)
 
     try {
       flowRendererRef.current?.stop()
@@ -285,6 +291,46 @@ export default function MediaCompatibilityLab({
       const projectWidth = Math.max(2, Math.round(sourceW * scale))
       const projectHeight = Math.max(2, Math.round(sourceH * scale))
 
+      let flowSource = source
+      let flowSourceMode = 'original-bounded-sample'
+
+      if (runtime === 'tauri') {
+        const desktopPath = desktopSourcePathRef.current
+
+        if (!desktopPath) {
+          throw new Error(
+            'No hay ruta local registrada para crear proxy Apple.'
+          )
+        }
+
+        const proxyStart = Math.max(
+          0,
+          Math.min(
+            currentTime,
+            Math.max(0, duration - sampleDuration)
+          )
+        )
+
+        log(
+          `Preparando Apple preview proxy · ` +
+          `${proxyStart.toFixed(1)}s → ` +
+          `${(proxyStart + sampleDuration).toFixed(1)}s`
+        )
+
+        const proxyPath = await invoke<string>('create_videoflow_proxy', {
+          path: desktopPath,
+          startSeconds: proxyStart,
+          durationSeconds: sampleDuration,
+        })
+
+        const proxyMedia = await registerDesktopMediaPath(proxyPath)
+
+        flowSource = proxyMedia.url
+        flowSourceMode = 'apple-avfoundation-proxy-960x540'
+
+        log(`Apple proxy listo · ${flowSourceMode}`)
+      }
+
       const flow = new VideoFlow({
         name: `F1 sample · ${fileName}`,
         width: projectWidth,
@@ -301,7 +347,7 @@ export default function MediaCompatibilityLab({
           mute: true,
         },
         {
-          source,
+          source: flowSource,
           sourceStart: 0,
           sourceDuration: sampleDuration,
         }
@@ -329,7 +375,7 @@ export default function MediaCompatibilityLab({
       setCheck(
         'videoflow-load',
         'pass',
-        `bounded sample ${sampleDuration.toFixed(1)}s · ` +
+        `${flowSourceMode} · ${sampleDuration.toFixed(1)}s · ` +
         `${projectWidth}×${projectHeight}`
       )
       log(`VideoFlow DOM safe sample loaded · ${json.duration.toFixed(2)}s`)
@@ -337,6 +383,8 @@ export default function MediaCompatibilityLab({
       setFlowReady(false)
       setCheck('videoflow-load', 'fail', String(error))
       log(`ERROR VideoFlow safe sample: ${String(error)}`)
+    } finally {
+      setFlowLoading(false)
     }
   }
 
@@ -451,6 +499,10 @@ export default function MediaCompatibilityLab({
       videoFlowTestMode: 'bounded-sample',
       videoFlowSampleSeconds: VIDEOFLOW_SAMPLE_SECONDS,
       videoFlowPreviewMaxEdge: VIDEOFLOW_PREVIEW_MAX_EDGE,
+      videoFlowProxyStrategy:
+        runtime === 'tauri'
+          ? 'apple-avfoundation-960x540'
+          : 'none',
       note: 'Master completo validado por HTMLVideoElement; VideoFlow DOM usa muestra acotada. No contiene ruta privada; Tauri usa localhost HTTP range bridge.',
     }),
     [
@@ -680,7 +732,16 @@ export default function MediaCompatibilityLab({
           <div ref={flowHostRef} className="flow-host" />
 
           <div className="transport">
-            <button onClick={loadVideoFlow} disabled={!source}>Load VideoFlow sample (8s)</button>
+            <button
+              onClick={loadVideoFlow}
+              disabled={!source || flowLoading}
+            >
+              {flowLoading
+                ? 'Preparing Apple proxy…'
+                : runtime === 'tauri'
+                  ? 'Prepare proxy + Load VideoFlow (8s)'
+                  : 'Load VideoFlow sample (8s)'}
+            </button>
             <button onClick={playVideoFlow} disabled={!flowReady}>▶ Play Flow</button>
             <button onClick={stopVideoFlow} disabled={!flowReady}>■ Stop</button>
             <button onClick={seekVideoFlow} disabled={!flowReady}>Seek to source playhead</button>

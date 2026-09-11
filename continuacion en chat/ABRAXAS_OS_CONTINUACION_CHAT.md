@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T17:28:42-04:00
+- Generado: 2026-09-11T17:41:35-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -91,38 +91,42 @@ Esto se vuelve a probar antes de construir F2.
 
 # Próximo paso
 
-Browser ya está certificado en horizontal y vertical.
+La reproducción de SOURCE en Tauri ya funciona en vertical y horizontal.
 
-## Probar únicamente Tauri
+No repetir esa investigación.
+
+## Reprobar sólo VideoFlow en Tauri
 
 `./scripts/abraxas desktop`
 
-### Señales esperadas
+Seleccionar vertical.
 
-Al seleccionar video:
+Completar los checks Source normales y después pulsar:
 
-- Source = `http`;
-- metadata debe cargar;
-- size y orientation dejan de ser unknown;
-- Terminal debe mostrar:
-  `[abraxas-media-http] ... bytes ...`
+`Prepare proxy + Load VideoFlow (8s)`
 
-Completar vertical y horizontal.
+Esperado:
 
-## Si funciona
+1. UI sigue respondiendo.
+2. Event Log muestra "Preparando Apple preview proxy".
+3. Luego "Apple proxy listo".
+4. VideoFlow DOM load pasa.
+5. Play Flow pasa.
+6. Seek Flow pasa.
 
-Descargar ambos reportes y ejecutar:
+Descargar JSON.
 
+Repetir horizontal.
+
+## Decisión
+
+Si ambos proxies pasan:
 `./scripts/abraxas f1-validate`
+→ F2.
 
-Entonces empieza F2 Editor Shell.
-
-## Si NO funciona
-
-No crear otro transporte WebView.
-
-El siguiente paso será Source Viewer nativo con AVPlayer/AVFoundation,
-manteniendo VideoFlow para composición y Production Timeline.
+Si incluso el proxy 960x540 de 8 s congela WKWebView:
+no crear más transportes.
+F2 Preview backend pasa a AVPlayer/AVFoundation nativo.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -171,20 +175,20 @@ roadmap de la aplicación.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Browser horizontal/vertical PASS. Tauri media transport migrado a localhost HTTP Range bridge con adapter reutilizable para F2/F3.",
+  "lastCompletedStep": "Tauri Source Playback funciona en vertical y horizontal mediante localhost HTTP Range. VideoFlow DOM se congela con source 4K; se añadió proxy Apple AVFoundation 960x540 para preview.",
   "blockedReason": null,
-  "nextStep": "Probar sólo Tauri vertical y horizontal con sourceKind=http. Si falla incluso HTTP Range, escalar Source Viewer a AVPlayer nativo.",
-  "updatedAt": "2026-09-11T17:28:42-04:00",
+  "nextStep": "Reprobar únicamente VideoFlow sample en Tauri vertical/horizontal. Si el proxy Apple pasa, descargar reportes y cerrar F1. Si el proxy también congela, escalar Preview de F2 a AVPlayer nativo.",
+  "updatedAt": "2026-09-11T17:41:35-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 70,
+    "mediaCompatibility": 80,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T17:28:41-04:00"
+    "updatedAt": "2026-09-11T17:41:34-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -207,7 +211,11 @@ roadmap de la aplicación.
     "tauriAssetProtocolCode4Observed": true,
     "tauriRangeStreamApplied": true,
     "tauriHttpRangeBridgeApplied": true,
-    "nativeAVPlayerIsNextEscalation": true
+    "nativeAVPlayerIsNextEscalation": true,
+    "tauriSourceVerticalPlaybackPass": true,
+    "tauriSourceHorizontalPlaybackPass": true,
+    "tauriVideoFlowOriginalSourceHang": true,
+    "applePreviewProxyApplied": true
   }
 }
 ```
@@ -255,25 +263,24 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
+ M .gitignore
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src-tauri/Cargo.lock
- M app/src-tauri/Cargo.toml
  M app/src-tauri/src/lib.rs
  M app/src/modules/media-lab/MediaCompatibilityLab.tsx
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
  M "continuacion en chat/ULTIMO_CHECK.txt"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/check_tauri_coherence.py
+ M scripts/check_project.sh
  M site/data/status.json
-?? PROJECT_CONTROL/F1_TAURI_ASSET_PROTOCOL_FINDING.md
-?? PROJECT_CONTROL/MEDIA_TRANSPORT_ARCHITECTURE.md
-?? app/src-tauri/src/media_http.rs
-?? app/src/core/media/
-?? docs/evidence/CHECK_20260911_172838.txt
-?? scripts/check_tauri_stream.py
+?? PROJECT_CONTROL/F1_TAURI_VIDEOFLOW_PROXY_FINDING.md
+?? app/src-tauri/src/media_proxy.rs
+?? docs/evidence/CHECK_20260911_174131.txt
+?? native/
+?? scripts/build_apple_media_proxy.sh
+?? scripts/check_apple_media_proxy.sh
 ```
 
 ### Remote
@@ -286,25 +293,25 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+34a6721 fix(f1): use loopback HTTP range bridge for Tauri media
 24c8314 fix(f1): separate media compatibility from session persistence
 95a0c50 fix(f1): bound VideoFlow preview to safe media sample
 a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
 695fc3e fix(f1): preserve browser media blob and add report consolidation
-d4387d8 docs: record F1 publication state
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_172838.txt`
+`docs/evidence/CHECK_20260911_174131.txt`
 
 ```text
+123 |     }
+124 | }
 
-[2b/8] VideoFlow integration coherence
-ABRAXAS · VIDEOFLOW INTEGRATION CHECK
-====================================
-
-OK integración spike coherente.
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+OK Swift typecheck
+OK helper self-test
 
 [3/8] TypeScript + Vite
 
@@ -316,16 +323,16 @@ transforming...
 ✓ 205 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.28 kB
+dist/index.html                                     0.45 kB │ gzip:   0.29 kB
 dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
 dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
-dist/assets/MediaCompatibilityLab-wopouFBJ.js      14.06 kB │ gzip:   5.04 kB
-dist/assets/index-B8QRWqs1.js                     223.93 kB │ gzip:  70.34 kB
-dist/assets/EditorSpike-uew8axsh.js               329.07 kB │ gzip:  62.35 kB
-dist/assets/dist-9i_Yu7VT.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/MediaCompatibilityLab-Bj9znR8d.js      14.73 kB │ gzip:   5.31 kB
+dist/assets/index-C7vNs2Z7.js                     223.93 kB │ gzip:  70.35 kB
+dist/assets/EditorSpike-Bq0ZLSCq.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 224ms
+✓ built in 211ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -333,7 +340,7 @@ dist/assets/dist-9i_Yu7VT.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -344,11 +351,11 @@ ABRAXAS PUBLIC REPO GUARD
 [6/8] Sync generated state
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
- NORMALIZED:
+      NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/ABRAXAS_OS_V0_8_0_20260911_172827.log
- - docs/evidence/CHECK_20260911_172838.txt
+ - docs/evidence/ABRAXAS_OS_V0_9_0_20260911_174123.log
+ - docs/evidence/CHECK_20260911_174131.txt
 
 [7/8] Git whitespace FINAL
 
@@ -358,15 +365,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_172838.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_174131.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 14:03:22 -0400
-Inicio de recuperación no destructiva del bootstrap Foundation.
 
 ## 2026-09-11 14:30:09 -0400
 Patch v0.3: backgroundColor corregido, Continuación en Chat automática, CLI unificada y GitHub público preparado.
@@ -394,6 +398,9 @@ v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator re
 
 ## 2026-09-11 17:28:42 -0400
 v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport adapter reutilizable. Browser PASS; faltan dos Tauri.
+
+## 2026-09-11 17:41:35 -0400
+v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.
 ```
 
 ## Archivos clave

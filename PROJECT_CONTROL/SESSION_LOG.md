@@ -29,3 +29,6 @@ v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator re
 
 ## 2026-09-11 17:28:42 -0400
 v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport adapter reutilizable. Browser PASS; faltan dos Tauri.
+
+## 2026-09-11 17:41:35 -0400
+v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.

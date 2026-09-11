@@ -54,3 +54,6 @@ archive/patches/
 # Python caches
 __pycache__/
 *.py[cod]
+
+# Local Apple helper builds
+native/apple/build/

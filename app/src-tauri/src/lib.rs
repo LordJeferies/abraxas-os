@@ -1,4 +1,5 @@
 mod media_http;
+mod media_proxy;
 
 use media_http::MediaHttpServer;
 
@@ -13,6 +14,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             media_http::register_media_source_http,
             media_http::media_server_health,
+            media_proxy::create_videoflow_proxy,
         ])
         .setup(|app| {
             if cfg!(debug_assertions) {

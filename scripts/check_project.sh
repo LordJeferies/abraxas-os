@@ -67,6 +67,9 @@ echo
 echo "[2b/8] VideoFlow integration coherence"
 python3 "$ROOT/scripts/check_videoflow_integration.py"
 echo
+echo "[2c/8] Apple preview proxy"
+"$ROOT/scripts/check_apple_media_proxy.sh"
+echo
 echo "[3/8] TypeScript + Vite"
 cd "$APP"
 npm run build
