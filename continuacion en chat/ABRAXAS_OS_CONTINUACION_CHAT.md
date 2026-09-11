@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T15:30:25-04:00
+- Generado: 2026-09-11T15:30:46-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -233,10 +233,10 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "v0.5.2: build frontend y Tauri pasan; se añadieron gates predictivos, coherencia Tauri y normalización automática. Falta certificar media real.",
+  "lastCompletedStep": "v0.5.x publicado en GitHub: Content Renaissance + F1 Media Lab. Build frontend/Tauri pasan. Falta certificar cuatro runs de media real.",
   "blockedReason": null,
-  "nextStep": "Ejecutar cuatro runs reales F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
-  "updatedAt": "2026-09-11T15:30:24-04:00",
+  "nextStep": "Ejecutar F1: browser horizontal, browser vertical, Tauri horizontal y Tauri vertical.",
+  "updatedAt": "2026-09-11T15:30:46-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
@@ -247,6 +247,11 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
   "lastCheck": {
     "status": "passed",
     "updatedAt": "2026-09-11T15:30:24-04:00"
+  },
+  "publicSiteDeploy": {
+    "status": "verified",
+    "url": "https://lordjeferies.github.io/abraxas-os/",
+    "checkedAt": "2026-09-11T15:30:45-04:00"
   }
 }
 ```
@@ -294,55 +299,8 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 
 ```text
 ## main...origin/main
-M  PROJECT_CONTROL/CURRENT_STATUS.md
-A  PROJECT_CONTROL/ERROR_PREVENTION_POLICY.md
-A  PROJECT_CONTROL/F1_MEDIA_COMPATIBILITY_PLAN.md
-A  PROJECT_CONTROL/KNOWN_WARNINGS.md
-M  PROJECT_CONTROL/MODULES.json
-M  PROJECT_CONTROL/NEXT_STEP.md
-M  PROJECT_CONTROL/PROJECT_STATE.json
-M  PROJECT_CONTROL/SESSION_LOG.md
-M  app/package-lock.json
-M  app/package.json
-M  app/src-tauri/Cargo.lock
-M  app/src-tauri/Cargo.toml
-M  app/src-tauri/capabilities/default.json
-M  app/src-tauri/src/lib.rs
-M  app/src-tauri/tauri.conf.json
-M  app/src/App.css
-M  app/src/App.tsx
-A  app/src/core/state/useAppStore.ts
-M  app/src/index.css
-A  app/src/modules/editor-shell/EditorSpike.tsx
-A  app/src/modules/media-lab/MediaCompatibilityLab.tsx
-M  app/src/modules/media-lab/README.md
-A  app/src/modules/media-lab/media-lab.css
-M  "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
-M  "continuacion en chat/ESTADO_ACTUAL.json"
-M  "continuacion en chat/ULTIMO_CHECK.txt"
-AD "continuacion en chat/ULTIMO_ERROR.md"
-A  "continuacion en chat/ULTIMO_PATCH_LOG.txt"
-M  docs/evidence/CHECK_20260911_142937.txt
-M  docs/evidence/CHECK_20260911_143556.txt
-M  docs/evidence/CHECK_20260911_143602.txt
-M  docs/evidence/CHECK_20260911_144956.txt
-A  docs/evidence/CHECK_20260911_151031.txt
-A  docs/evidence/CHECK_20260911_151356.txt
-A  docs/evidence/CHECK_20260911_151858.txt
-A  docs/evidence/CHECK_20260911_153021.txt
-M  scripts/check_project.sh
-A  scripts/check_syntax.sh
-A  scripts/check_tauri_coherence.py
-M  scripts/finalize_update.sh
-A  scripts/normalize_generated_text.py
-A  scripts/preflight_predictive.py
-A  scripts/sync_latest_patch_log.py
-A  site/assets/creation-hands.jpg
-M  site/assets/site.js
-M  site/assets/style.css
-A  site/data/content.json
-M  site/data/status.json
-M  site/index.html
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M site/data/status.json
 ```
 
 ### Remote
@@ -355,6 +313,7 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+7a47bff feat: publish F1 media lab and content renaissance site
 12942a2 docs: record successful GitHub publication
 03d0e78 chore: finalize GitHub public setup
 3946491 chore: publish Abraxas OS foundation
