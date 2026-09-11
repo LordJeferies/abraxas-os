@@ -44,15 +44,15 @@ ABRAXAS PUBLIC REPO GUARD
 ✅ No se detectaron bloqueos para un repo público.
 
 [6/6] Registrar check SIN cambiar la fase
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+Status sincronizado: /Users/lordjef/Desktop/Abrxs os/site/data/status.json
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
 
 ✅ PROJECT CHECK PASSED
 
 📁 Archivos para continuar en ChatGPT:
-~/Desktop/Abrxs os/continuacion en chat
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat
 
 Normalmente sube:
-~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
 
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_144956.txt
+Log: /Users/lordjef/Desktop/Abrxs os/docs/evidence/CHECK_20260911_144956.txt

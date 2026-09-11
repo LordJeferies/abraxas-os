@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T14:36:04-04:00",
+  "generatedAt": "2026-09-11T14:49:59-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
@@ -9,7 +9,7 @@
     "lastCompletedStep": "F0 Foundation completada y validada: frontend build, Cargo/Tauri check y public-repo guard pasan.",
     "blockedReason": null,
     "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-    "updatedAt": "2026-09-11T14:36:04-04:00",
+    "updatedAt": "2026-09-11T14:49:58-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
@@ -19,7 +19,7 @@
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T14:36:04-04:00"
+      "updatedAt": "2026-09-11T14:49:58-04:00"
     }
   },
   "modules": [
@@ -142,9 +142,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## No commits yet on main\n?? .github/\n?? .gitignore\n?? CLIENTES_PRIVADOS_LOCAL/\n?? PROJECT_CONTROL/\n?? README.md\n?? app/\n?? archive/\n?? \"continuacion en chat/\"\n?? contracts/\n?? docs/\n?? examples/\n?? packages/\n?? scripts/\n?? site/",
-    "remote": "SIN REMOTE",
-    "lastCommits": "fatal: your current branch 'main' does not have any commits yet"
+    "status": "## main\n M PROJECT_CONTROL/PROJECT_STATE.json\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M site/data/status.json\n?? docs/evidence/CHECK_20260911_144956.txt",
+    "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
+    "lastCommits": "3946491 chore: publish Abraxas OS foundation"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_143602.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_144956.txt"
 }
