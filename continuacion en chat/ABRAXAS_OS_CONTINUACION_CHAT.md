@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T18:33:21-04:00
+- Generado: 2026-09-11T18:46:19-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -282,36 +282,9 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/MODULES.json
- M PROJECT_CONTROL/NEXT_STEP.md
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
- M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/abraxas
- M scripts/check_project.sh
- M scripts/validate_f1_reports.py
- M site/data/status.json
-?? PROJECT_CONTROL/AUTOMATED_COMPOSITION_PLAN.md
-?? PROJECT_CONTROL/F1_5_ENGINE_DECISION.md
-?? PROJECT_CONTROL/F1_GATE_SUMMARY.json
-?? PROJECT_CONTROL/F1_MANUAL_ATTESTATION.json
-?? PROJECT_CONTROL/MEDIA_EXECUTION_MODES.md
-?? app/src/core/automation/
-?? app/src/core/media/runtimeTypes.ts
-?? contracts/automation-plan.v1.schema.json
-?? contracts/background-job.v1.schema.json
-?? contracts/cut-job.v1.schema.json
-?? contracts/source-media.v1.schema.json
-?? contracts/source-registry.v1.schema.json
-?? docs/evidence/CHECK_20260911_181946.txt
-?? docs/evidence/CHECK_20260911_182651.txt
-?? docs/evidence/CHECK_20260911_183317.txt
-?? examples/cut-job.demo.json
-?? scripts/abraxas_media_engine.py
-?? scripts/abraxas_source_runtime.py
+?? "continuacion en chat/ULTIMO_ERROR.md"
 ```
 
 ### Remote
@@ -324,11 +297,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+d66dd7a feat(runtime): close F1 and add fast source job runtime
 d265495 feat(media): add Apple preview proxies for Tauri VideoFlow
 34a6721 fix(f1): use loopback HTTP range bridge for Tauri media
 24c8314 fix(f1): separate media compatibility from session persistence
 95a0c50 fix(f1): bound VideoFlow preview to safe media sample
-a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
 ```
 
 ## Último check autoritativo
