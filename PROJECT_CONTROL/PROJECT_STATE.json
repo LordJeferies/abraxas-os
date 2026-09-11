@@ -4,14 +4,14 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Playback HTML5 confirmado manualmente en Browser. Scroll del Media Lab corregido y Editor Spike aislado del feedback loop React/VideoFlow. Falta completar reportes formales F1.",
+  "lastCompletedStep": "Master vertical completo reproduce correctamente en Browser Source Player. VideoFlow full-master provocó crash del renderer; F1 ahora valida VideoFlow con una muestra acotada segura de 8 s.",
   "blockedReason": null,
-  "nextStep": "Completar reportes F1 horizontal/vertical en Browser y Tauri. Después ejecutar f1-validate y comenzar F2 Editor Shell.",
-  "updatedAt": "2026-09-11T16:24:41-04:00",
+  "nextStep": "Repetir run Browser vertical usando Load VideoFlow sample (8s). Si pasa, completar Browser horizontal y los dos runs Tauri.",
+  "updatedAt": "2026-09-11T16:55:36-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 35,
+    "mediaCompatibility": 40,
     "editorShell": 0,
     "productionTimeline": 0
   },
@@ -30,6 +30,8 @@
     "browserVideoLoads": true,
     "browserPlayPause": true,
     "mediaLabScrollFixApplied": true,
-    "editorSpikeFeedbackLoopFixApplied": true
+    "editorSpikeFeedbackLoopFixApplied": true,
+    "videoFlowFullMasterCrashObserved": true,
+    "videoFlowSafeSampleModeApplied": true
   }
 }

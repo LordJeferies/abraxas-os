@@ -20,3 +20,6 @@ v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri ag
 
 ## 2026-09-11 16:24:41 -0400
 v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en cada cambio. F1 sigue como gate actual.
+
+## 2026-09-11 16:55:36 -0400
+v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.

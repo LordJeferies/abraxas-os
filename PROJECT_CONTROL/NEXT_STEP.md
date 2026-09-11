@@ -1,39 +1,43 @@
 # Próximo paso
 
-## 1. Volver a abrir Browser
+## Repetir Browser vertical
 
 `./scripts/abraxas web`
 
-Confirmar primero que ahora puedes hacer scroll hasta:
+Usar el mismo video vertical.
 
-- VideoFlow DOM Renderer;
-- Accumulated Coverage;
-- Event Log.
+El Source Player debe seguir trabajando con el master completo.
 
-## 2. Completar los dos runs Browser
+En la sección VideoFlow usar:
 
-- horizontal;
-- vertical.
+`Load VideoFlow sample (8s)`
 
-Descargar ambos reportes v2.
+Esa prueba ya NO intentará cargar los ~90 minutos dentro del DomRenderer.
 
-## 3. Probar Tauri
+Debe probar:
 
-`./scripts/abraxas desktop`
+- VideoFlow sample load;
+- Play Flow;
+- Seek Flow.
+
+El audio audible se certifica en el Source Player, no en el sample muteado.
+
+## Si Browser vertical pasa
 
 Completar:
 
-- horizontal;
-- vertical.
+- Browser horizontal;
+- Tauri vertical;
+- Tauri horizontal.
 
-## 4. Consolidar
+Luego:
 
 `./scripts/abraxas f1-validate`
 
-## 5. Si F1 pasa
+## Si incluso el sample de 8 s provoca crash
 
-Comienza F2 Editor Shell.
+No insistir con el master bruto.
 
-Antes de construir nuestro shell definitivo, repetir un smoke test corto en
-Editor Base para confirmar que texto, drag y playhead ya no se resetean con el
-wrapper VideoFlow corregido.
+Se registra DomRenderer + blob 4K como no seguro para este source y el siguiente
+paso será generar/use proxy para VideoFlow mientras el master permanece en el
+Source/Native Player.

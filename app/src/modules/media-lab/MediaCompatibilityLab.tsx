@@ -56,6 +56,9 @@ const REQUIRED_IDS = [
 
 const STORAGE_KEY = 'abraxas.media-lab.runs.v1'
 
+const VIDEOFLOW_SAMPLE_SECONDS = 8
+const VIDEOFLOW_PREVIEW_MAX_EDGE = 1080
+
 function basename(path: string) {
   return path.split(/[\\/]/).pop() || 'video'
 }
@@ -229,28 +232,68 @@ export default function MediaCompatibilityLab() {
   }
 
   const loadVideoFlow = async () => {
-    if (!source || !flowHostRef.current) return
+    if (!source || !flowHostRef.current || !duration) return
 
     try {
       flowRendererRef.current?.stop()
       flowRendererRef.current?.destroy(true)
       flowRendererRef.current = null
+      flowHostRef.current.replaceChildren()
 
-      const projectWidth = videoWidth || 1920
-      const projectHeight = videoHeight || 1080
+      /**
+       * IMPORTANTE:
+       * No cargamos el master completo dentro de DomRenderer durante F1.
+       *
+       * El HTMLVideoElement ya certifica que el master completo puede abrir,
+       * reproducir, pausar y hacer seek.
+       *
+       * VideoFlow se valida con una muestra corta y explícitamente acotada.
+       * Esto evita usar un master 4K de 60–90 minutos como si fuera una
+       * composición completa de preview.
+       */
+      const sampleDuration = Math.max(
+        1,
+        Math.min(VIDEOFLOW_SAMPLE_SECONDS, duration)
+      )
+
+      const sourceW = videoWidth || 1920
+      const sourceH = videoHeight || 1080
+      const scale = Math.min(
+        1,
+        VIDEOFLOW_PREVIEW_MAX_EDGE / Math.max(sourceW, sourceH)
+      )
+
+      const projectWidth = Math.max(2, Math.round(sourceW * scale))
+      const projectHeight = Math.max(2, Math.round(sourceH * scale))
 
       const flow = new VideoFlow({
-        name: `F1 · ${fileName}`,
+        name: `F1 sample · ${fileName}`,
         width: projectWidth,
         height: projectHeight,
         fps,
         backgroundColor: '#000000',
+        autoDetectDurations: false,
       })
 
-      flow.addVideo(
-        { fit: 'contain', volume: 1 },
-        { source },
-        { waitFor: 'finish' }
+      const clip = flow.addVideo(
+        {
+          fit: 'contain',
+          volume: 0,
+          mute: true,
+        },
+        {
+          source,
+          sourceStart: 0,
+          sourceDuration: sampleDuration,
+        }
+      )
+
+      flow.wait(sampleDuration)
+      clip.remove()
+
+      log(
+        `VideoFlow safe sample · ${sampleDuration.toFixed(1)}s · ` +
+        `${projectWidth}×${projectHeight} · muted`
       )
 
       const json = await flow.compile()
@@ -264,12 +307,17 @@ export default function MediaCompatibilityLab() {
 
       flowRendererRef.current = renderer
       setFlowReady(true)
-      setCheck('videoflow-load', 'pass', `${json.duration.toFixed(2)}s`)
-      log(`VideoFlow DOM loaded · ${json.duration.toFixed(2)}s`)
+      setCheck(
+        'videoflow-load',
+        'pass',
+        `bounded sample ${sampleDuration.toFixed(1)}s · ` +
+        `${projectWidth}×${projectHeight}`
+      )
+      log(`VideoFlow DOM safe sample loaded · ${json.duration.toFixed(2)}s`)
     } catch (error) {
       setFlowReady(false)
       setCheck('videoflow-load', 'fail', String(error))
-      log(`ERROR VideoFlow load: ${String(error)}`)
+      log(`ERROR VideoFlow safe sample: ${String(error)}`)
     }
   }
 
@@ -381,7 +429,10 @@ export default function MediaCompatibilityLab() {
       accumulatedCoverage: coverage,
       runtimeCoverageReady: runtimeReady,
       requiresExternalConsolidation: true,
-      note: 'No contiene ruta completa del archivo ni media del cliente.',
+      videoFlowTestMode: 'bounded-sample',
+      videoFlowSampleSeconds: VIDEOFLOW_SAMPLE_SECONDS,
+      videoFlowPreviewMaxEdge: VIDEOFLOW_PREVIEW_MAX_EDGE,
+      note: 'Master completo validado por HTMLVideoElement; VideoFlow DOM usa muestra acotada. No contiene ruta privada.',
     }),
     [
       runtime,
@@ -611,7 +662,7 @@ export default function MediaCompatibilityLab() {
           <div ref={flowHostRef} className="flow-host" />
 
           <div className="transport">
-            <button onClick={loadVideoFlow} disabled={!source}>Load VideoFlow</button>
+            <button onClick={loadVideoFlow} disabled={!source}>Load VideoFlow sample (8s)</button>
             <button onClick={playVideoFlow} disabled={!flowReady}>▶ Play Flow</button>
             <button onClick={stopVideoFlow} disabled={!flowReady}>■ Stop</button>
             <button onClick={seekVideoFlow} disabled={!flowReady}>Seek to source playhead</button>

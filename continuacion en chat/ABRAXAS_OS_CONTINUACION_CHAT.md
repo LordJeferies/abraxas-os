@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T16:24:41-04:00
+- Generado: 2026-09-11T16:55:36-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -91,43 +91,47 @@ Esto se vuelve a probar antes de construir F2.
 
 # Próximo paso
 
-## 1. Volver a abrir Browser
+## Repetir Browser vertical
 
 `./scripts/abraxas web`
 
-Confirmar primero que ahora puedes hacer scroll hasta:
+Usar el mismo video vertical.
 
-- VideoFlow DOM Renderer;
-- Accumulated Coverage;
-- Event Log.
+El Source Player debe seguir trabajando con el master completo.
 
-## 2. Completar los dos runs Browser
+En la sección VideoFlow usar:
 
-- horizontal;
-- vertical.
+`Load VideoFlow sample (8s)`
 
-Descargar ambos reportes v2.
+Esa prueba ya NO intentará cargar los ~90 minutos dentro del DomRenderer.
 
-## 3. Probar Tauri
+Debe probar:
 
-`./scripts/abraxas desktop`
+- VideoFlow sample load;
+- Play Flow;
+- Seek Flow.
+
+El audio audible se certifica en el Source Player, no en el sample muteado.
+
+## Si Browser vertical pasa
 
 Completar:
 
-- horizontal;
-- vertical.
+- Browser horizontal;
+- Tauri vertical;
+- Tauri horizontal.
 
-## 4. Consolidar
+Luego:
 
 `./scripts/abraxas f1-validate`
 
-## 5. Si F1 pasa
+## Si incluso el sample de 8 s provoca crash
 
-Comienza F2 Editor Shell.
+No insistir con el master bruto.
 
-Antes de construir nuestro shell definitivo, repetir un smoke test corto en
-Editor Base para confirmar que texto, drag y playhead ya no se resetean con el
-wrapper VideoFlow corregido.
+Se registra DomRenderer + blob 4K como no seguro para este source y el siguiente
+paso será generar/use proxy para VideoFlow mientras el master permanece en el
+Source/Native Player.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -176,14 +180,14 @@ roadmap de la aplicación.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "Playback HTML5 confirmado manualmente en Browser. Scroll del Media Lab corregido y Editor Spike aislado del feedback loop React/VideoFlow. Falta completar reportes formales F1.",
+  "lastCompletedStep": "Master vertical completo reproduce correctamente en Browser Source Player. VideoFlow full-master provocó crash del renderer; F1 ahora valida VideoFlow con una muestra acotada segura de 8 s.",
   "blockedReason": null,
-  "nextStep": "Completar reportes F1 horizontal/vertical en Browser y Tauri. Después ejecutar f1-validate y comenzar F2 Editor Shell.",
-  "updatedAt": "2026-09-11T16:24:41-04:00",
+  "nextStep": "Repetir run Browser vertical usando Load VideoFlow sample (8s). Si pasa, completar Browser horizontal y los dos runs Tauri.",
+  "updatedAt": "2026-09-11T16:55:36-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 35,
+    "mediaCompatibility": 40,
     "editorShell": 0,
     "productionTimeline": 0
   },
@@ -202,7 +206,9 @@ roadmap de la aplicación.
     "browserVideoLoads": true,
     "browserPlayPause": true,
     "mediaLabScrollFixApplied": true,
-    "editorSpikeFeedbackLoopFixApplied": true
+    "editorSpikeFeedbackLoopFixApplied": true,
+    "videoFlowFullMasterCrashObserved": true,
+    "videoFlowSafeSampleModeApplied": true
   }
 }
 ```
@@ -250,19 +256,16 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/CURRENT_STATUS.md
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/modules/editor-shell/EditorSpike.tsx
- M app/src/modules/media-lab/media-lab.css
+ M app/src-tauri/Cargo.toml
+ M app/src/modules/media-lab/MediaCompatibilityLab.tsx
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/check_project.sh
  M site/data/status.json
-?? PROJECT_CONTROL/F2_VIDEOFLOW_SPIKE_FINDINGS.md
-?? scripts/check_videoflow_integration.py
+?? PROJECT_CONTROL/F1_VIDEOFLOW_LOAD_CRASH_FINDING.md
 ```
 
 ### Remote
@@ -275,11 +278,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
 695fc3e fix(f1): preserve browser media blob and add report consolidation
 d4387d8 docs: record F1 publication state
 7a47bff feat: publish F1 media lab and content renaissance site
 12942a2 docs: record successful GitHub publication
-03d0e78 chore: finalize GitHub public setup
 ```
 
 ## Último check autoritativo
@@ -375,6 +378,9 @@ v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri ag
 
 ## 2026-09-11 16:24:41 -0400
 v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en cada cambio. F1 sigue como gate actual.
+
+## 2026-09-11 16:55:36 -0400
+v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.
 ```
 
 ## Archivos clave
