@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/automation-plan.v1.schema.json",
+  "title": "Abraxas Automation Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceId",
+    "directives"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.automation-plan.v1"
+    },
+    "sourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "presetId": {
+      "type": ["string", "null"]
+    },
+    "directives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "state",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "cut",
+              "caption",
+              "motion",
+              "xr",
+              "broll",
+              "sfx",
+              "music",
+              "transition"
+            ]
+          },
+          "state": {
+            "enum": [
+              "ghost",
+              "planned",
+              "ready",
+              "materialized",
+              "approved"
+            ]
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "reason": {
+            "type": ["string", "null"]
+          },
+          "confidence": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "presetId": {
+            "type": ["string", "null"]
+          },
+          "assetQuery": {
+            "type": ["string", "null"]
+          },
+          "assetId": {
+            "type": ["string", "null"]
+          },
+          "parameters": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

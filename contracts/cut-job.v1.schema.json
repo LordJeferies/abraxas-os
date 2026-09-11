@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/cut-job.v1.schema.json",
+  "title": "Abraxas Cut Job v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourcePath",
+    "outputPath",
+    "segments"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.cut-job.v1"
+    },
+    "sourcePath": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outputPath": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "enum": [
+        "exact_vt",
+        "fast_copy",
+        "fast_passthrough"
+      ],
+      "default": "exact_vt"
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceStart",
+          "sourceEnd"
+        ],
+        "properties": {
+          "sourceStart": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "sourceEnd": {
+            "oneOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

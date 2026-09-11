@@ -53,6 +53,50 @@ case "$CMD" in
     python3 "$ROOT/scripts/validate_f1_reports.py" "$@"
     "$ROOT/scripts/finalize_update.sh" "F1 validation ejecutada."
     ;;
+  media-preflight)
+    python3 "$ROOT/scripts/abraxas_media_engine.py" preflight
+    ;;
+  media-self-test)
+    python3 "$ROOT/scripts/abraxas_media_engine.py" self-test
+    ;;
+  cut)
+    if [ "$#" -lt 4 ]; then
+      echo 'Uso: ./scripts/abraxas cut SOURCE START END OUTPUT [exact_vt|fast_copy]'
+      exit 2
+    fi
+    SOURCE="$1"
+    START="$2"
+    END="$3"
+    OUTPUT="$4"
+    MODE="${5:-exact_vt}"
+    python3 "$ROOT/scripts/abraxas_media_engine.py" cut       --source "$SOURCE"       --start "$START"       --end "$END"       --out "$OUTPUT"       --mode "$MODE"
+    ;;
+  multicut)
+    if [ "$#" -lt 1 ]; then
+      echo 'Uso: ./scripts/abraxas multicut JOB_JSON'
+      exit 2
+    fi
+    python3 "$ROOT/scripts/abraxas_media_engine.py" multicut --job "$1"
+    ;;
+  runtime-preflight)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" preflight
+    ;;
+  runtime-self-test)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" self-test
+    ;;
+  source-register)
+    shift || true
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" register "$@"
+    ;;
+  source-list)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" sources
+    ;;
+  job-list)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" jobs
+    ;;
+  worker-once)
+    python3 "$ROOT/scripts/abraxas_source_runtime.py" worker-once
+    ;;
   github-public)
     "$ROOT/scripts/github_public.sh"
     ;;
@@ -72,6 +116,16 @@ ABRAXAS OS CLI
   ./scripts/abraxas site
   ./scripts/abraxas github-check
   ./scripts/abraxas f1-validate
+  ./scripts/abraxas media-preflight
+  ./scripts/abraxas media-self-test
+  ./scripts/abraxas runtime-preflight
+  ./scripts/abraxas runtime-self-test
+  ./scripts/abraxas source-register --source PATH --role horizontal_master
+  ./scripts/abraxas source-list
+  ./scripts/abraxas job-list
+  ./scripts/abraxas worker-once
+  ./scripts/abraxas cut SOURCE START END OUTPUT [exact_vt|fast_copy]
+  ./scripts/abraxas multicut JOB_JSON
   ./scripts/abraxas github-public
   ./scripts/abraxas private
 

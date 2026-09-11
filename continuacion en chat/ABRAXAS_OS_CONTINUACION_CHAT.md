@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T17:41:35-04:00
+- Generado: 2026-09-11T18:33:21-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -91,42 +91,46 @@ Esto se vuelve a probar antes de construir F2.
 
 # Próximo paso
 
-La reproducción de SOURCE en Tauri ya funciona en vertical y horizontal.
+## F1
 
-No repetir esa investigación.
+CERRADO.
 
-## Reprobar sólo VideoFlow en Tauri
+La evidencia formal es:
 
-`./scripts/abraxas desktop`
+- `F1_MANUAL_ATTESTATION.json`;
+- `F1_GATE_SUMMARY.json`.
 
-Seleccionar vertical.
+No repetir Browser/Tauri F1 salvo regresión futura.
 
-Completar los checks Source normales y después pulsar:
+## F1.5 actual
 
-`Prepare proxy + Load VideoFlow (8s)`
+Implementado:
 
-Esperado:
+- Proven Cut Engine;
+- Source Registry persistente privado;
+- fingerprint rápido;
+- ffprobe metadata;
+- Background Job Queue;
+- probe worker;
+- cut worker;
+- self-test end-to-end.
 
-1. UI sigue respondiendo.
-2. Event Log muestra "Preparando Apple preview proxy".
-3. Luego "Apple proxy listo".
-4. VideoFlow DOM load pasa.
-5. Play Flow pasa.
-6. Seek Flow pasa.
+Persistencia local:
 
-Descargar JSON.
+`CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME/`
 
-Repetir horizontal.
+## Siguiente bloque
 
-## Decisión
+1. adapter Tauri para Source Registry;
+2. panel Sources/Jobs;
+3. thumbnail worker;
+4. waveform coarse worker;
+5. transcript worker adapter;
+6. analysis worker adapter;
+7. Asset Library base.
 
-Si ambos proxies pasan:
-`./scripts/abraxas f1-validate`
-→ F2.
-
-Si incluso el proxy 960x540 de 8 s congela WKWebView:
-no crear más transportes.
-F2 Preview backend pasa a AVPlayer/AVFoundation nativo.
+Después:
+F2 Editor Shell.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -172,23 +176,23 @@ roadmap de la aplicación.
 {
   "project": "Abraxas OS",
   "schemaVersion": "abraxas.project-state.v1",
-  "currentPhase": "F1",
-  "phaseName": "Media Compatibility Lab",
+  "currentPhase": "F1.5",
+  "phaseName": "Fast Source Runtime & Proven Cut Engine",
   "status": "in_progress",
-  "lastCompletedStep": "Tauri Source Playback funciona en vertical y horizontal mediante localhost HTTP Range. VideoFlow DOM se congela con source 4K; se añadió proxy Apple AVFoundation 960x540 para preview.",
+  "lastCompletedStep": "F1 cerrado por atestación manual auditable. Fast Source Runtime implementado con Source Registry privado, Background Job Queue, probe worker y CUT_ONLY worker.",
   "blockedReason": null,
-  "nextStep": "Reprobar únicamente VideoFlow sample en Tauri vertical/horizontal. Si el proxy Apple pasa, descargar reportes y cerrar F1. Si el proxy también congela, escalar Preview de F2 a AVPlayer nativo.",
-  "updatedAt": "2026-09-11T17:41:35-04:00",
+  "nextStep": "Integrar Source Registry/Jobs en Tauri UI y añadir workers incrementales para thumbnail/waveform/transcript/analysis.",
+  "updatedAt": "2026-09-11T18:33:21-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 80,
+    "mediaCompatibility": 100,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T17:41:34-04:00"
+    "updatedAt": "2026-09-11T18:33:21-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -215,7 +219,19 @@ roadmap de la aplicación.
     "tauriSourceVerticalPlaybackPass": true,
     "tauriSourceHorizontalPlaybackPass": true,
     "tauriVideoFlowOriginalSourceHang": true,
-    "applePreviewProxyApplied": true
+    "applePreviewProxyApplied": true,
+    "provenLegacyCutPlaybookAnalyzed": true,
+    "ffmpegVideoToolboxCutEngineApplied": true,
+    "swiftCutExperimentRetired": true,
+    "provenCutEngineSelfTestPass": true,
+    "automationPlanContractAdded": true,
+    "f1ValidatorNonObjectJsonFixApplied": true,
+    "f1ManualAttestationAccepted": true,
+    "f1AllFourSlotsPass": true,
+    "fastSourceRuntimeSelfTestPass": true,
+    "sourceRegistryImplemented": true,
+    "backgroundJobQueueImplemented": true,
+    "cutWorkerImplemented": true
   }
 }
 ```
@@ -226,7 +242,9 @@ roadmap de la aplicación.
 |---|---|---|---|
 | foundation | Foundation | completed | PROJECT_CONTROL |
 | domain | Core Domain / Production Graph | started | contracts |
-| media-lab | Media Compatibility Lab | in_progress | app/src/modules/media-lab |
+| fast-source-runtime | Fast Source Runtime | in_progress | app/src/core/media |
+| proven-cut-engine | Proven Cut Engine · FFmpeg + VideoToolbox | in_progress | scripts/abraxas_media_engine.py |
+| media-lab | Media Compatibility Lab | completed | app/src/modules/media-lab |
 | editor-shell | Editor Shell | pending | app/src/modules/editor-shell |
 | timeline | Production Timeline | pending | app/src/modules/timeline |
 | inspector | Inspector | pending | app/src/modules/inspector |
@@ -240,6 +258,7 @@ roadmap de la aplicación.
 | calendar | Calendar | pending | app/src/modules/calendar |
 | publisher | Publisher | pending | app/src/modules/publisher |
 | public-site | Status / Product Website | in_progress | site |
+| automation-runtime | Automation Runtime / Ghost Fulfillment | pending | app/src/core/automation |
 
 ## Versiones clave
 
@@ -263,24 +282,36 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M .gitignore
+ M PROJECT_CONTROL/MODULES.json
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src-tauri/src/lib.rs
- M app/src/modules/media-lab/MediaCompatibilityLab.tsx
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
  M "continuacion en chat/ULTIMO_CHECK.txt"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/abraxas
  M scripts/check_project.sh
+ M scripts/validate_f1_reports.py
  M site/data/status.json
-?? PROJECT_CONTROL/F1_TAURI_VIDEOFLOW_PROXY_FINDING.md
-?? app/src-tauri/src/media_proxy.rs
-?? docs/evidence/CHECK_20260911_174131.txt
-?? native/
-?? scripts/build_apple_media_proxy.sh
-?? scripts/check_apple_media_proxy.sh
+?? PROJECT_CONTROL/AUTOMATED_COMPOSITION_PLAN.md
+?? PROJECT_CONTROL/F1_5_ENGINE_DECISION.md
+?? PROJECT_CONTROL/F1_GATE_SUMMARY.json
+?? PROJECT_CONTROL/F1_MANUAL_ATTESTATION.json
+?? PROJECT_CONTROL/MEDIA_EXECUTION_MODES.md
+?? app/src/core/automation/
+?? app/src/core/media/runtimeTypes.ts
+?? contracts/automation-plan.v1.schema.json
+?? contracts/background-job.v1.schema.json
+?? contracts/cut-job.v1.schema.json
+?? contracts/source-media.v1.schema.json
+?? contracts/source-registry.v1.schema.json
+?? docs/evidence/CHECK_20260911_181946.txt
+?? docs/evidence/CHECK_20260911_182651.txt
+?? docs/evidence/CHECK_20260911_183317.txt
+?? examples/cut-job.demo.json
+?? scripts/abraxas_media_engine.py
+?? scripts/abraxas_source_runtime.py
 ```
 
 ### Remote
@@ -293,25 +324,25 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+d265495 feat(media): add Apple preview proxies for Tauri VideoFlow
 34a6721 fix(f1): use loopback HTTP range bridge for Tauri media
 24c8314 fix(f1): separate media compatibility from session persistence
 95a0c50 fix(f1): bound VideoFlow preview to safe media sample
 a75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike
-695fc3e fix(f1): preserve browser media blob and add report consolidation
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_174131.txt`
+`docs/evidence/CHECK_20260911_183317.txt`
 
 ```text
-123 |     }
-124 | }
-
-[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
-OK Swift typecheck
-OK helper self-test
+{
+  "status": "pass",
+  "runtimeRoot": "~/Desktop/Abrxs os/CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "mediaEngine": "~/Desktop/Abrxs os/scripts/abraxas_media_engine.py"
+}
 
 [3/8] TypeScript + Vite
 
@@ -332,7 +363,7 @@ dist/assets/index-C7vNs2Z7.js                     223.93 kB │ gzip:  70.35 kB
 dist/assets/EditorSpike-Bq0ZLSCq.js               329.07 kB │ gzip:  62.35 kB
 dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 211ms
+✓ built in 197ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -340,7 +371,7 @@ dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -354,8 +385,8 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/ABRAXAS_OS_V0_9_0_20260911_174123.log
- - docs/evidence/CHECK_20260911_174131.txt
+ - docs/evidence/CHECK_20260911_183317.txt
+ - docs/evidence/ABRAXAS_OS_V0_12_0_20260911_183312.log
 
 [7/8] Git whitespace FINAL
 
@@ -365,15 +396,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_174131.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_183317.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 14:30:09 -0400
-Patch v0.3: backgroundColor corregido, Continuación en Chat automática, CLI unificada y GitHub público preparado.
 
 ## 2026-09-11 14:36:00 -0400
 v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y finalizador automático añadidos.
@@ -401,6 +429,9 @@ v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport 
 
 ## 2026-09-11 17:41:35 -0400
 v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.
+
+## 2026-09-11 18:33:21 -0400
+v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con registry/jobs/probe/cut worker.
 ```
 
 ## Archivos clave

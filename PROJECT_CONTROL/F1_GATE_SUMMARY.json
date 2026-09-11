@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "abraxas.f1-validation-summary.v4",
+  "generatedAt": "2026-09-11T18:33:15-04:00",
+  "passed": true,
+  "manualAttestationUsed": true,
+  "coverage": {
+    "browser_horizontal": true,
+    "browser_vertical": true,
+    "tauri_horizontal": true,
+    "tauri_vertical": true
+  },
+  "evidence": {
+    "browser_horizontal": {
+      "source": "manual-attestation",
+      "file": "F1_MANUAL_ATTESTATION.json",
+      "attestedAt": "2026-09-11T18:33:13-04:00",
+      "evidence": "Playback + seek/frame + audio + VideoFlow bounded sample observados."
+    },
+    "browser_vertical": {
+      "source": "manual-attestation",
+      "file": "F1_MANUAL_ATTESTATION.json",
+      "attestedAt": "2026-09-11T18:33:13-04:00",
+      "evidence": "Playback + seek/frame + audio + VideoFlow bounded sample observados."
+    },
+    "tauri_horizontal": {
+      "source": "manual-attestation",
+      "file": "F1_MANUAL_ATTESTATION.json",
+      "attestedAt": "2026-09-11T18:33:13-04:00",
+      "evidence": "HTTP Range Source Playback + Apple proxy + VideoFlow load/play/seek observados."
+    },
+    "tauri_vertical": {
+      "source": "manual-attestation",
+      "file": "F1_MANUAL_ATTESTATION.json",
+      "attestedAt": "2026-09-11T18:33:13-04:00",
+      "evidence": "HTTP Range Source Playback + Apple proxy + VideoFlow load/play/seek observados."
+    }
+  },
+  "missing": []
+}

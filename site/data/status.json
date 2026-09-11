@@ -1,23 +1,23 @@
 {
   "project": "Abraxas OS",
   "schemaVersion": "abraxas.project-state.v1",
-  "currentPhase": "F1",
-  "phaseName": "Media Compatibility Lab",
+  "currentPhase": "F1.5",
+  "phaseName": "Fast Source Runtime & Proven Cut Engine",
   "status": "in_progress",
-  "lastCompletedStep": "Tauri Source Playback funciona en vertical y horizontal mediante localhost HTTP Range. VideoFlow DOM se congela con source 4K; se añadió proxy Apple AVFoundation 960x540 para preview.",
+  "lastCompletedStep": "F1 cerrado por atestación manual auditable. Fast Source Runtime implementado con Source Registry privado, Background Job Queue, probe worker y CUT_ONLY worker.",
   "blockedReason": null,
-  "nextStep": "Reprobar únicamente VideoFlow sample en Tauri vertical/horizontal. Si el proxy Apple pasa, descargar reportes y cerrar F1. Si el proxy también congela, escalar Preview de F2 a AVPlayer nativo.",
-  "updatedAt": "2026-09-11T17:41:35-04:00",
+  "nextStep": "Integrar Source Registry/Jobs en Tauri UI y añadir workers incrementales para thumbnail/waveform/transcript/analysis.",
+  "updatedAt": "2026-09-11T18:33:21-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
-    "mediaCompatibility": 80,
+    "mediaCompatibility": 100,
     "editorShell": 0,
     "productionTimeline": 0
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T17:41:34-04:00"
+    "updatedAt": "2026-09-11T18:33:21-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -44,6 +44,18 @@
     "tauriSourceVerticalPlaybackPass": true,
     "tauriSourceHorizontalPlaybackPass": true,
     "tauriVideoFlowOriginalSourceHang": true,
-    "applePreviewProxyApplied": true
+    "applePreviewProxyApplied": true,
+    "provenLegacyCutPlaybookAnalyzed": true,
+    "ffmpegVideoToolboxCutEngineApplied": true,
+    "swiftCutExperimentRetired": true,
+    "provenCutEngineSelfTestPass": true,
+    "automationPlanContractAdded": true,
+    "f1ValidatorNonObjectJsonFixApplied": true,
+    "f1ManualAttestationAccepted": true,
+    "f1AllFourSlotsPass": true,
+    "fastSourceRuntimeSelfTestPass": true,
+    "sourceRegistryImplemented": true,
+    "backgroundJobQueueImplemented": true,
+    "cutWorkerImplemented": true
   }
 }

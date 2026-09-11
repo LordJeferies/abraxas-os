@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "abraxas.cut-job.v1",
+  "sourcePath": "/PRIVATE_LOCAL_SOURCE/master.mp4",
+  "outputPath": "/PRIVATE_LOCAL_OUTPUT/clip.mp4",
+  "mode": "exact_vt",
+  "segments": [
+    {
+      "sourceStart": "00:01:10.000",
+      "sourceEnd": "00:01:25.000"
+    },
+    {
+      "sourceStart": "00:08:30.000",
+      "sourceEnd": "00:08:42.500"
+    }
+  ]
+}

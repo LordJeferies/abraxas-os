@@ -1,25 +1,25 @@
 {
-  "generatedAt": "2026-09-11T17:41:35-04:00",
+  "generatedAt": "2026-09-11T18:33:21-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
-    "currentPhase": "F1",
-    "phaseName": "Media Compatibility Lab",
+    "currentPhase": "F1.5",
+    "phaseName": "Fast Source Runtime & Proven Cut Engine",
     "status": "in_progress",
-    "lastCompletedStep": "Tauri Source Playback funciona en vertical y horizontal mediante localhost HTTP Range. VideoFlow DOM se congela con source 4K; se añadió proxy Apple AVFoundation 960x540 para preview.",
+    "lastCompletedStep": "F1 cerrado por atestación manual auditable. Fast Source Runtime implementado con Source Registry privado, Background Job Queue, probe worker y CUT_ONLY worker.",
     "blockedReason": null,
-    "nextStep": "Reprobar únicamente VideoFlow sample en Tauri vertical/horizontal. Si el proxy Apple pasa, descargar reportes y cerrar F1. Si el proxy también congela, escalar Preview de F2 a AVPlayer nativo.",
-    "updatedAt": "2026-09-11T17:41:35-04:00",
+    "nextStep": "Integrar Source Registry/Jobs en Tauri UI y añadir workers incrementales para thumbnail/waveform/transcript/analysis.",
+    "updatedAt": "2026-09-11T18:33:21-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
-      "mediaCompatibility": 80,
+      "mediaCompatibility": 100,
       "editorShell": 0,
       "productionTimeline": 0
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T17:41:34-04:00"
+      "updatedAt": "2026-09-11T18:33:21-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -46,7 +46,19 @@
       "tauriSourceVerticalPlaybackPass": true,
       "tauriSourceHorizontalPlaybackPass": true,
       "tauriVideoFlowOriginalSourceHang": true,
-      "applePreviewProxyApplied": true
+      "applePreviewProxyApplied": true,
+      "provenLegacyCutPlaybookAnalyzed": true,
+      "ffmpegVideoToolboxCutEngineApplied": true,
+      "swiftCutExperimentRetired": true,
+      "provenCutEngineSelfTestPass": true,
+      "automationPlanContractAdded": true,
+      "f1ValidatorNonObjectJsonFixApplied": true,
+      "f1ManualAttestationAccepted": true,
+      "f1AllFourSlotsPass": true,
+      "fastSourceRuntimeSelfTestPass": true,
+      "sourceRegistryImplemented": true,
+      "backgroundJobQueueImplemented": true,
+      "cutWorkerImplemented": true
     }
   },
   "modules": [
@@ -63,9 +75,21 @@
       "path": "contracts"
     },
     {
+      "id": "fast-source-runtime",
+      "name": "Fast Source Runtime",
+      "status": "in_progress",
+      "path": "app/src/core/media"
+    },
+    {
+      "id": "proven-cut-engine",
+      "name": "Proven Cut Engine · FFmpeg + VideoToolbox",
+      "status": "in_progress",
+      "path": "scripts/abraxas_media_engine.py"
+    },
+    {
       "id": "media-lab",
       "name": "Media Compatibility Lab",
-      "status": "in_progress",
+      "status": "completed",
       "path": "app/src/modules/media-lab"
     },
     {
@@ -145,6 +169,12 @@
       "name": "Status / Product Website",
       "status": "in_progress",
       "path": "site"
+    },
+    {
+      "id": "automation-runtime",
+      "name": "Automation Runtime / Ghost Fulfillment",
+      "status": "pending",
+      "path": "app/src/core/automation"
     }
   ],
   "github": {
@@ -171,9 +201,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M .gitignore\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src-tauri/src/lib.rs\n M app/src/modules/media-lab/MediaCompatibilityLab.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_project.sh\n M site/data/status.json\n?? PROJECT_CONTROL/F1_TAURI_VIDEOFLOW_PROXY_FINDING.md\n?? app/src-tauri/src/media_proxy.rs\n?? docs/evidence/CHECK_20260911_174131.txt\n?? native/\n?? scripts/build_apple_media_proxy.sh\n?? scripts/check_apple_media_proxy.sh",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/MODULES.json\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/abraxas\n M scripts/check_project.sh\n M scripts/validate_f1_reports.py\n M site/data/status.json\n?? PROJECT_CONTROL/AUTOMATED_COMPOSITION_PLAN.md\n?? PROJECT_CONTROL/F1_5_ENGINE_DECISION.md\n?? PROJECT_CONTROL/F1_GATE_SUMMARY.json\n?? PROJECT_CONTROL/F1_MANUAL_ATTESTATION.json\n?? PROJECT_CONTROL/MEDIA_EXECUTION_MODES.md\n?? app/src/core/automation/\n?? app/src/core/media/runtimeTypes.ts\n?? contracts/automation-plan.v1.schema.json\n?? contracts/background-job.v1.schema.json\n?? contracts/cut-job.v1.schema.json\n?? contracts/source-media.v1.schema.json\n?? contracts/source-registry.v1.schema.json\n?? docs/evidence/CHECK_20260911_181946.txt\n?? docs/evidence/CHECK_20260911_182651.txt\n?? docs/evidence/CHECK_20260911_183317.txt\n?? examples/cut-job.demo.json\n?? scripts/abraxas_media_engine.py\n?? scripts/abraxas_source_runtime.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "34a6721 fix(f1): use loopback HTTP range bridge for Tauri media\n24c8314 fix(f1): separate media compatibility from session persistence\n95a0c50 fix(f1): bound VideoFlow preview to safe media sample\na75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike\n695fc3e fix(f1): preserve browser media blob and add report consolidation"
+    "lastCommits": "d265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media\n24c8314 fix(f1): separate media compatibility from session persistence\n95a0c50 fix(f1): bound VideoFlow preview to safe media sample\na75fe12 fix(ui): restore media lab scroll and stabilize VideoFlow spike"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_174131.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_183317.txt"
 }

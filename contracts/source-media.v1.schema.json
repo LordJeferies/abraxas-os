@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/source-media.v1.schema.json",
+  "title": "Abraxas Source Media v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "pathRef"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.source-media.v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pathRef": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Private local path reference; never publish client media paths."
+    },
+    "role": {
+      "enum": [
+        "horizontal_master",
+        "vertical_master",
+        "audio_master",
+        "other"
+      ]
+    },
+    "fingerprint": {
+      "type": ["string", "null"]
+    },
+    "durationSeconds": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "width": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "height": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "fps": {
+      "type": ["number", "null"],
+      "minimum": 0
+    }
+  }
+}

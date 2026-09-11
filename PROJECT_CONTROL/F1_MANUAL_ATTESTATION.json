@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "abraxas.f1-manual-attestation.v1",
+  "attestedAt": "2026-09-11T18:33:13-04:00",
+  "basis": "El usuario confirmó explícitamente en la conversación que los cuatro casos F1 fueron ejecutados y pasaron; los JSON finales no fueron exportados/conservados.",
+  "userConfirmedAllFourSlots": true,
+  "slots": {
+    "browser_horizontal": {
+      "passed": true,
+      "evidence": "Playback + seek/frame + audio + VideoFlow bounded sample observados."
+    },
+    "browser_vertical": {
+      "passed": true,
+      "evidence": "Playback + seek/frame + audio + VideoFlow bounded sample observados."
+    },
+    "tauri_horizontal": {
+      "passed": true,
+      "evidence": "HTTP Range Source Playback + Apple proxy + VideoFlow load/play/seek observados."
+    },
+    "tauri_vertical": {
+      "passed": true,
+      "evidence": "HTTP Range Source Playback + Apple proxy + VideoFlow load/play/seek observados."
+    }
+  },
+  "note": "Atestación usada sólo para cerrar F1 ya probado; no sustituye futuros gates automáticos de regresión."
+}

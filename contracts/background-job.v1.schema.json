@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/background-job.v1.schema.json",
+  "title": "Abraxas Background Job v1",
+  "type": "object",
+  "required": [
+    "id",
+    "kind",
+    "status",
+    "progress"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "probe",
+        "cut",
+        "transcript",
+        "analysis",
+        "thumbnail",
+        "waveform",
+        "proxy",
+        "asset-index"
+      ]
+    },
+    "status": {
+      "enum": [
+        "queued",
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "progress": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "sourceId": {
+      "type": ["string", "null"]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "result": {},
+    "error": {
+      "type": ["string", "null"]
+    }
+  }
+}

@@ -1,38 +1,42 @@
 # Próximo paso
 
-La reproducción de SOURCE en Tauri ya funciona en vertical y horizontal.
+## F1
 
-No repetir esa investigación.
+CERRADO.
 
-## Reprobar sólo VideoFlow en Tauri
+La evidencia formal es:
 
-`./scripts/abraxas desktop`
+- `F1_MANUAL_ATTESTATION.json`;
+- `F1_GATE_SUMMARY.json`.
 
-Seleccionar vertical.
+No repetir Browser/Tauri F1 salvo regresión futura.
 
-Completar los checks Source normales y después pulsar:
+## F1.5 actual
 
-`Prepare proxy + Load VideoFlow (8s)`
+Implementado:
 
-Esperado:
+- Proven Cut Engine;
+- Source Registry persistente privado;
+- fingerprint rápido;
+- ffprobe metadata;
+- Background Job Queue;
+- probe worker;
+- cut worker;
+- self-test end-to-end.
 
-1. UI sigue respondiendo.
-2. Event Log muestra "Preparando Apple preview proxy".
-3. Luego "Apple proxy listo".
-4. VideoFlow DOM load pasa.
-5. Play Flow pasa.
-6. Seek Flow pasa.
+Persistencia local:
 
-Descargar JSON.
+`CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME/`
 
-Repetir horizontal.
+## Siguiente bloque
 
-## Decisión
+1. adapter Tauri para Source Registry;
+2. panel Sources/Jobs;
+3. thumbnail worker;
+4. waveform coarse worker;
+5. transcript worker adapter;
+6. analysis worker adapter;
+7. Asset Library base.
 
-Si ambos proxies pasan:
-`./scripts/abraxas f1-validate`
-→ F2.
-
-Si incluso el proxy 960x540 de 8 s congela WKWebView:
-no crear más transportes.
-F2 Preview backend pasa a AVPlayer/AVFoundation nativo.
+Después:
+F2 Editor Shell.

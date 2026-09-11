@@ -1,168 +1,104 @@
 
 ============================================================
-0/12 · PREFLIGHT
+0/12 · PREFLIGHT NO DESTRUCTIVO
 ============================================================
-OK repo
-OK localhost media bridge
-OK Xcode/Swift
+Motor probado:
+{
+  "schemaVersion": "abraxas.media-engine.v1",
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "videoEncoder": "h264_videotoolbox",
+  "profile": "APPLE_VT_H264_40M_V1",
+  "status": "pass"
+}
+
+Último project state:
+phase: F1 Media Compatibility Lab
+lastCheck: {'status': 'passed', 'updatedAt': '2026-09-11T18:26:55-04:00'}
+mediaCompatibility: 90
+
+OK preflight
 
 ============================================================
 1/12 · BACKUP LOCALIZADO
 ============================================================
-Backup: ~/Desktop/Abrxs os/archive/patches/ABRAXAS_OS_V0_9_0_20260911_174123
+Backup: ~/Desktop/Abrxs os/archive/patches/ABRAXAS_OS_V0_12_0_20260911_183312
 
 ============================================================
-2/12 · SWIFT AVFOUNDATION PROXY HELPER
+2/12 · ATESTACIÓN MANUAL F1
 ============================================================
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:63:31: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 61 |     let asset = AVURLAsset(url: sourceURL)
- 62 |
- 63 |     let assetDuration = asset.duration.seconds
-    |                               `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 64 |     let safeStart = max(0.0, min(startSeconds, max(0.0, assetDuration - 0.1)))
- 65 |     let available = max(0.0, assetDuration - safeStart)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:89:14: warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 87 |     )
- 88 |
- 89 |     exporter.outputURL = outputURL
-    |              `- warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 90 |     exporter.outputFileType = .mp4
- 91 |     exporter.shouldOptimizeForNetworkUse = true
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:90:14: warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 88 |
- 89 |     exporter.outputURL = outputURL
- 90 |     exporter.outputFileType = .mp4
-    |              `- warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 91 |     exporter.shouldOptimizeForNetworkUse = true
- 92 |     exporter.timeRange = CMTimeRange(
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:99:14: warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
- 97 |     let semaphore = DispatchSemaphore(value: 0)
- 98 |
- 99 |     exporter.exportAsynchronously {
-    |              `- warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
-100 |         semaphore.signal()
-101 |     }
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:105:21: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-103 |     semaphore.wait()
-104 |
-105 |     switch exporter.status {
-    |                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-106 |     case .completed:
-107 |         let attrs = try FileManager.default.attributesOfItem(atPath: outputURL.path)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:117:22: warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-115 |     case .failed:
-116 |         throw ProxyError.exportFailed(
-117 |             exporter.error?.localizedDescription ?? "unknown AVFoundation error"
-    |                      `- warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-118 |         )
-119 |     case .cancelled:
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:122:69: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-120 |         throw ProxyError.exportFailed("cancelled")
-121 |     default:
-122 |         throw ProxyError.exportFailed("unexpected status \(exporter.status.rawValue)")
-    |                                                                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-123 |     }
-124 | }
-
-[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
-ABRAXAS_MEDIA_PROXY_SELF_TEST_OK
-Built: ~/Desktop/Abrxs os/native/apple/build/abraxas-media-proxy
+~/Desktop/Abrxs os/PROJECT_CONTROL/F1_MANUAL_ATTESTATION.json
 
 ============================================================
-3/12 · RUST COMMAND PARA CREAR/CACHEAR PROXY
-============================================================
-OK create_videoflow_proxy registrado
-
-============================================================
-4/12 · MEDIA LAB USA PROXY APPLE EN TAURI
-============================================================
-OK Tauri VideoFlow usa Apple proxy
-
-============================================================
-5/12 · CHECKER APPLE PROXY
-============================================================
-ABRAXAS · APPLE MEDIA PROXY CHECK
-================================
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:63:31: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 61 |     let asset = AVURLAsset(url: sourceURL)
- 62 |
- 63 |     let assetDuration = asset.duration.seconds
-    |                               `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 64 |     let safeStart = max(0.0, min(startSeconds, max(0.0, assetDuration - 0.1)))
- 65 |     let available = max(0.0, assetDuration - safeStart)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:89:14: warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 87 |     )
- 88 |
- 89 |     exporter.outputURL = outputURL
-    |              `- warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 90 |     exporter.outputFileType = .mp4
- 91 |     exporter.shouldOptimizeForNetworkUse = true
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:90:14: warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 88 |
- 89 |     exporter.outputURL = outputURL
- 90 |     exporter.outputFileType = .mp4
-    |              `- warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 91 |     exporter.shouldOptimizeForNetworkUse = true
- 92 |     exporter.timeRange = CMTimeRange(
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:99:14: warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
- 97 |     let semaphore = DispatchSemaphore(value: 0)
- 98 |
- 99 |     exporter.exportAsynchronously {
-    |              `- warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
-100 |         semaphore.signal()
-101 |     }
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:105:21: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-103 |     semaphore.wait()
-104 |
-105 |     switch exporter.status {
-    |                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-106 |     case .completed:
-107 |         let attrs = try FileManager.default.attributesOfItem(atPath: outputURL.path)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:117:22: warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-115 |     case .failed:
-116 |         throw ProxyError.exportFailed(
-117 |             exporter.error?.localizedDescription ?? "unknown AVFoundation error"
-    |                      `- warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-118 |         )
-119 |     case .cancelled:
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:122:69: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-120 |         throw ProxyError.exportFailed("cancelled")
-121 |     default:
-122 |         throw ProxyError.exportFailed("unexpected status \(exporter.status.rawValue)")
-    |                                                                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-123 |     }
-124 | }
-
-[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
-OK Swift typecheck
-OK helper self-test
-OK Apple proxy check agregado al pipeline
-
-============================================================
-6/12 · DOCUMENTAR DECISIÓN DE PROXY
+3/12 · VALIDATOR REPORTS + MANUAL ATTESTATION
 ============================================================
 
 ============================================================
-7/12 · ESTADO
+4/12 · FAST SOURCE RUNTIME
 ============================================================
 
 ============================================================
-8/12 · CHECKS DE CÓDIGO
+5/12 · SOURCE/JOB CONTRACTS + TYPES
+============================================================
+
+============================================================
+6/12 · CLI UNIFICADA
+============================================================
+OK unified CLI
+
+============================================================
+7/12 · RUNTIME SELF-TEST REAL
+============================================================
+{
+  "status": "pass",
+  "runtimeRoot": "~/Desktop/Abrxs os/CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "mediaEngine": "~/Desktop/Abrxs os/scripts/abraxas_media_engine.py"
+}
+{
+  "schemaVersion": "abraxas.fast-source-runtime.self-test.v1",
+  "status": "pass",
+  "sourceId": "src_fbcb1428720d16846a61",
+  "probeJobId": "job_ba851669b70d4aafb02a",
+  "cutJobId": "job_3070e01d37ce45e69f51",
+  "outputBytes": 769038
+}
+OK source register
+OK persistent queue
+OK probe worker
+OK cut worker
+OK atomic stores
+
+============================================================
+8/12 · CERRAR F1
+============================================================
+ABRAXAS F1 RELEASE GATE
+======================
+PASS browser · horizontal · manual-attestation
+PASS browser · vertical   · manual-attestation
+PASS tauri   · horizontal · manual-attestation
+PASS tauri   · vertical   · manual-attestation
+
+Manual attestation: USED
+Reason: El usuario confirmó explícitamente en la conversación que los cuatro casos F1 fueron ejecutados y pasaron; los JSON finales no fueron exportados/conservados.
+
+Ignored:
+ - abraxas-f1-browser-unknown-1789158361855.json : slot inesperado: ('browser', 'unknown')
+
+F1 COMPLETED.
+CURRENT PHASE: F1.5 Fast Source Runtime & Proven Cut Engine.
+
+============================================================
+9/12 · PROJECT STATE + CHECK GATE
+============================================================
+OK runtime preflight agregado al project check
+
+============================================================
+10/12 · FULL GATES
 ============================================================
 NORMALIZED:
- - docs/evidence/ABRAXAS_OS_V0_9_0_20260911_174123.log
+ - continuacion en chat/ULTIMO_PATCH_LOG.txt
+ - docs/evidence/ABRAXAS_OS_V0_11_1_20260911_182645.log
 ABRAXAS · SYNTAX CHECK
 ======================
 
@@ -180,6 +116,8 @@ OK scripts/check_apple_media_proxy.sh
 OK scripts/check_project.sh
 
 [python]
+OK scripts/abraxas_media_engine.py
+OK scripts/abraxas_source_runtime.py
 OK scripts/build_public_site.py
 OK scripts/check_site_budget.py
 OK scripts/check_tauri_coherence.py
@@ -209,94 +147,6 @@ OK site/data/content.json
 OK site/data/status.json
 
 ✅ Syntax gate aprobado.
-ABRAXAS · APPLE MEDIA PROXY CHECK
-================================
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:63:31: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 61 |     let asset = AVURLAsset(url: sourceURL)
- 62 |
- 63 |     let assetDuration = asset.duration.seconds
-    |                               `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
- 64 |     let safeStart = max(0.0, min(startSeconds, max(0.0, assetDuration - 0.1)))
- 65 |     let available = max(0.0, assetDuration - safeStart)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:89:14: warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 87 |     )
- 88 |
- 89 |     exporter.outputURL = outputURL
-    |              `- warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 90 |     exporter.outputFileType = .mp4
- 91 |     exporter.shouldOptimizeForNetworkUse = true
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:90:14: warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 88 |
- 89 |     exporter.outputURL = outputURL
- 90 |     exporter.outputFileType = .mp4
-    |              `- warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
- 91 |     exporter.shouldOptimizeForNetworkUse = true
- 92 |     exporter.timeRange = CMTimeRange(
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:99:14: warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
- 97 |     let semaphore = DispatchSemaphore(value: 0)
- 98 |
- 99 |     exporter.exportAsynchronously {
-    |              `- warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
-100 |         semaphore.signal()
-101 |     }
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:105:21: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-103 |     semaphore.wait()
-104 |
-105 |     switch exporter.status {
-    |                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-106 |     case .completed:
-107 |         let attrs = try FileManager.default.attributesOfItem(atPath: outputURL.path)
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:117:22: warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-115 |     case .failed:
-116 |         throw ProxyError.exportFailed(
-117 |             exporter.error?.localizedDescription ?? "unknown AVFoundation error"
-    |                      `- warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
-118 |         )
-119 |     case .cancelled:
-
-~/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:122:69: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-120 |         throw ProxyError.exportFailed("cancelled")
-121 |     default:
-122 |         throw ProxyError.exportFailed("unexpected status \(exporter.status.rawValue)")
-    |                                                                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
-123 |     }
-124 | }
-
-[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
-OK Swift typecheck
-OK helper self-test
-ABRAXAS · TAURI LOCALHOST MEDIA CHECK
-====================================
-OK   loopback bind
-OK   random assigned port
-OK   opaque token registry
-OK   range parser
-OK   206 partial content
-OK   bounded range chunks
-OK   full GET streams File
-OK   CORS
-OK   health endpoint
-OK   tiny_http dependency
-OK   http-range dependency
-OK   server managed by Tauri
-OK   register command
-OK   transport adapter
-OK   runtime health fetch
-OK   Media Lab uses adapter
-OK   source kind http
-
-OK localhost media bridge wiring.
-ABRAXAS · VIDEOFLOW INTEGRATION CHECK
-====================================
-
-OK integración spike coherente.
-    Checking app v0.1.0 (~/Desktop/Abrxs os/app/src-tauri)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.01s
 
 > abraxas-os@0.0.0 build
 > tsc -b && vite build
@@ -315,19 +165,16 @@ dist/assets/index-C7vNs2Z7.js                     223.93 kB │ gzip:  70.35 kB
 dist/assets/EditorSpike-Bq0ZLSCq.js               329.07 kB │ gzip:  62.35 kB
 dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 
+✓ built in 236ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 266ms
-
-============================================================
-9/12 · PROJECT CHECK
-============================================================
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.60s
 ABRAXAS OS PROJECT CHECK
 ========================
-Date: 2026-09-11 17:41:31 -0400
+Date: 2026-09-11 18:33:17 -0400
 
 [0/8] Predictive preflight
 ABRAXAS · PREDICTIVE PREFLIGHT
@@ -337,7 +184,7 @@ ABRAXAS · PREDICTIVE PREFLIGHT
 
 [1/8] Syntax + generated-text hygiene
 NORMALIZED:
- - docs/evidence/ABRAXAS_OS_V0_9_0_20260911_174123.log
+ - docs/evidence/ABRAXAS_OS_V0_12_0_20260911_183312.log
 ABRAXAS · SYNTAX CHECK
 ======================
 
@@ -355,6 +202,8 @@ OK scripts/check_apple_media_proxy.sh
 OK scripts/check_project.sh
 
 [python]
+OK scripts/abraxas_media_engine.py
+OK scripts/abraxas_source_runtime.py
 OK scripts/build_public_site.py
 OK scripts/check_site_budget.py
 OK scripts/check_tauri_coherence.py
@@ -460,6 +309,24 @@ ABRAXAS · APPLE MEDIA PROXY CHECK
 OK Swift typecheck
 OK helper self-test
 
+[2d/8] Proven media engine
+{
+  "schemaVersion": "abraxas.media-engine.v1",
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "videoEncoder": "h264_videotoolbox",
+  "profile": "APPLE_VT_H264_40M_V1",
+  "status": "pass"
+}
+
+[2e/8] Fast Source Runtime
+{
+  "status": "pass",
+  "runtimeRoot": "~/Desktop/Abrxs os/CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "mediaEngine": "~/Desktop/Abrxs os/scripts/abraxas_media_engine.py"
+}
+
 [3/8] TypeScript + Vite
 
 > abraxas-os@0.0.0 build
@@ -479,7 +346,7 @@ dist/assets/index-C7vNs2Z7.js                     223.93 kB │ gzip:  70.35 kB
 dist/assets/EditorSpike-Bq0ZLSCq.js               329.07 kB │ gzip:  62.35 kB
 dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 211ms
+✓ built in 197ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -487,7 +354,7 @@ dist/assets/dist-ByOR3hGE.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -501,8 +368,8 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/ABRAXAS_OS_V0_9_0_20260911_174123.log
- - docs/evidence/CHECK_20260911_174131.txt
+ - docs/evidence/CHECK_20260911_183317.txt
+ - docs/evidence/ABRAXAS_OS_V0_12_0_20260911_183312.log
 
 [7/8] Git whitespace FINAL
 
@@ -512,11 +379,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_174131.txt
-
-============================================================
-10/12 · REPO GATES
-============================================================
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_183317.txt
 ABRAXAS PUBLIC REPO GUARD
 =========================
 
@@ -524,6 +387,6 @@ ABRAXAS PUBLIC REPO GUARD
 ✅ Generated/evidence text already normalized.
 
 ============================================================
-11/12 · CHECKPOINT + COMMIT
+11/12 · CHECKPOINT + COMMIT + PUSH
 ============================================================
 Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json

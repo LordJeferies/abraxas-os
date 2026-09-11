@@ -70,6 +70,12 @@ echo
 echo "[2c/8] Apple preview proxy"
 "$ROOT/scripts/check_apple_media_proxy.sh"
 echo
+echo "[2d/8] Proven media engine"
+python3 "$ROOT/scripts/abraxas_media_engine.py" preflight
+echo
+echo "[2e/8] Fast Source Runtime"
+python3 "$ROOT/scripts/abraxas_source_runtime.py" preflight
+echo
 echo "[3/8] TypeScript + Vite"
 cd "$APP"
 npm run build

@@ -32,3 +32,6 @@ v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport 
 
 ## 2026-09-11 17:41:35 -0400
 v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.
+
+## 2026-09-11 18:33:21 -0400
+v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con registry/jobs/probe/cut worker.

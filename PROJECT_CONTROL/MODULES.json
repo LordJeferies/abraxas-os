@@ -14,9 +14,21 @@
       "path": "contracts"
     },
     {
+      "id": "fast-source-runtime",
+      "name": "Fast Source Runtime",
+      "status": "in_progress",
+      "path": "app/src/core/media"
+    },
+    {
+      "id": "proven-cut-engine",
+      "name": "Proven Cut Engine · FFmpeg + VideoToolbox",
+      "status": "in_progress",
+      "path": "scripts/abraxas_media_engine.py"
+    },
+    {
       "id": "media-lab",
       "name": "Media Compatibility Lab",
-      "status": "in_progress",
+      "status": "completed",
       "path": "app/src/modules/media-lab"
     },
     {
@@ -96,6 +108,12 @@
       "name": "Status / Product Website",
       "status": "in_progress",
       "path": "site"
+    },
+    {
+      "id": "automation-runtime",
+      "name": "Automation Runtime / Ghost Fulfillment",
+      "status": "pending",
+      "path": "app/src/core/automation"
     }
   ]
 }
