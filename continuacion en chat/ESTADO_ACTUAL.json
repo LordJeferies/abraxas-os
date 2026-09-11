@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-11T14:49:59-04:00",
+  "generatedAt": "2026-09-11T14:50:04-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1",
     "phaseName": "Media Compatibility Lab",
     "status": "pending",
-    "lastCompletedStep": "F0 Foundation completada y validada: frontend build, Cargo/Tauri check y public-repo guard pasan.",
+    "lastCompletedStep": "F0 Foundation validada y repositorio público GitHub publicado. Siguiente: F1 Media Compatibility Lab.",
     "blockedReason": null,
     "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-    "updatedAt": "2026-09-11T14:49:58-04:00",
+    "updatedAt": "2026-09-11T14:50:04-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
@@ -127,7 +127,9 @@
     "repoUrl": "https://github.com/LordJeferies/abraxas-os",
     "pagesUrl": "https://lordjeferies.github.io/abraxas-os/",
     "privateClientWorkspace": "CLIENTES_PRIVADOS_LOCAL",
-    "publishPrivateClientData": false
+    "publishPrivateClientData": false,
+    "lastPushStatus": "success",
+    "lastPushAt": "2026-09-11T14:50:04-04:00"
   },
   "versions": {
     "node": "v24.18.0",
@@ -142,9 +144,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main\n M PROJECT_CONTROL/PROJECT_STATE.json\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M site/data/status.json\n?? docs/evidence/CHECK_20260911_144956.txt",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/GITHUB.json\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M site/data/status.json",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "3946491 chore: publish Abraxas OS foundation"
+    "lastCommits": "03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
   },
   "latestCheck": "docs/evidence/CHECK_20260911_144956.txt"
 }

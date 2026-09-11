@@ -5,5 +5,7 @@
   "repoUrl": "https://github.com/LordJeferies/abraxas-os",
   "pagesUrl": "https://lordjeferies.github.io/abraxas-os/",
   "privateClientWorkspace": "CLIENTES_PRIVADOS_LOCAL",
-  "publishPrivateClientData": false
+  "publishPrivateClientData": false,
+  "lastPushStatus": "success",
+  "lastPushAt": "2026-09-11T14:50:04-04:00"
 }

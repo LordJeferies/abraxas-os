@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T14:49:59-04:00
+- Generado: 2026-09-11T14:50:04-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -220,10 +220,10 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "pending",
-  "lastCompletedStep": "F0 Foundation completada y validada: frontend build, Cargo/Tauri check y public-repo guard pasan.",
+  "lastCompletedStep": "F0 Foundation validada y repositorio público GitHub publicado. Siguiente: F1 Media Compatibility Lab.",
   "blockedReason": null,
   "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-  "updatedAt": "2026-09-11T14:49:58-04:00",
+  "updatedAt": "2026-09-11T14:50:04-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
@@ -280,13 +280,11 @@ Luna 2 y Luna 3 quedan para etapas posteriores.
 ### Status
 
 ```text
-## main
+## main...origin/main
+ M PROJECT_CONTROL/GITHUB.json
  M PROJECT_CONTROL/PROJECT_STATE.json
- M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
- M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
+ M PROJECT_CONTROL/SESSION_LOG.md
  M site/data/status.json
-?? docs/evidence/CHECK_20260911_144956.txt
 ```
 
 ### Remote
@@ -299,6 +297,7 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+03d0e78 chore: finalize GitHub public setup
 3946491 chore: publish Abraxas OS foundation
 ```
 
@@ -381,6 +380,9 @@ Patch v0.3: backgroundColor corregido, Continuación en Chat automática, CLI un
 
 ## 2026-09-11 14:36:00 -0400
 v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y finalizador automático añadidos.
+
+## 2026-09-11 14:50:04 -0400
+GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.
 ```
 
 ## Archivos clave

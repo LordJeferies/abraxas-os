@@ -8,3 +8,6 @@ Patch v0.3: backgroundColor corregido, Continuación en Chat automática, CLI un
 
 ## 2026-09-11 14:36:00 -0400
 v0.4: estado coherente, workspace privado, GitHub LordJeferies configurado, CI y finalizador automático añadidos.
+
+## 2026-09-11 14:50:04 -0400
+GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.

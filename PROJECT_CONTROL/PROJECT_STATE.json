@@ -4,10 +4,10 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "pending",
-  "lastCompletedStep": "F0 Foundation completada y validada: frontend build, Cargo/Tauri check y public-repo guard pasan.",
+  "lastCompletedStep": "F0 Foundation validada y repositorio público GitHub publicado. Siguiente: F1 Media Compatibility Lab.",
   "blockedReason": null,
   "nextStep": "Implementar Media Compatibility Lab y demostrar reproducción de MP4 real en browser y Tauri.",
-  "updatedAt": "2026-09-11T14:49:58-04:00",
+  "updatedAt": "2026-09-11T14:50:04-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
