@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T18:48:43-04:00",
+  "generatedAt": "2026-09-11T18:48:46-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
@@ -209,9 +209,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main [ahead 1]\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src-tauri/src/lib.rs\n M app/src/App.tsx\n M app/src/core/media/runtimeTypes.ts\n M app/src/core/state/useAppStore.ts\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/abraxas\n M scripts/abraxas_source_runtime.py\n M scripts/check_project.sh\n M site/data/status.json\n?? app/src-tauri/src/source_runtime.rs\n?? app/src/modules/runtime/\n?? docs/evidence/CHECK_20260911_184838.txt\n?? scripts/check_runtime_ui.py",
+    "status": "## main...origin/main",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media\n24c8314 fix(f1): separate media compatibility from session persistence"
+    "lastCommits": "2563c9a feat(runtime): add source jobs assets bundle\n7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media"
   },
   "latestCheck": "docs/evidence/CHECK_20260911_184838.txt"
 }
