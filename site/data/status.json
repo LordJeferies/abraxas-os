@@ -4,10 +4,10 @@
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
+  "lastCompletedStep": "Playback HTML5 confirmado manualmente en Browser. Scroll del Media Lab corregido y Editor Spike aislado del feedback loop React/VideoFlow. Falta completar reportes formales F1.",
   "blockedReason": null,
-  "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
-  "updatedAt": "2026-09-11T16:05:29-04:00",
+  "nextStep": "Completar reportes F1 horizontal/vertical en Browser y Tauri. Después ejecutar f1-validate y comenzar F2 Editor Shell.",
+  "updatedAt": "2026-09-11T16:24:41-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
@@ -25,5 +25,11 @@
     "url": "https://lordjeferies.github.io/abraxas-os/",
     "checkedAt": "2026-09-11T15:30:45-04:00"
   },
-  "publicSiteIsReleaseGate": false
+  "publicSiteIsReleaseGate": false,
+  "manualObservations": {
+    "browserVideoLoads": true,
+    "browserPlayPause": true,
+    "mediaLabScrollFixApplied": true,
+    "editorSpikeFeedbackLoopFixApplied": true
+  }
 }

@@ -1,35 +1,39 @@
 # Próximo paso
 
-## F1 — certificación real
-
-### Browser
+## 1. Volver a abrir Browser
 
 `./scripts/abraxas web`
 
-Hacer un run horizontal y uno vertical.
+Confirmar primero que ahora puedes hacer scroll hasta:
 
-Para la primera línea base usar un video H.264/AAC conocido.
+- VideoFlow DOM Renderer;
+- Accumulated Coverage;
+- Event Log.
 
-Descargar ambos reportes JSON.
+## 2. Completar los dos runs Browser
 
-### Tauri
+- horizontal;
+- vertical.
+
+Descargar ambos reportes v2.
+
+## 3. Probar Tauri
 
 `./scripts/abraxas desktop`
 
-Hacer un run horizontal y uno vertical.
+Completar:
 
-Descargar ambos reportes JSON.
+- horizontal;
+- vertical.
 
-### Consolidar
-
-Con los cuatro JSON en Downloads:
+## 4. Consolidar
 
 `./scripts/abraxas f1-validate`
 
-Sólo cuatro reportes v2 con `currentRunPassed=true` completan F1.
+## 5. Si F1 pasa
 
-## Después
+Comienza F2 Editor Shell.
 
-F2 Editor Shell.
-
-El sitio público queda congelado hasta F1/F2 salvo fallo crítico.
+Antes de construir nuestro shell definitivo, repetir un smoke test corto en
+Editor Base para confirmar que texto, drag y playhead ya no se resetean con el
+wrapper VideoFlow corregido.

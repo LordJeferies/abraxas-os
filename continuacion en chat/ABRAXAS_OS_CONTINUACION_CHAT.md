@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T16:05:29-04:00
+- Generado: 2026-09-11T16:24:41-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -47,67 +47,87 @@ XR es una secuencia visual compuesta que puede contener varios estados/assets.
 
 # Estado actual
 
-## Aplicación
+## F0 Foundation
+COMPLETED.
 
-F0 Foundation: COMPLETED.
+## F1 Media Compatibility
+IN PROGRESS.
 
-F1 Media Compatibility Lab: IN PROGRESS.
+Confirmado manualmente:
 
-Frontend y Tauri compilan. Falta certificar reproducción real con cuatro runs:
+- Browser carga video real;
+- video se visualiza;
+- Play funciona;
+- Pause funciona.
 
-- Browser horizontal;
-- Browser vertical;
-- Tauri horizontal;
-- Tauri vertical.
+Corregido:
 
-## Sitio público
+- scroll del Media Compatibility Lab;
+- lifecycle del Blob URL;
+- separación de reports Browser/Tauri.
 
-Se está estabilizando una versión rápida y data-driven.
+Pendiente para cerrar F1:
 
-El sitio es una capa de comunicación del proyecto y NO un release gate de la
-aplicación.
+- run Browser horizontal;
+- run Browser vertical;
+- run Tauri horizontal;
+- run Tauri vertical;
+- consolidar con `./scripts/abraxas f1-validate`.
 
-Si su diseño vuelve a requerir iteraciones importantes, se aparca y se retoma
-después de F1/F2.
+## Editor Base
+
+El comportamiento extraño de selección/texto no se ignora.
+
+Encontramos un anti-patrón en nuestro wrapper:
+`onChange={setVideo}` reinyectaba el VideoJSON al editor después de cada cambio.
+
+El spike fue simplificado para dejar que VideoFlow mantenga selección,
+playhead e history en su store interno.
+
+Esto se vuelve a probar antes de construir F2.
 
 
 ## Próximo paso
 
 # Próximo paso
 
-## F1 — certificación real
-
-### Browser
+## 1. Volver a abrir Browser
 
 `./scripts/abraxas web`
 
-Hacer un run horizontal y uno vertical.
+Confirmar primero que ahora puedes hacer scroll hasta:
 
-Para la primera línea base usar un video H.264/AAC conocido.
+- VideoFlow DOM Renderer;
+- Accumulated Coverage;
+- Event Log.
 
-Descargar ambos reportes JSON.
+## 2. Completar los dos runs Browser
 
-### Tauri
+- horizontal;
+- vertical.
+
+Descargar ambos reportes v2.
+
+## 3. Probar Tauri
 
 `./scripts/abraxas desktop`
 
-Hacer un run horizontal y uno vertical.
+Completar:
 
-Descargar ambos reportes JSON.
+- horizontal;
+- vertical.
 
-### Consolidar
-
-Con los cuatro JSON en Downloads:
+## 4. Consolidar
 
 `./scripts/abraxas f1-validate`
 
-Sólo cuatro reportes v2 con `currentRunPassed=true` completan F1.
+## 5. Si F1 pasa
 
-## Después
+Comienza F2 Editor Shell.
 
-F2 Editor Shell.
-
-El sitio público queda congelado hasta F1/F2 salvo fallo crítico.
+Antes de construir nuestro shell definitivo, repetir un smoke test corto en
+Editor Base para confirmar que texto, drag y playhead ya no se resetean con el
+wrapper VideoFlow corregido.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -156,10 +176,10 @@ roadmap de la aplicación.
   "currentPhase": "F1",
   "phaseName": "Media Compatibility Lab",
   "status": "in_progress",
-  "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
+  "lastCompletedStep": "Playback HTML5 confirmado manualmente en Browser. Scroll del Media Lab corregido y Editor Spike aislado del feedback loop React/VideoFlow. Falta completar reportes formales F1.",
   "blockedReason": null,
-  "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
-  "updatedAt": "2026-09-11T16:05:29-04:00",
+  "nextStep": "Completar reportes F1 horizontal/vertical en Browser y Tauri. Después ejecutar f1-validate y comenzar F2 Editor Shell.",
+  "updatedAt": "2026-09-11T16:24:41-04:00",
   "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
   "progress": {
     "foundation": 100,
@@ -177,7 +197,13 @@ roadmap de la aplicación.
     "url": "https://lordjeferies.github.io/abraxas-os/",
     "checkedAt": "2026-09-11T15:30:45-04:00"
   },
-  "publicSiteIsReleaseGate": false
+  "publicSiteIsReleaseGate": false,
+  "manualObservations": {
+    "browserVideoLoads": true,
+    "browserPlayPause": true,
+    "mediaLabScrollFixApplied": true,
+    "editorSpikeFeedbackLoopFixApplied": true
+  }
 }
 ```
 
@@ -224,32 +250,19 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M .gitignore
  M PROJECT_CONTROL/CURRENT_STATUS.md
- M PROJECT_CONTROL/FROM_TO.md
  M PROJECT_CONTROL/NEXT_STEP.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/modules/media-lab/MediaCompatibilityLab.tsx
+ M app/src/modules/editor-shell/EditorSpike.tsx
+ M app/src/modules/media-lab/media-lab.css
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/abraxas
- M scripts/normalize_generated_text.py
- M site/assets/site.js
- M site/assets/style.css
- M site/data/content.json
+ M scripts/check_project.sh
  M site/data/status.json
- M site/index.html
-?? PROJECT_CONTROL/APP_PROGRESS.md
-?? PROJECT_CONTROL/PUBLIC_SITE_FREEZE.md
-?? docs/evidence/CHECK_20260911_155515.txt
-?? scripts/build_public_site.py
-?? scripts/check_site_budget.py
-?? scripts/validate_f1_reports.py
-?? site/assets/creation-hands-1800.jpg
-?? site/assets/creation-hands-960.jpg
+?? PROJECT_CONTROL/F2_VIDEOFLOW_SPIKE_FINDINGS.md
+?? scripts/check_videoflow_integration.py
 ```
 
 ### Remote
@@ -262,11 +275,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+695fc3e fix(f1): preserve browser media blob and add report consolidation
 d4387d8 docs: record F1 publication state
 7a47bff feat: publish F1 media lab and content renaissance site
 12942a2 docs: record successful GitHub publication
 03d0e78 chore: finalize GitHub public setup
-3946491 chore: publish Abraxas OS foundation
 ```
 
 ## Último check autoritativo
@@ -359,6 +372,9 @@ v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: 
 
 ## 2026-09-11 16:05:29 -0400
 v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri agregados. Sitio congelado hasta F1/F2.
+
+## 2026-09-11 16:24:41 -0400
+v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en cada cambio. F1 sigue como gate actual.
 ```
 
 ## Archivos clave

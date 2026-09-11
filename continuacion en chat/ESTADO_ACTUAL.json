@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-11T16:05:29-04:00",
+  "generatedAt": "2026-09-11T16:24:41-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1",
     "phaseName": "Media Compatibility Lab",
     "status": "in_progress",
-    "lastCompletedStep": "F1 Media Lab compila. Corregido ciclo de vida del Blob URL Browser.",
+    "lastCompletedStep": "Playback HTML5 confirmado manualmente en Browser. Scroll del Media Lab corregido y Editor Spike aislado del feedback loop React/VideoFlow. Falta completar reportes formales F1.",
     "blockedReason": null,
-    "nextStep": "Generar cuatro reportes v2 PASS: Browser horizontal/vertical y Tauri horizontal/vertical; luego ejecutar ./scripts/abraxas f1-validate.",
-    "updatedAt": "2026-09-11T16:05:29-04:00",
+    "nextStep": "Completar reportes F1 horizontal/vertical en Browser y Tauri. Después ejecutar f1-validate y comenzar F2 Editor Shell.",
+    "updatedAt": "2026-09-11T16:24:41-04:00",
     "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
     "progress": {
       "foundation": 100,
@@ -27,7 +27,13 @@
       "url": "https://lordjeferies.github.io/abraxas-os/",
       "checkedAt": "2026-09-11T15:30:45-04:00"
     },
-    "publicSiteIsReleaseGate": false
+    "publicSiteIsReleaseGate": false,
+    "manualObservations": {
+      "browserVideoLoads": true,
+      "browserPlayPause": true,
+      "mediaLabScrollFixApplied": true,
+      "editorSpikeFeedbackLoopFixApplied": true
+    }
   },
   "modules": [
     {
@@ -151,9 +157,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M .gitignore\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/FROM_TO.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/modules/media-lab/MediaCompatibilityLab.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/abraxas\n M scripts/normalize_generated_text.py\n M site/assets/site.js\n M site/assets/style.css\n M site/data/content.json\n M site/data/status.json\n M site/index.html\n?? PROJECT_CONTROL/APP_PROGRESS.md\n?? PROJECT_CONTROL/PUBLIC_SITE_FREEZE.md\n?? docs/evidence/CHECK_20260911_155515.txt\n?? scripts/build_public_site.py\n?? scripts/check_site_budget.py\n?? scripts/validate_f1_reports.py\n?? site/assets/creation-hands-1800.jpg\n?? site/assets/creation-hands-960.jpg",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/modules/editor-shell/EditorSpike.tsx\n M app/src/modules/media-lab/media-lab.css\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_project.sh\n M site/data/status.json\n?? PROJECT_CONTROL/F2_VIDEOFLOW_SPIKE_FINDINGS.md\n?? scripts/check_videoflow_integration.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "d4387d8 docs: record F1 publication state\n7a47bff feat: publish F1 media lab and content renaissance site\n12942a2 docs: record successful GitHub publication\n03d0e78 chore: finalize GitHub public setup\n3946491 chore: publish Abraxas OS foundation"
+    "lastCommits": "695fc3e fix(f1): preserve browser media blob and add report consolidation\nd4387d8 docs: record F1 publication state\n7a47bff feat: publish F1 media lab and content renaissance site\n12942a2 docs: record successful GitHub publication\n03d0e78 chore: finalize GitHub public setup"
   },
   "latestCheck": "docs/evidence/CHECK_20260911_155515.txt"
 }

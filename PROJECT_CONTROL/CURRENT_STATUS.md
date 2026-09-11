@@ -1,24 +1,40 @@
 # Estado actual
 
-## Aplicación
+## F0 Foundation
+COMPLETED.
 
-F0 Foundation: COMPLETED.
+## F1 Media Compatibility
+IN PROGRESS.
 
-F1 Media Compatibility Lab: IN PROGRESS.
+Confirmado manualmente:
 
-Frontend y Tauri compilan. Falta certificar reproducción real con cuatro runs:
+- Browser carga video real;
+- video se visualiza;
+- Play funciona;
+- Pause funciona.
 
-- Browser horizontal;
-- Browser vertical;
-- Tauri horizontal;
-- Tauri vertical.
+Corregido:
 
-## Sitio público
+- scroll del Media Compatibility Lab;
+- lifecycle del Blob URL;
+- separación de reports Browser/Tauri.
 
-Se está estabilizando una versión rápida y data-driven.
+Pendiente para cerrar F1:
 
-El sitio es una capa de comunicación del proyecto y NO un release gate de la
-aplicación.
+- run Browser horizontal;
+- run Browser vertical;
+- run Tauri horizontal;
+- run Tauri vertical;
+- consolidar con `./scripts/abraxas f1-validate`.
 
-Si su diseño vuelve a requerir iteraciones importantes, se aparca y se retoma
-después de F1/F2.
+## Editor Base
+
+El comportamiento extraño de selección/texto no se ignora.
+
+Encontramos un anti-patrón en nuestro wrapper:
+`onChange={setVideo}` reinyectaba el VideoJSON al editor después de cada cambio.
+
+El spike fue simplificado para dejar que VideoFlow mantenga selección,
+playhead e history en su store interno.
+
+Esto se vuelve a probar antes de construir F2.

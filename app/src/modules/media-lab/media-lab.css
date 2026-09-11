@@ -1,7 +1,12 @@
 .media-lab{
-  min-height:100%;
+  height:100%;
+  min-height:0;
   padding:28px;
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  -webkit-overflow-scrolling:touch;
   background:
     radial-gradient(circle at 20% -10%,rgba(124,92,255,.12),transparent 26%),
     #07070a;
@@ -21,7 +26,7 @@
 .runtime-badge.browser span{background:#79b9ff;box-shadow:0 0 12px #79b9ff}
 
 .lab-grid{
-  max-width:1500px;margin:auto;
+  max-width:1500px;margin:auto;padding-bottom:28px;
   display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,.65fr);
   gap:14px;
 }
