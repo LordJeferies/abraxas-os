@@ -1,1 +1,1 @@
-Canvastect V5: base web portable en site/canvastect. Fuente packages/abraxas-canvastect-starter. Sin datos de clientes. Tauri/merge/semana pendientes. El checkout original queda intacto.
+Canvastect V6 web. No Tauri. Creador y lienzo comparten runtime. Original de prueba publicado por autorización expresa del usuario. Historial IndexedDB local; merge/semana/PWA pendientes. Reproducir: python3 packages/abraxas-canvastect-starter/build.py; node packages/abraxas-canvastect-starter/build-comparison.cjs [ruta_original]. QA visual y móvil pendiente.

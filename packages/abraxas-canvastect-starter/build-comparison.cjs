@@ -1,0 +1,14 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=__dirname;
+require('./src/domain.js');require('./src/exporters.js');
+const original=fs.readFileSync((process.argv[2] || path.join(root,'../../site/canvastect/comparacion/original.html')),'utf8');
+const raw=JSON.parse(original.match(/<script[^>]*id="app-data"[^>]*>([\s\S]*?)<\/script>/)[1]);
+const doc=Canvastect.Domain.normalize(raw);
+assert.equal(doc.fichas.length,45);assert.equal(doc.fichas.reduce((n,f)=>n+f.blocks.length,0),5383);assert.deepStrictEqual(doc.sourcePayload,raw);
+const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
+global.document={getElementById:id=>({textContent:id==='canvastect-style'?html.match(/<style id="canvastect-style">([\s\S]*?)<\/style>/)[1]:html.match(/<script id="canvastect-runtime">([\s\S]*?)<\/script>/)[1]})};
+const out=path.join(root,'dist/comparacion');fs.mkdirSync(out,{recursive:true});
+fs.writeFileSync(path.join(out,'original.html'),original);
+fs.writeFileSync(path.join(out,'lienzo.html'),Canvastect.Exporters.html(doc));
+fs.writeFileSync(path.join(out,'validacion.json'),JSON.stringify({pieces:45,events:5383,sourcePreserved:true,ui:'V6',roundTrip:JSON.stringify(Canvastect.Domain.normalize(JSON.parse(JSON.stringify(doc))))===JSON.stringify(doc)},null,2));
+console.log('Original y lienzo generados. 45 fichas / 5383 eventos.');
