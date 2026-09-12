@@ -210,3 +210,21 @@ Los hijos TextLayer son metadata editorial visible al inspeccionar el Group,
 pero no forman parte del render final.
 
 El start/end Alfa es autoritativo en Editor, Ficha y ventanas flotantes.
+
+## Alpha to VideoFlow Projection Contract v2
+
+Contrato:
+`contracts/alpha-videoflow-projection.v2.schema.json`
+
+Una ficha Alpha y una ruta producen un Production Graph temporal.
+Cada recurso conserva `resourceId`, tipo, estado, parent, start y end.
+
+La proyección separa:
+1. lane semántica T1-T9 usada por Abraxas;
+2. jerarquía de GroupLayers usada por VideoFlow.
+
+Un child puede aparecer en su lane semántica y seguir nested dentro del Group
+padre en VideoFlow.
+
+Los Group Ghosts tienen duración finita:
+`sourceDuration = end - start`.

@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-12T00:08:25-04:00
+- Generado: 2026-09-12T01:29:27-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -49,43 +49,20 @@ XR es una secuencia visual compuesta que puede contener varios estados/assets.
 
 Fase: F1.6 · Alpha Ingestion & Domain Lock
 
-F0 Foundation: COMPLETED.
-F1 Media Compatibility: COMPLETED.
-F1.5 Fast Source Runtime: base funcional.
+## v0.19.3 · Canonical Editor + Projection Contract v2
 
-## Group Ghost model
-
-Cada Ghost se proyecta como `GroupLayer` real de VideoFlow.
-
-Dentro:
-- TextLayer placeholder hijo;
-- información corta;
-- placeholder invisible en preview.
-
-Fuera:
-- Ghost Inspector contiene la información completa;
-- prompts;
-- references;
-- instrucciones;
-- raw Alpha context.
-
-Ghost Info:
-- docked;
-- floating always-on-top.
-
-Ficha Review:
-- dashboard de información general;
-- Story Script de la ruta;
-- timeline Alfa original por start/end;
-- selección de Ghost desde la ficha.
-
-Timeline semántica:
-- fija dentro de VideoEditor;
-- floating always-on-top para acompañar CapCut/DaVinci.
-
-El Group conserva `resourceId <-> layer.id`.
-
-La materialización futura añadirá assets al MISMO Group.
+Arquitectura integrada:
+- Production Graph temporal = `timelineDirectives`;
+- HTML raw = provenance + Timeline Truth;
+- Ficha Studio editable;
+- T1-T9 fijos;
+- parent/child preservado;
+- VideoFlow top-level = 9 Track Container Groups;
+- Ghost Groups limitados por start/end;
+- child resources anidados en su padre;
+- Timeline oficial = Abraxas custom Timeline;
+- Timeline flotante = misma geometría canónica;
+- contrato Alpha -> VideoFlow v2 documenta la proyección completa.
 
 Gate:
 F1_6_ALPHA_INGESTION_DOMAIN
@@ -95,88 +72,53 @@ F1_6_ALPHA_INGESTION_DOMAIN
 
 # Próximo paso
 
-## Validación v0.18
+## Validación funcional v0.19.3
 
-1. `./scripts/abraxas desktop`
-2. abrir una ficha Alfa VIDEO
-3. `Editar →`
-4. seleccionar un Ghost
-5. `Ghost Info` muestra toda la información
-6. probar Copy en prompts/referencias
-7. `↗ Timeline` abre ventana always-on-top
-8. `↗ Ghost` abre otra ventana always-on-top
-9. abrir CapCut y verificar ambas encima
-10. seleccionar otro Ghost desde Timeline flotante
-11. Ghost Info flotante debe actualizarse
-12. cambiar ficha/ruta; Timeline flotante se actualiza
-13. botón `Ficha` abre dashboard de revisión con información general + timeline Alfa original
+1. abrir Potenciales Alfa;
+2. clic en tarjeta -> Ficha Studio;
+3. editar texto/prompt y comprobar persistencia;
+4. abrir Editor;
+5. comprobar T1..T9 y huecos temporales reales;
+6. verificar que XR/Image/Motion/SFX conservan start/end de la ficha;
+7. abrir Timeline flotante y comparar;
+8. seleccionar Ghost y revisar información completa;
+9. reiniciar app y comprobar persistencia.
 
-## Después
-
-1. drag/drop Finder/Asset Library -> Group Ghost
-2. XR -> Image/Video children
-3. SFX/VO/Music -> Audio children
-4. A-roll/B-roll -> Video children
-5. captions -> Captions child
-6. Motion -> keyframes del Group/children
-7. double-click Group -> mini editor interno
-8. sync materialization -> Production Graph
+Después:
+- Finder/Asset Library -> Group Ghost;
+- materialización de Image/Video/Audio/Captions;
+- drag/trim canónico -> Production Graph;
+- mini editor XR.
 
 
 ## De dónde venimos / hacia dónde vamos
 
 # De dónde venimos y hacia dónde vamos
 
-## De dónde venimos
+## Base completada
 
-ABRXOS R9.x dejó aprendizaje útil sobre Beta/Alfa, Story Editors, cortes,
-paquetes IA y arquitectura Tauri/Rust/Swift.
+- F0 Foundation: completada.
+- F1 Media Compatibility: completada.
+- F1.5 Fast Source Runtime: base funcional.
 
-Abraxas OS reutiliza ese aprendizaje con una arquitectura modular nueva.
+## Ahora
 
-## Dónde estamos ahora
-
-F0 Foundation está completada.
-
-Estamos en F1 Media Compatibility Lab.
-
-El código de F1 compila en frontend y Tauri, pero todavía falta la prueba que
-realmente importa: reproducir videos reales.
-
-## Hacia dónde vamos inmediatamente
-
-Certificar cuatro casos:
-
-1. Browser horizontal.
-2. Browser vertical.
-3. Tauri horizontal.
-4. Tauri vertical.
-
-Después comienza F2 Editor Shell y F3 Production Timeline.
-
-## Regla
-
-El sitio público puede evolucionar en paralelo, pero no vuelve a bloquear el
-roadmap de la aplicación.
-
-## Alpha -> Contracted Group Ghost
+F1.6 · Alpha Ingestion & Domain Lock.
 
 HTML / JSON
-→ AlphaContent
-→ UNA ficha
+→ AlphaContent persistente
+→ Ficha Studio editable
 → UNA ruta
-→ Ghost Resource Contract
-→ GroupLayer exacto
-→ Text children editoriales
-→ VideoJSON
-→ VideoEditor
+→ Production Graph temporal
+→ T1-T9 canónico
+→ VideoFlow jerárquico
+→ Group Ghosts acotados en tiempo
+→ Timeline fija / flotante / Ghost Inspector
 
-En paralelo:
-→ Ficha Review
-→ Semantic Timeline
-→ Floating Timeline
+## Siguiente
 
-Las tres vistas usan el mismo `start/end`.
+Validación manual de paridad temporal y luego materialización de assets reales
+dentro de los mismos Group Ghosts sin cambiar resourceId.
 
 
 ## Estado estructurado
@@ -188,22 +130,22 @@ Las tres vistas usan el mismo `start/end`.
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Ghost Resource Contract v1 y Alpha Editor Projection v1 integrados: cada recurso Alfa se proyecta como GroupLayer con start/end exactos y TextLayers internos ordenados para qué/prompt/referencia/acción.",
+  "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
   "blockedReason": null,
-  "nextStep": "Validar visualmente start/end exactos y children internos del Group; después materializar assets dentro del mismo resourceId.",
-  "updatedAt": "2026-09-12T00:08:22-04:00",
+  "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
+  "updatedAt": "2026-09-12T01:29:27-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 58,
-    "productionTimeline": 55,
+    "editorShell": 70,
+    "productionTimeline": 68,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 97
+    "alphaIngestion": 98
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-12T00:08:21-04:00"
+    "updatedAt": "2026-09-12T01:29:26-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -290,7 +232,20 @@ Las tres vistas usan el mismo `start/end`.
     "semanticFloatingCanonicalTimingImplemented": true,
     "draftV5InvalidatesPriorTimingDrafts": true,
     "contractGateAddedToProjectCheck": true,
-    "exactTimingManualUiPass": false
+    "exactTimingManualUiPass": false,
+    "fixedTrackSlotsT1T9Implemented": true,
+    "videoFlowNineTrackContainersImplemented": true,
+    "alphaImagesFirstClassTrackImplemented": true,
+    "alphaParentChildMigrationImplemented": true,
+    "canonicalAbsoluteTimingImplemented": true,
+    "hierarchicalVideoFlowProjectionImplemented": true,
+    "alphaVideoFlowProjectionContractV2Implemented": true,
+    "nativeVideoFlowTimelineRemovedFromProductUi": true,
+    "fichaStudioImplemented": true,
+    "alphaEditOverlayPersistenceImplemented": true,
+    "timelineModuleInProgress": true,
+    "inspectorModuleInProgress": true,
+    "v0193ManualFunctionalPass": false
   }
 }
 ```
@@ -306,8 +261,8 @@ Las tres vistas usan el mismo `start/end`.
 | proven-cut-engine | Proven Cut Engine · FFmpeg + VideoToolbox | in_progress | scripts/abraxas_media_engine.py |
 | media-lab | Media Compatibility Lab | completed | app/src/modules/media-lab |
 | editor-shell | Editor Shell | in_progress | app/src/modules/editor-shell |
-| timeline | Production Timeline | pending | app/src/modules/timeline |
-| inspector | Inspector | pending | app/src/modules/inspector |
+| timeline | Production Timeline | in_progress | app/src/modules/timeline |
+| inspector | Inspector | in_progress | app/src/modules/inspector |
 | xr-studio | XR Studio | pending | app/src/modules/xr-studio |
 | assets | Asset Workflow | pending | app/src/modules/assets |
 | captions | Captions Studio | pending | app/src/modules/captions |
@@ -342,6 +297,55 @@ Las tres vistas usan el mismo `start/end`.
 
 ```text
 ## main...origin/main
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/FROM_TO.md
+ M PROJECT_CONTROL/GHOST_MODEL.md
+ M PROJECT_CONTROL/MODULES.json
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M PROJECT_CONTROL/TIMELINE_MODEL.md
+ M app/src/core/alpha/alphaEditorDirectives.ts
+ M app/src/core/alpha/alphaTimelineModel.ts
+ M app/src/core/alpha/floatingEditorBridge.ts
+ M app/src/core/alpha/normalizeAlpha.ts
+ M app/src/core/alpha/types.ts
+ M app/src/core/alpha/useAlphaStore.ts
+ M app/src/core/alpha/videoFlowDraftStore.ts
+ M app/src/core/alpha/videoFlowProjection.ts
+ M app/src/modules/alpha/AlphaSemanticTimeline.tsx
+ M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
+ M app/src/modules/alpha/AlphaWorkspace.tsx
+ M app/src/modules/alpha/alpha-semantic-timeline.css
+ M app/src/modules/alpha/alpha-videoflow-editor.css
+ M app/src/modules/alpha/alpha-workspace.css
+ M app/src/modules/floating/FloatingWorkspace.tsx
+ M app/src/modules/floating/floating-workspace.css
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M docs/architecture/ABRAXAS_OS_MASTER_SPEC.md
+ M docs/decisions/DECISIONS.md
+ M scripts/check_alpha_ingestion.py
+ M scripts/check_ghost_contracts.py
+ M scripts/check_project.sh
+ M site/data/status.json
+ M site/index.html
+?? PROJECT_CONTROL/FICHA_STUDIO.md
+?? app/src/core/alpha/alphaEditStore.ts
+?? app/src/modules/alpha/AlphaFichaStudio.tsx
+?? app/src/modules/alpha/CanonicalTimeline.tsx
+?? app/src/modules/alpha/alpha-ficha-studio.css
+?? app/src/modules/alpha/canonical-timeline.css
+?? contracts/alpha-content-edit.v1.schema.json
+?? contracts/alpha-videoflow-projection.v2.schema.json
+?? contracts/editor-track-slots.v1.schema.json
+?? docs/evidence/CHECK_20260912_011326.txt
+?? docs/evidence/CHECK_20260912_012921.txt
+?? examples/alpha-videoflow-projection.v2.demo.json
+?? examples/canonical-timeline-truth.demo.json
+?? scripts/check_timeline_truth.py
 ```
 
 ### Remote
@@ -354,21 +358,19 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+a0cfaac chore: sync generated project state
 137a866 fix(timeline): recover exact Group Ghost timing and contracts
 38a12cb chore: sync generated project state
 ed4e8b3 feat(editor): add Group Ghosts and floating workspace
 5e4112a chore: sync generated project state
-3384c79 feat(editor): add Group Ghosts and floating workspace
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260912_000817.txt`
+`docs/evidence/CHECK_20260912_012921.txt`
 
 ```text
-
-OK Ghost Resource + Alpha Editor Projection contracts.
 
 [3/8] TypeScript + Vite
 
@@ -377,24 +379,26 @@ OK Ghost Resource + Alpha Editor Projection contracts.
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 233 modules transformed.
+✓ 236 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                                     0.45 kB │ gzip:   0.29 kB
-dist/assets/AlphaWorkspace-DnddpBeD.css             4.42 kB │ gzip:   1.35 kB
 dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
+dist/assets/AlphaWorkspace-CwLsoOAF.css             4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
-dist/assets/index-CwZf4HP0.css                      5.75 kB │ gzip:   1.92 kB
-dist/assets/EditorSpike-DsNwtVKI.css               56.38 kB │ gzip:   8.35 kB
-dist/assets/dist-js-BB0LuyPq.js                     0.15 kB │ gzip:   0.15 kB
-dist/assets/RuntimePanel-BE7XedYe.js                7.84 kB │ gzip:   2.53 kB
-dist/assets/MediaCompatibilityLab-DpZI3Yem.js      14.56 kB │ gzip:   5.23 kB
-dist/assets/AlphaWorkspace-BwLgE0d2.js             16.02 kB │ gzip:   5.73 kB
-dist/assets/index-DD2QcW2V.js                     257.64 kB │ gzip:  79.20 kB
-dist/assets/EditorSpike-YEp5hPJa.js               344.63 kB │ gzip:  66.94 kB
-dist/assets/dist-DQto2TKh.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/index-DDFdI7Xk.css                      6.20 kB │ gzip:   2.00 kB
+dist/assets/AlphaFichaStudio-srwMs5U9.css           8.30 kB │ gzip:   2.11 kB
+dist/assets/EditorSpike-Z9mrWnC8.css               50.83 kB │ gzip:   7.18 kB
+dist/assets/dist-js-KKXgbApR.js                     0.15 kB │ gzip:   0.15 kB
+dist/assets/AlphaWorkspace-Z-urxclc.js              6.17 kB │ gzip:   2.23 kB
+dist/assets/RuntimePanel-DwORPwBi.js                7.84 kB │ gzip:   2.53 kB
+dist/assets/AlphaFichaStudio-DI3qVV-u.js           12.35 kB │ gzip:   3.94 kB
+dist/assets/MediaCompatibilityLab-CaiDPfhW.js      14.56 kB │ gzip:   5.22 kB
+dist/assets/index-BWgwl8Xj.js                     269.98 kB │ gzip:  83.13 kB
+dist/assets/EditorSpike-DgAR9ut2.js               340.25 kB │ gzip:  65.79 kB
+dist/assets/dist-DRPzMndF.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 161ms
+✓ built in 187ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -402,7 +406,7 @@ dist/assets/dist-DQto2TKh.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -416,7 +420,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260912_000817.txt
+ - docs/evidence/CHECK_20260912_012921.txt
 
 [7/8] Git whitespace FINAL
 
@@ -426,15 +430,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260912_000817.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260912_012921.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 17:28:42 -0400
-v0.8: Tauri media local usa localhost HTTP Range bridge; se crea MediaTransport adapter reutilizable. Browser PASS; faltan dos Tauri.
 
 ## 2026-09-11 17:41:35 -0400
 v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.
@@ -462,6 +463,9 @@ v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top t
 
 ## 2026-09-12 00:08:22 -0400
 v0.18.4: recovered exact Group Ghosts + canonical timeline + contracts.
+
+## 2026-09-12 01:29:27 -0400
+v0.19.3: canonical editor + projection contract v2 + site status sync.
 ```
 
 ## Archivos clave

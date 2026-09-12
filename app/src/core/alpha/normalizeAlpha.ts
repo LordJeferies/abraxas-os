@@ -124,15 +124,23 @@ function normalizeTrack(
     'a_roll': 'aroll',
     'b-roll': 'broll',
     'b_roll': 'broll',
+    'image': 'images',
+    'images': 'images',
+    'photo': 'images',
+    'still': 'images',
     'sound': 'sfx',
     'fx': 'sfx',
   }
 
-  const rawTrack = aliases[str(trackValue).toLowerCase()]
-    ?? str(trackValue).toLowerCase() as AlphaTrack
+  const rawTrack = (
+    aliases[str(trackValue).toLowerCase()]
+    ?? str(trackValue).toLowerCase()
+  ) as AlphaTrack
 
-  const rawType = aliases[str(typeValue).toLowerCase()]
-    ?? str(typeValue).toLowerCase() as AlphaTrack
+  const rawType = (
+    aliases[str(typeValue).toLowerCase()]
+    ?? str(typeValue).toLowerCase()
+  ) as AlphaTrack
 
   const valid: AlphaTrack[] = [
     'story',
@@ -140,6 +148,7 @@ function normalizeTrack(
     'vo',
     'captions',
     'xr',
+    'images',
     'broll',
     'motion',
     'transition',
@@ -186,30 +195,124 @@ function explicitTimeline(
 
   return piece.timeline
     .filter((item): item is Record<string, unknown> =>
-      Boolean(item) && typeof item === 'object'
+      Boolean(item)
+      && typeof item === 'object'
+      && !Array.isArray(item)
     )
     .map((item, index) => {
-      const [track, type] = normalizeTrack(item.track, item.type ?? item.kind)
-      const start = num(item.start) ?? 0
-      const end = num(item.end)
-        ?? start + (num(item.duration) ?? num(item.durationSeconds) ?? estimate(str(item.text ?? item.displayText ?? item.label)))
+      const [track, type] = normalizeTrack(
+        item.track,
+        item.type ?? item.kind,
+      )
+
+      const start = num(
+        item.start ?? item.t0,
+      ) ?? 0
+
+      const end = num(
+        item.end ?? item.t1,
+      )
+        ?? start + (
+          num(item.duration)
+          ?? num(item.durationSeconds)
+          ?? estimate(
+            str(
+              item.text
+              ?? item.displayText
+              ?? item.label
+            )
+          )
+        )
+
+      const parentResourceId = (
+        str(
+          item.parentResourceId
+          ?? item.parentId
+        )
+        || null
+      )
+
+      const groupRole = (
+        item.groupRole === 'parent'
+        || item.groupRole === 'child'
+      )
+        ? item.groupRole
+        : parentResourceId
+        ? 'child'
+        : track === 'xr'
+        ? 'parent'
+        : null
 
       return directive({
-        resourceId: str(item.id ?? item.resourceId)
-          || stable('res', contentId, 'explicit', index),
+        resourceId:
+          str(
+            item.id
+            ?? item.resourceId
+          )
+          || stable(
+            'res',
+            contentId,
+            'explicit',
+            index,
+          ),
+
         track,
         type,
         start,
         end,
-        state: type === 'story' ? 'planned' : 'ghost',
-        label: str(item.label ?? item.role) || type.toUpperCase(),
-        description: str(item.function ?? item.description),
-        text: str(item.displayText ?? item.text),
-        speaker: str(item.speaker),
-        routes: Array.isArray(item.routes)
-          ? item.routes.map(str)
-          : [],
-        presetId: item.presetId ? str(item.presetId) : null,
+
+        state:
+          type === 'story'
+            ? 'planned'
+            : 'ghost',
+
+        label:
+          str(
+            item.label
+            ?? item.role
+            ?? item.title
+          )
+          || type.toUpperCase(),
+
+        description:
+          str(
+            item.function
+            ?? item.description
+            ?? item.imageDescription
+            ?? item.purpose
+          ),
+
+        text:
+          str(
+            item.displayText
+            ?? item.text
+          ),
+
+        speaker:
+          str(item.speaker),
+
+        routes:
+          Array.isArray(item.routes)
+            ? item.routes
+                .map(str)
+                .filter(Boolean)
+            : item.route
+            ? [str(item.route)]
+            : [],
+
+        presetId:
+          item.presetId
+            ? str(item.presetId)
+            : null,
+
+        parentResourceId,
+        groupRole,
+
+        assetBindings:
+          Array.isArray(item.assetIds)
+            ? item.assetIds.map(str)
+            : [],
+
         sourceRange: (
           item.sourceStart != null
           || item.sourceEnd != null
@@ -217,15 +320,28 @@ function explicitTimeline(
           || item.endTc != null
         )
           ? {
-              start: item.sourceStart ?? item.startTc,
-              end: item.sourceEnd ?? item.endTc,
+              start:
+                item.sourceStart
+                ?? item.startTc,
+
+              end:
+                item.sourceEnd
+                ?? item.endTc,
             }
           : null,
+
         parameters: {
-          sourceUnitId: item.sourceUnitId,
-          partId: item.partId,
-          timingStatus: item.timingStatus,
-          raw: item,
+          sourceUnitId:
+            item.sourceUnitId,
+
+          partId:
+            item.partId,
+
+          timingStatus:
+            item.timingStatus,
+
+          raw:
+            item,
         },
       })
     })
@@ -611,75 +727,196 @@ function normalizePiece(
     ?? `piece-${index + 1}`
   )
 
-  const contentId = originalId || stable('content', documentId, index)
-  const type = contentType(piece)
+  const contentId =
+    originalId
+    || stable(
+      'content',
+      documentId,
+      index,
+    )
 
-  let timeline = explicitTimeline(piece, contentId)
+  const type =
+    contentType(piece)
 
-  if (!timeline.length && type === 'video') {
-    timeline = partsTimeline(piece, contentId)
+  let timeline =
+    explicitTimeline(
+      piece,
+      contentId,
+    )
+
+  const hasRichExplicitTimeline =
+    timeline.some(
+      (item) =>
+        [
+          'vo',
+          'xr',
+          'images',
+          'motion',
+          'broll',
+          'sfx',
+          'music',
+          'transition',
+        ].includes(
+          item.track,
+        ),
+    )
+
+  if (
+    !timeline.length
+    && type === 'video'
+  ) {
+    timeline =
+      partsTimeline(
+        piece,
+        contentId,
+      )
   }
 
-  if (type === 'video') {
-    const known = new Set(timeline.map((item) => item.resourceId))
+  if (
+    type === 'video'
+    && !hasRichExplicitTimeline
+  ) {
+    const known =
+      new Set(
+        timeline.map(
+          (item) =>
+            item.resourceId,
+        ),
+      )
 
-    xrsTimeline(piece, contentId).forEach((item) => {
-      if (!known.has(item.resourceId)) {
-        known.add(item.resourceId)
-        timeline.push(item)
-      }
+    xrsTimeline(
+      piece,
+      contentId,
+    ).forEach(
+      (item) => {
+        if (
+          !known.has(
+            item.resourceId,
+          )
+        ) {
+          known.add(
+            item.resourceId,
+          )
+
+          timeline.push(
+            item,
+          )
+        }
+      },
+    )
+  }
+
+  const duration =
+    Math.max(
+      num(piece.durationSeconds)
+      ?? 0,
+
+      num(piece.duration)
+      ?? 0,
+
+      ...timeline.map(
+        (item) =>
+          item.end,
+      ),
+    )
+
+  const title =
+    str(piece.title)
+    || originalId
+
+  const payloadForRevision =
+    JSON.stringify({
+      title,
+      timeline,
+      staticGraph:
+        staticGraph(
+          piece,
+          contentId,
+        ),
+      copies:
+        piece.copies
+        ?? piece.copy
+        ?? null,
     })
-  }
 
-  const duration = Math.max(
-    num(piece.durationSeconds) ?? 0,
-    num(piece.duration) ?? 0,
-    ...timeline.map((item) => item.end),
-  )
-
-  const title = str(piece.title) || originalId
-  const payloadForRevision = JSON.stringify({
-    title,
-    timeline,
-    staticGraph: staticGraph(piece, contentId),
-    copies: piece.copies ?? piece.copy ?? null,
-  })
-
-  const revisionId = `${contentId}@${stable('rev', payloadForRevision).slice(-8)}`
+  const revisionId =
+    `${contentId}@${stable(
+      'rev',
+      payloadForRevision,
+    ).slice(-8)}`
 
   const copies = (
-    piece.copies && typeof piece.copies === 'object'
+    piece.copies
+    && typeof piece.copies === 'object'
       ? piece.copies
       : piece.copy
-      ? { default: piece.copy }
+      ? {
+          default:
+            piece.copy,
+        }
       : {}
   ) as Record<string, unknown>
 
   return {
-    schemaVersion: 'abraxas.alpha-content.v1' as const,
+    schemaVersion:
+      'abraxas.alpha-content.v1' as const,
+
     contentId,
     revisionId,
     title,
-    thesis: str(piece.thesis),
-    objective: str(piece.objective),
-    contentType: type,
-    orientation: orientation(piece),
-    status: str(piece.status ?? piece.workflow_status ?? 'alpha'),
-    routes: pieceRoutes(piece),
-    durationSeconds: duration,
-    timelineDirectives: timeline.sort(
-      (a, b) => a.start - b.start || a.end - b.end
-    ),
-    staticGraph: staticGraph(piece, contentId),
-    copyVariants: copies,
+
+    thesis:
+      str(piece.thesis),
+
+    objective:
+      str(piece.objective),
+
+    contentType:
+      type,
+
+    orientation:
+      orientation(piece),
+
+    status:
+      str(
+        piece.status
+        ?? piece.workflow_status
+        ?? 'alpha',
+      ),
+
+    routes:
+      pieceRoutes(piece),
+
+    durationSeconds:
+      duration,
+
+    timelineDirectives:
+      timeline.sort(
+        (a, b) =>
+          a.start - b.start
+          || a.end - b.end,
+      ),
+
+    staticGraph:
+      staticGraph(
+        piece,
+        contentId,
+      ),
+
+    copyVariants:
+      copies,
+
     provenance: [
       {
         sourceName,
         sourceFamily,
-        originalPieceId: originalId,
+        originalPieceId:
+          originalId,
       },
     ],
-    sourcePayload: piece,
+
+    sourcePayload:
+      piece,
   } satisfies AlphaContent
 }
 
@@ -752,6 +989,53 @@ function family(payload: Record<string, unknown>) {
   }
 
   return 'generic-pieces-json'
+}
+
+export function migrateAlphaEnvelope(
+  document: AlphaEnvelope,
+): AlphaEnvelope {
+  return {
+    ...document,
+
+    contents:
+      document.contents.map(
+        (content, index) => {
+          const raw =
+            content.sourcePayload
+
+          if (
+            !raw
+            || typeof raw !== 'object'
+            || Array.isArray(raw)
+          ) {
+            return content
+          }
+
+          const piece =
+            raw as Record<string, unknown>
+
+          if (
+            !Array.isArray(piece.timeline)
+            && !Array.isArray(piece.parts)
+            && !Array.isArray(piece.xrs)
+          ) {
+            return content
+          }
+
+          try {
+            return normalizePiece(
+              piece,
+              index,
+              document.documentId,
+              document.sourceName,
+              document.sourceFamily,
+            )
+          } catch {
+            return content
+          }
+        },
+      ),
+  }
 }
 
 export async function importAlphaFile(

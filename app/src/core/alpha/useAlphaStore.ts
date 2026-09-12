@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { AlphaEnvelope } from './types'
+import { migrateAlphaEnvelope } from './normalizeAlpha'
 
 export type AlphaTimelineMode = 'temporal' | 'semantic'
 
@@ -68,27 +69,72 @@ function openDatabase(): Promise<IDBDatabase | null> {
   })
 }
 
-async function readPersisted(): Promise<PersistedAlphaWorkspace | null> {
-  const db = await openDatabase()
-  if (!db) return null
+async function readPersisted():
+  Promise<PersistedAlphaWorkspace | null> {
+  const db =
+    await openDatabase()
 
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(STORE_NAME, 'readonly')
-    const store = tx.objectStore(STORE_NAME)
-    const request = store.get(STATE_KEY)
+  if (!db) {
+    return null
+  }
 
-    request.onsuccess = () => {
-      const value = request.result as PersistedAlphaWorkspace | undefined
-      resolve(
-        value?.schemaVersion === 'abraxas.alpha-workspace-state.v1'
-          ? value
-          : null
-      )
-    }
+  return new Promise(
+    (
+      resolve,
+      reject,
+    ) => {
+      const tx =
+        db.transaction(
+          STORE_NAME,
+          'readonly',
+        )
 
-    request.onerror = () => reject(request.error)
-    tx.oncomplete = () => db.close()
-  })
+      const store =
+        tx.objectStore(
+          STORE_NAME,
+        )
+
+      const request =
+        store.get(
+          STATE_KEY,
+        )
+
+      request.onsuccess =
+        () => {
+          const value =
+            request.result as
+              | PersistedAlphaWorkspace
+              | undefined
+
+          if (
+            value?.schemaVersion
+            !== 'abraxas.alpha-workspace-state.v1'
+          ) {
+            resolve(null)
+            return
+          }
+
+          resolve({
+            ...value,
+
+            documents:
+              value.documents.map(
+                migrateAlphaEnvelope,
+              ),
+          })
+        }
+
+      request.onerror =
+        () =>
+          reject(
+            request.error,
+          )
+
+      tx.oncomplete =
+        () =>
+          db.close()
+    },
+  )
 }
 
 async function writePersisted(

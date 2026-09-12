@@ -85,6 +85,10 @@ echo
 echo "[2h/8] Ghost / Editor contracts"
 python3 "$ROOT/scripts/check_ghost_contracts.py"
 echo
+echo
+echo "[2i/8] Canonical T1-T9 / Ficha Studio"
+python3 "$ROOT/scripts/check_timeline_truth.py"
+echo
 echo "[3/8] TypeScript + Vite"
 cd "$APP"
 npm run build

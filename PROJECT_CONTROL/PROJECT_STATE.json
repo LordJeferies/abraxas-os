@@ -4,22 +4,22 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Ghost Resource Contract v1 y Alpha Editor Projection v1 integrados: cada recurso Alfa se proyecta como GroupLayer con start/end exactos y TextLayers internos ordenados para qué/prompt/referencia/acción.",
+  "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
   "blockedReason": null,
-  "nextStep": "Validar visualmente start/end exactos y children internos del Group; después materializar assets dentro del mismo resourceId.",
-  "updatedAt": "2026-09-12T00:08:22-04:00",
+  "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
+  "updatedAt": "2026-09-12T01:29:27-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 58,
-    "productionTimeline": 55,
+    "editorShell": 70,
+    "productionTimeline": 68,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 97
+    "alphaIngestion": 98
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-12T00:08:21-04:00"
+    "updatedAt": "2026-09-12T01:29:26-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -106,6 +106,19 @@
     "semanticFloatingCanonicalTimingImplemented": true,
     "draftV5InvalidatesPriorTimingDrafts": true,
     "contractGateAddedToProjectCheck": true,
-    "exactTimingManualUiPass": false
+    "exactTimingManualUiPass": false,
+    "fixedTrackSlotsT1T9Implemented": true,
+    "videoFlowNineTrackContainersImplemented": true,
+    "alphaImagesFirstClassTrackImplemented": true,
+    "alphaParentChildMigrationImplemented": true,
+    "canonicalAbsoluteTimingImplemented": true,
+    "hierarchicalVideoFlowProjectionImplemented": true,
+    "alphaVideoFlowProjectionContractV2Implemented": true,
+    "nativeVideoFlowTimelineRemovedFromProductUi": true,
+    "fichaStudioImplemented": true,
+    "alphaEditOverlayPersistenceImplemented": true,
+    "timelineModuleInProgress": true,
+    "inspectorModuleInProgress": true,
+    "v0193ManualFunctionalPass": false
   }
 }

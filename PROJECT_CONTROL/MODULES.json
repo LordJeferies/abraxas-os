@@ -46,13 +46,13 @@
     {
       "id": "timeline",
       "name": "Production Timeline",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/timeline"
     },
     {
       "id": "inspector",
       "name": "Inspector",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/inspector"
     },
     {

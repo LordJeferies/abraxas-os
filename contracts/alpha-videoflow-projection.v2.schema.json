@@ -1,0 +1,325 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/alpha-videoflow-projection.v2.schema.json",
+  "title": "Abraxas Alpha -> VideoFlow Projection v2",
+  "description": "Contrato autoritativo que explica cómo una ficha Alpha se convierte en una ruta editorial con 9 Track Slots fijos y recursos VideoFlow GroupLayer acotados por start/end. Los child resources pueden permanecer anidados en su Ghost padre en VideoFlow y aparecer en su lane semántica.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contentId",
+    "revisionId",
+    "route",
+    "durationSeconds",
+    "trackSlots",
+    "resources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.alpha-videoflow-projection.v2"
+    },
+    "contentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revisionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1
+    },
+    "durationSeconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "trackSlots": {
+      "const": [
+        {
+          "id": "T1",
+          "label": "A-ROLL",
+          "accepts": [
+            "aroll"
+          ],
+          "zIndex": 1
+        },
+        {
+          "id": "T2",
+          "label": "XR",
+          "accepts": [
+            "xr"
+          ],
+          "zIndex": 2
+        },
+        {
+          "id": "T3",
+          "label": "IMAGES",
+          "accepts": [
+            "images"
+          ],
+          "zIndex": 3
+        },
+        {
+          "id": "T4",
+          "label": "MOTION",
+          "accepts": [
+            "motion",
+            "transition"
+          ],
+          "zIndex": 4
+        },
+        {
+          "id": "T5",
+          "label": "B-ROLL",
+          "accepts": [
+            "broll"
+          ],
+          "zIndex": 5
+        },
+        {
+          "id": "T6",
+          "label": "VO JOC",
+          "accepts": [
+            "vo"
+          ],
+          "zIndex": 6
+        },
+        {
+          "id": "T7",
+          "label": "SFX",
+          "accepts": [
+            "sfx"
+          ],
+          "zIndex": 7
+        },
+        {
+          "id": "T8",
+          "label": "MUSIC",
+          "accepts": [
+            "music"
+          ],
+          "zIndex": 8
+        },
+        {
+          "id": "T9",
+          "label": "CAPTIONS",
+          "accepts": [
+            "captions"
+          ],
+          "zIndex": 9
+        }
+      ]
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resourceId",
+          "resourceType",
+          "track",
+          "trackSlot",
+          "state",
+          "groupRole",
+          "parentResourceId",
+          "timing",
+          "videoFlow"
+        ],
+        "properties": {
+          "resourceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resourceType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "track": {
+            "enum": [
+              "aroll",
+              "xr",
+              "images",
+              "motion",
+              "transition",
+              "broll",
+              "vo",
+              "sfx",
+              "music",
+              "captions"
+            ]
+          },
+          "trackSlot": {
+            "enum": [
+              "T1",
+              "T2",
+              "T3",
+              "T4",
+              "T5",
+              "T6",
+              "T7",
+              "T8",
+              "T9"
+            ]
+          },
+          "state": {
+            "enum": [
+              "ghost",
+              "planned",
+              "ready",
+              "materialized",
+              "approved"
+            ]
+          },
+          "groupRole": {
+            "enum": [
+              "root",
+              "child"
+            ]
+          },
+          "parentResourceId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "timing": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "start",
+              "end",
+              "duration",
+              "coordinateSpace",
+              "source"
+            ],
+            "properties": {
+              "start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "duration": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "coordinateSpace": {
+                "const": "content-absolute"
+              },
+              "source": {
+                "const": "alpha-production-graph"
+              },
+              "relativeToParent": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "start": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "end": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "duration": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              }
+            }
+          },
+          "videoFlow": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "representation",
+              "rootTrackContainer",
+              "groupLayerId",
+              "nestedUnderResourceId",
+              "informationChildren",
+              "renderPolicy"
+            ],
+            "properties": {
+              "representation": {
+                "const": "group-layer"
+              },
+              "rootTrackContainer": {
+                "enum": [
+                  "T1",
+                  "T2",
+                  "T3",
+                  "T4",
+                  "T5",
+                  "T6",
+                  "T7",
+                  "T8",
+                  "T9"
+                ]
+              },
+              "groupLayerId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "nestedUnderResourceId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "informationChildren": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "order",
+                    "role",
+                    "text",
+                    "visibleInPreview"
+                  ],
+                  "properties": {
+                    "order": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "role": {
+                      "enum": [
+                        "summary",
+                        "timing",
+                        "prompt",
+                        "reference",
+                        "action"
+                      ]
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "visibleInPreview": {
+                      "const": false
+                    }
+                  }
+                }
+              },
+              "renderPolicy": {
+                "enum": [
+                  "editorial-only-until-materialized",
+                  "materialized-children-only"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

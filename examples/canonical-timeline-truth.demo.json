@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "abraxas.timeline-truth-fixture.v1",
+  "duration": 86.492,
+  "route": "source",
+  "resources": [
+    {
+      "id": "XR_DEMO_01",
+      "track": "xr",
+      "start": 1.632,
+      "end": 7.837
+    },
+    {
+      "id": "XR_DEMO_02",
+      "track": "xr",
+      "start": 23.303,
+      "end": 32.303
+    },
+    {
+      "id": "XR_DEMO_03",
+      "track": "xr",
+      "start": 47.044,
+      "end": 56.044
+    },
+    {
+      "id": "XR_DEMO_04",
+      "track": "xr",
+      "start": 65.406,
+      "end": 71.881
+    }
+  ]
+}

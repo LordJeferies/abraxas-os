@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-09-12T00:08:25-04:00",
+  "generatedAt": "2026-09-12T01:29:27-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.6",
     "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "Ghost Resource Contract v1 y Alpha Editor Projection v1 integrados: cada recurso Alfa se proyecta como GroupLayer con start/end exactos y TextLayers internos ordenados para qué/prompt/referencia/acción.",
+    "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
     "blockedReason": null,
-    "nextStep": "Validar visualmente start/end exactos y children internos del Group; después materializar assets dentro del mismo resourceId.",
-    "updatedAt": "2026-09-12T00:08:22-04:00",
+    "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
+    "updatedAt": "2026-09-12T01:29:27-04:00",
     "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
-      "editorShell": 58,
-      "productionTimeline": 55,
+      "editorShell": 70,
+      "productionTimeline": 68,
       "fastSourceRuntime": 80,
-      "alphaIngestion": 97
+      "alphaIngestion": 98
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-12T00:08:21-04:00"
+      "updatedAt": "2026-09-12T01:29:26-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -108,7 +108,20 @@
       "semanticFloatingCanonicalTimingImplemented": true,
       "draftV5InvalidatesPriorTimingDrafts": true,
       "contractGateAddedToProjectCheck": true,
-      "exactTimingManualUiPass": false
+      "exactTimingManualUiPass": false,
+      "fixedTrackSlotsT1T9Implemented": true,
+      "videoFlowNineTrackContainersImplemented": true,
+      "alphaImagesFirstClassTrackImplemented": true,
+      "alphaParentChildMigrationImplemented": true,
+      "canonicalAbsoluteTimingImplemented": true,
+      "hierarchicalVideoFlowProjectionImplemented": true,
+      "alphaVideoFlowProjectionContractV2Implemented": true,
+      "nativeVideoFlowTimelineRemovedFromProductUi": true,
+      "fichaStudioImplemented": true,
+      "alphaEditOverlayPersistenceImplemented": true,
+      "timelineModuleInProgress": true,
+      "inspectorModuleInProgress": true,
+      "v0193ManualFunctionalPass": false
     }
   },
   "modules": [
@@ -157,13 +170,13 @@
     {
       "id": "timeline",
       "name": "Production Timeline",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/timeline"
     },
     {
       "id": "inspector",
       "name": "Inspector",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/inspector"
     },
     {
@@ -257,9 +270,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/FROM_TO.md\n M PROJECT_CONTROL/GHOST_MODEL.md\n M PROJECT_CONTROL/MODULES.json\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M PROJECT_CONTROL/TIMELINE_MODEL.md\n M app/src/core/alpha/alphaEditorDirectives.ts\n M app/src/core/alpha/alphaTimelineModel.ts\n M app/src/core/alpha/floatingEditorBridge.ts\n M app/src/core/alpha/normalizeAlpha.ts\n M app/src/core/alpha/types.ts\n M app/src/core/alpha/useAlphaStore.ts\n M app/src/core/alpha/videoFlowDraftStore.ts\n M app/src/core/alpha/videoFlowProjection.ts\n M app/src/modules/alpha/AlphaSemanticTimeline.tsx\n M app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n M app/src/modules/alpha/AlphaWorkspace.tsx\n M app/src/modules/alpha/alpha-semantic-timeline.css\n M app/src/modules/alpha/alpha-videoflow-editor.css\n M app/src/modules/alpha/alpha-workspace.css\n M app/src/modules/floating/FloatingWorkspace.tsx\n M app/src/modules/floating/floating-workspace.css\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M docs/architecture/ABRAXAS_OS_MASTER_SPEC.md\n M docs/decisions/DECISIONS.md\n M scripts/check_alpha_ingestion.py\n M scripts/check_ghost_contracts.py\n M scripts/check_project.sh\n M site/data/status.json\n M site/index.html\n?? PROJECT_CONTROL/FICHA_STUDIO.md\n?? app/src/core/alpha/alphaEditStore.ts\n?? app/src/modules/alpha/AlphaFichaStudio.tsx\n?? app/src/modules/alpha/CanonicalTimeline.tsx\n?? app/src/modules/alpha/alpha-ficha-studio.css\n?? app/src/modules/alpha/canonical-timeline.css\n?? contracts/alpha-content-edit.v1.schema.json\n?? contracts/alpha-videoflow-projection.v2.schema.json\n?? contracts/editor-track-slots.v1.schema.json\n?? docs/evidence/CHECK_20260912_011326.txt\n?? docs/evidence/CHECK_20260912_012921.txt\n?? examples/alpha-videoflow-projection.v2.demo.json\n?? examples/canonical-timeline-truth.demo.json\n?? scripts/check_timeline_truth.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "137a866 fix(timeline): recover exact Group Ghost timing and contracts\n38a12cb chore: sync generated project state\ned4e8b3 feat(editor): add Group Ghosts and floating workspace\n5e4112a chore: sync generated project state\n3384c79 feat(editor): add Group Ghosts and floating workspace"
+    "lastCommits": "a0cfaac chore: sync generated project state\n137a866 fix(timeline): recover exact Group Ghost timing and contracts\n38a12cb chore: sync generated project state\ned4e8b3 feat(editor): add Group Ghosts and floating workspace\n5e4112a chore: sync generated project state"
   },
-  "latestCheck": "docs/evidence/CHECK_20260912_000817.txt"
+  "latestCheck": "docs/evidence/CHECK_20260912_012921.txt"
 }

@@ -2,43 +2,20 @@
 
 Fase: F1.6 · Alpha Ingestion & Domain Lock
 
-F0 Foundation: COMPLETED.
-F1 Media Compatibility: COMPLETED.
-F1.5 Fast Source Runtime: base funcional.
+## v0.19.3 · Canonical Editor + Projection Contract v2
 
-## Group Ghost model
-
-Cada Ghost se proyecta como `GroupLayer` real de VideoFlow.
-
-Dentro:
-- TextLayer placeholder hijo;
-- información corta;
-- placeholder invisible en preview.
-
-Fuera:
-- Ghost Inspector contiene la información completa;
-- prompts;
-- references;
-- instrucciones;
-- raw Alpha context.
-
-Ghost Info:
-- docked;
-- floating always-on-top.
-
-Ficha Review:
-- dashboard de información general;
-- Story Script de la ruta;
-- timeline Alfa original por start/end;
-- selección de Ghost desde la ficha.
-
-Timeline semántica:
-- fija dentro de VideoEditor;
-- floating always-on-top para acompañar CapCut/DaVinci.
-
-El Group conserva `resourceId <-> layer.id`.
-
-La materialización futura añadirá assets al MISMO Group.
+Arquitectura integrada:
+- Production Graph temporal = `timelineDirectives`;
+- HTML raw = provenance + Timeline Truth;
+- Ficha Studio editable;
+- T1-T9 fijos;
+- parent/child preservado;
+- VideoFlow top-level = 9 Track Container Groups;
+- Ghost Groups limitados por start/end;
+- child resources anidados en su padre;
+- Timeline oficial = Abraxas custom Timeline;
+- Timeline flotante = misma geometría canónica;
+- contrato Alpha -> VideoFlow v2 documenta la proyección completa.
 
 Gate:
 F1_6_ALPHA_INGESTION_DOMAIN

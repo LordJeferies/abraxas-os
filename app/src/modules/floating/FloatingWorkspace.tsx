@@ -1,14 +1,6 @@
-import {
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import {
-  getCurrentWebviewWindow,
-} from '@tauri-apps/api/webviewWindow'
-import type {
-  FloatingEditorKind,
-} from '../../core/alpha/floatingWindow'
+import { useEffect, useMemo, useState } from 'react'
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
+import type { FloatingEditorKind } from '../../core/alpha/floatingWindow'
 import {
   readFloatingSnapshot,
   sendFloatingSelection,
@@ -16,44 +8,21 @@ import {
   type FloatingEditorSnapshot,
 } from '../../core/alpha/floatingEditorBridge'
 import {
-  CANONICAL_TRACKS,
+  TRACK_SLOTS,
+  timelineGeometry,
 } from '../../core/alpha/alphaTimelineModel'
 import GhostInspectorPanel from '../alpha/GhostInspectorPanel'
 import './floating-workspace.css'
 
-export function getFloatingKind():
-  FloatingEditorKind
-  | null {
-  const query =
-    new URLSearchParams(
-      window.location.search,
-    ).get(
-      'floating',
-    )
+export function getFloatingKind(): FloatingEditorKind | null {
+  const query = new URLSearchParams(window.location.search).get('floating')
 
-  if (
-    query === 'timeline'
-    || query === 'ghost'
-  ) {
-    return query
-  }
+  if (query === 'timeline' || query === 'ghost') return query
 
   try {
-    const label =
-      getCurrentWebviewWindow()
-        .label
-
-    if (
-      label === 'floating-timeline'
-    ) {
-      return 'timeline'
-    }
-
-    if (
-      label === 'floating-ghost'
-    ) {
-      return 'ghost'
-    }
+    const label = getCurrentWebviewWindow().label
+    if (label === 'floating-timeline') return 'timeline'
+    if (label === 'floating-ghost') return 'ghost'
   } catch {
     // Browser / Pages mode.
   }
@@ -64,124 +33,67 @@ export function getFloatingKind():
 function FloatingTimeline({
   snapshot,
 }: {
-  snapshot:
-    FloatingEditorSnapshot
-    | null
+  snapshot: FloatingEditorSnapshot | null
 }) {
   if (!snapshot) {
     return (
-      <div
-        className="floating-empty"
-      >
+      <div className="floating-empty">
         Abre una ficha Alfa en el Editor.
       </div>
     )
   }
 
-  const duration =
-    Math.max(
-      1,
-      snapshot.duration,
-    )
-
   return (
-    <section
-      className="floating-timeline"
-    >
+    <section className="floating-timeline">
       <header>
         <div>
-          <small>
-            ABRAXAS · TIMELINE CANÓNICA
-          </small>
-
-          <strong>
-            {snapshot.title}
-          </strong>
+          <small>ABRAXAS · T1–T9</small>
+          <strong>{snapshot.title}</strong>
         </div>
-
-        <span>
-          {snapshot.route}
-        </span>
+        <span>{snapshot.route}</span>
       </header>
 
-      <div
-        className="floating-timeline-scroll"
-      >
-        {CANONICAL_TRACKS.map(
-          (entry) => {
-            const items =
-              snapshot.items.filter(
-                (item) =>
-                  item.track
-                  === entry.track,
-              )
+      <div className="floating-timeline-scroll">
+        {TRACK_SLOTS.map((slot) => {
+          const items = snapshot.items.filter((item) => item.slotId === slot.id)
 
-            return (
-              <div
-                className="floating-lane"
-                key={entry.track}
-              >
-                <strong>
-                  {entry.label}
-                </strong>
+          return (
+            <div className="floating-lane" key={slot.id}>
+              <strong>{slot.label}</strong>
+              <div>
+                {items.map((item) => {
+                  const geometry = timelineGeometry(item, snapshot.duration)
 
-                <div>
-                  {items.map(
-                    (item) => (
+                  return (
+                    <div
+                      key={item.resourceId}
+                      className="floating-item-position"
+                      style={{
+                        left: `${geometry.leftPct}%`,
+                        width: `${geometry.widthPct}%`,
+                      }}
+                    >
                       <button
-                        key={
-                          item.resourceId
-                        }
+                        type="button"
                         className={
-                          snapshot
-                            .selectedResourceId
-                          === item.resourceId
+                          snapshot.selectedResourceId === item.resourceId
                             ? 'selected'
                             : ''
                         }
-                        style={{
-                          left:
-                            `${item.start / duration * 100}%`,
-
-                          width:
-                            `${Math.max(
-                              0.45,
-                              (
-                                item.end
-                                - item.start
-                              )
-                              / duration
-                              * 100,
-                            )}%`,
-
-                          backgroundColor:
-                            entry.color,
-                        }}
-                        onClick={() =>
-                          sendFloatingSelection(
-                            item.resourceId,
-                          )
-                        }
-                        title={
-                          `${item.label} · ${item.start.toFixed(3)} → ${item.end.toFixed(3)}`
-                        }
+                        style={{ backgroundColor: slot.color }}
+                        onClick={() => sendFloatingSelection(item.resourceId)}
+                        title={`${item.label} · ${item.start.toFixed(3)} → ${item.end.toFixed(3)}`}
                       >
-                        {
-                          item.state
-                          === 'ghost'
-                            ? '👻 '
-                            : '◆ '
-                        }
-
+                        {item.state === 'ghost' ? '👻 ' : '◆ '}
                         {item.label}
                       </button>
-                    ),
-                  )}
-                </div>
+                    </div>
+                  )
+                })}
               </div>
-            )
-          },
-        )}
+            </div>
+          )
+        })}
       </div>
     </section>
   )
@@ -190,58 +102,27 @@ function FloatingTimeline({
 export default function FloatingWorkspace({
   kind,
 }: {
-  kind:
-    FloatingEditorKind
+  kind: FloatingEditorKind
 }) {
-  const [
-    snapshot,
-    setSnapshot,
-  ] =
-    useState<
-      FloatingEditorSnapshot
-      | null
-    >(
-      () =>
-        readFloatingSnapshot(),
-    )
+  const [snapshot, setSnapshot] = useState<FloatingEditorSnapshot | null>(
+    () => readFloatingSnapshot(),
+  )
 
   useEffect(
-    () =>
-      subscribeFloatingSnapshot(
-        setSnapshot,
-      ),
+    () => subscribeFloatingSnapshot(setSnapshot),
     [],
   )
 
-  const selected =
-    useMemo(
-      () =>
-        snapshot?.selected
-        ?? null,
-
-      [snapshot],
-    )
+  const selected = useMemo(
+    () => snapshot?.selected ?? null,
+    [snapshot],
+  )
 
   return (
-    <main
-      className="floating-workspace"
-    >
+    <main className="floating-workspace">
       {kind === 'timeline'
-        ? (
-            <FloatingTimeline
-              snapshot={
-                snapshot
-              }
-            />
-          )
-        : (
-            <GhostInspectorPanel
-              ghost={
-                selected
-              }
-              compact
-            />
-          )}
+        ? <FloatingTimeline snapshot={snapshot} />
+        : <GhostInspectorPanel ghost={selected} compact />}
     </main>
   )
 }

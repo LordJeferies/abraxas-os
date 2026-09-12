@@ -11,6 +11,7 @@ export type AlphaTrack =
   | 'vo'
   | 'captions'
   | 'xr'
+  | 'images'
   | 'broll'
   | 'motion'
   | 'transition'

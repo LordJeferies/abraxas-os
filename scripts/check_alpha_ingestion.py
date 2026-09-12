@@ -5,155 +5,57 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 files = {
-    "timeline_model":
-        ROOT / "app/src/core/alpha/alphaTimelineModel.ts",
-
-    "projection":
-        ROOT / "app/src/core/alpha/videoFlowProjection.ts",
-
-    "drafts":
-        ROOT / "app/src/core/alpha/videoFlowDraftStore.ts",
-
-    "semantic":
-        ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
-
-    "floating":
-        ROOT / "app/src/modules/floating/FloatingWorkspace.tsx",
-
-    "ficha":
-        ROOT / "app/src/modules/alpha/AlphaFichaReview.tsx",
-
-    "editor":
-        ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
-
-    "inspector":
-        ROOT / "app/src/modules/alpha/GhostInspectorPanel.tsx",
-
-    "normalizer":
-        ROOT / "app/src/core/alpha/normalizeAlpha.ts",
-
-    "store":
-        ROOT / "app/src/core/alpha/useAlphaStore.ts",
+    'normalizer': ROOT / 'app/src/core/alpha/normalizeAlpha.ts',
+    'store': ROOT / 'app/src/core/alpha/useAlphaStore.ts',
+    'edits': ROOT / 'app/src/core/alpha/alphaEditStore.ts',
+    'adapter': ROOT / 'app/src/core/alpha/alphaEditorDirectives.ts',
+    'model': ROOT / 'app/src/core/alpha/alphaTimelineModel.ts',
+    'projection': ROOT / 'app/src/core/alpha/videoFlowProjection.ts',
+    'draft': ROOT / 'app/src/core/alpha/videoFlowDraftStore.ts',
+    'workspace': ROOT / 'app/src/modules/alpha/AlphaWorkspace.tsx',
+    'studio': ROOT / 'app/src/modules/alpha/AlphaFichaStudio.tsx',
+    'timeline': ROOT / 'app/src/modules/alpha/CanonicalTimeline.tsx',
+    'semantic': ROOT / 'app/src/modules/alpha/AlphaSemanticTimeline.tsx',
+    'editor': ROOT / 'app/src/modules/alpha/AlphaVideoFlowEditor.tsx',
 }
 
-missing = [
-    name
-    for name, path
-    in files.items()
-    if not path.is_file()
-]
-
+missing = [name for name, path in files.items() if not path.is_file()]
 if missing:
-    print("Missing:", ", ".join(missing))
+    print('Missing:', ', '.join(missing))
     sys.exit(2)
 
-text = {
-    name:
-        path.read_text(
-          errors="replace"
-        )
-    for name, path
-    in files.items()
-}
-
-css = (
-    ROOT / "app/src/modules/alpha/alpha-semantic-timeline.css"
-).read_text(errors="replace")
+text = {name: path.read_text(errors='replace') for name, path in files.items()}
 
 checks = {
-    "stable importer preserved":
-        "export async function importAlphaFile"
-        in text["normalizer"],
-
-    "stable registry preserved":
-        "export const useAlphaStore"
-        in text["store"],
-
-    "canonical timeline shared":
-        "buildCanonicalTimeline"
-        in text["timeline_model"],
-
-    "group projection":
-        "flow.group"
-        in text["projection"],
-
-    "resource id binds group id":
-        "resourceToLayer"
-        in text["projection"]
-        and "group.id"
-        in text["projection"],
-
-    "exact group timing":
-        "sourceDuration:"
-        in text["projection"]
-        and "normalizeCompiledTiming"
-        in text["projection"],
-
-    "no parallel wait start bug":
-        "wait(timing.start)"
-        not in text["projection"],
-
-    "ordered text children":
-        "01 · QUÉ VA AQUÍ"
-        in text["projection"]
-        and "03 · PROMPT"
-        in text["projection"]
-        and "04 · REFERENCIA"
-        in text["projection"],
-
-    "draft v5 invalidates bad drafts":
-        "abraxas.videoflow-draft.v5"
-        in text["drafts"]
-        and "abraxas-videoflow-drafts-v5"
-        in text["drafts"],
-
-    "semantic uses alpha exact timing":
-        "buildCanonicalTimeline"
-        in text["semantic"]
-        and "settings?.sourceDuration"
-        not in text["semantic"],
-
-    "one fixed semantic lane per type":
-        "height:40px"
-        in css
-        and "model.tracks.map"
-        in text["semantic"],
-
-    "floating uses canonical lanes":
-        "CANONICAL_TRACKS"
-        in text["floating"],
-
-    "ficha exists":
-        "TIMELINE ALFA"
-        in text["ficha"],
-
-    "ghost inspector retained":
-        "Ghost Info"
-        in text["inspector"],
-
-    "real VideoFlow retained":
-        "<VideoEditor"
-        in text["editor"],
-
-    "canonical snapshot retained":
-        "buildCanonicalTimeline"
-        in text["editor"],
+    'canonical Alpha import': 'abraxas.alpha-content.v1' in text['normalizer'],
+    'durable registry': 'indexedDB.open' in text['store'],
+    'persisted migration': 'migrateAlphaEnvelope' in text['store'],
+    'editable overlay persistence': 'abraxas.alpha-content-edit.v1' in text['edits'],
+    'single directive adapter': 'content.timelineDirectives' in text['adapter'],
+    'fixed track slots': 'TRACK_SLOTS' in text['model'],
+    'hierarchical VideoFlow': 'TRACK_SLOTS_ENGINE_ORDER.map' in text['projection'],
+    'draft v7': 'abraxas.videoflow-draft.v7' in text['draft'],
+    'board opens Ficha Studio': 'openFicha' in text['workspace'],
+    'Ficha editable': 'patchResource' in text['studio'],
+    'one canonical timeline component': 'CanonicalTimeline' in text['semantic'],
+    'real VideoEditor retained': '<VideoEditor' in text['editor'],
+    'custom timeline always mounted': 'components={{' in text['editor'] and 'AlphaSemanticTimeline' in text['editor'],
+    'native Track N toggle absent': 'timelineView' not in text['editor'],
+    'no reinjection anti-pattern': 'onChange={setVideo}' not in text['editor'],
 }
 
 failed = []
 
-print("ABRAXAS · EXACT GROUP GHOST CHECK")
-print("================================")
+print('ABRAXAS · CANONICAL ALPHA EDITOR CHECK')
+print('======================================')
 
 for name, ok in checks.items():
-    print(("OK  " if ok else "FAIL"), name)
+    print(('OK  ' if ok else 'FAIL'), name)
     if not ok:
         failed.append(name)
 
 if failed:
-    print("\nFailed:", ", ".join(failed))
+    print('\nFailed:', ', '.join(failed))
     sys.exit(3)
 
-print(
-    "\nOK Alpha -> exact Group Ghost -> single-lane Semantic/Floating/Ficha."
-)
+print('\nOK Alpha -> Production Graph -> T1-T9 Timeline -> hierarchical VideoFlow + Ficha Studio.')

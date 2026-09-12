@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/editor-track-slots.v1.schema.json",
+  "title": "Abraxas Fixed Editor Track Slots v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "slots"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.editor-track-slots.v1"
+    },
+    "slots": {
+      "const": [
+        {
+          "id": "T1",
+          "label": "A-ROLL",
+          "accepts": [
+            "aroll"
+          ],
+          "zIndex": 1
+        },
+        {
+          "id": "T2",
+          "label": "XR",
+          "accepts": [
+            "xr"
+          ],
+          "zIndex": 2
+        },
+        {
+          "id": "T3",
+          "label": "IMAGES",
+          "accepts": [
+            "images"
+          ],
+          "zIndex": 3
+        },
+        {
+          "id": "T4",
+          "label": "MOTION",
+          "accepts": [
+            "motion",
+            "transition"
+          ],
+          "zIndex": 4
+        },
+        {
+          "id": "T5",
+          "label": "B-ROLL",
+          "accepts": [
+            "broll"
+          ],
+          "zIndex": 5
+        },
+        {
+          "id": "T6",
+          "label": "VO JOC",
+          "accepts": [
+            "vo"
+          ],
+          "zIndex": 6
+        },
+        {
+          "id": "T7",
+          "label": "SFX",
+          "accepts": [
+            "sfx"
+          ],
+          "zIndex": 7
+        },
+        {
+          "id": "T8",
+          "label": "MUSIC",
+          "accepts": [
+            "music"
+          ],
+          "zIndex": 8
+        },
+        {
+          "id": "T9",
+          "label": "CAPTIONS",
+          "accepts": [
+            "captions"
+          ],
+          "zIndex": 9
+        }
+      ]
+    }
+  }
+}

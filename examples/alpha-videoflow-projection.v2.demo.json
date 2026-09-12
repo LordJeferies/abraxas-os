@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "abraxas.alpha-videoflow-projection.v2",
+  "contentId": "DEMO_CONTENT_01",
+  "revisionId": "DEMO_CONTENT_01@rev1",
+  "route": "source",
+  "durationSeconds": 86.492,
+  "trackSlots": [
+    {
+      "id": "T1",
+      "label": "A-ROLL",
+      "accepts": [
+        "aroll"
+      ],
+      "zIndex": 1
+    },
+    {
+      "id": "T2",
+      "label": "XR",
+      "accepts": [
+        "xr"
+      ],
+      "zIndex": 2
+    },
+    {
+      "id": "T3",
+      "label": "IMAGES",
+      "accepts": [
+        "images"
+      ],
+      "zIndex": 3
+    },
+    {
+      "id": "T4",
+      "label": "MOTION",
+      "accepts": [
+        "motion",
+        "transition"
+      ],
+      "zIndex": 4
+    },
+    {
+      "id": "T5",
+      "label": "B-ROLL",
+      "accepts": [
+        "broll"
+      ],
+      "zIndex": 5
+    },
+    {
+      "id": "T6",
+      "label": "VO JOC",
+      "accepts": [
+        "vo"
+      ],
+      "zIndex": 6
+    },
+    {
+      "id": "T7",
+      "label": "SFX",
+      "accepts": [
+        "sfx"
+      ],
+      "zIndex": 7
+    },
+    {
+      "id": "T8",
+      "label": "MUSIC",
+      "accepts": [
+        "music"
+      ],
+      "zIndex": 8
+    },
+    {
+      "id": "T9",
+      "label": "CAPTIONS",
+      "accepts": [
+        "captions"
+      ],
+      "zIndex": 9
+    }
+  ],
+  "resources": [
+    {
+      "resourceId": "XR_DEMO_01",
+      "resourceType": "xr",
+      "track": "xr",
+      "trackSlot": "T2",
+      "state": "ghost",
+      "groupRole": "root",
+      "parentResourceId": null,
+      "timing": {
+        "start": 18.2,
+        "end": 27.2,
+        "duration": 9.0,
+        "coordinateSpace": "content-absolute",
+        "source": "alpha-production-graph",
+        "relativeToParent": null
+      },
+      "videoFlow": {
+        "representation": "group-layer",
+        "rootTrackContainer": "T2",
+        "groupLayerId": null,
+        "nestedUnderResourceId": null,
+        "informationChildren": [
+          {
+            "order": 1,
+            "role": "summary",
+            "text": "Mostrar el recurso XR indicado por la ficha.",
+            "visibleInPreview": false
+          },
+          {
+            "order": 2,
+            "role": "timing",
+            "text": "18.200 -> 27.200 · 9.000 s",
+            "visibleInPreview": false
+          },
+          {
+            "order": 3,
+            "role": "prompt",
+            "text": "Prompt de generación preservado desde Alpha.",
+            "visibleInPreview": false
+          }
+        ],
+        "renderPolicy": "editorial-only-until-materialized"
+      }
+    },
+    {
+      "resourceId": "XR_DEMO_01_A01",
+      "resourceType": "image",
+      "track": "images",
+      "trackSlot": "T3",
+      "state": "ghost",
+      "groupRole": "child",
+      "parentResourceId": "XR_DEMO_01",
+      "timing": {
+        "start": 19.0,
+        "end": 22.0,
+        "duration": 3.0,
+        "coordinateSpace": "content-absolute",
+        "source": "alpha-production-graph",
+        "relativeToParent": {
+          "start": 0.8,
+          "end": 3.8,
+          "duration": 3.0
+        }
+      },
+      "videoFlow": {
+        "representation": "group-layer",
+        "rootTrackContainer": "T3",
+        "groupLayerId": null,
+        "nestedUnderResourceId": "XR_DEMO_01",
+        "informationChildren": [
+          {
+            "order": 1,
+            "role": "summary",
+            "text": "Imagen A01 perteneciente al XR.",
+            "visibleInPreview": false
+          }
+        ],
+        "renderPolicy": "editorial-only-until-materialized"
+      }
+    }
+  ]
+}

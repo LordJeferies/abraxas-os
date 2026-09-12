@@ -1,15 +1,15 @@
-import VideoFlow, {
-  type VideoJSON,
-} from '@videoflow/core'
+import VideoFlow, { type VideoJSON } from '@videoflow/core'
 import {
   getGhostInspectorData,
   selectEditorDirectivesForRoute,
   type EditorDirective,
   type GhostInfoField,
 } from './alphaEditorDirectives'
-import type {
-  AlphaContent,
-} from './types'
+import {
+  TRACK_SLOTS_ENGINE_ORDER,
+  slotForItem,
+} from './alphaTimelineModel'
+import type { AlphaContent } from './types'
 
 export interface AlphaVideoFlowProjection {
   video: VideoJSON
@@ -18,6 +18,8 @@ export interface AlphaVideoFlowProjection {
   layerToResource: Record<string, string>
   projectedResourceCount: number
   ghostCount: number
+  trackContainerCount: number
+  nestedGhostCount: number
 }
 
 interface MutableLayer {
@@ -32,54 +34,32 @@ interface MutableVideo {
   layers: MutableLayer[]
 }
 
-interface ChildCard {
+interface ExpectedTiming {
+  startTime: number
+  sourceDuration: number
   name: string
-  text: string
 }
 
 const FPS = 30
 const FRAME = 1 / FPS
 
-function compact(
-  value: string,
-  max = 150,
-) {
-  const normalized =
-    value
-      .replace(/\s+/gu, ' ')
-      .trim()
-
+function compact(value: string, max = 120) {
+  const normalized = value.replace(/\s+/gu, ' ').trim()
   return normalized.length <= max
     ? normalized
     : `${normalized.slice(0, max - 1)}…`
 }
 
-function frameTime(
-  seconds: number,
-) {
-  return Math.max(
-    0,
-    Math.round(seconds * FPS) / FPS,
-  )
+function frameTime(seconds: number) {
+  return Math.max(0, Math.round(seconds * FPS) / FPS)
 }
 
-function timingOf(
-  directive: EditorDirective,
-) {
-  const startTime =
-    frameTime(directive.start)
-
-  const endTime =
-    Math.max(
-      startTime + FRAME,
-      frameTime(directive.end),
-    )
-
+function timing(start: number, end: number) {
+  const startTime = frameTime(start)
+  const endTime = Math.max(startTime + FRAME, frameTime(end))
   return {
     startTime,
-    sourceDuration:
-      endTime - startTime,
-    endTime,
+    sourceDuration: endTime - startTime,
   }
 }
 
@@ -88,396 +68,261 @@ function fieldCards(
   fields: GhostInfoField[],
   maxItems: number,
 ) {
-  return fields
-    .slice(0, maxItems)
-    .map(
-      (field, index): ChildCard => ({
-        name:
-          `${prefix} ${String(index + 1).padStart(2, '0')} · ${field.label}`,
-
-        text:
-          compact(field.value),
-      }),
-    )
+  return fields.slice(0, maxItems).map((field, index) => ({
+    name: `${prefix} ${index + 1} · ${field.label}`,
+    text: compact(field.value),
+  }))
 }
 
-function cardsFor(
-  directive: EditorDirective,
-): ChildCard[] {
-  const info =
-    getGhostInspectorData(
-      directive,
-    )
+function infoCards(directive: EditorDirective) {
+  const info = getGhostInspectorData(directive)
 
-  const cards: ChildCard[] = [
+  return [
     {
-      name:
-        '01 · QUÉ VA AQUÍ',
-
-      text:
-        compact(
-          directive.description
-          || directive.text
-          || directive.label
-          || 'Agregar contenido',
-        ),
+      name: '01 · QUÉ VA AQUÍ',
+      text: compact(
+        directive.description
+        || directive.text
+        || directive.label
+        || 'Agregar contenido',
+      ),
     },
-
     {
-      name:
-        '02 · TIMING',
-
+      name: '02 · TIMING',
       text:
-        `${directive.start.toFixed(3)}s → ${directive.end.toFixed(3)}s`
-        + ` · duración ${(directive.end - directive.start).toFixed(3)}s`,
+        `${directive.start.toFixed(3)} → ${directive.end.toFixed(3)}`
+        + ` · ${(directive.end - directive.start).toFixed(3)} s`,
     },
+    ...fieldCards('03 · PROMPT', info.promptFields, 3),
+    ...fieldCards('04 · REFERENCIA', info.referenceFields, 3),
+    ...fieldCards('05 · HACER', info.actionFields, 3),
   ]
-
-  cards.push(
-    ...fieldCards(
-      '03 · PROMPT',
-      info.promptFields,
-      4,
-    ),
-
-    ...fieldCards(
-      '04 · REFERENCIA',
-      info.referenceFields,
-      4,
-    ),
-
-    ...fieldCards(
-      '05 · HACER',
-      info.actionFields,
-      4,
-    ),
-  )
-
-  return cards.length
-    ? cards
-    : [{
-        name:
-          '01 · QUÉ VA AQUÍ',
-
-        text:
-          'Agregar contenido',
-      }]
 }
 
-function childY(
-  index: number,
-  total: number,
-) {
-  if (total <= 1) {
-    return 0.5
+function canvasFor(content: AlphaContent) {
+  if (content.orientation === 'vertical') {
+    return { width: 1080, height: 1920 }
   }
 
-  const top = 0.16
-  const bottom = 0.84
-  const step =
-    (bottom - top)
-    / Math.max(
-      1,
-      total - 1,
-    )
+  if (content.orientation === 'square') {
+    return { width: 1080, height: 1080 }
+  }
 
-  return Math.min(
-    bottom,
-    top
-    + index * step,
+  return { width: 1920, height: 1080 }
+}
+
+function flattenLayers(layers: MutableLayer[]): MutableLayer[] {
+  return layers.flatMap(
+    (layer) => [
+      layer,
+      ...flattenLayers(layer.children ?? []),
+    ],
   )
 }
 
-function canvasFor(
-  content: AlphaContent,
-) {
-  if (
-    content.orientation === 'vertical'
-  ) {
-    return {
-      width: 1080,
-      height: 1920,
-    }
-  }
-
-  if (
-    content.orientation === 'square'
-  ) {
-    return {
-      width: 1080,
-      height: 1080,
-    }
-  }
-
-  return {
-    width: 1920,
-    height: 1080,
-  }
-}
-
-function normalizeCompiledTiming(
+function normalizeTimings(
   video: VideoJSON,
-  expected:
-    Map<
-      string,
-      {
-        startTime: number
-        sourceDuration: number
-        name: string
-      }
-    >,
-  maxEnd: number,
+  expected: Map<string, ExpectedTiming>,
+  duration: number,
 ) {
-  const mutable =
-    video as unknown as MutableVideo
+  const mutable = video as unknown as MutableVideo
 
-  for (
-    const layer
-    of mutable.layers
-  ) {
-    const timing =
-      expected.get(
-        layer.id,
-      )
-
-    if (!timing) {
-      continue
-    }
+  for (const layer of flattenLayers(mutable.layers)) {
+    const value = expected.get(layer.id)
+    if (!value) continue
 
     layer.settings = {
       ...(layer.settings ?? {}),
-      startTime:
-        timing.startTime,
-      sourceDuration:
-        timing.sourceDuration,
-      name:
-        timing.name,
-    }
-
-    for (
-      const child
-      of layer.children
-      ?? []
-    ) {
-      child.settings = {
-        ...(child.settings ?? {}),
-        startTime: 0,
-        sourceDuration:
-          timing.sourceDuration,
-      }
+      startTime: value.startTime,
+      sourceDuration: value.sourceDuration,
+      name: value.name,
     }
   }
 
-  mutable.duration =
-    Math.max(
-      1,
-      maxEnd,
-    )
+  mutable.duration = Math.max(1, duration)
 }
 
 /**
- * Contract:
- *   Alpha resource -> ONE VideoFlow GroupLayer
- *   Group startTime  = Alpha start
- *   Group duration   = Alpha end - Alpha start
- *   resourceId       <-> GroupLayer.id
+ * Abraxas fixed track topology:
  *
- * The group contains ordered editorial TextLayer children:
- *   01 what goes here
- *   02 timing
- *   03 prompts
- *   04 references/assets
- *   05 actions/motion/sfx/etc.
+ * T1 A-ROLL
+ * T2 XR
+ * T3 IMAGES
+ * T4 MOTION / TRANSITIONS
+ * T5 B-ROLL
+ * T6 VO JOC
+ * T7 SFX
+ * T8 MUSIC
+ * T9 CAPTIONS
  *
- * The child text is hidden from preview/render but remains inspectable inside
- * the Group. We intentionally do NOT use wait(start) inside parallel branches.
+ * The 9 top-level VideoFlow layers are structural Track Container Groups.
+ * Every real resource is a nested Group Ghost. Children with parentResourceId
+ * stay inside their parent Ghost, so XR images/motion/SFX never become extra
+ * top-level tracks.
  */
 export async function projectAlphaToVideoFlow(
   content: AlphaContent,
   route: string,
 ): Promise<AlphaVideoFlowProjection> {
-  const canvas =
-    canvasFor(content)
+  const canvas = canvasFor(content)
+  const directives = selectEditorDirectivesForRoute(content, route)
+    .filter((item) => item.track !== 'story')
 
-  const flow =
-    new VideoFlow({
-      name:
-        `${content.title} · ${route} · Abraxas`,
+  const duration = Math.max(
+    content.durationSeconds || 0,
+    ...directives.map((item) => item.end),
+    1,
+  )
 
-      width:
-        canvas.width,
+  const flow = new VideoFlow({
+    name: `${content.title} · ${route} · Abraxas`,
+    width: canvas.width,
+    height: canvas.height,
+    fps: FPS,
+    backgroundColor: '#08090b',
+    autoDetectDurations: false,
+  })
 
-      height:
-        canvas.height,
+  const resourceToLayer: Record<string, string> = {}
+  const layerToResource: Record<string, string> = {}
+  const expected = new Map<string, ExpectedTiming>()
+  const byId = new Map(directives.map((item) => [item.resourceId, item]))
+  const childrenByParent = new Map<string, EditorDirective[]>()
 
-      fps: FPS,
+  for (const item of directives) {
+    if (!item.parentResourceId || !byId.has(item.parentResourceId)) continue
 
-      backgroundColor:
-        '#08090b',
+    const children = childrenByParent.get(item.parentResourceId) ?? []
+    children.push(item)
+    childrenByParent.set(item.parentResourceId, children)
+  }
 
-      autoDetectDurations:
-        false,
-    })
+  let nestedGhostCount = 0
 
-  const resourceToLayer:
-    Record<string, string> = {}
+  const addGhost = (
+    item: EditorDirective,
+    parentAbsoluteStart: number,
+  ) => {
+    const relativeStart = Math.max(0, item.start - parentAbsoluteStart)
+    const relativeEnd = relativeStart + Math.max(FRAME, item.end - item.start)
+    const relativeTiming = timing(relativeStart, relativeEnd)
 
-  const layerToResource:
-    Record<string, string> = {}
-
-  const expected =
-    new Map<
-      string,
+    const group = flow.group(
+      { opacity: 1 },
       {
-        startTime: number
-        sourceDuration: number
-        name: string
-      }
-    >()
-
-  const directives =
-    selectEditorDirectivesForRoute(
-      content,
-      route,
-    )
-
-  flow.parallel(
-    directives.map(
-      (
-        directive,
-      ) =>
-        () => {
-          const timing =
-            timingOf(
-              directive,
-            )
-
-          const cards =
-            cardsFor(
-              directive,
-            )
-
-          const group =
-            flow.group(
-              {
-                opacity: 1,
-              },
-
-              {
-                startTime:
-                  timing.startTime,
-
-                sourceDuration:
-                  timing.sourceDuration,
-
-                name:
-                  `Ghost · ${directive.track} · ${directive.label}`,
-              },
-
-              () => {
-                cards.forEach(
-                  (
-                    card,
-                    index,
-                  ) => {
-                    flow.addText(
-                      {
-                        text:
-                          card.text,
-
-                        fontSize:
-                          1.35,
-
-                        color:
-                          '#ffffff',
-
-                        position: [
-                          0.5,
-                          childY(
-                            index,
-                            cards.length,
-                          ),
-                        ],
-
-                        // Editorial child only.
-                        opacity: 0,
-                      },
-
-                      {
-                        startTime: 0,
-
-                        sourceDuration:
-                          timing.sourceDuration,
-
-                        name:
-                          card.name,
-                      },
-                    )
-                  },
-                )
-              },
-            )
-
-          resourceToLayer[
-            directive.resourceId
-          ] = group.id
-
-          layerToResource[
-            group.id
-          ] = directive.resourceId
-
-          expected.set(
-            group.id,
+        startTime: relativeTiming.startTime,
+        sourceDuration: relativeTiming.sourceDuration,
+        name:
+          `${item.state === 'ghost' ? 'Ghost' : 'Resource'}`
+          + ` · ${item.track} · ${item.label}`,
+      },
+      () => {
+        for (const card of infoCards(item)) {
+          const textLayer = flow.addText(
             {
-              startTime:
-                timing.startTime,
-
-              sourceDuration:
-                timing.sourceDuration,
-
-              name:
-                `Ghost · ${directive.track} · ${directive.label}`,
+              text: card.text,
+              opacity: 0,
+              fontSize: 1.1,
+              color: '#ffffff',
+              position: [0.5, 0.5],
+            },
+            {
+              startTime: 0,
+              sourceDuration: relativeTiming.sourceDuration,
+              name: card.name,
             },
           )
-        },
-    ),
-  )
 
-  const video =
-    await flow.compile()
+          expected.set(textLayer.id, {
+            startTime: 0,
+            sourceDuration: relativeTiming.sourceDuration,
+            name: card.name,
+          })
+        }
 
-  const maxEnd =
-    Math.max(
-      content.durationSeconds
-      || 0,
+        const children = (childrenByParent.get(item.resourceId) ?? [])
+          .slice()
+          .sort((a, b) => a.start - b.start || a.end - b.end)
 
-      ...directives.map(
-        (item) =>
-          timingOf(
-            item,
-          ).endTime,
-      ),
-
-      1,
+        for (const child of children) {
+          nestedGhostCount += 1
+          addGhost(child, item.start)
+        }
+      },
     )
 
-  normalizeCompiledTiming(
-    video,
-    expected,
-    maxEnd,
+    resourceToLayer[item.resourceId] = group.id
+    layerToResource[group.id] = item.resourceId
+    expected.set(group.id, {
+      startTime: relativeTiming.startTime,
+      sourceDuration: relativeTiming.sourceDuration,
+      name:
+        `${item.state === 'ghost' ? 'Ghost' : 'Resource'}`
+        + ` · ${item.track} · ${item.label}`,
+    })
+  }
+
+  flow.parallel(
+    TRACK_SLOTS_ENGINE_ORDER.map((slot) => () => {
+      const trackGroup = flow.group(
+        { opacity: 1 },
+        {
+          startTime: 0,
+          sourceDuration: frameTime(duration),
+          name: `${slot.id} · ${slot.shortLabel}`,
+        },
+        () => {
+          // Structural marker guarantees an empty canonical track still exists.
+          const marker = flow.addText(
+            {
+              text: `${slot.id} · ${slot.shortLabel}`,
+              opacity: 0,
+              fontSize: 1,
+              color: '#ffffff',
+            },
+            {
+              startTime: 0,
+              sourceDuration: frameTime(duration),
+              name: `${slot.id} · TRACK MARKER`,
+            },
+          )
+
+          expected.set(marker.id, {
+            startTime: 0,
+            sourceDuration: frameTime(duration),
+            name: `${slot.id} · TRACK MARKER`,
+          })
+
+          const roots = directives
+            .filter((item) => !item.parentResourceId || !byId.has(item.parentResourceId))
+            .filter((item) => slotForItem(item)?.id === slot.id)
+            .sort((a, b) => a.start - b.start || a.end - b.end)
+
+          for (const root of roots) {
+            addGhost(root, 0)
+          }
+        },
+      )
+
+      expected.set(trackGroup.id, {
+        startTime: 0,
+        sourceDuration: frameTime(duration),
+        name: `${slot.id} · ${slot.shortLabel}`,
+      })
+    }),
   )
+
+  const video = await flow.compile()
+  normalizeTimings(video, expected, duration)
 
   return {
     video,
     route,
     resourceToLayer,
     layerToResource,
-    projectedResourceCount:
-      directives.length,
-    ghostCount:
-      directives.filter(
-        (item) =>
-          item.state === 'ghost',
-      ).length,
+    projectedResourceCount: Object.keys(resourceToLayer).length,
+    ghostCount: directives.filter((item) => item.state === 'ghost').length,
+    trackContainerCount: video.layers.length,
+    nestedGhostCount,
   }
 }

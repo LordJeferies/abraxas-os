@@ -1,11 +1,13 @@
 import type {
   GhostInspectorData,
-  EditorTrack,
 } from './alphaEditorDirectives'
+import type {
+  TrackSlotId,
+} from './alphaTimelineModel'
 
 export interface FloatingTimelineItem {
   resourceId: string
-  track: EditorTrack
+  slotId: TrackSlotId
   state: string
   start: number
   end: number
@@ -13,7 +15,7 @@ export interface FloatingTimelineItem {
 }
 
 export interface FloatingEditorSnapshot {
-  schemaVersion: 'abraxas.floating-editor.v1'
+  schemaVersion: 'abraxas.floating-editor.v2'
   title: string
   contentId: string
   route: string
@@ -25,11 +27,17 @@ export interface FloatingEditorSnapshot {
 }
 
 type FloatingMessage =
-  | { type: 'snapshot'; payload: FloatingEditorSnapshot }
-  | { type: 'select-resource'; resourceId: string }
+  | {
+      type: 'snapshot'
+      payload: FloatingEditorSnapshot
+    }
+  | {
+      type: 'select-resource'
+      resourceId: string
+    }
 
-const STORAGE_KEY = 'abraxas.floating-editor.snapshot.v1'
-const CHANNEL = 'abraxas-floating-editor-v1'
+const STORAGE_KEY = 'abraxas.floating-editor.snapshot.v2'
+const CHANNEL = 'abraxas-floating-editor-v2'
 
 function makeChannel() {
   return typeof BroadcastChannel !== 'undefined'
@@ -37,11 +45,13 @@ function makeChannel() {
     : null
 }
 
-export function publishFloatingSnapshot(snapshot: FloatingEditorSnapshot) {
+export function publishFloatingSnapshot(
+  snapshot: FloatingEditorSnapshot,
+) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot))
   } catch {
-    // Storage failure must not affect the editor.
+    // Floating UI failure must never break the editor.
   }
 
   const target = makeChannel()
@@ -55,8 +65,11 @@ export function readFloatingSnapshot(): FloatingEditorSnapshot | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
+
     const parsed = JSON.parse(raw) as FloatingEditorSnapshot
-    return parsed.schemaVersion === 'abraxas.floating-editor.v1' ? parsed : null
+    return parsed.schemaVersion === 'abraxas.floating-editor.v2'
+      ? parsed
+      : null
   } catch {
     return null
   }
@@ -69,7 +82,9 @@ export function subscribeFloatingSnapshot(
   if (!target) return () => undefined
 
   target.onmessage = (event: MessageEvent<FloatingMessage>) => {
-    if (event.data.type === 'snapshot') callback(event.data.payload)
+    if (event.data.type === 'snapshot') {
+      callback(event.data.payload)
+    }
   }
 
   return () => target.close()
@@ -90,7 +105,9 @@ export function subscribeFloatingSelection(
   if (!target) return () => undefined
 
   target.onmessage = (event: MessageEvent<FloatingMessage>) => {
-    if (event.data.type === 'select-resource') callback(event.data.resourceId)
+    if (event.data.type === 'select-resource') {
+      callback(event.data.resourceId)
+    }
   }
 
   return () => target.close()

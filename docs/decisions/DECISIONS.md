@@ -84,3 +84,14 @@ la reproducción REAL dentro de Tauri.
   referencias e instrucciones.
 - La materialización añade children al mismo Group/resourceId.
 - Semántica, Ficha y Floating Timeline comparten una sola proyección temporal.
+
+### DECISION: Alpha -> VideoFlow Projection v2
+
+- T1=A-roll, T2=XR, T3=Images, T4=Motion/Transitions, T5=B-roll,
+  T6=VO, T7=SFX, T8=Music, T9=Captions.
+- Production Graph start/end es la fuente temporal de verdad.
+- VideoFlow no inventa el timing editorial.
+- Root resources viven bajo su Track Container.
+- Child resources permanecen nested bajo parentResourceId.
+- Child resources siguen visibles en su lane semántica correspondiente.
+- Ficha edits son overlays persistentes y no mutan el HTML importado.
