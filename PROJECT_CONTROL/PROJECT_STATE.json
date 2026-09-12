@@ -4,22 +4,22 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Una ficha Alfa y una ruta se proyectan a un VideoJSON aislado; VideoFlow conserva layers reales y el panel Timeline semántico agrupa los recursos en una sola fila por tipo.",
+  "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
   "blockedReason": null,
-  "nextStep": "Validar visualmente Amanda R10.1: source=82, voA=99, voB=99 para intro_g01; luego añadir drag/trim directo a la timeline semántica.",
-  "updatedAt": "2026-09-11T22:30:11-04:00",
+  "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
+  "updatedAt": "2026-09-11T23:08:20-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 44,
-    "productionTimeline": 38,
+    "editorShell": 52,
+    "productionTimeline": 46,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 94
+    "alphaIngestion": 95
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T22:30:10-04:00"
+    "updatedAt": "2026-09-11T23:08:20-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -91,6 +91,13 @@
     "alphaImagesHandledInEditorAdapter": true,
     "alphaDraftV2PerContentRouteImplemented": true,
     "alphaImporterRegistryPreserved": true,
-    "alphaSemanticLaneLayoutManualUiPass": false
+    "alphaSemanticLaneLayoutManualUiPass": false,
+    "ghostIsGroupLayerModelImplemented": true,
+    "ghostPlaceholderChildImplemented": true,
+    "ghostInspectorDockedImplemented": true,
+    "ghostInspectorFloatingImplemented": true,
+    "timelineFloatingAlwaysOnTopImplemented": true,
+    "floatingWindowsVisibleOnAllWorkspaces": true,
+    "ghostMaterializationPending": true
   }
 }

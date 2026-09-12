@@ -1,5 +1,6 @@
 mod media_http;
 mod source_runtime;
+mod floating_windows;
 mod media_proxy;
 
 use media_http::MediaHttpServer;
@@ -13,6 +14,8 @@ pub fn run() {
         .manage(media_server)
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
+            floating_windows::open_floating_editor_window,
+            floating_windows::close_floating_editor_window,
             media_http::register_media_source_http,
             media_http::media_server_health,
             media_proxy::create_videoflow_proxy,

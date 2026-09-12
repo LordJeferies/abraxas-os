@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T22:30:14-04:00
+- Generado: 2026-09-11T23:08:20-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -53,47 +53,33 @@ F0 Foundation: COMPLETED.
 F1 Media Compatibility: COMPLETED.
 F1.5 Fast Source Runtime: base funcional.
 
-## Audited one-ficha VideoFlow
+## Group Ghost model
 
-El importador HTML/JSON, el Content Registry y useAlphaStore se preservaron.
+Cada Ghost se proyecta como `GroupLayer` real de VideoFlow.
 
-El Editor ahora interpreta `sourcePayload.timeline` mediante un adapter
-específico de edición sin reescribir el normalizador estable.
+Dentro:
+- TextLayer placeholder hijo;
+- información corta;
+- placeholder invisible en preview.
 
-Flujo:
+Fuera:
+- Ghost Inspector contiene la información completa;
+- prompts;
+- references;
+- instrucciones;
+- raw Alpha context.
 
-HTML / JSON
-→ AlphaContent persistente
-→ seleccionar UNA ficha
-→ seleccionar UNA ruta
-→ EditorDirective[]
-→ VideoJSON
-→ VideoEditor real
-→ Timeline semántico dentro del propio VideoEditor
+Ghost Info:
+- docked;
+- floating always-on-top.
 
-Una ficha activa produce un solo VideoJSON.
+Timeline semántica:
+- fija dentro de VideoEditor;
+- floating always-on-top para acompañar CapCut/DaVinci.
 
-Una ruta activa produce un draft independiente:
-`contentId::route`.
+El Group conserva `resourceId <-> layer.id`.
 
-Orden de pistas:
-1. SUBTÍTULOS
-2. XR
-3. IMÁGENES
-4. MOTION
-5. B-ROLL
-6. VO JOC
-7. A-ROLL
-8. PARTES
-9. SFX
-10. MÚSICA
-
-Los Ghosts continúan siendo layers reales de VideoFlow con:
-`resourceId <-> layer.id`.
-
-La vista `VideoFlow` nativa se conserva como fallback temporal para drag/trim.
-La vista `Semántica` reemplaza sólo el panel Timeline y lee el VideoJSON vivo
-con `useVideo()` + `usePlayhead()`.
+La materialización futura añadirá assets al MISMO Group.
 
 Gate:
 F1_6_ALPHA_INGESTION_DOMAIN
@@ -103,41 +89,31 @@ F1_6_ALPHA_INGESTION_DOMAIN
 
 # Próximo paso
 
-## Validación manual v0.17.3
+## Validación v0.18
 
 1. `./scripts/abraxas desktop`
-2. F1.6 · Alpha
-3. Amanda R10.1
-4. abrir `The only way out is through`
-5. `Editar →`
-6. Vista `Semántica`
+2. abrir una ficha Alfa VIDEO
+3. `Editar →`
+4. seleccionar un Ghost
+5. `Ghost Info` muestra toda la información
+6. probar Copy en prompts/referencias
+7. `↗ Timeline` abre ventana always-on-top
+8. `↗ Ghost` abre otra ventana always-on-top
+9. abrir CapCut y verificar ambas encima
+10. seleccionar otro Ghost desde Timeline flotante
+11. Ghost Info flotante debe actualizarse
+12. cambiar ficha/ruta; Timeline flotante se actualiza
 
-Para `Entrevista original`:
-- total esperado: 82 recursos.
+## Después
 
-Para `VO A · documental`:
-- total esperado: 99 recursos.
-
-Para `VO B · cine`:
-- total esperado: 99 recursos.
-
-En cada ruta debe existir UNA sola fila:
-SUBTÍTULOS / XR / IMÁGENES / MOTION / B-ROLL /
-VO JOC / A-ROLL / PARTES / SFX / MÚSICA.
-
-No deben reaparecer Track 1...Track 208.
-
-Al cambiar de ficha debe reconstruirse el VideoJSON sólo para esa ficha.
-Al cambiar de ruta debe cambiar el draft `contentId::route`.
-
-## Después de validar
-
-1. drag/trim directo en Timeline Semántica usando commands de VideoFlow;
-2. selección semántica -> Inspector;
-3. source binding vertical/horizontal;
-4. materialización A-roll/XR/B-roll/SFX/captions/motion;
-5. Finder/Asset Library -> Ghost;
-6. SQLite privado.
+1. drag/drop Finder/Asset Library -> Group Ghost
+2. XR -> Image/Video children
+3. SFX/VO/Music -> Audio children
+4. A-roll/B-roll -> Video children
+5. captions -> Captions child
+6. Motion -> keyframes del Group/children
+7. double-click Group -> mini editor interno
+8. sync materialization -> Production Graph
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -186,22 +162,22 @@ roadmap de la aplicación.
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Una ficha Alfa y una ruta se proyectan a un VideoJSON aislado; VideoFlow conserva layers reales y el panel Timeline semántico agrupa los recursos en una sola fila por tipo.",
+  "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
   "blockedReason": null,
-  "nextStep": "Validar visualmente Amanda R10.1: source=82, voA=99, voB=99 para intro_g01; luego añadir drag/trim directo a la timeline semántica.",
-  "updatedAt": "2026-09-11T22:30:11-04:00",
+  "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
+  "updatedAt": "2026-09-11T23:08:20-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 44,
-    "productionTimeline": 38,
+    "editorShell": 52,
+    "productionTimeline": 46,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 94
+    "alphaIngestion": 95
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T22:30:10-04:00"
+    "updatedAt": "2026-09-11T23:08:20-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -273,7 +249,14 @@ roadmap de la aplicación.
     "alphaImagesHandledInEditorAdapter": true,
     "alphaDraftV2PerContentRouteImplemented": true,
     "alphaImporterRegistryPreserved": true,
-    "alphaSemanticLaneLayoutManualUiPass": false
+    "alphaSemanticLaneLayoutManualUiPass": false,
+    "ghostIsGroupLayerModelImplemented": true,
+    "ghostPlaceholderChildImplemented": true,
+    "ghostInspectorDockedImplemented": true,
+    "ghostInspectorFloatingImplemented": true,
+    "timelineFloatingAlwaysOnTopImplemented": true,
+    "floatingWindowsVisibleOnAllWorkspaces": true,
+    "ghostMaterializationPending": true
   }
 }
 ```
@@ -325,6 +308,32 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src-tauri/src/lib.rs
+ M app/src/App.tsx
+ M app/src/core/alpha/alphaEditorDirectives.ts
+ M app/src/core/alpha/videoFlowDraftStore.ts
+ M app/src/core/alpha/videoFlowProjection.ts
+ M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
+ M app/src/modules/alpha/alpha-videoflow-editor.css
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/check_alpha_ingestion.py
+ M site/data/status.json
+?? PROJECT_CONTROL/FLOATING_EDITOR_WORKFLOW.md
+?? PROJECT_CONTROL/GHOST_MODEL.md
+?? app/src-tauri/src/floating_windows.rs
+?? app/src/core/alpha/floatingEditorBridge.ts
+?? app/src/core/alpha/floatingWindow.ts
+?? app/src/modules/alpha/GhostInspectorPanel.tsx
+?? app/src/modules/alpha/ghost-inspector.css
+?? app/src/modules/floating/
+?? docs/evidence/CHECK_20260911_230815.txt
 ```
 
 ### Remote
@@ -337,21 +346,21 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+2e9ea5e chore: sync generated project state
 21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow
 9d43059 chore: sync generated project state
 fe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow
 55fa827 chore: sync generated project state
-8424753 feat(alpha): stabilize Story Editor ingestion workspace
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_223006.txt`
+`docs/evidence/CHECK_20260911_230815.txt`
 
 ```text
 
-OK one ficha + one route + one semantic lane per type with real VideoFlow layers.
+OK Group Ghost model + docked/floating inspector/timeline.
 
 [3/8] TypeScript + Vite
 
@@ -360,24 +369,24 @@ OK one ficha + one route + one semantic lane per type with real VideoFlow layers
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 218 modules transformed.
+✓ 230 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                                     0.45 kB │ gzip:   0.29 kB
-dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
 dist/assets/AlphaWorkspace-DnddpBeD.css             4.42 kB │ gzip:   1.35 kB
 dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
-dist/assets/EditorSpike-C6SiboQW.css               53.11 kB │ gzip:   7.73 kB
-dist/assets/dist-js-D0VCXaEV.js                     0.26 kB │ gzip:   0.21 kB
-dist/assets/RuntimePanel-BzrYQLyF.js                7.84 kB │ gzip:   2.52 kB
-dist/assets/MediaCompatibilityLab-CqVUZDg2.js      14.56 kB │ gzip:   5.22 kB
-dist/assets/AlphaWorkspace-CvyrXLq-.js             16.02 kB │ gzip:   5.73 kB
-dist/assets/index-DKuaBwbN.js                     228.32 kB │ gzip:  71.63 kB
-dist/assets/EditorSpike-BZnWtbSU.js               343.29 kB │ gzip:  66.73 kB
-dist/assets/dist--E3LzUxN.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/index-X-bjsVZn.css                      5.66 kB │ gzip:   1.90 kB
+dist/assets/EditorSpike-CgbIDiF-.css               53.59 kB │ gzip:   7.81 kB
+dist/assets/dist-js-DlwmpTr6.js                     0.15 kB │ gzip:   0.15 kB
+dist/assets/RuntimePanel-BDFT-_vf.js                7.83 kB │ gzip:   2.52 kB
+dist/assets/MediaCompatibilityLab-Cqm1aSYo.js      14.55 kB │ gzip:   5.22 kB
+dist/assets/AlphaWorkspace-DZAjcP2J.js             16.02 kB │ gzip:   5.73 kB
+dist/assets/index-CPtiyyd4.js                     253.32 kB │ gzip:  77.70 kB
+dist/assets/EditorSpike-CnEZ_cPb.js               345.37 kB │ gzip:  67.38 kB
+dist/assets/dist-DP5z4Itv.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 183ms
+✓ built in 182ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -385,7 +394,7 @@ dist/assets/dist--E3LzUxN.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -399,7 +408,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_223006.txt
+ - docs/evidence/CHECK_20260911_230815.txt
 
 [7/8] Git whitespace FINAL
 
@@ -409,15 +418,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_223006.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_230815.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 16:24:41 -0400
-v0.7.1: scroll Media Lab corregido; Editor Spike deja de reinyectar VideoJSON en cada cambio. F1 sigue como gate actual.
 
 ## 2026-09-11 16:55:36 -0400
 v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.
@@ -445,6 +451,9 @@ v0.16.4: safe recovery; Alpha fichas + Ghosts project into real VideoFlow after 
 
 ## 2026-09-11 22:30:10 -0400
 v0.17.3: audited one-ficha route-aware semantic VideoFlow.
+
+## 2026-09-11 23:08:20 -0400
+v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.
 ```
 
 ## Archivos clave

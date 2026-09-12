@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-09-11T22:30:14-04:00",
+  "generatedAt": "2026-09-11T23:08:20-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.6",
     "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "Una ficha Alfa y una ruta se proyectan a un VideoJSON aislado; VideoFlow conserva layers reales y el panel Timeline semántico agrupa los recursos en una sola fila por tipo.",
+    "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
     "blockedReason": null,
-    "nextStep": "Validar visualmente Amanda R10.1: source=82, voA=99, voB=99 para intro_g01; luego añadir drag/trim directo a la timeline semántica.",
-    "updatedAt": "2026-09-11T22:30:11-04:00",
+    "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
+    "updatedAt": "2026-09-11T23:08:20-04:00",
     "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
-      "editorShell": 44,
-      "productionTimeline": 38,
+      "editorShell": 52,
+      "productionTimeline": 46,
       "fastSourceRuntime": 80,
-      "alphaIngestion": 94
+      "alphaIngestion": 95
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T22:30:10-04:00"
+      "updatedAt": "2026-09-11T23:08:20-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -93,7 +93,14 @@
       "alphaImagesHandledInEditorAdapter": true,
       "alphaDraftV2PerContentRouteImplemented": true,
       "alphaImporterRegistryPreserved": true,
-      "alphaSemanticLaneLayoutManualUiPass": false
+      "alphaSemanticLaneLayoutManualUiPass": false,
+      "ghostIsGroupLayerModelImplemented": true,
+      "ghostPlaceholderChildImplemented": true,
+      "ghostInspectorDockedImplemented": true,
+      "ghostInspectorFloatingImplemented": true,
+      "timelineFloatingAlwaysOnTopImplemented": true,
+      "floatingWindowsVisibleOnAllWorkspaces": true,
+      "ghostMaterializationPending": true
     }
   },
   "modules": [
@@ -242,9 +249,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src-tauri/src/lib.rs\n M app/src/App.tsx\n M app/src/core/alpha/alphaEditorDirectives.ts\n M app/src/core/alpha/videoFlowDraftStore.ts\n M app/src/core/alpha/videoFlowProjection.ts\n M app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n M app/src/modules/alpha/alpha-videoflow-editor.css\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_alpha_ingestion.py\n M site/data/status.json\n?? PROJECT_CONTROL/FLOATING_EDITOR_WORKFLOW.md\n?? PROJECT_CONTROL/GHOST_MODEL.md\n?? app/src-tauri/src/floating_windows.rs\n?? app/src/core/alpha/floatingEditorBridge.ts\n?? app/src/core/alpha/floatingWindow.ts\n?? app/src/modules/alpha/GhostInspectorPanel.tsx\n?? app/src/modules/alpha/ghost-inspector.css\n?? app/src/modules/floating/\n?? docs/evidence/CHECK_20260911_230815.txt",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow\n9d43059 chore: sync generated project state\nfe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow\n55fa827 chore: sync generated project state\n8424753 feat(alpha): stabilize Story Editor ingestion workspace"
+    "lastCommits": "2e9ea5e chore: sync generated project state\n21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow\n9d43059 chore: sync generated project state\nfe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow\n55fa827 chore: sync generated project state"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_223006.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_230815.txt"
 }

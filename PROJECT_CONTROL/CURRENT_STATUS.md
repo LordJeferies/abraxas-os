@@ -6,47 +6,33 @@ F0 Foundation: COMPLETED.
 F1 Media Compatibility: COMPLETED.
 F1.5 Fast Source Runtime: base funcional.
 
-## Audited one-ficha VideoFlow
+## Group Ghost model
 
-El importador HTML/JSON, el Content Registry y useAlphaStore se preservaron.
+Cada Ghost se proyecta como `GroupLayer` real de VideoFlow.
 
-El Editor ahora interpreta `sourcePayload.timeline` mediante un adapter
-específico de edición sin reescribir el normalizador estable.
+Dentro:
+- TextLayer placeholder hijo;
+- información corta;
+- placeholder invisible en preview.
 
-Flujo:
+Fuera:
+- Ghost Inspector contiene la información completa;
+- prompts;
+- references;
+- instrucciones;
+- raw Alpha context.
 
-HTML / JSON
-→ AlphaContent persistente
-→ seleccionar UNA ficha
-→ seleccionar UNA ruta
-→ EditorDirective[]
-→ VideoJSON
-→ VideoEditor real
-→ Timeline semántico dentro del propio VideoEditor
+Ghost Info:
+- docked;
+- floating always-on-top.
 
-Una ficha activa produce un solo VideoJSON.
+Timeline semántica:
+- fija dentro de VideoEditor;
+- floating always-on-top para acompañar CapCut/DaVinci.
 
-Una ruta activa produce un draft independiente:
-`contentId::route`.
+El Group conserva `resourceId <-> layer.id`.
 
-Orden de pistas:
-1. SUBTÍTULOS
-2. XR
-3. IMÁGENES
-4. MOTION
-5. B-ROLL
-6. VO JOC
-7. A-ROLL
-8. PARTES
-9. SFX
-10. MÚSICA
-
-Los Ghosts continúan siendo layers reales de VideoFlow con:
-`resourceId <-> layer.id`.
-
-La vista `VideoFlow` nativa se conserva como fallback temporal para drag/trim.
-La vista `Semántica` reemplaza sólo el panel Timeline y lee el VideoJSON vivo
-con `useVideo()` + `usePlayhead()`.
+La materialización futura añadirá assets al MISMO Group.
 
 Gate:
 F1_6_ALPHA_INGESTION_DOMAIN

@@ -5,6 +5,9 @@ import {
 } from 'react'
 import { useAppStore } from './core/state/useAppStore'
 import { useAlphaStore } from './core/alpha/useAlphaStore'
+import FloatingWorkspace, {
+  getFloatingKind,
+} from './modules/floating/FloatingWorkspace'
 import './App.css'
 
 const AlphaWorkspace = lazy(
@@ -32,7 +35,7 @@ function LoadingModule() {
   )
 }
 
-export default function App() {
+function MainApp() {
   const view = useAppStore((state) => state.view)
   const setView = useAppStore((state) => state.setView)
   const hydrateAlpha = useAlphaStore(
@@ -121,4 +124,14 @@ export default function App() {
       </section>
     </main>
   )
+}
+
+export default function App() {
+  const floatingKind = getFloatingKind()
+
+  if (floatingKind) {
+    return <FloatingWorkspace kind={floatingKind} />
+  }
+
+  return <MainApp />
 }

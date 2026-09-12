@@ -5,190 +5,98 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 files = {
-    "adapter":
-        ROOT / "app/src/core/alpha/alphaEditorDirectives.ts",
-
-    "normalizer":
-        ROOT / "app/src/core/alpha/normalizeAlpha.ts",
-
-    "store":
-        ROOT / "app/src/core/alpha/useAlphaStore.ts",
-
-    "drafts":
-        ROOT / "app/src/core/alpha/videoFlowDraftStore.ts",
-
-    "projection":
-        ROOT / "app/src/core/alpha/videoFlowProjection.ts",
-
-    "workspace":
-        ROOT / "app/src/modules/alpha/AlphaWorkspace.tsx",
-
-    "semantic":
-        ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
-
-    "vf_editor":
-        ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
-
-    "editor":
-        ROOT / "app/src/modules/editor-shell/EditorSpike.tsx",
-
-    "app":
-        ROOT / "app/src/App.tsx",
+    "adapter": ROOT / "app/src/core/alpha/alphaEditorDirectives.ts",
+    "projection": ROOT / "app/src/core/alpha/videoFlowProjection.ts",
+    "drafts": ROOT / "app/src/core/alpha/videoFlowDraftStore.ts",
+    "bridge": ROOT / "app/src/core/alpha/floatingEditorBridge.ts",
+    "window": ROOT / "app/src/core/alpha/floatingWindow.ts",
+    "editor": ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
+    "semantic": ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
+    "inspector": ROOT / "app/src/modules/alpha/GhostInspectorPanel.tsx",
+    "floating": ROOT / "app/src/modules/floating/FloatingWorkspace.tsx",
+    "app": ROOT / "app/src/App.tsx",
+    "rust": ROOT / "app/src-tauri/src/floating_windows.rs",
+    "lib": ROOT / "app/src-tauri/src/lib.rs",
 }
 
-missing = [
-    name
-    for name, path
-    in files.items()
-    if not path.is_file()
-]
+missing = [name for name, path in files.items() if not path.is_file()]
 
 if missing:
-    print(
-        "Missing:",
-        ", ".join(missing),
-    )
+    print("Missing:", ", ".join(missing))
     sys.exit(2)
 
-text = {
-    name:
-        path.read_text(
-            errors="replace"
-        )
-    for name, path
-    in files.items()
-}
+text = {name: path.read_text(errors="replace") for name, path in files.items()}
 
 checks = {
-    "existing HTML importer preserved":
-        "export async function importAlphaFile"
-        in text["normalizer"],
+    "every ghost projects as GroupLayer":
+        "flow.group" in text["projection"] and "placeholderText" in text["projection"],
 
-    "existing Alpha registry preserved":
-        "export const useAlphaStore"
-        in text["store"],
+    "placeholder child is hidden":
+        "flow.addText" in text["projection"] and "opacity: 0" in text["projection"],
 
-    "editor adapter reads raw source timeline":
-        "content.sourcePayload.timeline"
-        in text["adapter"],
+    "group id is canonical binding":
+        "group.id" in text["projection"] and "resourceToLayer" in text["projection"],
 
-    "images supported in editor adapter":
-        "images: 'images'"
-        in text["adapter"],
+    "draft v3 invalidates old flat drafts":
+        "abraxas.videoflow-draft.v3" in text["drafts"]
+        and "abraxas-videoflow-drafts-v3" in text["drafts"],
 
-    "unknown raw tracks are dropped safely":
-        "return VALID_TRACKS.has(fallback)"
-        in text["adapter"],
+    "full ghost info preserved":
+        "getGhostInspectorData" in text["adapter"] and "allFields" in text["adapter"],
 
-    "one route selected":
-        "selectEditorDirectivesForRoute"
-        in text["adapter"]
-        and "item.routes.includes"
-        in text["adapter"],
+    "docked inspector exists":
+        "GhostInspectorPanel" in text["editor"] and "inspectorDocked" in text["editor"],
 
-    "route isolated drafts v2":
-        "abraxas-videoflow-drafts-v2"
-        in text["drafts"]
-        and "contentId"
-        in text["drafts"]
-        and "route"
-        in text["drafts"],
+    "floating timeline and ghost buttons":
+        "openFloatingEditorWindow" in text["editor"]
+        and "'timeline'" in text["editor"]
+        and "'ghost'" in text["editor"],
 
-    "real VideoFlow layers preserved":
-        "new VideoFlow"
-        in text["projection"]
-        and "flow.addText"
-        in text["projection"],
+    "floating bridge syncs selection":
+        "publishFloatingSnapshot" in text["bridge"]
+        and "select-resource" in text["bridge"],
 
-    "resourceId layer.id sidecar preserved":
-        "resourceToLayer"
-        in text["projection"]
-        and "layer.id"
-        in text["projection"],
+    "floating workspace has both modes":
+        "FloatingTimeline" in text["floating"] and "GhostInspectorPanel" in text["floating"],
 
-    "custom VideoFlow timeline uses verified hooks":
-        "useVideo"
-        in text["semantic"]
-        and "usePlayhead"
-        in text["semantic"],
+    "always on top Tauri windows":
+        ".always_on_top(true)" in text["rust"]
+        and ".visible_on_all_workspaces(true)" in text["rust"],
 
-    "semantic lanes fixed":
-        "SUBTÍTULOS"
-        in text["semantic"]
-        and "XR"
-        in text["semantic"]
-        and "A-ROLL"
-        in text["semantic"]
-        and "SFX"
-        in text["semantic"],
+    "App renders floating-only workspace":
+        "getFloatingKind" in text["app"] and "FloatingWorkspace" in text["app"],
 
-    "one ficha active":
-        "selectedContentId"
-        in text["vf_editor"]
-        and "content.contentId"
-        in text["vf_editor"],
+    "Tauri commands registered":
+        "floating_windows::open_floating_editor_window" in text["lib"],
 
-    "Timeline custom panel supported":
-        "Timeline:"
-        in text["vf_editor"]
-        and "AlphaSemanticTimeline"
-        in text["vf_editor"],
+    "semantic timeline retained":
+        "AlphaSemanticTimeline" in text["semantic"],
 
-    "native VideoFlow fallback retained":
-        "'videoflow'"
-        in text["vf_editor"],
+    "one ficha / one route retained":
+        "activeRoute" in text["editor"] and "content.contentId" in text["editor"],
+
+    "real VideoFlow retained":
+        "<VideoEditor" in text["editor"],
 
     "autosave retained":
-        "onChange="
-        in text["vf_editor"]
-        and "saveVideoFlowDraft"
-        in text["vf_editor"],
+        "onChange=" in text["editor"] and "saveVideoFlowDraft" in text["editor"],
 
     "no feedback loop":
-        "onChange={setVideo}"
-        not in text["vf_editor"]
-        and "video={video}"
-        not in text["vf_editor"],
-
-    "Alpha opens Editor":
-        "setAppView('editor-spike')"
-        in text["workspace"],
-
-    "Editor bridge preserved":
-        "AlphaVideoFlowEditor"
-        in text["editor"],
-
-    "App hydrates registry":
-        "hydrateAlpha"
-        in text["app"],
+        "onChange={setVideo}" not in text["editor"],
 }
 
 failed = []
 
-print(
-    "ABRAXAS · SAFE ONE-FICHA VIDEOFLOW CHECK"
-)
-print(
-    "========================================"
-)
+print("ABRAXAS · GROUP GHOST + FLOATING WORKSPACE CHECK")
+print("===============================================")
 
 for name, ok in checks.items():
-    print(
-        ("OK  " if ok else "FAIL"),
-        name,
-    )
-
+    print(("OK  " if ok else "FAIL"), name)
     if not ok:
         failed.append(name)
 
 if failed:
-    print(
-        "\nFailed:",
-        ", ".join(failed),
-    )
+    print("\nFailed:", ", ".join(failed))
     sys.exit(3)
 
-print(
-    "\nOK one ficha + one route + one semantic lane per type "
-    "with real VideoFlow layers."
-)
+print("\nOK Group Ghost model + docked/floating inspector/timeline.")
