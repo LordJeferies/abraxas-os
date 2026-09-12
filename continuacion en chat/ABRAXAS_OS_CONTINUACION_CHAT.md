@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T23:08:23-04:00
+- Generado: 2026-09-11T23:25:57-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -73,6 +73,12 @@ Ghost Info:
 - docked;
 - floating always-on-top.
 
+Ficha Review:
+- dashboard de información general;
+- Story Script de la ruta;
+- timeline Alfa original por start/end;
+- selección de Ghost desde la ficha.
+
 Timeline semántica:
 - fija dentro de VideoEditor;
 - floating always-on-top para acompañar CapCut/DaVinci.
@@ -103,6 +109,7 @@ F1_6_ALPHA_INGESTION_DOMAIN
 10. seleccionar otro Ghost desde Timeline flotante
 11. Ghost Info flotante debe actualizarse
 12. cambiar ficha/ruta; Timeline flotante se actualiza
+13. botón `Ficha` abre dashboard de revisión con información general + timeline Alfa original
 
 ## Después
 
@@ -165,7 +172,7 @@ roadmap de la aplicación.
   "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
   "blockedReason": null,
   "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
-  "updatedAt": "2026-09-11T23:08:20-04:00",
+  "updatedAt": "2026-09-11T23:25:57-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
@@ -177,7 +184,7 @@ roadmap de la aplicación.
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T23:08:20-04:00"
+    "updatedAt": "2026-09-11T23:25:56-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -308,6 +315,20 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/check_alpha_ingestion.py
+ M site/data/status.json
+?? app/src/modules/alpha/AlphaFichaReview.tsx
+?? app/src/modules/alpha/alpha-ficha-review.css
+?? docs/evidence/CHECK_20260911_232552.txt
 ```
 
 ### Remote
@@ -320,17 +341,17 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+5e4112a chore: sync generated project state
 3384c79 feat(editor): add Group Ghosts and floating workspace
 2e9ea5e chore: sync generated project state
 21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow
 9d43059 chore: sync generated project state
-fe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_230815.txt`
+`docs/evidence/CHECK_20260911_232552.txt`
 
 ```text
 
@@ -343,29 +364,29 @@ OK Group Ghost model + docked/floating inspector/timeline.
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 230 modules transformed.
+✓ 232 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/index.html                                     0.45 kB │ gzip:   0.28 kB
 dist/assets/AlphaWorkspace-DnddpBeD.css             4.42 kB │ gzip:   1.35 kB
 dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
 dist/assets/index-X-bjsVZn.css                      5.66 kB │ gzip:   1.90 kB
-dist/assets/EditorSpike-CgbIDiF-.css               53.59 kB │ gzip:   7.81 kB
-dist/assets/dist-js-DlwmpTr6.js                     0.15 kB │ gzip:   0.15 kB
-dist/assets/RuntimePanel-BDFT-_vf.js                7.83 kB │ gzip:   2.52 kB
-dist/assets/MediaCompatibilityLab-Cqm1aSYo.js      14.55 kB │ gzip:   5.22 kB
-dist/assets/AlphaWorkspace-DZAjcP2J.js             16.02 kB │ gzip:   5.73 kB
-dist/assets/index-CPtiyyd4.js                     253.32 kB │ gzip:  77.70 kB
-dist/assets/EditorSpike-CnEZ_cPb.js               345.37 kB │ gzip:  67.38 kB
-dist/assets/dist-DP5z4Itv.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/EditorSpike-tyCLTnVx.css               56.30 kB │ gzip:   8.33 kB
+dist/assets/dist-js-BCILdO_F.js                     0.15 kB │ gzip:   0.15 kB
+dist/assets/RuntimePanel-CYQ9W9bq.js                7.83 kB │ gzip:   2.53 kB
+dist/assets/MediaCompatibilityLab-GrZLAt9T.js      14.55 kB │ gzip:   5.22 kB
+dist/assets/AlphaWorkspace-drwegGMD.js             16.02 kB │ gzip:   5.73 kB
+dist/assets/index-MoyeXa75.js                     253.32 kB │ gzip:  77.70 kB
+dist/assets/EditorSpike-BhBvr6_8.js               349.06 kB │ gzip:  68.10 kB
+dist/assets/dist-DNwaB4FB.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 182ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 179ms
 
 [4/8] Rust / Tauri
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
@@ -382,7 +403,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_230815.txt
+ - docs/evidence/CHECK_20260911_232552.txt
 
 [7/8] Git whitespace FINAL
 
@@ -392,15 +413,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_230815.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_232552.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 16:55:36 -0400
-v0.7.2: VideoFlow F1 cambia a safe sample 8s; master completo queda en Source Player. Evita full-master DomRenderer crash.
 
 ## 2026-09-11 17:02:58 -0400
 v0.7.3: reopen sale de F1; Media Lab conserva sesión entre vistas; validator recalcula PASS por checks relevantes.
@@ -427,6 +445,9 @@ v0.16.4: safe recovery; Alpha fichas + Ghosts project into real VideoFlow after 
 v0.17.3: audited one-ficha route-aware semantic VideoFlow.
 
 ## 2026-09-11 23:08:20 -0400
+v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.
+
+## 2026-09-11 23:25:57 -0400
 v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.
 ```
 

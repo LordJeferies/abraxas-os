@@ -26,6 +26,12 @@ Ghost Info:
 - docked;
 - floating always-on-top.
 
+Ficha Review:
+- dashboard de información general;
+- Story Script de la ruta;
+- timeline Alfa original por start/end;
+- selección de Ghost desde la ficha.
+
 Timeline semántica:
 - fija dentro de VideoEditor;
 - floating always-on-top para acompañar CapCut/DaVinci.

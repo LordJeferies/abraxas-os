@@ -7,7 +7,7 @@
   "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
   "blockedReason": null,
   "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
-  "updatedAt": "2026-09-11T23:08:20-04:00",
+  "updatedAt": "2026-09-11T23:25:57-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
@@ -19,7 +19,7 @@
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T23:08:20-04:00"
+    "updatedAt": "2026-09-11T23:25:56-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",

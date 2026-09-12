@@ -32,6 +32,7 @@ import AlphaSemanticTimeline, {
   AlphaTimelineProjectionProvider,
 } from './AlphaSemanticTimeline'
 import GhostInspectorPanel from './GhostInspectorPanel'
+import AlphaFichaReview from './AlphaFichaReview'
 import './alpha-videoflow-editor.css'
 
 type TimelineView = 'semantic' | 'videoflow'
@@ -110,6 +111,7 @@ export default function AlphaVideoFlowEditor() {
   const [projectionVersion, setProjectionVersion] = useState(0)
   const [timelineView, setTimelineView] = useState<TimelineView>('semantic')
   const [inspectorDocked, setInspectorDocked] = useState(true)
+  const [fichaOpen, setFichaOpen] = useState(false)
   const [projectionMaps, setProjectionMaps] = useState({
     resourceToLayer: {} as Record<string, string>,
     layerToResource: {} as Record<string, string>,
@@ -369,6 +371,13 @@ export default function AlphaVideoFlowEditor() {
           </select>
         )}
 
+        <button
+          className={fichaOpen ? 'active' : ''}
+          onClick={() => setFichaOpen((value) => !value)}
+        >
+          Ficha
+        </button>
+
         <div className="alpha-vf-view-toggle">
           <button
             className={timelineView === 'semantic' ? 'active' : ''}
@@ -433,6 +442,16 @@ export default function AlphaVideoFlowEditor() {
         )}
 
         <div className="alpha-vf-host">
+          {fichaOpen && (
+            <AlphaFichaReview
+              content={content}
+              route={activeRoute}
+              selectedResourceId={selectedResourceId}
+              onSelectResource={selectResource}
+              onClose={() => setFichaOpen(false)}
+            />
+          )}
+
           {loading && (
             <div className="alpha-vf-loading">
               Creando Group Ghosts…

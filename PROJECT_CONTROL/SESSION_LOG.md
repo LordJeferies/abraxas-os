@@ -50,3 +50,6 @@ v0.17.3: audited one-ficha route-aware semantic VideoFlow.
 
 ## 2026-09-11 23:08:20 -0400
 v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.
+
+## 2026-09-11 23:25:57 -0400
+v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.

@@ -14,6 +14,7 @@
 10. seleccionar otro Ghost desde Timeline flotante
 11. Ghost Info flotante debe actualizarse
 12. cambiar ficha/ruta; Timeline flotante se actualiza
+13. botón `Ficha` abre dashboard de revisión con información general + timeline Alfa original
 
 ## Después
 

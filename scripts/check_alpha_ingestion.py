@@ -13,6 +13,7 @@ files = {
     "editor": ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
     "semantic": ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
     "inspector": ROOT / "app/src/modules/alpha/GhostInspectorPanel.tsx",
+    "ficha": ROOT / "app/src/modules/alpha/AlphaFichaReview.tsx",
     "floating": ROOT / "app/src/modules/floating/FloatingWorkspace.tsx",
     "app": ROOT / "app/src/App.tsx",
     "rust": ROOT / "app/src-tauri/src/floating_windows.rs",
@@ -71,6 +72,10 @@ checks = {
 
     "semantic timeline retained":
         "AlphaSemanticTimeline" in text["semantic"],
+
+    "HTML-like ficha review retained":
+        "TIMELINE ALFA ORIGINAL" in text["ficha"]
+        and "FICHA ALFA · REVIEW" in text["ficha"],
 
     "one ficha / one route retained":
         "activeRoute" in text["editor"] and "content.contentId" in text["editor"],
