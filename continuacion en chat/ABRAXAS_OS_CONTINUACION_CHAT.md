@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T20:41:00-04:00
+- Generado: 2026-09-11T20:41:03-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -275,25 +275,6 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/CURRENT_STATUS.md
- M PROJECT_CONTROL/MODULES.json
- M PROJECT_CONTROL/NEXT_STEP.md
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/App.tsx
- M app/src/core/state/useAppStore.ts
- M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
- M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
- M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/check_project.sh
- M site/data/status.json
-?? app/src/core/alpha/
-?? app/src/modules/alpha/
-?? contracts/alpha-content.v1.schema.json
-?? contracts/alpha-import-envelope.v1.schema.json
-?? docs/evidence/CHECK_20260911_204054.txt
-?? scripts/check_alpha_ingestion.py
 ```
 
 ### Remote
@@ -306,11 +287,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+8424753 feat(alpha): stabilize Story Editor ingestion workspace
 c235c30 chore: sync generated project state
 2563c9a feat(runtime): add source jobs assets bundle
 7810f59 chore: sync generated project state
 d66dd7a feat(runtime): close F1 and add fast source job runtime
-d265495 feat(media): add Apple preview proxies for Tauri VideoFlow
 ```
 
 ## Último check autoritativo
