@@ -53,3 +53,6 @@ v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top t
 
 ## 2026-09-11 23:25:57 -0400
 v0.18: Group Ghost model + docked/floating Ghost Info + floating always-on-top timeline.
+
+## 2026-09-12 00:08:22 -0400
+v0.18.4: recovered exact Group Ghosts + canonical timeline + contracts.

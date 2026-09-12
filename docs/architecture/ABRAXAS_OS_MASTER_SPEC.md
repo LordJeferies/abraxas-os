@@ -197,3 +197,16 @@ NO timeline visual.
 VideoFlow será una proyección/render del Production Graph.
 
 Esto permite sustituir motores sin destruir el proyecto.
+
+## Ghost Projection Contract v1
+
+Contratos:
+- `contracts/ghost-resource.v1.schema.json`
+- `contracts/alpha-editor-projection.v1.schema.json`
+
+Un recurso Alfa con estado Ghost se proyecta a un GroupLayer real.
+El Group conserva resourceId, track, start/end y sus instrucciones.
+Los hijos TextLayer son metadata editorial visible al inspeccionar el Group,
+pero no forman parte del render final.
+
+El start/end Alfa es autoritativo en Editor, Ficha y ventanas flotantes.

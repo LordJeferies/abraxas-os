@@ -1,28 +1,41 @@
 # Ghost Model
 
-## Regla central
+## Contract
 
-Ghost es un ESTADO, no un tipo de recurso.
+`contracts/ghost-resource.v1.schema.json`
 
-Cada recurso pendiente se representa en VideoFlow como un `GroupLayer`.
+Ghost es un estado. La representación de edición de un recurso Ghost es un
+VideoFlow `GroupLayer`.
+
+Identidad:
 
 `resourceId Abraxas <-> VideoFlow GroupLayer.id`
 
-Dentro del Group existe un TextLayer hijo con una descripción breve de lo que
-debe agregarse. El TextLayer es editorial y se mantiene oculto del preview.
+## Timing obligatorio
 
-Cuando el recurso se materializa, NO se reemplaza el Group:
+La fuente de verdad es Alfa / Production Graph.
 
-Group Ghost
-- placeholder text
+- `startTime = start`
+- `sourceDuration = end - start`
+- ningún Ghost puede prolongarse hasta el final por auto-layout.
 
-→
+## Contenido del Group Ghost
 
-MISMO Group / MISMO resourceId
-- image/video/audio/captions/etc
+El Group contiene TextLayers editoriales ordenados:
 
-La información larga vive en Ghost Inspector.
+1. `QUÉ VA AQUÍ`
+2. `TIMING`
+3. `PROMPT`
+4. `REFERENCIA`
+5. `HACER`
 
-Tracks:
-SUBTÍTULOS / XR / IMÁGENES / MOTION / B-ROLL /
-VO JOC / A-ROLL / PARTES / SFX / MÚSICA.
+Puede haber varios Prompt/Referencia/Hacer.
+
+Todos los TextLayers internos:
+- empiezan en `0` relativo al Group;
+- duran exactamente lo mismo que el Group;
+- están ocultos del preview/render;
+- siguen disponibles al abrir/inspeccionar el Group.
+
+Materializar no reemplaza el Group:
+se añaden children reales al MISMO `resourceId`.

@@ -1,156 +1,25 @@
 import {
-  createContext,
-  useContext,
   useMemo,
-  type ReactNode,
 } from 'react'
 import {
   usePlayhead,
   useVideo,
 } from '@videoflow/react-video-editor'
 import {
-  getEditorDirectives,
-  selectEditorDirectivesForRoute,
-  type EditorDirective,
-  type EditorTrack,
-} from '../../core/alpha/alphaEditorDirectives'
+  buildCanonicalTimeline,
+  formatTimelineTime,
+  itemsForTrack,
+  timelinePixelsPerSecond,
+  timelineTickInterval,
+} from '../../core/alpha/alphaTimelineModel'
 import {
   useAlphaStore,
 } from '../../core/alpha/useAlphaStore'
 import './alpha-semantic-timeline.css'
 
-interface ProjectionMaps {
-  resourceToLayer:
-    Record<string, string>
-
-  layerToResource:
-    Record<string, string>
-}
-
-const ProjectionContext =
-  createContext<ProjectionMaps>({
-    resourceToLayer: {},
-    layerToResource: {},
-  })
-
-export function AlphaTimelineProjectionProvider({
-  maps,
-  children,
-}: {
-  maps: ProjectionMaps
-  children: ReactNode
-}) {
-  return (
-    <ProjectionContext.Provider
-      value={maps}
-    >
-      {children}
-    </ProjectionContext.Provider>
-  )
-}
-
-const TRACKS: Array<{
-  track: EditorTrack
-  label: string
-  color: string
-}> = [
-  {
-    track: 'captions',
-    label: 'SUBTÍTULOS',
-    color: '#c9c7c8',
-  },
-  {
-    track: 'xr',
-    label: 'XR',
-    color: '#d298e4',
-  },
-  {
-    track: 'images',
-    label: 'IMÁGENES',
-    color: '#9b8dca',
-  },
-  {
-    track: 'motion',
-    label: 'MOTION',
-    color: '#d28e95',
-  },
-  {
-    track: 'broll',
-    label: 'B-ROLL',
-    color: '#8f785e',
-  },
-  {
-    track: 'vo',
-    label: 'VO JOC',
-    color: '#a8caa8',
-  },
-  {
-    track: 'aroll',
-    label: 'A-ROLL',
-    color: '#a7bfcb',
-  },
-  {
-    track: 'story',
-    label: 'PARTES',
-    color: '#c8a2af',
-  },
-  {
-    track: 'sfx',
-    label: 'SFX',
-    color: '#dfcf78',
-  },
-  {
-    track: 'music',
-    label: 'MÚSICA',
-    color: '#86b3a3',
-  },
-]
-
-interface TimelineLayerShape {
-  id: string
-
-  settings?: {
-    startTime?: number
-    sourceDuration?: number
-  }
-}
-
-function numberValue(
-  value: unknown,
-  fallback: number,
-) {
-  return (
-    typeof value === 'number'
-    && Number.isFinite(value)
-  )
-    ? value
-    : fallback
-}
-
-function labelFor(
-  directive: EditorDirective,
-) {
-  if (
-    directive.track === 'aroll'
-  ) {
-    return (
-      directive.speaker
-      || directive.label
-      || 'A-roll'
-    )
-  }
-
-  return (
-    directive.label
-    || directive.description
-    || directive.text
-    || directive.type
-  )
-}
-
 function compact(
   value: string,
-  max = 46,
+  max = 44,
 ) {
   const normalized =
     value
@@ -162,65 +31,6 @@ function compact(
     : `${normalized.slice(0, max - 1)}…`
 }
 
-function pixelsPerSecond(
-  duration: number,
-) {
-  if (duration <= 150) {
-    return 13
-  }
-
-  if (duration <= 420) {
-    return 7
-  }
-
-  if (duration <= 1200) {
-    return 4
-  }
-
-  return 2
-}
-
-function tickInterval(
-  duration: number,
-) {
-  if (duration <= 150) {
-    return 10
-  }
-
-  if (duration <= 420) {
-    return 30
-  }
-
-  if (duration <= 1200) {
-    return 60
-  }
-
-  return 300
-}
-
-function formatTime(
-  seconds: number,
-) {
-  const safe =
-    Math.max(
-      0,
-      Math.round(seconds),
-    )
-
-  const minutes =
-    Math.floor(
-      safe / 60,
-    )
-
-  const rest =
-    safe % 60
-
-  return (
-    `${String(minutes).padStart(2, '0')}:`
-    + `${String(rest).padStart(2, '0')}`
-  )
-}
-
 export default function AlphaSemanticTimeline() {
   const video =
     useVideo()
@@ -229,11 +39,6 @@ export default function AlphaSemanticTimeline() {
     frame,
   } =
     usePlayhead()
-
-  const maps =
-    useContext(
-      ProjectionContext,
-    )
 
   const documents =
     useAlphaStore(
@@ -300,15 +105,15 @@ export default function AlphaSemanticTimeline() {
       ],
     )
 
-  const directives =
+  const model =
     useMemo(
       () =>
         content
-          ? selectEditorDirectivesForRoute(
+          ? buildCanonicalTimeline(
               content,
               route,
             )
-          : [],
+          : null,
 
       [
         content,
@@ -316,170 +121,49 @@ export default function AlphaSemanticTimeline() {
       ],
     )
 
-  const layerById =
-    useMemo(
-      () => {
-        const result =
-          new Map<
-            string,
-            TimelineLayerShape
-          >()
-
-        for (
-          const raw
-          of video.layers
-        ) {
-          const layer = raw as unknown as TimelineLayerShape
-
-          result.set(
-            layer.id,
-            layer,
-          )
-        }
-
-        return result
-      },
-
-      [video],
-    )
-
-  const items =
-    useMemo(
-      () =>
-        directives
-          .map(
-            (
-              directive,
-            ) => {
-              const layerId =
-                maps.resourceToLayer[
-                  directive.resourceId
-                ]
-
-              const layer =
-                layerId
-                  ? layerById.get(
-                      layerId,
-                    )
-                  : undefined
-
-              const start =
-                numberValue(
-                  layer
-                    ?.settings
-                    ?.startTime,
-
-                  directive.start,
-                )
-
-              const duration =
-                Math.max(
-                  1
-                  / Math.max(
-                    1,
-                    video.fps
-                    || 30,
-                  ),
-
-                  numberValue(
-                    layer
-                      ?.settings
-                      ?.sourceDuration,
-
-                    directive.end
-                    - directive.start,
-                  ),
-                )
-
-              return {
-                directive,
-                layerId,
-                start,
-                duration,
-                end:
-                  start
-                  + duration,
-              }
-            },
-          )
-          .filter(
-            (item) =>
-              Boolean(
-                item.layerId,
-              ),
-          ),
-
-      [
-        directives,
-        maps.resourceToLayer,
-        layerById,
-        video.fps,
-      ],
-    )
-
-  const duration =
-    Math.max(
-      1,
-      numberValue(
-        video.duration,
-        0,
-      ),
-      ...items.map(
-        (item) =>
-          item.end,
-      ),
-    )
+  if (!model) {
+    return null
+  }
 
   const pixels =
-    pixelsPerSecond(
-      duration,
+    timelinePixelsPerSecond(
+      model.duration,
     )
 
-  const timelineWidth =
+  const width =
     Math.max(
       980,
       Math.ceil(
-        duration
+        model.duration
         * pixels,
       ),
     )
 
   const interval =
-    tickInterval(
-      duration,
+    timelineTickInterval(
+      model.duration,
     )
 
   const ticks: number[] = []
 
   for (
     let time = 0;
-    time <= duration;
+    time <= model.duration;
     time += interval
   ) {
-    ticks.push(
-      time,
-    )
+    ticks.push(time)
   }
-
-  const fps =
-    Math.max(
-      1,
-      video.fps
-      || 30,
-    )
 
   const currentSeconds =
     Math.max(
       0,
       frame,
-    ) / fps
-
-  const totalDirectives =
-    content
-      ? getEditorDirectives(
-          content,
-        ).length
-      : 0
+    )
+    / Math.max(
+      1,
+      video.fps
+      || 30,
+    )
 
   return (
     <section
@@ -495,33 +179,28 @@ export default function AlphaSemanticTimeline() {
           {' · '}
           {route}
           {' · '}
-          {items.length}
-          {' / '}
-          {totalDirectives}
+          {model.items.length}
+          {' recursos'}
         </span>
 
-        {TRACKS.map(
-          (entry) => {
-            const count =
-              items.filter(
-                (item) =>
-                  item.directive.track
-                  === entry.track,
-              ).length
-
-            return (
-              <span
-                key={entry.track}
-                className="abx-semantic-chip"
-              >
-                {entry.label}
-                {' '}
-                <b>
-                  {count}
-                </b>
-              </span>
-            )
-          },
+        {model.tracks.map(
+          (entry) => (
+            <span
+              key={entry.track}
+              className="abx-semantic-chip"
+            >
+              {entry.label}
+              {' '}
+              <b>
+                {
+                  itemsForTrack(
+                    model,
+                    entry.track,
+                  ).length
+                }
+              </b>
+            </span>
+          ),
         )}
       </header>
 
@@ -532,7 +211,7 @@ export default function AlphaSemanticTimeline() {
           className="abx-semantic-canvas"
           style={{
             width:
-              timelineWidth
+              width
               + 118,
           }}
         >
@@ -548,8 +227,7 @@ export default function AlphaSemanticTimeline() {
             <div
               className="abx-semantic-ruler"
               style={{
-                width:
-                  timelineWidth,
+                width,
               }}
             >
               {ticks.map(
@@ -563,9 +241,11 @@ export default function AlphaSemanticTimeline() {
                         * pixels,
                     }}
                   >
-                    {formatTime(
-                      time,
-                    )}
+                    {
+                      formatTimelineTime(
+                        time,
+                      )
+                    }
                   </span>
                 ),
               )}
@@ -581,20 +261,19 @@ export default function AlphaSemanticTimeline() {
                 left:
                   118
                   + Math.min(
-                    timelineWidth,
+                    width,
                     currentSeconds
                     * pixels,
                   ),
               }}
             />
 
-            {TRACKS.map(
+            {model.tracks.map(
               (entry) => {
-                const laneItems =
-                  items.filter(
-                    (item) =>
-                      item.directive.track
-                      === entry.track,
+                const items =
+                  itemsForTrack(
+                    model,
+                    entry.track,
                   )
 
                 return (
@@ -611,8 +290,7 @@ export default function AlphaSemanticTimeline() {
                     <div
                       className="abx-semantic-lane"
                       style={{
-                        width:
-                          timelineWidth,
+                        width,
                       }}
                     >
                       {ticks.map(
@@ -630,86 +308,73 @@ export default function AlphaSemanticTimeline() {
                         ),
                       )}
 
-                      {laneItems.map(
-                        (item) => {
-                          const directive =
-                            item.directive
+                      {items.map(
+                        (item) => (
+                          <button
+                            key={
+                              item.resourceId
+                            }
+                            type="button"
+                            className={[
+                              'abx-semantic-block',
+                              item.state
+                              === 'ghost'
+                                ? 'is-ghost'
+                                : 'is-ready',
+                              item.resourceId
+                              === selectedResourceId
+                                ? 'is-selected'
+                                : '',
+                            ]
+                              .filter(Boolean)
+                              .join(' ')}
+                            style={{
+                              left:
+                                item.start
+                                * pixels,
 
-                          const selected =
-                            directive.resourceId
-                            === selectedResourceId
-
-                          return (
-                            <button
-                              key={
-                                directive.resourceId
-                              }
-                              type="button"
-                              className={[
-                                'abx-semantic-block',
-                                directive.state
-                                === 'ghost'
-                                  ? 'is-ghost'
-                                  : 'is-ready',
-                                selected
-                                  ? 'is-selected'
-                                  : '',
-                              ]
-                                .filter(Boolean)
-                                .join(' ')}
-                              style={{
-                                left:
-                                  item.start
+                              width:
+                                Math.max(
+                                  8,
+                                  (
+                                    item.end
+                                    - item.start
+                                  )
                                   * pixels,
-
-                                width:
-                                  Math.max(
-                                    12,
-                                    item.duration
-                                    * pixels,
-                                  ),
-
-                                backgroundColor:
-                                  entry.color,
-                              }}
-                              title={[
-                                entry.label,
-                                labelFor(
-                                  directive,
                                 ),
-                                (
-                                  `${item.start.toFixed(2)}`
-                                  + '–'
-                                  + `${item.end.toFixed(2)}s`
-                                ),
-                              ].join(
-                                ' · ',
-                              )}
-                              onClick={() =>
-                                selectResource(
-                                  directive.resourceId,
-                                )
+
+                              backgroundColor:
+                                entry.color,
+                            }}
+                            title={
+                              `${item.label} · `
+                              + `${formatTimelineTime(item.start)} → `
+                              + `${formatTimelineTime(item.end)}`
+                            }
+                            onClick={() =>
+                              selectResource(
+                                item.resourceId,
+                              )
+                            }
+                          >
+                            <small>
+                              {
+                                item.state
+                                === 'ghost'
+                                  ? '👻'
+                                  : '◆'
                               }
-                            >
-                              <small>
-                                {
-                                  directive.state
-                                  === 'ghost'
-                                    ? '👻'
-                                    : '◆'
-                                }
-                              </small>
+                            </small>
 
-                              <span>
-                                {compact(
-                                  labelFor(
-                                    directive,
-                                  ),
-                                )}
-                              </span>
-                            </button>
-                          )
-                        },
+                            <span>
+                              {compact(
+                                item.label
+                                || item.description
+                                || item.type,
+                              )}
+                            </span>
+                          </button>
+                        ),
                       )}
                     </div>
                   </div>

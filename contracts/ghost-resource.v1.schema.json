@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/ghost-resource.v1.schema.json",
+  "title": "Abraxas Ghost Resource Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "resourceId",
+    "resourceType",
+    "state",
+    "track",
+    "timing",
+    "group"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.ghost-resource.v1"
+    },
+    "resourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resourceType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "ghost",
+        "planned",
+        "ready",
+        "materialized",
+        "approved"
+      ]
+    },
+    "track": {
+      "enum": [
+        "captions",
+        "xr",
+        "images",
+        "motion",
+        "broll",
+        "vo",
+        "aroll",
+        "story",
+        "sfx",
+        "music",
+        "transition"
+      ]
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "duration"
+      ],
+      "properties": {
+        "start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "source": {
+          "enum": [
+            "alpha",
+            "production-graph"
+          ]
+        }
+      }
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation",
+        "placeholderChildren",
+        "renderPolicy"
+      ],
+      "properties": {
+        "representation": {
+          "const": "videoflow-group"
+        },
+        "layerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "placeholderChildren": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "order",
+              "role",
+              "text",
+              "visibleInPreview"
+            ],
+            "properties": {
+              "order": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "role": {
+                "enum": [
+                  "summary",
+                  "timing",
+                  "prompt",
+                  "reference",
+                  "action"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "visibleInPreview": {
+                "const": false
+              }
+            }
+          }
+        },
+        "renderPolicy": {
+          "enum": [
+            "editorial-only-until-materialized",
+            "materialized-children-only"
+          ]
+        }
+      }
+    },
+    "assetBindings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

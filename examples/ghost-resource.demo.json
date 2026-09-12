@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "abraxas.ghost-resource.v1",
+  "resourceId": "XR_DEMO_01",
+  "resourceType": "xr",
+  "state": "ghost",
+  "track": "xr",
+  "routes": [
+    "source"
+  ],
+  "timing": {
+    "start": 18.2,
+    "end": 27.2,
+    "duration": 9.0,
+    "source": "alpha"
+  },
+  "group": {
+    "representation": "videoflow-group",
+    "layerId": null,
+    "placeholderChildren": [
+      {
+        "order": 1,
+        "role": "summary",
+        "text": "Mostrar tres detalles macro del proceso.",
+        "visibleInPreview": false
+      },
+      {
+        "order": 2,
+        "role": "timing",
+        "text": "18.200s → 27.200s · duración 9.000s",
+        "visibleInPreview": false
+      },
+      {
+        "order": 3,
+        "role": "prompt",
+        "text": "Macro close-up sequence...",
+        "visibleInPreview": false
+      }
+    ],
+    "renderPolicy": "editorial-only-until-materialized"
+  },
+  "assetBindings": []
+}

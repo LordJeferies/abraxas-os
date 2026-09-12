@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/alpha-editor-projection.v1.schema.json",
+  "title": "Abraxas Alpha Editor Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contentId",
+    "route",
+    "duration",
+    "laneOrder",
+    "resources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.alpha-editor-projection.v1"
+    },
+    "contentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duration": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "laneOrder": {
+      "const": [
+        "captions",
+        "xr",
+        "images",
+        "motion",
+        "broll",
+        "vo",
+        "aroll",
+        "story",
+        "sfx",
+        "music"
+      ]
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "ghost-resource.v1.schema.json"
+      }
+    }
+  }
+}

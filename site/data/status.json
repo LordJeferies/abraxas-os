@@ -4,22 +4,22 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Ghosts audiovisuales se modelan como GroupLayer reales de VideoFlow con placeholder TextLayer hijo; Ghost Info puede ir docked o flotante y Timeline puede abrirse always-on-top para acompañar CapCut/DaVinci.",
+  "lastCompletedStep": "Ghost Resource Contract v1 y Alpha Editor Projection v1 integrados: cada recurso Alfa se proyecta como GroupLayer con start/end exactos y TextLayers internos ordenados para qué/prompt/referencia/acción.",
   "blockedReason": null,
-  "nextStep": "Validar Group Ghosts, Inspector docked/floating y Timeline flotante. Después conectar materialización de assets al mismo Group resourceId.",
-  "updatedAt": "2026-09-11T23:25:57-04:00",
+  "nextStep": "Validar visualmente start/end exactos y children internos del Group; después materializar assets dentro del mismo resourceId.",
+  "updatedAt": "2026-09-12T00:08:22-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 52,
-    "productionTimeline": 46,
+    "editorShell": 58,
+    "productionTimeline": 55,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 95
+    "alphaIngestion": 97
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T23:25:56-04:00"
+    "updatedAt": "2026-09-12T00:08:21-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -98,6 +98,14 @@
     "ghostInspectorFloatingImplemented": true,
     "timelineFloatingAlwaysOnTopImplemented": true,
     "floatingWindowsVisibleOnAllWorkspaces": true,
-    "ghostMaterializationPending": true
+    "ghostMaterializationPending": true,
+    "ghostResourceContractV1Implemented": true,
+    "alphaEditorProjectionContractV1Implemented": true,
+    "groupGhostOrderedTextChildrenImplemented": true,
+    "groupGhostExactAlphaTimingImplemented": true,
+    "semanticFloatingCanonicalTimingImplemented": true,
+    "draftV5InvalidatesPriorTimingDrafts": true,
+    "contractGateAddedToProjectCheck": true,
+    "exactTimingManualUiPass": false
   }
 }

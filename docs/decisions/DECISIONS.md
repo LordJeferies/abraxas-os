@@ -73,3 +73,14 @@ no base de código obligatoria.
 ## ADR-012
 Antes de continuar con grandes módulos debe aprobarse
 la reproducción REAL dentro de Tauri.
+
+### DECISION: Ghost Group exact timing
+
+- Ghost es estado, no tipo.
+- Cada Ghost audiovisual se representa como GroupLayer.
+- `start/end` del Alfa son fuente de verdad.
+- `duration = end - start`.
+- El Group contiene TextLayers ordenados con resumen, timing, prompts,
+  referencias e instrucciones.
+- La materialización añade children al mismo Group/resourceId.
+- Semántica, Ficha y Floating Timeline comparten una sola proyección temporal.

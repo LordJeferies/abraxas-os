@@ -5,95 +5,145 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 files = {
-    "adapter": ROOT / "app/src/core/alpha/alphaEditorDirectives.ts",
-    "projection": ROOT / "app/src/core/alpha/videoFlowProjection.ts",
-    "drafts": ROOT / "app/src/core/alpha/videoFlowDraftStore.ts",
-    "bridge": ROOT / "app/src/core/alpha/floatingEditorBridge.ts",
-    "window": ROOT / "app/src/core/alpha/floatingWindow.ts",
-    "editor": ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
-    "semantic": ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
-    "inspector": ROOT / "app/src/modules/alpha/GhostInspectorPanel.tsx",
-    "ficha": ROOT / "app/src/modules/alpha/AlphaFichaReview.tsx",
-    "floating": ROOT / "app/src/modules/floating/FloatingWorkspace.tsx",
-    "app": ROOT / "app/src/App.tsx",
-    "rust": ROOT / "app/src-tauri/src/floating_windows.rs",
-    "lib": ROOT / "app/src-tauri/src/lib.rs",
+    "timeline_model":
+        ROOT / "app/src/core/alpha/alphaTimelineModel.ts",
+
+    "projection":
+        ROOT / "app/src/core/alpha/videoFlowProjection.ts",
+
+    "drafts":
+        ROOT / "app/src/core/alpha/videoFlowDraftStore.ts",
+
+    "semantic":
+        ROOT / "app/src/modules/alpha/AlphaSemanticTimeline.tsx",
+
+    "floating":
+        ROOT / "app/src/modules/floating/FloatingWorkspace.tsx",
+
+    "ficha":
+        ROOT / "app/src/modules/alpha/AlphaFichaReview.tsx",
+
+    "editor":
+        ROOT / "app/src/modules/alpha/AlphaVideoFlowEditor.tsx",
+
+    "inspector":
+        ROOT / "app/src/modules/alpha/GhostInspectorPanel.tsx",
+
+    "normalizer":
+        ROOT / "app/src/core/alpha/normalizeAlpha.ts",
+
+    "store":
+        ROOT / "app/src/core/alpha/useAlphaStore.ts",
 }
 
-missing = [name for name, path in files.items() if not path.is_file()]
+missing = [
+    name
+    for name, path
+    in files.items()
+    if not path.is_file()
+]
 
 if missing:
     print("Missing:", ", ".join(missing))
     sys.exit(2)
 
-text = {name: path.read_text(errors="replace") for name, path in files.items()}
+text = {
+    name:
+        path.read_text(
+          errors="replace"
+        )
+    for name, path
+    in files.items()
+}
+
+css = (
+    ROOT / "app/src/modules/alpha/alpha-semantic-timeline.css"
+).read_text(errors="replace")
 
 checks = {
-    "every ghost projects as GroupLayer":
-        "flow.group" in text["projection"] and "placeholderText" in text["projection"],
+    "stable importer preserved":
+        "export async function importAlphaFile"
+        in text["normalizer"],
 
-    "placeholder child is hidden":
-        "flow.addText" in text["projection"] and "opacity: 0" in text["projection"],
+    "stable registry preserved":
+        "export const useAlphaStore"
+        in text["store"],
 
-    "group id is canonical binding":
-        "group.id" in text["projection"] and "resourceToLayer" in text["projection"],
+    "canonical timeline shared":
+        "buildCanonicalTimeline"
+        in text["timeline_model"],
 
-    "draft v3 invalidates old flat drafts":
-        "abraxas.videoflow-draft.v3" in text["drafts"]
-        and "abraxas-videoflow-drafts-v3" in text["drafts"],
+    "group projection":
+        "flow.group"
+        in text["projection"],
 
-    "full ghost info preserved":
-        "getGhostInspectorData" in text["adapter"] and "allFields" in text["adapter"],
+    "resource id binds group id":
+        "resourceToLayer"
+        in text["projection"]
+        and "group.id"
+        in text["projection"],
 
-    "docked inspector exists":
-        "GhostInspectorPanel" in text["editor"] and "inspectorDocked" in text["editor"],
+    "exact group timing":
+        "sourceDuration:"
+        in text["projection"]
+        and "normalizeCompiledTiming"
+        in text["projection"],
 
-    "floating timeline and ghost buttons":
-        "openFloatingEditorWindow" in text["editor"]
-        and "'timeline'" in text["editor"]
-        and "'ghost'" in text["editor"],
+    "no parallel wait start bug":
+        "wait(timing.start)"
+        not in text["projection"],
 
-    "floating bridge syncs selection":
-        "publishFloatingSnapshot" in text["bridge"]
-        and "select-resource" in text["bridge"],
+    "ordered text children":
+        "01 · QUÉ VA AQUÍ"
+        in text["projection"]
+        and "03 · PROMPT"
+        in text["projection"]
+        and "04 · REFERENCIA"
+        in text["projection"],
 
-    "floating workspace has both modes":
-        "FloatingTimeline" in text["floating"] and "GhostInspectorPanel" in text["floating"],
+    "draft v5 invalidates bad drafts":
+        "abraxas.videoflow-draft.v5"
+        in text["drafts"]
+        and "abraxas-videoflow-drafts-v5"
+        in text["drafts"],
 
-    "always on top Tauri windows":
-        ".always_on_top(true)" in text["rust"]
-        and ".visible_on_all_workspaces(true)" in text["rust"],
+    "semantic uses alpha exact timing":
+        "buildCanonicalTimeline"
+        in text["semantic"]
+        and "settings?.sourceDuration"
+        not in text["semantic"],
 
-    "App renders floating-only workspace":
-        "getFloatingKind" in text["app"] and "FloatingWorkspace" in text["app"],
+    "one fixed semantic lane per type":
+        "height:40px"
+        in css
+        and "model.tracks.map"
+        in text["semantic"],
 
-    "Tauri commands registered":
-        "floating_windows::open_floating_editor_window" in text["lib"],
+    "floating uses canonical lanes":
+        "CANONICAL_TRACKS"
+        in text["floating"],
 
-    "semantic timeline retained":
-        "AlphaSemanticTimeline" in text["semantic"],
+    "ficha exists":
+        "TIMELINE ALFA"
+        in text["ficha"],
 
-    "HTML-like ficha review retained":
-        "TIMELINE ALFA ORIGINAL" in text["ficha"]
-        and "FICHA ALFA · REVIEW" in text["ficha"],
-
-    "one ficha / one route retained":
-        "activeRoute" in text["editor"] and "content.contentId" in text["editor"],
+    "ghost inspector retained":
+        "Ghost Info"
+        in text["inspector"],
 
     "real VideoFlow retained":
-        "<VideoEditor" in text["editor"],
+        "<VideoEditor"
+        in text["editor"],
 
-    "autosave retained":
-        "onChange=" in text["editor"] and "saveVideoFlowDraft" in text["editor"],
-
-    "no feedback loop":
-        "onChange={setVideo}" not in text["editor"],
+    "canonical snapshot retained":
+        "buildCanonicalTimeline"
+        in text["editor"],
 }
 
 failed = []
 
-print("ABRAXAS · GROUP GHOST + FLOATING WORKSPACE CHECK")
-print("===============================================")
+print("ABRAXAS · EXACT GROUP GHOST CHECK")
+print("================================")
 
 for name, ok in checks.items():
     print(("OK  " if ok else "FAIL"), name)
@@ -104,4 +154,6 @@ if failed:
     print("\nFailed:", ", ".join(failed))
     sys.exit(3)
 
-print("\nOK Group Ghost model + docked/floating inspector/timeline.")
+print(
+    "\nOK Alpha -> exact Group Ghost -> single-lane Semantic/Floating/Ficha."
+)

@@ -31,3 +31,22 @@ Después comienza F2 Editor Shell y F3 Production Timeline.
 
 El sitio público puede evolucionar en paralelo, pero no vuelve a bloquear el
 roadmap de la aplicación.
+
+## Alpha -> Contracted Group Ghost
+
+HTML / JSON
+→ AlphaContent
+→ UNA ficha
+→ UNA ruta
+→ Ghost Resource Contract
+→ GroupLayer exacto
+→ Text children editoriales
+→ VideoJSON
+→ VideoEditor
+
+En paralelo:
+→ Ficha Review
+→ Semantic Timeline
+→ Floating Timeline
+
+Las tres vistas usan el mismo `start/end`.
