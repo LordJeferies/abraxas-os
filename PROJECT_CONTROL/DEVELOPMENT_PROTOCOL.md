@@ -33,3 +33,16 @@ Los módulos se comunican mediante:
 - APIs documentadas.
 
 No mediante dependencias internas improvisadas.
+
+## Isolated project-check safety
+
+Candidate validation may run from a detached Git worktree only when
+`ABRAXAS_ALLOW_ISOLATED_CHECK=1`.
+
+Real project checks still require branch `main`.
+
+`check_project.sh` MUST use its own resolved `$ROOT` for lifecycle mutations.
+It must never hardcode `~/Desktop/Abrxs os` inside embedded Python because a
+candidate check must not be able to mutate the real checkout.
+
+`sync_status.py` is output-only and never rewrites PROJECT_STATE.

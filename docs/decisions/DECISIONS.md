@@ -95,3 +95,14 @@ la reproducción REAL dentro de Tauri.
 - Child resources permanecen nested bajo parentResourceId.
 - Child resources siguen visibles en su lane semántica correspondiente.
 - Ficha edits son overlays persistentes y no mutan el HTML importado.
+
+### DECISION: Isolated checks must be checkout-local
+
+Full candidate checks are allowed from detached worktrees only under the
+explicit environment flag `ABRAXAS_ALLOW_ISOLATED_CHECK=1`.
+
+Every lifecycle mutation performed by `check_project.sh` targets the checkout
+resolved from the script path.
+
+This prevents an isolated candidate failure from marking the real desktop repo
+as blocked.

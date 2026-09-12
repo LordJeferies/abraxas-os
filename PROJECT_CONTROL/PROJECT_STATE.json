@@ -4,10 +4,10 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
+  "lastCompletedStep": "v0.19.3 canonical editor remains installed; v0.19.3.4 hardens validation/finalization so isolated checks are detached-safe, checkout-local and generated status is output-only.",
   "blockedReason": null,
-  "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
-  "updatedAt": "2026-09-12T01:29:27-04:00",
+  "nextStep": "Use the desktop app and complete the manual v0.19.3 functional pass: Ficha Studio, T1-T9 timing gaps, bounded Ghost Groups, nested XR children, floating timeline and edit persistence.",
+  "updatedAt": "2026-09-12T02:13:04-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
@@ -19,7 +19,7 @@
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-12T01:29:26-04:00"
+    "updatedAt": "2026-09-12T02:13:04-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -119,6 +119,9 @@
     "alphaEditOverlayPersistenceImplemented": true,
     "timelineModuleInProgress": true,
     "inspectorModuleInProgress": true,
-    "v0193ManualFunctionalPass": false
+    "v0193ManualFunctionalPass": false,
+    "isolatedProjectCheckDetachedModeImplemented": true,
+    "projectCheckRootIsCheckoutLocalImplemented": true,
+    "syncStatusOutputOnlyImplemented": true
   }
 }

@@ -1,17 +1,38 @@
 #!/usr/bin/env python3
+"""
+Project semantic state -> public status projection.
+
+PROJECT_CONTROL/PROJECT_STATE.json is READ-ONLY here.
+"""
+
 from pathlib import Path
 import json
-from datetime import datetime, timezone
 
-root = Path(__file__).resolve().parents[1]
-src = root / "PROJECT_CONTROL" / "PROJECT_STATE.json"
-dst = root / "site" / "data" / "status.json"
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "PROJECT_CONTROL" / "PROJECT_STATE.json"
+OUTPUT = ROOT / "site" / "data" / "status.json"
 
-data = json.loads(src.read_text())
-data["updatedAt"] = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
-src.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+state = json.loads(
+    SOURCE.read_text(
+        encoding="utf-8",
+    )
+)
 
-dst.parent.mkdir(parents=True, exist_ok=True)
-dst.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+OUTPUT.parent.mkdir(
+    parents=True,
+    exist_ok=True,
+)
 
-print(f"Status sincronizado: {dst}")
+OUTPUT.write_text(
+    json.dumps(
+        state,
+        indent=2,
+        ensure_ascii=False,
+    )
+    + "\n",
+    encoding="utf-8",
+)
+
+print(
+    f"Status sincronizado (PROJECT_STATE read-only): {OUTPUT}"
+)

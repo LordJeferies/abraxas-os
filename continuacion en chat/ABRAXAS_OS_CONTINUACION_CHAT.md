@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-12T01:29:27-04:00
+- Generado: 2026-09-12T02:13:04-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -130,10 +130,10 @@ dentro de los mismos Group Ghosts sin cambiar resourceId.
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
+  "lastCompletedStep": "v0.19.3 canonical editor remains installed; v0.19.3.4 hardens validation/finalization so isolated checks are detached-safe, checkout-local and generated status is output-only.",
   "blockedReason": null,
-  "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
-  "updatedAt": "2026-09-12T01:29:27-04:00",
+  "nextStep": "Use the desktop app and complete the manual v0.19.3 functional pass: Ficha Studio, T1-T9 timing gaps, bounded Ghost Groups, nested XR children, floating timeline and edit persistence.",
+  "updatedAt": "2026-09-12T02:13:04-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
@@ -145,7 +145,7 @@ dentro de los mismos Group Ghosts sin cambiar resourceId.
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-12T01:29:26-04:00"
+    "updatedAt": "2026-09-12T02:13:04-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -245,7 +245,10 @@ dentro de los mismos Group Ghosts sin cambiar resourceId.
     "alphaEditOverlayPersistenceImplemented": true,
     "timelineModuleInProgress": true,
     "inspectorModuleInProgress": true,
-    "v0193ManualFunctionalPass": false
+    "v0193ManualFunctionalPass": false,
+    "isolatedProjectCheckDetachedModeImplemented": true,
+    "projectCheckRootIsCheckoutLocalImplemented": true,
+    "syncStatusOutputOnlyImplemented": true
   }
 }
 ```
@@ -297,55 +300,21 @@ dentro de los mismos Group Ghosts sin cambiar resourceId.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/CURRENT_STATUS.md
- M PROJECT_CONTROL/FROM_TO.md
- M PROJECT_CONTROL/GHOST_MODEL.md
- M PROJECT_CONTROL/MODULES.json
- M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/DEVELOPMENT_PROTOCOL.md
  M PROJECT_CONTROL/PROJECT_STATE.json
  M PROJECT_CONTROL/SESSION_LOG.md
- M PROJECT_CONTROL/TIMELINE_MODEL.md
- M app/src/core/alpha/alphaEditorDirectives.ts
- M app/src/core/alpha/alphaTimelineModel.ts
- M app/src/core/alpha/floatingEditorBridge.ts
- M app/src/core/alpha/normalizeAlpha.ts
- M app/src/core/alpha/types.ts
- M app/src/core/alpha/useAlphaStore.ts
- M app/src/core/alpha/videoFlowDraftStore.ts
- M app/src/core/alpha/videoFlowProjection.ts
- M app/src/modules/alpha/AlphaSemanticTimeline.tsx
- M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
- M app/src/modules/alpha/AlphaWorkspace.tsx
- M app/src/modules/alpha/alpha-semantic-timeline.css
- M app/src/modules/alpha/alpha-videoflow-editor.css
- M app/src/modules/alpha/alpha-workspace.css
- M app/src/modules/floating/FloatingWorkspace.tsx
- M app/src/modules/floating/floating-workspace.css
  M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
  M "continuacion en chat/ESTADO_ACTUAL.json"
  M "continuacion en chat/ULTIMO_CHECK.txt"
  M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M docs/architecture/ABRAXAS_OS_MASTER_SPEC.md
  M docs/decisions/DECISIONS.md
- M scripts/check_alpha_ingestion.py
- M scripts/check_ghost_contracts.py
  M scripts/check_project.sh
+ M scripts/preflight_predictive.py
+ M scripts/sync_status.py
  M site/data/status.json
  M site/index.html
-?? PROJECT_CONTROL/FICHA_STUDIO.md
-?? app/src/core/alpha/alphaEditStore.ts
-?? app/src/modules/alpha/AlphaFichaStudio.tsx
-?? app/src/modules/alpha/CanonicalTimeline.tsx
-?? app/src/modules/alpha/alpha-ficha-studio.css
-?? app/src/modules/alpha/canonical-timeline.css
-?? contracts/alpha-content-edit.v1.schema.json
-?? contracts/alpha-videoflow-projection.v2.schema.json
-?? contracts/editor-track-slots.v1.schema.json
-?? docs/evidence/CHECK_20260912_011326.txt
-?? docs/evidence/CHECK_20260912_012921.txt
-?? examples/alpha-videoflow-projection.v2.demo.json
-?? examples/canonical-timeline-truth.demo.json
-?? scripts/check_timeline_truth.py
+?? docs/evidence/CHECK_20260912_021259.txt
+?? scripts/check_generated_state_coherence.py
 ```
 
 ### Remote
@@ -358,37 +327,19 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+f2cb74f feat(editor): canonical timeline projection contract and Ficha Studio
 a0cfaac chore: sync generated project state
 137a866 fix(timeline): recover exact Group Ghost timing and contracts
 38a12cb chore: sync generated project state
 ed4e8b3 feat(editor): add Group Ghosts and floating workspace
-5e4112a chore: sync generated project state
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260912_012921.txt`
+`docs/evidence/CHECK_20260912_021259.txt`
 
 ```text
-
-[3/8] TypeScript + Vite
-
-> abraxas-os@0.0.0 build
-> tsc -b && vite build
-
-vite v8.3.0 building client environment for production...
-transforming...
-✓ 236 modules transformed.
-rendering chunks...
-computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.29 kB
-dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
-dist/assets/AlphaWorkspace-CwLsoOAF.css             4.72 kB │ gzip:   1.42 kB
-dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
-dist/assets/index-DDFdI7Xk.css                      6.20 kB │ gzip:   2.00 kB
-dist/assets/AlphaFichaStudio-srwMs5U9.css           8.30 kB │ gzip:   2.11 kB
-dist/assets/EditorSpike-Z9mrWnC8.css               50.83 kB │ gzip:   7.18 kB
 dist/assets/dist-js-KKXgbApR.js                     0.15 kB │ gzip:   0.15 kB
 dist/assets/AlphaWorkspace-Z-urxclc.js              6.17 kB │ gzip:   2.23 kB
 dist/assets/RuntimePanel-DwORPwBi.js                7.84 kB │ gzip:   2.53 kB
@@ -398,7 +349,7 @@ dist/assets/index-BWgwl8Xj.js                     269.98 kB │ gzip:  83.13 kB
 dist/assets/EditorSpike-DgAR9ut2.js               340.25 kB │ gzip:  65.79 kB
 dist/assets/dist-DRPzMndF.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 187ms
+✓ built in 213ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -406,7 +357,7 @@ dist/assets/dist-DRPzMndF.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.49s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -415,30 +366,45 @@ ABRAXAS PUBLIC REPO GUARD
 ✅ No se detectaron bloqueos para un repo público.
 
 [6/8] Sync generated state
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+Status sincronizado (PROJECT_STATE read-only): ~/Desktop/Abrxs os/site/data/status.json
+ABRAXAS · GENERATED STATE COHERENCE
+===================================
+OK   sync_status does not write PROJECT_STATE
+OK   sync_status does not assign source updatedAt
+OK   PROJECT_STATE valid JSON
+OK   site/data/status valid JSON
+OK   public status exactly projects PROJECT_STATE
+
+OK PROJECT_STATE is semantic source; generated status is output-only.
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260912_012921.txt
+ - docs/evidence/CHECK_20260912_021259.txt
 
 [7/8] Git whitespace FINAL
 
 [8/8] Record successful check
-Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
+Status sincronizado (PROJECT_STATE read-only): ~/Desktop/Abrxs os/site/data/status.json
+ABRAXAS · GENERATED STATE COHERENCE
+===================================
+OK   sync_status does not write PROJECT_STATE
+OK   sync_status does not assign source updatedAt
+OK   PROJECT_STATE valid JSON
+OK   site/data/status valid JSON
+OK   public status exactly projects PROJECT_STATE
+
+OK PROJECT_STATE is semantic source; generated status is output-only.
 ~/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260912_012921.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260912_021259.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 17:41:35 -0400
-v0.9: Tauri Source Playback PASS manual; VideoFlow Tauri ahora usa Apple AVFoundation 960x540 proxy. Última discriminación antes de elegir AVPlayer Preview.
 
 ## 2026-09-11 18:33:21 -0400
 v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con registry/jobs/probe/cut worker.
@@ -466,6 +432,9 @@ v0.18.4: recovered exact Group Ghosts + canonical timeline + contracts.
 
 ## 2026-09-12 01:29:27 -0400
 v0.19.3: canonical editor + projection contract v2 + site status sync.
+
+## 2026-09-12 02:13:04 -0400
+v0.19.3.4: isolated checks are detached-safe and checkout-local; generated status is output-only.
 ```
 
 ## Archivos clave

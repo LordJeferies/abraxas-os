@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import subprocess
 import sys
+import os
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
@@ -69,9 +70,13 @@ else:
         errors.append(f"Versión Node inesperada: {node_out}")
 
 # Git branch / remote.
+allow_isolated = os.environ.get("ABRAXAS_ALLOW_ISOLATED_CHECK") == "1"
 rc, branch, _ = command(["git", "branch", "--show-current"])
 if rc == 0 and branch != "main":
-    errors.append(f"Branch activa inesperada: {branch}")
+    if allow_isolated and branch == "":
+        warnings.append("Detached HEAD permitido sólo para validación aislada.")
+    else:
+        errors.append(f"Branch activa inesperada: {branch}")
 
 rc, origin, _ = command(["git", "remote", "get-url", "origin"])
 expected_origin = "https://github.com/LordJeferies/abraxas-os.git"

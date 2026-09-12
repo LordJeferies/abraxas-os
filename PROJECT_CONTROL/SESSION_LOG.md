@@ -59,3 +59,6 @@ v0.18.4: recovered exact Group Ghosts + canonical timeline + contracts.
 
 ## 2026-09-12 01:29:27 -0400
 v0.19.3: canonical editor + projection contract v2 + site status sync.
+
+## 2026-09-12 02:13:04 -0400
+v0.19.3.4: isolated checks are detached-safe and checkout-local; generated status is output-only.

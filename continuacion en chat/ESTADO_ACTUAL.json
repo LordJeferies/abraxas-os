@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-12T01:29:27-04:00",
+  "generatedAt": "2026-09-12T02:13:04-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.6",
     "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "v0.19.3 integra Ficha Studio, T1-T9 canónico y contrato Alpha -> VideoFlow v2: cada recurso conserva start/end y termina como Group acotado o child nested dentro de su parentResourceId.",
+    "lastCompletedStep": "v0.19.3 canonical editor remains installed; v0.19.3.4 hardens validation/finalization so isolated checks are detached-safe, checkout-local and generated status is output-only.",
     "blockedReason": null,
-    "nextStep": "Validar manualmente paridad de Ficha/Timeline/VideoFlow y luego materializar assets reales dentro de los mismos Group Ghosts.",
-    "updatedAt": "2026-09-12T01:29:27-04:00",
+    "nextStep": "Use the desktop app and complete the manual v0.19.3 functional pass: Ficha Studio, T1-T9 timing gaps, bounded Ghost Groups, nested XR children, floating timeline and edit persistence.",
+    "updatedAt": "2026-09-12T02:13:04-04:00",
     "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
@@ -21,7 +21,7 @@
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-12T01:29:26-04:00"
+      "updatedAt": "2026-09-12T02:13:04-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -121,7 +121,10 @@
       "alphaEditOverlayPersistenceImplemented": true,
       "timelineModuleInProgress": true,
       "inspectorModuleInProgress": true,
-      "v0193ManualFunctionalPass": false
+      "v0193ManualFunctionalPass": false,
+      "isolatedProjectCheckDetachedModeImplemented": true,
+      "projectCheckRootIsCheckoutLocalImplemented": true,
+      "syncStatusOutputOnlyImplemented": true
     }
   },
   "modules": [
@@ -270,9 +273,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/FROM_TO.md\n M PROJECT_CONTROL/GHOST_MODEL.md\n M PROJECT_CONTROL/MODULES.json\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M PROJECT_CONTROL/TIMELINE_MODEL.md\n M app/src/core/alpha/alphaEditorDirectives.ts\n M app/src/core/alpha/alphaTimelineModel.ts\n M app/src/core/alpha/floatingEditorBridge.ts\n M app/src/core/alpha/normalizeAlpha.ts\n M app/src/core/alpha/types.ts\n M app/src/core/alpha/useAlphaStore.ts\n M app/src/core/alpha/videoFlowDraftStore.ts\n M app/src/core/alpha/videoFlowProjection.ts\n M app/src/modules/alpha/AlphaSemanticTimeline.tsx\n M app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n M app/src/modules/alpha/AlphaWorkspace.tsx\n M app/src/modules/alpha/alpha-semantic-timeline.css\n M app/src/modules/alpha/alpha-videoflow-editor.css\n M app/src/modules/alpha/alpha-workspace.css\n M app/src/modules/floating/FloatingWorkspace.tsx\n M app/src/modules/floating/floating-workspace.css\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M docs/architecture/ABRAXAS_OS_MASTER_SPEC.md\n M docs/decisions/DECISIONS.md\n M scripts/check_alpha_ingestion.py\n M scripts/check_ghost_contracts.py\n M scripts/check_project.sh\n M site/data/status.json\n M site/index.html\n?? PROJECT_CONTROL/FICHA_STUDIO.md\n?? app/src/core/alpha/alphaEditStore.ts\n?? app/src/modules/alpha/AlphaFichaStudio.tsx\n?? app/src/modules/alpha/CanonicalTimeline.tsx\n?? app/src/modules/alpha/alpha-ficha-studio.css\n?? app/src/modules/alpha/canonical-timeline.css\n?? contracts/alpha-content-edit.v1.schema.json\n?? contracts/alpha-videoflow-projection.v2.schema.json\n?? contracts/editor-track-slots.v1.schema.json\n?? docs/evidence/CHECK_20260912_011326.txt\n?? docs/evidence/CHECK_20260912_012921.txt\n?? examples/alpha-videoflow-projection.v2.demo.json\n?? examples/canonical-timeline-truth.demo.json\n?? scripts/check_timeline_truth.py",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/DEVELOPMENT_PROTOCOL.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M docs/decisions/DECISIONS.md\n M scripts/check_project.sh\n M scripts/preflight_predictive.py\n M scripts/sync_status.py\n M site/data/status.json\n M site/index.html\n?? docs/evidence/CHECK_20260912_021259.txt\n?? scripts/check_generated_state_coherence.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "a0cfaac chore: sync generated project state\n137a866 fix(timeline): recover exact Group Ghost timing and contracts\n38a12cb chore: sync generated project state\ned4e8b3 feat(editor): add Group Ghosts and floating workspace\n5e4112a chore: sync generated project state"
+    "lastCommits": "f2cb74f feat(editor): canonical timeline projection contract and Ficha Studio\na0cfaac chore: sync generated project state\n137a866 fix(timeline): recover exact Group Ghost timing and contracts\n38a12cb chore: sync generated project state\ned4e8b3 feat(editor): add Group Ghosts and floating workspace"
   },
-  "latestCheck": "docs/evidence/CHECK_20260912_012921.txt"
+  "latestCheck": "docs/evidence/CHECK_20260912_021259.txt"
 }
