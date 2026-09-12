@@ -1,5 +1,10 @@
-import { lazy, Suspense } from 'react'
+import {
+  lazy,
+  Suspense,
+  useEffect,
+} from 'react'
 import { useAppStore } from './core/state/useAppStore'
+import { useAlphaStore } from './core/alpha/useAlphaStore'
 import './App.css'
 
 const AlphaWorkspace = lazy(
@@ -30,6 +35,13 @@ function LoadingModule() {
 export default function App() {
   const view = useAppStore((state) => state.view)
   const setView = useAppStore((state) => state.setView)
+  const hydrateAlpha = useAlphaStore(
+    (state) => state.hydrate
+  )
+
+  useEffect(() => {
+    void hydrateAlpha()
+  }, [hydrateAlpha])
 
   return (
     <main className="app-shell">
@@ -65,13 +77,13 @@ export default function App() {
             className={view === 'editor-spike' ? 'active' : ''}
             onClick={() => setView('editor-spike')}
           >
-            Editor Base
+            Editor
           </button>
         </nav>
 
         <div className="phase">
           F1.6
-          <b>ALPHA INGESTION</b>
+          <b>INTEGRATED ALPHA</b>
         </div>
       </header>
 
@@ -89,7 +101,9 @@ export default function App() {
             }`}
             aria-hidden={view !== 'media-lab'}
           >
-            <MediaCompatibilityLab active={view === 'media-lab'} />
+            <MediaCompatibilityLab
+              active={view === 'media-lab'}
+            />
           </div>
 
           {view === 'runtime' && (

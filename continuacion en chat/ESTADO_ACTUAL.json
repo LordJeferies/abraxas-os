@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-09-11T20:41:03-04:00",
+  "generatedAt": "2026-09-11T21:29:22-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.6",
     "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
+    "lastCompletedStep": "Integrated Alpha -> VideoFlow compila: HTML/JSON crea fichas Alfa persistentes y todas las TimelineDirectives audiovisuales válidas se proyectan como layers Ghost reales en VideoFlow.",
     "blockedReason": null,
-    "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
-    "updatedAt": "2026-09-11T20:41:00-04:00",
+    "nextStep": "Prueba visual con Amanda. Si los Ghost layers aparecen en la timeline real de VideoFlow, comenzar Source Binding + Ghost Materialization.",
+    "updatedAt": "2026-09-11T21:29:22-04:00",
     "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
-      "editorShell": 0,
-      "productionTimeline": 0,
+      "editorShell": 32,
+      "productionTimeline": 22,
       "fastSourceRuntime": 80,
-      "alphaIngestion": 55
+      "alphaIngestion": 88
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T20:40:59-04:00"
+      "updatedAt": "2026-09-11T21:29:22-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -74,7 +74,19 @@
       "alphaViewerWithoutMasterImplemented": true,
       "ghostTimelineFromAlphaImplemented": true,
       "staticVisualGraphImportImplemented": true,
-      "alphaTypeScriptBuildPass": true
+      "alphaTypeScriptBuildPass": true,
+      "alphaGlobalRegistryImplemented": true,
+      "alphaIndexedDbPersistenceImplemented": true,
+      "alphaCrossViewPersistenceImplemented": true,
+      "alphaEditorBridgeImplemented": true,
+      "alphaMultipleDocumentsRegistryImplemented": true,
+      "alphaHtmlToVideoFlowProjectionBuildPass": true,
+      "alphaAllAudiovisualDirectivesProjectToVideoFlow": true,
+      "alphaVideoFlowFrameQuantizationHandled": true,
+      "alphaVideoFlowLayerIdSidecarImplemented": true,
+      "alphaVideoFlowDraftPersistenceImplemented": true,
+      "alphaVideoFlowCandidateBuiltBeforeApply": true,
+      "alphaVideoFlowManualUiPass": false
     }
   },
   "modules": [
@@ -117,7 +129,7 @@
     {
       "id": "editor-shell",
       "name": "Editor Shell",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/editor-shell"
     },
     {
@@ -223,9 +235,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/MODULES.json\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/App.tsx\n M app/src/modules/alpha/AlphaWorkspace.tsx\n M app/src/modules/alpha/alpha-workspace.css\n M app/src/modules/editor-shell/EditorSpike.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_alpha_ingestion.py\n M scripts/check_runtime_ui.py\n M site/data/status.json\n?? app/src/core/alpha/useAlphaStore.ts\n?? app/src/core/alpha/videoFlowDraftStore.ts\n?? app/src/core/alpha/videoFlowProjection.ts\n?? app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n?? app/src/modules/alpha/alpha-videoflow-editor.css\n?? docs/evidence/CHECK_20260911_205157.txt\n?? docs/evidence/CHECK_20260911_212915.txt",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "8424753 feat(alpha): stabilize Story Editor ingestion workspace\nc235c30 chore: sync generated project state\n2563c9a feat(runtime): add source jobs assets bundle\n7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime"
+    "lastCommits": "55fa827 chore: sync generated project state\n8424753 feat(alpha): stabilize Story Editor ingestion workspace\nc235c30 chore: sync generated project state\n2563c9a feat(runtime): add source jobs assets bundle\n7810f59 chore: sync generated project state"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_204054.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_212915.txt"
 }

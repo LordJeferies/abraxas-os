@@ -40,7 +40,7 @@
     {
       "id": "editor-shell",
       "name": "Editor Shell",
-      "status": "pending",
+      "status": "in_progress",
       "path": "app/src/modules/editor-shell"
     },
     {

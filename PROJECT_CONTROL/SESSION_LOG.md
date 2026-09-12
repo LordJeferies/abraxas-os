@@ -41,3 +41,6 @@ v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis
 
 ## 2026-09-11 20:41:00 -0400
 v0.14.3: repara preflight de directorios untracked, TS6133 y completa F1.6 hasta gates verdes.
+
+## 2026-09-11 21:29:22 -0400
+v0.16.4: safe recovery; Alpha fichas + Ghosts project into real VideoFlow after isolated candidate build.

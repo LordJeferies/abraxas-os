@@ -1,22 +1,15 @@
 import type { VideoJSON } from '@videoflow/core'
-import { VideoEditor } from '@videoflow/react-video-editor'
+import {
+  VideoEditor,
+} from '@videoflow/react-video-editor'
 import '@videoflow/react-video-editor/style.css'
+import {
+  useAlphaStore,
+} from '../../core/alpha/useAlphaStore'
+import AlphaVideoFlowEditor from '../alpha/AlphaVideoFlowEditor'
 
-/**
- * IMPORTANTE:
- *
- * `video` se entrega como documento INICIAL al editor.
- * VideoFlow mantiene selección, playhead, history y edición en su store interno.
- *
- * No devolver cada `onChange` inmediatamente a la prop `video`.
- * Hacerlo puede reinyectar el documento mientras el usuario está arrastrando
- * o escribiendo y provocar pérdida de selección/foco/playhead.
- *
- * La persistencia real se implementará en F2 mediante un adapter/autosave
- * que NO rehidrate el editor en cada tecla.
- */
 const initialVideo: VideoJSON = {
-  name: 'Abraxas OS · Editor Spike',
+  name: 'Abraxas OS · Editor',
   width: 1920,
   height: 1080,
   fps: 30,
@@ -26,6 +19,16 @@ const initialVideo: VideoJSON = {
 }
 
 export default function EditorSpike() {
+  const hasAlpha = useAlphaStore(
+    (state) =>
+      state.documents.length > 0
+      && Boolean(state.selectedContentId),
+  )
+
+  if (hasAlpha) {
+    return <AlphaVideoFlowEditor />
+  }
+
   return (
     <section className="editor-spike">
       <VideoEditor

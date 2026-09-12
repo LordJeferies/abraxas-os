@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T20:41:03-04:00
+- Generado: 2026-09-11T21:29:22-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -52,21 +52,51 @@ Fase: F1.6 · Alpha Ingestion & Domain Lock
 F0 Foundation: COMPLETED.
 F1 Media Compatibility: COMPLETED.
 F1.5 Fast Source Runtime: base funcional.
-F1.6 Alpha Ingestion: build técnico aprobado; pendiente validación manual
-con los tres Story Editors reales.
 
-Implementado:
-- HTML/JSON -> AlphaContent;
-- Kanban;
-- visor sin master;
-- Ghost Timeline temporal;
-- vista semántica;
-- XR padre + estados internos;
-- captions / Motion / SFX como pistas;
-- Static Visual Graph para carruseles;
-- preview/diff antes de reimportar.
+## Integrated Alpha -> VideoFlow
 
-Gate actual:
+Flujo compilado:
+
+HTML / JSON
+→ normalizeAlpha
+→ AlphaContent
+→ Content Registry persistente
+→ Production Graph
+→ VideoFlow Projection Adapter
+→ VideoJSON
+→ VideoEditor real
+
+Cada TimelineDirective audiovisual válida genera un layer real de VideoFlow.
+
+Tracks proyectables:
+- STORY
+- A-ROLL
+- VO
+- CAPTIONS
+- XR
+- B-ROLL
+- MOTION
+- TRANSITION
+- SFX
+- MUSIC
+
+Identidad:
+`resourceId <-> VideoFlow layer.id`
+
+Timing:
+Production Graph conserva los tiempos semánticos exactos.
+La proyección de VideoFlow se alinea explícitamente a frames de 30fps.
+
+Persistencia:
+- Content Registry Alfa: IndexedDB
+- draft VideoFlow: IndexedDB separado
+
+Los Ghosts siguen siendo placeholders hasta materializarlos con assets/master.
+
+Pendiente:
+validación visual manual con un Story Editor real.
+
+Gate:
 F1_6_ALPHA_INGESTION_DOMAIN
 
 
@@ -74,39 +104,34 @@ F1_6_ALPHA_INGESTION_DOMAIN
 
 # Próximo paso
 
-## Prueba manual F1.6
+## Prueba visual final de F1.6
 
-`./scripts/abraxas desktop`
-
-Abrir:
-
-`F1.6 · Alpha`
-
-Importar en este orden:
-
-1. JOC55 Amanda R10.1.
-2. JOC 3 llamadas.
-3. JOC Semanas 1-2.
-
-Verificar:
-- fichas Kanban;
-- A-roll visible como texto sin master;
-- captions;
-- XR padre + estados internos;
-- Motion;
-- SFX;
-- timeline temporal;
-- timeline semántica;
-- carruseles como Static Visual Graph;
-- reimportación muestra diff antes de aplicar.
+1. `./scripts/abraxas desktop`
+2. abrir `F1.6 · Alpha`
+3. importar Amanda R10.1 si no está persistida
+4. confirmar las fichas Alfa
+5. abrir una ficha VIDEO con `Editar →`
+6. debe abrir el VideoEditor real
+7. la timeline de VideoFlow debe contener los Ghost layers importados del Alfa
+8. deben aparecer placeholders con 👻
+9. cambiar a otra ficha desde el selector del Editor
+10. salir y volver al Editor
+11. el draft debe persistir
+12. `Regenerar desde Alfa` debe reconstruir el VideoJSON canónico
 
 ## Después
 
-1. persistencia SQLite privada del Alfa;
-2. source binding manual/automático vertical/horizontal;
-3. drag/drop Finder -> Ghost/Timeline;
-4. transcript worker real con whisper-cli;
-5. cerrar F1.6 y abrir F2/F3.
+1. vincular master vertical/horizontal
+2. A-roll Ghost -> clip master real
+3. XR Ghost -> imágenes/video/grupo
+4. B-roll Ghost -> clip real
+5. SFX Ghost -> audio real
+6. captions -> CaptionsLayer real
+7. Motion -> keyframes/animations
+8. Global Drop Router Finder/Asset Library -> Ghost
+9. sync VideoFlow -> Production Graph
+10. SQLite privado
+11. whisper-cli real
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -155,22 +180,22 @@ roadmap de la aplicación.
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
+  "lastCompletedStep": "Integrated Alpha -> VideoFlow compila: HTML/JSON crea fichas Alfa persistentes y todas las TimelineDirectives audiovisuales válidas se proyectan como layers Ghost reales en VideoFlow.",
   "blockedReason": null,
-  "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
-  "updatedAt": "2026-09-11T20:41:00-04:00",
+  "nextStep": "Prueba visual con Amanda. Si los Ghost layers aparecen en la timeline real de VideoFlow, comenzar Source Binding + Ghost Materialization.",
+  "updatedAt": "2026-09-11T21:29:22-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 0,
-    "productionTimeline": 0,
+    "editorShell": 32,
+    "productionTimeline": 22,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 55
+    "alphaIngestion": 88
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T20:40:59-04:00"
+    "updatedAt": "2026-09-11T21:29:22-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -223,7 +248,19 @@ roadmap de la aplicación.
     "alphaViewerWithoutMasterImplemented": true,
     "ghostTimelineFromAlphaImplemented": true,
     "staticVisualGraphImportImplemented": true,
-    "alphaTypeScriptBuildPass": true
+    "alphaTypeScriptBuildPass": true,
+    "alphaGlobalRegistryImplemented": true,
+    "alphaIndexedDbPersistenceImplemented": true,
+    "alphaCrossViewPersistenceImplemented": true,
+    "alphaEditorBridgeImplemented": true,
+    "alphaMultipleDocumentsRegistryImplemented": true,
+    "alphaHtmlToVideoFlowProjectionBuildPass": true,
+    "alphaAllAudiovisualDirectivesProjectToVideoFlow": true,
+    "alphaVideoFlowFrameQuantizationHandled": true,
+    "alphaVideoFlowLayerIdSidecarImplemented": true,
+    "alphaVideoFlowDraftPersistenceImplemented": true,
+    "alphaVideoFlowCandidateBuiltBeforeApply": true,
+    "alphaVideoFlowManualUiPass": false
   }
 }
 ```
@@ -238,7 +275,7 @@ roadmap de la aplicación.
 | alpha-ingestion | Alpha Ingestion & Domain Lock | in_progress | app/src/modules/alpha |
 | proven-cut-engine | Proven Cut Engine · FFmpeg + VideoToolbox | in_progress | scripts/abraxas_media_engine.py |
 | media-lab | Media Compatibility Lab | completed | app/src/modules/media-lab |
-| editor-shell | Editor Shell | pending | app/src/modules/editor-shell |
+| editor-shell | Editor Shell | in_progress | app/src/modules/editor-shell |
 | timeline | Production Timeline | pending | app/src/modules/timeline |
 | inspector | Inspector | pending | app/src/modules/inspector |
 | xr-studio | XR Studio | pending | app/src/modules/xr-studio |
@@ -275,6 +312,29 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/MODULES.json
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src/App.tsx
+ M app/src/modules/alpha/AlphaWorkspace.tsx
+ M app/src/modules/alpha/alpha-workspace.css
+ M app/src/modules/editor-shell/EditorSpike.tsx
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/check_alpha_ingestion.py
+ M scripts/check_runtime_ui.py
+ M site/data/status.json
+?? app/src/core/alpha/useAlphaStore.ts
+?? app/src/core/alpha/videoFlowDraftStore.ts
+?? app/src/core/alpha/videoFlowProjection.ts
+?? app/src/modules/alpha/AlphaVideoFlowEditor.tsx
+?? app/src/modules/alpha/alpha-videoflow-editor.css
+?? docs/evidence/CHECK_20260911_205157.txt
+?? docs/evidence/CHECK_20260911_212915.txt
 ```
 
 ### Remote
@@ -287,21 +347,21 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+55fa827 chore: sync generated project state
 8424753 feat(alpha): stabilize Story Editor ingestion workspace
 c235c30 chore: sync generated project state
 2563c9a feat(runtime): add source jobs assets bundle
 7810f59 chore: sync generated project state
-d66dd7a feat(runtime): close F1 and add fast source job runtime
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_204054.txt`
+`docs/evidence/CHECK_20260911_212915.txt`
 
 ```text
 
-OK Alpha Ingestion wiring.
+OK HTML Alpha -> fichas -> Ghost layers -> real VideoFlow editor.
 
 [3/8] TypeScript + Vite
 
@@ -310,24 +370,24 @@ OK Alpha Ingestion wiring.
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 210 modules transformed.
+✓ 215 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/index.html                                     0.45 kB │ gzip:   0.28 kB
 dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
+dist/assets/AlphaWorkspace-DnddpBeD.css             4.42 kB │ gzip:   1.35 kB
 dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
-dist/assets/AlphaWorkspace-C--cLnza.css            11.23 kB │ gzip:   2.86 kB
-dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
+dist/assets/EditorSpike-J7ZKtVHS.css               50.31 kB │ gzip:   7.06 kB
 dist/assets/dist-js-D0VCXaEV.js                     0.26 kB │ gzip:   0.21 kB
-dist/assets/RuntimePanel-JwHgy4pn.js                7.83 kB │ gzip:   2.53 kB
-dist/assets/MediaCompatibilityLab-DlLjk7kL.js      14.55 kB │ gzip:   5.22 kB
-dist/assets/AlphaWorkspace-CmqR6Oes.js             24.46 kB │ gzip:   7.88 kB
-dist/assets/index-PMGYhBeH.js                     224.69 kB │ gzip:  70.54 kB
-dist/assets/EditorSpike-BqgdkGsN.js               329.07 kB │ gzip:  62.35 kB
-dist/assets/dist-Bvlp1drt.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/RuntimePanel-aKG1NMNU.js                7.84 kB │ gzip:   2.52 kB
+dist/assets/MediaCompatibilityLab-Df1Zog2c.js      14.56 kB │ gzip:   5.22 kB
+dist/assets/AlphaWorkspace-DrtmVAyE.js             16.02 kB │ gzip:   5.73 kB
+dist/assets/index-auCEDnzv.js                     228.32 kB │ gzip:  71.63 kB
+dist/assets/EditorSpike-DPzIfqQ4.js               336.27 kB │ gzip:  64.65 kB
+dist/assets/dist-DrSIJS-2.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 224ms
+✓ built in 296ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -335,7 +395,7 @@ dist/assets/dist-Bvlp1drt.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -349,7 +409,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_204054.txt
+ - docs/evidence/CHECK_20260911_212915.txt
 
 [7/8] Git whitespace FINAL
 
@@ -359,15 +419,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_204054.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_212915.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 15:19:02 -0400
-v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.
 
 ## 2026-09-11 16:05:29 -0400
 v0.7: Browser Blob URL corregido; reportes F1 v2 y consolidador Browser/Tauri agregados. Sitio congelado hasta F1/F2.
@@ -395,6 +452,9 @@ v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis
 
 ## 2026-09-11 20:41:00 -0400
 v0.14.3: repara preflight de directorios untracked, TS6133 y completa F1.6 hasta gates verdes.
+
+## 2026-09-11 21:29:22 -0400
+v0.16.4: safe recovery; Alpha fichas + Ghosts project into real VideoFlow after isolated candidate build.
 ```
 
 ## Archivos clave

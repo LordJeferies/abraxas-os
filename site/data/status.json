@@ -4,22 +4,22 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
+  "lastCompletedStep": "Integrated Alpha -> VideoFlow compila: HTML/JSON crea fichas Alfa persistentes y todas las TimelineDirectives audiovisuales válidas se proyectan como layers Ghost reales en VideoFlow.",
   "blockedReason": null,
-  "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
-  "updatedAt": "2026-09-11T20:41:00-04:00",
+  "nextStep": "Prueba visual con Amanda. Si los Ghost layers aparecen en la timeline real de VideoFlow, comenzar Source Binding + Ghost Materialization.",
+  "updatedAt": "2026-09-11T21:29:22-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 0,
-    "productionTimeline": 0,
+    "editorShell": 32,
+    "productionTimeline": 22,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 55
+    "alphaIngestion": 88
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T20:40:59-04:00"
+    "updatedAt": "2026-09-11T21:29:22-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -72,6 +72,18 @@
     "alphaViewerWithoutMasterImplemented": true,
     "ghostTimelineFromAlphaImplemented": true,
     "staticVisualGraphImportImplemented": true,
-    "alphaTypeScriptBuildPass": true
+    "alphaTypeScriptBuildPass": true,
+    "alphaGlobalRegistryImplemented": true,
+    "alphaIndexedDbPersistenceImplemented": true,
+    "alphaCrossViewPersistenceImplemented": true,
+    "alphaEditorBridgeImplemented": true,
+    "alphaMultipleDocumentsRegistryImplemented": true,
+    "alphaHtmlToVideoFlowProjectionBuildPass": true,
+    "alphaAllAudiovisualDirectivesProjectToVideoFlow": true,
+    "alphaVideoFlowFrameQuantizationHandled": true,
+    "alphaVideoFlowLayerIdSidecarImplemented": true,
+    "alphaVideoFlowDraftPersistenceImplemented": true,
+    "alphaVideoFlowCandidateBuiltBeforeApply": true,
+    "alphaVideoFlowManualUiPass": false
   }
 }
