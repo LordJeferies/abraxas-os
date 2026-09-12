@@ -38,3 +38,6 @@ v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con r
 
 ## 2026-09-11 18:48:42 -0400
 v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis adapters.
+
+## 2026-09-11 20:41:00 -0400
+v0.14.3: repara preflight de directorios untracked, TS6133 y completa F1.6 hasta gates verdes.

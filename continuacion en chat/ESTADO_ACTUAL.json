@@ -1,26 +1,27 @@
 {
-  "generatedAt": "2026-09-11T18:48:46-04:00",
+  "generatedAt": "2026-09-11T20:41:00-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
-    "currentPhase": "F1.5",
-    "phaseName": "Fast Source Runtime & Proven Cut Engine",
+    "currentPhase": "F1.6",
+    "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "Sources/Jobs/Assets integrado en Tauri UI; atomic jobs, thumbnail/waveform workers y Asset Library base pasan self-test.",
+    "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
     "blockedReason": null,
-    "nextStep": "Activar backend real de transcripción y proveedor de análisis semántico; después comenzar F2 Editor Shell.",
-    "updatedAt": "2026-09-11T18:48:42-04:00",
-    "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
+    "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
+    "updatedAt": "2026-09-11T20:41:00-04:00",
+    "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
       "editorShell": 0,
       "productionTimeline": 0,
-      "fastSourceRuntime": 80
+      "fastSourceRuntime": 80,
+      "alphaIngestion": 55
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T18:48:42-04:00"
+      "updatedAt": "2026-09-11T20:40:59-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -66,7 +67,14 @@
       "waveformWorkerSelfTestPass": true,
       "assetLibraryBaseImplemented": true,
       "transcriptionAdapterImplemented": true,
-      "analysisAdapterImplemented": true
+      "analysisAdapterImplemented": true,
+      "alphaImportEnvelopeImplemented": true,
+      "alphaHtmlImportImplemented": true,
+      "alphaReimportDiffImplemented": true,
+      "alphaViewerWithoutMasterImplemented": true,
+      "ghostTimelineFromAlphaImplemented": true,
+      "staticVisualGraphImportImplemented": true,
+      "alphaTypeScriptBuildPass": true
     }
   },
   "modules": [
@@ -79,7 +87,7 @@
     {
       "id": "domain",
       "name": "Core Domain / Production Graph",
-      "status": "started",
+      "status": "in_progress",
       "path": "contracts"
     },
     {
@@ -87,6 +95,12 @@
       "name": "Fast Source Runtime",
       "status": "in_progress",
       "path": "app/src/core/media"
+    },
+    {
+      "id": "alpha-ingestion",
+      "name": "Alpha Ingestion & Domain Lock",
+      "status": "in_progress",
+      "path": "app/src/modules/alpha"
     },
     {
       "id": "proven-cut-engine",
@@ -209,9 +223,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/MODULES.json\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/App.tsx\n M app/src/core/state/useAppStore.ts\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_project.sh\n M site/data/status.json\n?? app/src/core/alpha/\n?? app/src/modules/alpha/\n?? contracts/alpha-content.v1.schema.json\n?? contracts/alpha-import-envelope.v1.schema.json\n?? docs/evidence/CHECK_20260911_204054.txt\n?? scripts/check_alpha_ingestion.py",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "2563c9a feat(runtime): add source jobs assets bundle\n7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow\n34a6721 fix(f1): use loopback HTTP range bridge for Tauri media"
+    "lastCommits": "c235c30 chore: sync generated project state\n2563c9a feat(runtime): add source jobs assets bundle\n7810f59 chore: sync generated project state\nd66dd7a feat(runtime): close F1 and add fast source job runtime\nd265495 feat(media): add Apple preview proxies for Tauri VideoFlow"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_184838.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_204054.txt"
 }

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/alpha-content.v1.schema.json",
+  "title": "Abraxas Alpha Content v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "contentId",
+    "revisionId",
+    "title",
+    "contentType",
+    "timelineDirectives"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.alpha-content.v1"
+    },
+    "contentId": {
+      "type": "string"
+    },
+    "revisionId": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "contentType": {
+      "enum": [
+        "video",
+        "static",
+        "other"
+      ]
+    },
+    "orientation": {
+      "type": "string"
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timelineDirectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "resourceId",
+          "type",
+          "track",
+          "state",
+          "start",
+          "end"
+        ]
+      }
+    },
+    "staticGraph": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "sourcePayload": {
+      "type": "object"
+    }
+  }
+}

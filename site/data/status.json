@@ -1,24 +1,25 @@
 {
   "project": "Abraxas OS",
   "schemaVersion": "abraxas.project-state.v1",
-  "currentPhase": "F1.5",
-  "phaseName": "Fast Source Runtime & Proven Cut Engine",
+  "currentPhase": "F1.6",
+  "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Sources/Jobs/Assets integrado en Tauri UI; atomic jobs, thumbnail/waveform workers y Asset Library base pasan self-test.",
+  "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
   "blockedReason": null,
-  "nextStep": "Activar backend real de transcripción y proveedor de análisis semántico; después comenzar F2 Editor Shell.",
-  "updatedAt": "2026-09-11T18:48:42-04:00",
-  "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
+  "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
+  "updatedAt": "2026-09-11T20:41:00-04:00",
+  "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
     "editorShell": 0,
     "productionTimeline": 0,
-    "fastSourceRuntime": 80
+    "fastSourceRuntime": 80,
+    "alphaIngestion": 55
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T18:48:42-04:00"
+    "updatedAt": "2026-09-11T20:40:59-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -64,6 +65,13 @@
     "waveformWorkerSelfTestPass": true,
     "assetLibraryBaseImplemented": true,
     "transcriptionAdapterImplemented": true,
-    "analysisAdapterImplemented": true
+    "analysisAdapterImplemented": true,
+    "alphaImportEnvelopeImplemented": true,
+    "alphaHtmlImportImplemented": true,
+    "alphaReimportDiffImplemented": true,
+    "alphaViewerWithoutMasterImplemented": true,
+    "ghostTimelineFromAlphaImplemented": true,
+    "staticVisualGraphImportImplemented": true,
+    "alphaTypeScriptBuildPass": true
   }
 }

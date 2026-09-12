@@ -1,40 +1,23 @@
 # Estado actual
 
-## F0 Foundation
-COMPLETED.
+Fase: F1.6 · Alpha Ingestion & Domain Lock
 
-## F1 Media Compatibility
-IN PROGRESS.
+F0 Foundation: COMPLETED.
+F1 Media Compatibility: COMPLETED.
+F1.5 Fast Source Runtime: base funcional.
+F1.6 Alpha Ingestion: build técnico aprobado; pendiente validación manual
+con los tres Story Editors reales.
 
-Confirmado manualmente:
+Implementado:
+- HTML/JSON -> AlphaContent;
+- Kanban;
+- visor sin master;
+- Ghost Timeline temporal;
+- vista semántica;
+- XR padre + estados internos;
+- captions / Motion / SFX como pistas;
+- Static Visual Graph para carruseles;
+- preview/diff antes de reimportar.
 
-- Browser carga video real;
-- video se visualiza;
-- Play funciona;
-- Pause funciona.
-
-Corregido:
-
-- scroll del Media Compatibility Lab;
-- lifecycle del Blob URL;
-- separación de reports Browser/Tauri.
-
-Pendiente para cerrar F1:
-
-- run Browser horizontal;
-- run Browser vertical;
-- run Tauri horizontal;
-- run Tauri vertical;
-- consolidar con `./scripts/abraxas f1-validate`.
-
-## Editor Base
-
-El comportamiento extraño de selección/texto no se ignora.
-
-Encontramos un anti-patrón en nuestro wrapper:
-`onChange={setVideo}` reinyectaba el VideoJSON al editor después de cada cambio.
-
-El spike fue simplificado para dejar que VideoFlow mantenga selección,
-playhead e history en su store interno.
-
-Esto se vuelve a probar antes de construir F2.
+Gate actual:
+F1_6_ALPHA_INGESTION_DOMAIN

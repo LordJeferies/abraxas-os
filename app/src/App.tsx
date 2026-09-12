@@ -2,6 +2,10 @@ import { lazy, Suspense } from 'react'
 import { useAppStore } from './core/state/useAppStore'
 import './App.css'
 
+const AlphaWorkspace = lazy(
+  () => import('./modules/alpha/AlphaWorkspace')
+)
+
 const MediaCompatibilityLab = lazy(
   () => import('./modules/media-lab/MediaCompatibilityLab')
 )
@@ -40,6 +44,12 @@ export default function App() {
 
         <nav className="app-nav">
           <button
+            className={view === 'alpha' ? 'active' : ''}
+            onClick={() => setView('alpha')}
+          >
+            F1.6 · Alpha
+          </button>
+          <button
             className={view === 'runtime' ? 'active' : ''}
             onClick={() => setView('runtime')}
           >
@@ -60,13 +70,19 @@ export default function App() {
         </nav>
 
         <div className="phase">
-          F1.5
-          <b>FAST SOURCE RUNTIME</b>
+          F1.6
+          <b>ALPHA INGESTION</b>
         </div>
       </header>
 
       <section className="workspace">
         <Suspense fallback={<LoadingModule />}>
+          {view === 'alpha' && (
+            <div className="workspace-pane is-active">
+              <AlphaWorkspace />
+            </div>
+          )}
+
           <div
             className={`workspace-pane ${
               view === 'media-lab' ? 'is-active' : 'is-hidden'

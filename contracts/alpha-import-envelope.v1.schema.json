@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abraxas.local/contracts/alpha-import-envelope.v1.schema.json",
+  "title": "Abraxas Alpha Import Envelope v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "documentId",
+    "identityKey",
+    "sourceFamily",
+    "contents"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "abraxas.alpha-import-envelope.v1"
+    },
+    "documentId": {
+      "type": "string"
+    },
+    "identityKey": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "sourceFamily": {
+      "type": "string"
+    },
+    "sourceFormat": {
+      "type": "string"
+    },
+    "sourceName": {
+      "type": "string"
+    },
+    "contents": {
+      "type": "array",
+      "items": {
+        "$ref": "alpha-content.v1.schema.json"
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@
     {
       "id": "domain",
       "name": "Core Domain / Production Graph",
-      "status": "started",
+      "status": "in_progress",
       "path": "contracts"
     },
     {
@@ -18,6 +18,12 @@
       "name": "Fast Source Runtime",
       "status": "in_progress",
       "path": "app/src/core/media"
+    },
+    {
+      "id": "alpha-ingestion",
+      "name": "Alpha Ingestion & Domain Lock",
+      "status": "in_progress",
+      "path": "app/src/modules/alpha"
     },
     {
       "id": "proven-cut-engine",

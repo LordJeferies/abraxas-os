@@ -79,6 +79,9 @@ echo
 echo "[2f/8] F1.5 bundle wiring"
 python3 "$ROOT/scripts/check_runtime_ui.py"
 echo
+echo "[2g/8] Alpha Ingestion"
+python3 "$ROOT/scripts/check_alpha_ingestion.py"
+echo
 echo "[3/8] TypeScript + Vite"
 cd "$APP"
 npm run build

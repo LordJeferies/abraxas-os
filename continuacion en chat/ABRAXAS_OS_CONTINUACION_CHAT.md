@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T18:48:46-04:00
+- Generado: 2026-09-11T20:41:00-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -47,81 +47,66 @@ XR es una secuencia visual compuesta que puede contener varios estados/assets.
 
 # Estado actual
 
-## F0 Foundation
-COMPLETED.
+Fase: F1.6 · Alpha Ingestion & Domain Lock
 
-## F1 Media Compatibility
-IN PROGRESS.
+F0 Foundation: COMPLETED.
+F1 Media Compatibility: COMPLETED.
+F1.5 Fast Source Runtime: base funcional.
+F1.6 Alpha Ingestion: build técnico aprobado; pendiente validación manual
+con los tres Story Editors reales.
 
-Confirmado manualmente:
+Implementado:
+- HTML/JSON -> AlphaContent;
+- Kanban;
+- visor sin master;
+- Ghost Timeline temporal;
+- vista semántica;
+- XR padre + estados internos;
+- captions / Motion / SFX como pistas;
+- Static Visual Graph para carruseles;
+- preview/diff antes de reimportar.
 
-- Browser carga video real;
-- video se visualiza;
-- Play funciona;
-- Pause funciona.
-
-Corregido:
-
-- scroll del Media Compatibility Lab;
-- lifecycle del Blob URL;
-- separación de reports Browser/Tauri.
-
-Pendiente para cerrar F1:
-
-- run Browser horizontal;
-- run Browser vertical;
-- run Tauri horizontal;
-- run Tauri vertical;
-- consolidar con `./scripts/abraxas f1-validate`.
-
-## Editor Base
-
-El comportamiento extraño de selección/texto no se ignora.
-
-Encontramos un anti-patrón en nuestro wrapper:
-`onChange={setVideo}` reinyectaba el VideoJSON al editor después de cada cambio.
-
-El spike fue simplificado para dejar que VideoFlow mantenga selección,
-playhead e history en su store interno.
-
-Esto se vuelve a probar antes de construir F2.
+Gate actual:
+F1_6_ALPHA_INGESTION_DOMAIN
 
 
 ## Próximo paso
 
 # Próximo paso
 
-## F1
-COMPLETED.
-
-## F1.5 implementado
-
-- Source Registry.
-- Proven Cut Engine.
-- Background Job Queue con claim atómico.
-- Thumbnail worker.
-- Waveform coarse worker.
-- Asset Library base.
-- Sources / Jobs / Assets UI dentro de Tauri.
-- Adapter de transcripción con autodetección de backend.
-- Adapter de análisis semántico por configuración.
-
-## Probar
+## Prueba manual F1.6
 
 `./scripts/abraxas desktop`
 
-Abrir `F1.5 · Sources & Jobs`.
+Abrir:
 
-Registrar un master y pulsar `Prepare timeline`.
-Agregar una carpeta de fotos/video/audio con `+ Carpeta de assets`.
+`F1.6 · Alpha`
 
-## Siguiente
+Importar en este orden:
 
-Activar un backend real de transcripción y un proveedor de análisis semántico.
-No se instala un modelo pesado a ciegas: el runtime detecta backends disponibles
-y deja esos jobs en `blocked` mientras no haya uno configurado.
+1. JOC55 Amanda R10.1.
+2. JOC 3 llamadas.
+3. JOC Semanas 1-2.
 
-Después comienza F2 Editor Shell.
+Verificar:
+- fichas Kanban;
+- A-roll visible como texto sin master;
+- captions;
+- XR padre + estados internos;
+- Motion;
+- SFX;
+- timeline temporal;
+- timeline semántica;
+- carruseles como Static Visual Graph;
+- reimportación muestra diff antes de aplicar.
+
+## Después
+
+1. persistencia SQLite privada del Alfa;
+2. source binding manual/automático vertical/horizontal;
+3. drag/drop Finder -> Ghost/Timeline;
+4. transcript worker real con whisper-cli;
+5. cerrar F1.6 y abrir F2/F3.
 
 
 ## De dónde venimos / hacia dónde vamos
@@ -167,24 +152,25 @@ roadmap de la aplicación.
 {
   "project": "Abraxas OS",
   "schemaVersion": "abraxas.project-state.v1",
-  "currentPhase": "F1.5",
-  "phaseName": "Fast Source Runtime & Proven Cut Engine",
+  "currentPhase": "F1.6",
+  "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Sources/Jobs/Assets integrado en Tauri UI; atomic jobs, thumbnail/waveform workers y Asset Library base pasan self-test.",
+  "lastCompletedStep": "F1.6 compila: HTML/JSON Alpha Import, Kanban, visor sin master, Ghost Timeline temporal/semántica y Static Visual Graph.",
   "blockedReason": null,
-  "nextStep": "Activar backend real de transcripción y proveedor de análisis semántico; después comenzar F2 Editor Shell.",
-  "updatedAt": "2026-09-11T18:48:42-04:00",
-  "releaseGate": "F1_REAL_MEDIA_PLAYBACK",
+  "nextStep": "Validar los tres Story Editors reales; luego persistencia SQLite del Alfa, source binding y drag/drop Finder -> Ghost/Timeline.",
+  "updatedAt": "2026-09-11T20:41:00-04:00",
+  "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
     "editorShell": 0,
     "productionTimeline": 0,
-    "fastSourceRuntime": 80
+    "fastSourceRuntime": 80,
+    "alphaIngestion": 55
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T18:48:42-04:00"
+    "updatedAt": "2026-09-11T20:40:59-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -230,7 +216,14 @@ roadmap de la aplicación.
     "waveformWorkerSelfTestPass": true,
     "assetLibraryBaseImplemented": true,
     "transcriptionAdapterImplemented": true,
-    "analysisAdapterImplemented": true
+    "analysisAdapterImplemented": true,
+    "alphaImportEnvelopeImplemented": true,
+    "alphaHtmlImportImplemented": true,
+    "alphaReimportDiffImplemented": true,
+    "alphaViewerWithoutMasterImplemented": true,
+    "ghostTimelineFromAlphaImplemented": true,
+    "staticVisualGraphImportImplemented": true,
+    "alphaTypeScriptBuildPass": true
   }
 }
 ```
@@ -240,8 +233,9 @@ roadmap de la aplicación.
 | ID | Módulo | Estado | Ruta |
 |---|---|---|---|
 | foundation | Foundation | completed | PROJECT_CONTROL |
-| domain | Core Domain / Production Graph | started | contracts |
+| domain | Core Domain / Production Graph | in_progress | contracts |
 | fast-source-runtime | Fast Source Runtime | in_progress | app/src/core/media |
+| alpha-ingestion | Alpha Ingestion & Domain Lock | in_progress | app/src/modules/alpha |
 | proven-cut-engine | Proven Cut Engine · FFmpeg + VideoToolbox | in_progress | scripts/abraxas_media_engine.py |
 | media-lab | Media Compatibility Lab | completed | app/src/modules/media-lab |
 | editor-shell | Editor Shell | pending | app/src/modules/editor-shell |
@@ -281,6 +275,25 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
+ M PROJECT_CONTROL/CURRENT_STATUS.md
+ M PROJECT_CONTROL/MODULES.json
+ M PROJECT_CONTROL/NEXT_STEP.md
+ M PROJECT_CONTROL/PROJECT_STATE.json
+ M PROJECT_CONTROL/SESSION_LOG.md
+ M app/src/App.tsx
+ M app/src/core/state/useAppStore.ts
+ M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
+ M "continuacion en chat/ESTADO_ACTUAL.json"
+ M "continuacion en chat/ULTIMO_CHECK.txt"
+ M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
+ M scripts/check_project.sh
+ M site/data/status.json
+?? app/src/core/alpha/
+?? app/src/modules/alpha/
+?? contracts/alpha-content.v1.schema.json
+?? contracts/alpha-import-envelope.v1.schema.json
+?? docs/evidence/CHECK_20260911_204054.txt
+?? scripts/check_alpha_ingestion.py
 ```
 
 ### Remote
@@ -293,23 +306,21 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+c235c30 chore: sync generated project state
 2563c9a feat(runtime): add source jobs assets bundle
 7810f59 chore: sync generated project state
 d66dd7a feat(runtime): close F1 and add fast source job runtime
 d265495 feat(media): add Apple preview proxies for Tauri VideoFlow
-34a6721 fix(f1): use loopback HTTP range bridge for Tauri media
 ```
 
 ## Último check autoritativo
 
 Archivo:
-`docs/evidence/CHECK_20260911_184838.txt`
+`docs/evidence/CHECK_20260911_204054.txt`
 
 ```text
-OK   Runtime source registration
-OK   Runtime asset indexing
 
-OK F1.5 bundle wiring.
+OK Alpha Ingestion wiring.
 
 [3/8] TypeScript + Vite
 
@@ -318,22 +329,24 @@ OK F1.5 bundle wiring.
 
 vite v8.3.0 building client environment for production...
 transforming...
-✓ 207 modules transformed.
+✓ 210 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                     0.45 kB │ gzip:   0.28 kB
+dist/index.html                                     0.45 kB │ gzip:   0.29 kB
 dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
 dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
 dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
+dist/assets/AlphaWorkspace-C--cLnza.css            11.23 kB │ gzip:   2.86 kB
 dist/assets/EditorSpike-DfuJObso.css               48.48 kB │ gzip:   6.59 kB
 dist/assets/dist-js-D0VCXaEV.js                     0.26 kB │ gzip:   0.21 kB
-dist/assets/RuntimePanel-BsCmfKhC.js                7.83 kB │ gzip:   2.53 kB
-dist/assets/MediaCompatibilityLab-Dz18yXrt.js      14.55 kB │ gzip:   5.22 kB
-dist/assets/index-f03Z41by.js                     224.34 kB │ gzip:  70.46 kB
-dist/assets/EditorSpike-CVWr7rbV.js               329.07 kB │ gzip:  62.35 kB
-dist/assets/dist-dsg4UZeG.js                    1,704.83 kB │ gzip: 358.93 kB
+dist/assets/RuntimePanel-JwHgy4pn.js                7.83 kB │ gzip:   2.53 kB
+dist/assets/MediaCompatibilityLab-DlLjk7kL.js      14.55 kB │ gzip:   5.22 kB
+dist/assets/AlphaWorkspace-CmqR6Oes.js             24.46 kB │ gzip:   7.88 kB
+dist/assets/index-PMGYhBeH.js                     224.69 kB │ gzip:  70.54 kB
+dist/assets/EditorSpike-BqgdkGsN.js               329.07 kB │ gzip:  62.35 kB
+dist/assets/dist-Bvlp1drt.js                    1,704.83 kB │ gzip: 358.93 kB
 
-✓ built in 185ms
+✓ built in 224ms
 [plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
@@ -341,7 +354,7 @@ dist/assets/dist-dsg4UZeG.js                    1,704.83 kB │ gzip: 358.93 kB
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 [4/8] Rust / Tauri
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
 
 [5/8] Public repo guard
 ABRAXAS PUBLIC REPO GUARD
@@ -355,7 +368,7 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
       NORMALIZED:
  - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
  - continuacion en chat/ULTIMO_CHECK.txt
- - docs/evidence/CHECK_20260911_184838.txt
+ - docs/evidence/CHECK_20260911_204054.txt
 
 [7/8] Git whitespace FINAL
 
@@ -365,15 +378,12 @@ Status sincronizado: ~/Desktop/Abrxs os/site/data/status.json
 ✅ Generated/evidence text already normalized.
 
 ✅ PROJECT CHECK PASSED
-Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_184838.txt
+Log: ~/Desktop/Abrxs os/docs/evidence/CHECK_20260911_204054.txt
 ```
 
 ## Última actividad
 
 ```text
-
-## 2026-09-11 14:50:04 -0400
-GitHub public push corregido con scope workflow. Repo publicado; siguiente F1 Media Compatibility Lab.
 
 ## 2026-09-11 15:19:02 -0400
 v0.5.2: pipeline predictivo/higiene agregado. Frontend y Tauri pasan. Próximo: cuatro runs reales F1.
@@ -401,6 +411,9 @@ v0.12: F1 cerrado por atestación manual; Fast Source Runtime implementado con r
 
 ## 2026-09-11 18:48:42 -0400
 v0.13: Sources/Jobs/Assets UI + thumbnail/waveform workers + transcript/analysis adapters.
+
+## 2026-09-11 20:41:00 -0400
+v0.14.3: repara preflight de directorios untracked, TS6133 y completa F1.6 hasta gates verdes.
 ```
 
 ## Archivos clave

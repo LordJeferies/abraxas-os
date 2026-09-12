@@ -1,6 +1,10 @@
 import { create } from 'zustand'
 
-export type AppView = 'media-lab' | 'runtime' | 'editor-spike'
+export type AppView =
+  | 'alpha'
+  | 'media-lab'
+  | 'runtime'
+  | 'editor-spike'
 
 interface AppState {
   view: AppView
@@ -8,6 +12,6 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  view: 'runtime',
+  view: 'alpha',
   setView: (view) => set({ view }),
 }))
