@@ -44,3 +44,6 @@ v0.14.3: repara preflight de directorios untracked, TS6133 y completa F1.6 hasta
 
 ## 2026-09-11 21:29:22 -0400
 v0.16.4: safe recovery; Alpha fichas + Ghosts project into real VideoFlow after isolated candidate build.
+
+## 2026-09-11 22:30:10 -0400
+v0.17.3: audited one-ficha route-aware semantic VideoFlow.

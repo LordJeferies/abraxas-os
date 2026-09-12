@@ -6,48 +6,47 @@ F0 Foundation: COMPLETED.
 F1 Media Compatibility: COMPLETED.
 F1.5 Fast Source Runtime: base funcional.
 
-## Integrated Alpha -> VideoFlow
+## Audited one-ficha VideoFlow
 
-Flujo compilado:
+El importador HTML/JSON, el Content Registry y useAlphaStore se preservaron.
+
+El Editor ahora interpreta `sourcePayload.timeline` mediante un adapter
+específico de edición sin reescribir el normalizador estable.
+
+Flujo:
 
 HTML / JSON
-→ normalizeAlpha
-→ AlphaContent
-→ Content Registry persistente
-→ Production Graph
-→ VideoFlow Projection Adapter
+→ AlphaContent persistente
+→ seleccionar UNA ficha
+→ seleccionar UNA ruta
+→ EditorDirective[]
 → VideoJSON
 → VideoEditor real
+→ Timeline semántico dentro del propio VideoEditor
 
-Cada TimelineDirective audiovisual válida genera un layer real de VideoFlow.
+Una ficha activa produce un solo VideoJSON.
 
-Tracks proyectables:
-- STORY
-- A-ROLL
-- VO
-- CAPTIONS
-- XR
-- B-ROLL
-- MOTION
-- TRANSITION
-- SFX
-- MUSIC
+Una ruta activa produce un draft independiente:
+`contentId::route`.
 
-Identidad:
-`resourceId <-> VideoFlow layer.id`
+Orden de pistas:
+1. SUBTÍTULOS
+2. XR
+3. IMÁGENES
+4. MOTION
+5. B-ROLL
+6. VO JOC
+7. A-ROLL
+8. PARTES
+9. SFX
+10. MÚSICA
 
-Timing:
-Production Graph conserva los tiempos semánticos exactos.
-La proyección de VideoFlow se alinea explícitamente a frames de 30fps.
+Los Ghosts continúan siendo layers reales de VideoFlow con:
+`resourceId <-> layer.id`.
 
-Persistencia:
-- Content Registry Alfa: IndexedDB
-- draft VideoFlow: IndexedDB separado
-
-Los Ghosts siguen siendo placeholders hasta materializarlos con assets/master.
-
-Pendiente:
-validación visual manual con un Story Editor real.
+La vista `VideoFlow` nativa se conserva como fallback temporal para drag/trim.
+La vista `Semántica` reemplaza sólo el panel Timeline y lee el VideoJSON vivo
+con `useVideo()` + `usePlayhead()`.
 
 Gate:
 F1_6_ALPHA_INGESTION_DOMAIN

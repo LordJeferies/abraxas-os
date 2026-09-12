@@ -1,0 +1,263 @@
+ABRAXAS OS PROJECT CHECK
+========================
+Date: 2026-09-11 22:30:06 -0400
+
+[0/8] Predictive preflight
+ABRAXAS · PREDICTIVE PREFLIGHT
+==============================
+
+✅ Preflight predictivo aprobado.
+
+[1/8] Syntax + generated-text hygiene
+NORMALIZED:
+ - docs/evidence/ABRAXAS_OS_V0_17_3_AUDITED_SEMANTIC_20260911_222959.log
+ABRAXAS · SYNTAX CHECK
+======================
+
+[bash]
+OK scripts/github_public.sh
+OK scripts/abraxas
+OK scripts/build_apple_media_proxy.sh
+OK scripts/check_syntax.sh
+OK scripts/run-desktop.sh
+OK scripts/doctor.sh
+OK scripts/finalize_update.sh
+OK scripts/run-web.sh
+OK scripts/checkpoint.sh
+OK scripts/check_apple_media_proxy.sh
+OK scripts/check_project.sh
+
+[python]
+OK scripts/abraxas_media_engine.py
+OK scripts/abraxas_source_runtime.py
+OK scripts/build_public_site.py
+OK scripts/check_alpha_ingestion.py
+OK scripts/check_runtime_ui.py
+OK scripts/check_site_budget.py
+OK scripts/check_tauri_coherence.py
+OK scripts/check_tauri_stream.py
+OK scripts/check_videoflow_integration.py
+OK scripts/normalize_generated_text.py
+OK scripts/preflight_predictive.py
+OK scripts/prepush_guard.py
+OK scripts/sync_latest_patch_log.py
+OK scripts/sync_status.py
+OK scripts/update_continuation.py
+OK scripts/validate_f1_reports.py
+
+[site javascript]
+OK site/assets/site.js
+
+[json]
+OK PROJECT_CONTROL/PROJECT_STATE.json
+OK PROJECT_CONTROL/MODULES.json
+OK PROJECT_CONTROL/GITHUB.json
+OK contracts/production-graph.v1.schema.json
+OK examples/production-graph.demo.json
+OK app/package.json
+OK app/src-tauri/tauri.conf.json
+OK app/src-tauri/capabilities/default.json
+OK site/data/content.json
+OK site/data/status.json
+
+✅ Syntax gate aprobado.
+
+[2/8] Tauri config coherence
+ABRAXAS · TAURI COHERENCE CHECK
+================================
+
+✅ Configuración Tauri/Cargo/plugins coherente.
+
+[2b/8] VideoFlow integration coherence
+ABRAXAS · VIDEOFLOW INTEGRATION CHECK
+====================================
+
+OK integración spike coherente.
+
+[2c/8] Apple preview proxy
+ABRAXAS · APPLE MEDIA PROXY CHECK
+================================
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:63:31: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+ 61 |     let asset = AVURLAsset(url: sourceURL)
+ 62 |
+ 63 |     let assetDuration = asset.duration.seconds
+    |                               `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead [#DeprecatedDeclaration]
+ 64 |     let safeStart = max(0.0, min(startSeconds, max(0.0, assetDuration - 0.1)))
+ 65 |     let available = max(0.0, assetDuration - safeStart)
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:89:14: warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+ 87 |     )
+ 88 |
+ 89 |     exporter.outputURL = outputURL
+    |              `- warning: 'outputURL' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+ 90 |     exporter.outputFileType = .mp4
+ 91 |     exporter.shouldOptimizeForNetworkUse = true
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:90:14: warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+ 88 |
+ 89 |     exporter.outputURL = outputURL
+ 90 |     exporter.outputFileType = .mp4
+    |              `- warning: 'outputFileType' was deprecated in macOS 27.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+ 91 |     exporter.shouldOptimizeForNetworkUse = true
+ 92 |     exporter.timeRange = CMTimeRange(
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:99:14: warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
+ 97 |     let semaphore = DispatchSemaphore(value: 0)
+ 98 |
+ 99 |     exporter.exportAsynchronously {
+    |              `- warning: 'exportAsynchronously(completionHandler:)' was deprecated in macOS 15.0 [#DeprecatedDeclaration]
+100 |         semaphore.signal()
+101 |     }
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:105:21: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
+103 |     semaphore.wait()
+104 |
+105 |     switch exporter.status {
+    |                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
+106 |     case .completed:
+107 |         let attrs = try FileManager.default.attributesOfItem(atPath: outputURL.path)
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:117:22: warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+115 |     case .failed:
+116 |         throw ProxyError.exportFailed(
+117 |             exporter.error?.localizedDescription ?? "unknown AVFoundation error"
+    |                      `- warning: 'error' was deprecated in macOS 15.0: Use export(to:as:) async throws instead [#DeprecatedDeclaration]
+118 |         )
+119 |     case .cancelled:
+
+/Users/lordjef/Desktop/Abrxs os/native/apple/AbraxasMediaProxy.swift:122:69: warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
+120 |         throw ProxyError.exportFailed("cancelled")
+121 |     default:
+122 |         throw ProxyError.exportFailed("unexpected status \(exporter.status.rawValue)")
+    |                                                                     `- warning: 'status' was deprecated in macOS 15.0: Use states(updateInterval:) instead [#DeprecatedDeclaration]
+123 |     }
+124 | }
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+OK Swift typecheck
+OK helper self-test
+
+[2d/8] Proven media engine
+{
+  "schemaVersion": "abraxas.media-engine.v1",
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "videoEncoder": "h264_videotoolbox",
+  "profile": "APPLE_VT_H264_40M_V1",
+  "status": "pass"
+}
+
+[2e/8] Fast Source Runtime
+{
+  "status": "pass",
+  "runtimeRoot": "/Users/lordjef/Desktop/Abrxs os/CLIENTES_PRIVADOS_LOCAL/_ABRAXAS_RUNTIME",
+  "ffprobe": "/opt/homebrew/bin/ffprobe",
+  "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+  "transcriptionBackends": [
+    "whisper-cli"
+  ],
+  "analysisProvider": null
+}
+
+[2f/8] F1.5 bundle wiring
+ABRAXAS · F1.5 BUNDLE CHECK
+===========================
+OK   atomic claim
+OK   thumbnail worker
+OK   waveform worker
+OK   asset library
+OK   transcript adapter
+OK   analysis adapter
+OK   Tauri runtime module
+OK   Tauri asset command
+OK   Tauri drain command
+OK   App runtime view
+OK   Media Lab keepalive
+OK   Store runtime view
+OK   Runtime source registration
+OK   Runtime asset indexing
+
+OK F1.5 bundle wiring.
+
+[2g/8] Alpha Ingestion
+ABRAXAS · SAFE ONE-FICHA VIDEOFLOW CHECK
+========================================
+OK   existing HTML importer preserved
+OK   existing Alpha registry preserved
+OK   editor adapter reads raw source timeline
+OK   images supported in editor adapter
+OK   unknown raw tracks are dropped safely
+OK   one route selected
+OK   route isolated drafts v2
+OK   real VideoFlow layers preserved
+OK   resourceId layer.id sidecar preserved
+OK   custom VideoFlow timeline uses verified hooks
+OK   semantic lanes fixed
+OK   one ficha active
+OK   Timeline custom panel supported
+OK   native VideoFlow fallback retained
+OK   autosave retained
+OK   no feedback loop
+OK   Alpha opens Editor
+OK   Editor bridge preserved
+OK   App hydrates registry
+
+OK one ficha + one route + one semantic lane per type with real VideoFlow layers.
+
+[3/8] TypeScript + Vite
+
+> abraxas-os@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 218 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     0.45 kB │ gzip:   0.29 kB
+dist/assets/index-Tgdujzyh.css                      2.31 kB │ gzip:   1.01 kB
+dist/assets/AlphaWorkspace-DnddpBeD.css             4.42 kB │ gzip:   1.35 kB
+dist/assets/RuntimePanel-DtAfwpUF.css               4.72 kB │ gzip:   1.42 kB
+dist/assets/MediaCompatibilityLab-DADf_X2z.css      5.52 kB │ gzip:   1.76 kB
+dist/assets/EditorSpike-C6SiboQW.css               53.11 kB │ gzip:   7.73 kB
+dist/assets/dist-js-D0VCXaEV.js                     0.26 kB │ gzip:   0.21 kB
+dist/assets/RuntimePanel-BzrYQLyF.js                7.84 kB │ gzip:   2.52 kB
+dist/assets/MediaCompatibilityLab-CqVUZDg2.js      14.56 kB │ gzip:   5.22 kB
+dist/assets/AlphaWorkspace-CvyrXLq-.js             16.02 kB │ gzip:   5.73 kB
+dist/assets/index-DKuaBwbN.js                     228.32 kB │ gzip:  71.63 kB
+dist/assets/EditorSpike-BZnWtbSU.js               343.29 kB │ gzip:  66.73 kB
+dist/assets/dist--E3LzUxN.js                    1,704.83 kB │ gzip: 358.93 kB
+
+✓ built in 183ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+[4/8] Rust / Tauri
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+
+[5/8] Public repo guard
+ABRAXAS PUBLIC REPO GUARD
+=========================
+
+✅ No se detectaron bloqueos para un repo público.
+
+[6/8] Sync generated state
+Status sincronizado: /Users/lordjef/Desktop/Abrxs os/site/data/status.json
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+      NORMALIZED:
+ - continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+ - continuacion en chat/ULTIMO_CHECK.txt
+ - docs/evidence/CHECK_20260911_223006.txt
+
+[7/8] Git whitespace FINAL
+
+[8/8] Record successful check
+Status sincronizado: /Users/lordjef/Desktop/Abrxs os/site/data/status.json
+/Users/lordjef/Desktop/Abrxs os/continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md
+✅ Generated/evidence text already normalized.
+
+✅ PROJECT CHECK PASSED
+Log: /Users/lordjef/Desktop/Abrxs os/docs/evidence/CHECK_20260911_223006.txt

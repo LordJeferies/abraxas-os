@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-09-11T21:29:26-04:00",
+  "generatedAt": "2026-09-11T22:30:11-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
     "currentPhase": "F1.6",
     "phaseName": "Alpha Ingestion & Domain Lock",
     "status": "in_progress",
-    "lastCompletedStep": "Integrated Alpha -> VideoFlow compila: HTML/JSON crea fichas Alfa persistentes y todas las TimelineDirectives audiovisuales válidas se proyectan como layers Ghost reales en VideoFlow.",
+    "lastCompletedStep": "Una ficha Alfa y una ruta se proyectan a un VideoJSON aislado; VideoFlow conserva layers reales y el panel Timeline semántico agrupa los recursos en una sola fila por tipo.",
     "blockedReason": null,
-    "nextStep": "Prueba visual con Amanda. Si los Ghost layers aparecen en la timeline real de VideoFlow, comenzar Source Binding + Ghost Materialization.",
-    "updatedAt": "2026-09-11T21:29:22-04:00",
+    "nextStep": "Validar visualmente Amanda R10.1: source=82, voA=99, voB=99 para intro_g01; luego añadir drag/trim directo a la timeline semántica.",
+    "updatedAt": "2026-09-11T22:30:11-04:00",
     "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
     "progress": {
       "foundation": 100,
       "mediaCompatibility": 100,
-      "editorShell": 32,
-      "productionTimeline": 22,
+      "editorShell": 44,
+      "productionTimeline": 38,
       "fastSourceRuntime": 80,
-      "alphaIngestion": 88
+      "alphaIngestion": 94
     },
     "lastCheck": {
       "status": "passed",
-      "updatedAt": "2026-09-11T21:29:22-04:00"
+      "updatedAt": "2026-09-11T22:30:10-04:00"
     },
     "publicSiteDeploy": {
       "status": "verified",
@@ -86,7 +86,14 @@
       "alphaVideoFlowLayerIdSidecarImplemented": true,
       "alphaVideoFlowDraftPersistenceImplemented": true,
       "alphaVideoFlowCandidateBuiltBeforeApply": true,
-      "alphaVideoFlowManualUiPass": false
+      "alphaVideoFlowManualUiPass": false,
+      "alphaOneFichaProjectionImplemented": true,
+      "alphaOneRouteProjectionImplemented": true,
+      "alphaSemanticVideoFlowTimelineImplemented": true,
+      "alphaImagesHandledInEditorAdapter": true,
+      "alphaDraftV2PerContentRouteImplemented": true,
+      "alphaImporterRegistryPreserved": true,
+      "alphaSemanticLaneLayoutManualUiPass": false
     }
   },
   "modules": [
@@ -235,9 +242,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main",
+    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/core/alpha/videoFlowDraftStore.ts\n M app/src/core/alpha/videoFlowProjection.ts\n M app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n M app/src/modules/alpha/alpha-videoflow-editor.css\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_alpha_ingestion.py\n M site/data/status.json\n?? app/src/core/alpha/alphaEditorDirectives.ts\n?? app/src/modules/alpha/AlphaSemanticTimeline.tsx\n?? app/src/modules/alpha/alpha-semantic-timeline.css\n?? docs/evidence/CHECK_20260911_223006.txt",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "fe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow\n55fa827 chore: sync generated project state\n8424753 feat(alpha): stabilize Story Editor ingestion workspace\nc235c30 chore: sync generated project state\n2563c9a feat(runtime): add source jobs assets bundle"
+    "lastCommits": "9d43059 chore: sync generated project state\nfe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow\n55fa827 chore: sync generated project state\n8424753 feat(alpha): stabilize Story Editor ingestion workspace\nc235c30 chore: sync generated project state"
   },
-  "latestCheck": "docs/evidence/CHECK_20260911_212915.txt"
+  "latestCheck": "docs/evidence/CHECK_20260911_223006.txt"
 }

@@ -4,22 +4,22 @@
   "currentPhase": "F1.6",
   "phaseName": "Alpha Ingestion & Domain Lock",
   "status": "in_progress",
-  "lastCompletedStep": "Integrated Alpha -> VideoFlow compila: HTML/JSON crea fichas Alfa persistentes y todas las TimelineDirectives audiovisuales válidas se proyectan como layers Ghost reales en VideoFlow.",
+  "lastCompletedStep": "Una ficha Alfa y una ruta se proyectan a un VideoJSON aislado; VideoFlow conserva layers reales y el panel Timeline semántico agrupa los recursos en una sola fila por tipo.",
   "blockedReason": null,
-  "nextStep": "Prueba visual con Amanda. Si los Ghost layers aparecen en la timeline real de VideoFlow, comenzar Source Binding + Ghost Materialization.",
-  "updatedAt": "2026-09-11T21:29:22-04:00",
+  "nextStep": "Validar visualmente Amanda R10.1: source=82, voA=99, voB=99 para intro_g01; luego añadir drag/trim directo a la timeline semántica.",
+  "updatedAt": "2026-09-11T22:30:11-04:00",
   "releaseGate": "F1_6_ALPHA_INGESTION_DOMAIN",
   "progress": {
     "foundation": 100,
     "mediaCompatibility": 100,
-    "editorShell": 32,
-    "productionTimeline": 22,
+    "editorShell": 44,
+    "productionTimeline": 38,
     "fastSourceRuntime": 80,
-    "alphaIngestion": 88
+    "alphaIngestion": 94
   },
   "lastCheck": {
     "status": "passed",
-    "updatedAt": "2026-09-11T21:29:22-04:00"
+    "updatedAt": "2026-09-11T22:30:10-04:00"
   },
   "publicSiteDeploy": {
     "status": "verified",
@@ -84,6 +84,13 @@
     "alphaVideoFlowLayerIdSidecarImplemented": true,
     "alphaVideoFlowDraftPersistenceImplemented": true,
     "alphaVideoFlowCandidateBuiltBeforeApply": true,
-    "alphaVideoFlowManualUiPass": false
+    "alphaVideoFlowManualUiPass": false,
+    "alphaOneFichaProjectionImplemented": true,
+    "alphaOneRouteProjectionImplemented": true,
+    "alphaSemanticVideoFlowTimelineImplemented": true,
+    "alphaImagesHandledInEditorAdapter": true,
+    "alphaDraftV2PerContentRouteImplemented": true,
+    "alphaImporterRegistryPreserved": true,
+    "alphaSemanticLaneLayoutManualUiPass": false
   }
 }

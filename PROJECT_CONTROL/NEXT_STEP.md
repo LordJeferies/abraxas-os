@@ -1,30 +1,37 @@
 # Próximo paso
 
-## Prueba visual final de F1.6
+## Validación manual v0.17.3
 
 1. `./scripts/abraxas desktop`
-2. abrir `F1.6 · Alpha`
-3. importar Amanda R10.1 si no está persistida
-4. confirmar las fichas Alfa
-5. abrir una ficha VIDEO con `Editar →`
-6. debe abrir el VideoEditor real
-7. la timeline de VideoFlow debe contener los Ghost layers importados del Alfa
-8. deben aparecer placeholders con 👻
-9. cambiar a otra ficha desde el selector del Editor
-10. salir y volver al Editor
-11. el draft debe persistir
-12. `Regenerar desde Alfa` debe reconstruir el VideoJSON canónico
+2. F1.6 · Alpha
+3. Amanda R10.1
+4. abrir `The only way out is through`
+5. `Editar →`
+6. Vista `Semántica`
 
-## Después
+Para `Entrevista original`:
+- total esperado: 82 recursos.
 
-1. vincular master vertical/horizontal
-2. A-roll Ghost -> clip master real
-3. XR Ghost -> imágenes/video/grupo
-4. B-roll Ghost -> clip real
-5. SFX Ghost -> audio real
-6. captions -> CaptionsLayer real
-7. Motion -> keyframes/animations
-8. Global Drop Router Finder/Asset Library -> Ghost
-9. sync VideoFlow -> Production Graph
-10. SQLite privado
-11. whisper-cli real
+Para `VO A · documental`:
+- total esperado: 99 recursos.
+
+Para `VO B · cine`:
+- total esperado: 99 recursos.
+
+En cada ruta debe existir UNA sola fila:
+SUBTÍTULOS / XR / IMÁGENES / MOTION / B-ROLL /
+VO JOC / A-ROLL / PARTES / SFX / MÚSICA.
+
+No deben reaparecer Track 1...Track 208.
+
+Al cambiar de ficha debe reconstruirse el VideoJSON sólo para esa ficha.
+Al cambiar de ruta debe cambiar el draft `contentId::route`.
+
+## Después de validar
+
+1. drag/trim directo en Timeline Semántica usando commands de VideoFlow;
+2. selección semántica -> Inspector;
+3. source binding vertical/horizontal;
+4. materialización A-roll/XR/B-roll/SFX/captions/motion;
+5. Finder/Asset Library -> Ghost;
+6. SQLite privado.
