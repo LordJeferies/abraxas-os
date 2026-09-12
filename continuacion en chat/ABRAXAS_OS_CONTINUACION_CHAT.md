@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-12T00:08:22-04:00
+- Generado: 2026-09-12T00:08:25-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -342,33 +342,6 @@ Las tres vistas usan el mismo `start/end`.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/FROM_TO.md
- M PROJECT_CONTROL/GHOST_MODEL.md
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/core/alpha/videoFlowDraftStore.ts
- M app/src/core/alpha/videoFlowProjection.ts
- M app/src/modules/alpha/AlphaSemanticTimeline.tsx
- M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
- M app/src/modules/alpha/alpha-semantic-timeline.css
- M app/src/modules/floating/FloatingWorkspace.tsx
- M app/src/modules/floating/floating-workspace.css
- M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
- M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
- M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M docs/architecture/ABRAXAS_OS_MASTER_SPEC.md
- M docs/decisions/DECISIONS.md
- M scripts/check_alpha_ingestion.py
- M scripts/check_project.sh
- M site/data/status.json
-?? PROJECT_CONTROL/TIMELINE_MODEL.md
-?? app/src/core/alpha/alphaTimelineModel.ts
-?? contracts/alpha-editor-projection.v1.schema.json
-?? contracts/ghost-resource.v1.schema.json
-?? docs/evidence/CHECK_20260912_000817.txt
-?? examples/ghost-resource.demo.json
-?? scripts/check_ghost_contracts.py
 ```
 
 ### Remote
@@ -381,11 +354,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+137a866 fix(timeline): recover exact Group Ghost timing and contracts
 38a12cb chore: sync generated project state
 ed4e8b3 feat(editor): add Group Ghosts and floating workspace
 5e4112a chore: sync generated project state
 3384c79 feat(editor): add Group Ghosts and floating workspace
-2e9ea5e chore: sync generated project state
 ```
 
 ## Último check autoritativo
