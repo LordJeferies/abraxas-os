@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T22:30:11-04:00
+- Generado: 2026-09-11T22:30:14-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -325,24 +325,6 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/CURRENT_STATUS.md
- M PROJECT_CONTROL/NEXT_STEP.md
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/core/alpha/videoFlowDraftStore.ts
- M app/src/core/alpha/videoFlowProjection.ts
- M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
- M app/src/modules/alpha/alpha-videoflow-editor.css
- M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
- M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
- M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/check_alpha_ingestion.py
- M site/data/status.json
-?? app/src/core/alpha/alphaEditorDirectives.ts
-?? app/src/modules/alpha/AlphaSemanticTimeline.tsx
-?? app/src/modules/alpha/alpha-semantic-timeline.css
-?? docs/evidence/CHECK_20260911_223006.txt
 ```
 
 ### Remote
@@ -355,11 +337,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow
 9d43059 chore: sync generated project state
 fe09ad1 feat(editor): safely integrate alpha ghosts into VideoFlow
 55fa827 chore: sync generated project state
 8424753 feat(alpha): stabilize Story Editor ingestion workspace
-c235c30 chore: sync generated project state
 ```
 
 ## Último check autoritativo
