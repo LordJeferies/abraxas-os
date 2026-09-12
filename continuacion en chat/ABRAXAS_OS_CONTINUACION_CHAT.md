@@ -6,7 +6,7 @@
 
 - Producto: Abraxas OS
 - Repo local: `~/Desktop/Abrxs os`
-- Generado: 2026-09-11T23:25:57-04:00
+- Generado: 2026-09-11T23:26:00-04:00
 - Rama Git: `main`
 - GitHub público: https://github.com/LordJeferies/abraxas-os
 - Status / Product page: https://lordjeferies.github.io/abraxas-os/
@@ -315,20 +315,6 @@ roadmap de la aplicación.
 
 ```text
 ## main...origin/main
- M PROJECT_CONTROL/CURRENT_STATUS.md
- M PROJECT_CONTROL/NEXT_STEP.md
- M PROJECT_CONTROL/PROJECT_STATE.json
- M PROJECT_CONTROL/SESSION_LOG.md
- M app/src/modules/alpha/AlphaVideoFlowEditor.tsx
- M "continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md"
- M "continuacion en chat/ESTADO_ACTUAL.json"
- M "continuacion en chat/ULTIMO_CHECK.txt"
- M "continuacion en chat/ULTIMO_PATCH_LOG.txt"
- M scripts/check_alpha_ingestion.py
- M site/data/status.json
-?? app/src/modules/alpha/AlphaFichaReview.tsx
-?? app/src/modules/alpha/alpha-ficha-review.css
-?? docs/evidence/CHECK_20260911_232552.txt
 ```
 
 ### Remote
@@ -341,11 +327,11 @@ origin	https://github.com/LordJeferies/abraxas-os.git (push)
 ### Últimos commits
 
 ```text
+ed4e8b3 feat(editor): add Group Ghosts and floating workspace
 5e4112a chore: sync generated project state
 3384c79 feat(editor): add Group Ghosts and floating workspace
 2e9ea5e chore: sync generated project state
 21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow
-9d43059 chore: sync generated project state
 ```
 
 ## Último check autoritativo

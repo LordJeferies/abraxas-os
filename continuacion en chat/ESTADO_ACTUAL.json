@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T23:25:57-04:00",
+  "generatedAt": "2026-09-11T23:26:00-04:00",
   "projectState": {
     "project": "Abraxas OS",
     "schemaVersion": "abraxas.project-state.v1",
@@ -249,9 +249,9 @@
   },
   "git": {
     "branch": "main",
-    "status": "## main...origin/main\n M PROJECT_CONTROL/CURRENT_STATUS.md\n M PROJECT_CONTROL/NEXT_STEP.md\n M PROJECT_CONTROL/PROJECT_STATE.json\n M PROJECT_CONTROL/SESSION_LOG.md\n M app/src/modules/alpha/AlphaVideoFlowEditor.tsx\n M \"continuacion en chat/ABRAXAS_OS_CONTINUACION_CHAT.md\"\n M \"continuacion en chat/ESTADO_ACTUAL.json\"\n M \"continuacion en chat/ULTIMO_CHECK.txt\"\n M \"continuacion en chat/ULTIMO_PATCH_LOG.txt\"\n M scripts/check_alpha_ingestion.py\n M site/data/status.json\n?? app/src/modules/alpha/AlphaFichaReview.tsx\n?? app/src/modules/alpha/alpha-ficha-review.css\n?? docs/evidence/CHECK_20260911_232552.txt",
+    "status": "## main...origin/main",
     "remote": "origin\thttps://github.com/LordJeferies/abraxas-os.git (fetch)\norigin\thttps://github.com/LordJeferies/abraxas-os.git (push)",
-    "lastCommits": "5e4112a chore: sync generated project state\n3384c79 feat(editor): add Group Ghosts and floating workspace\n2e9ea5e chore: sync generated project state\n21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow\n9d43059 chore: sync generated project state"
+    "lastCommits": "ed4e8b3 feat(editor): add Group Ghosts and floating workspace\n5e4112a chore: sync generated project state\n3384c79 feat(editor): add Group Ghosts and floating workspace\n2e9ea5e chore: sync generated project state\n21b5de7 feat(timeline): add audited one-ficha semantic VideoFlow"
   },
   "latestCheck": "docs/evidence/CHECK_20260911_232552.txt"
 }
